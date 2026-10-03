@@ -778,24 +778,28 @@ Ranking (top 30 of the 132; `sf#` = number of soft-float call sites in the body)
 | 25 | `0x006ce53c` | B | 15 | 309 | 1,530 | 87 | 1,926 | `CSkyBoxSceneNode::render(void*)` |
 | 26 | `0x0032ccc4` | A | 3 | 229 | 1,815 | 58 | 2,102 | `Application::Update()` |
 | 27 | `0x006f7330` | B | 1 | 43 | 1,029 | 62 | 1,134 | `CAnimatedMeshSceneNode::render(void*)` |
-| 28 | `0x0035e118` | C | **112** | **13,888** | 27 | 149 | 14,064 | `CMatrix4Base<float>::mult(…)` |
-| 29 | `0x003232c0` | C | **130** | **16,120** | 21 | 156 | 16,297 | `CMatrix4<float>::getInverse(…)` |
-| 30 | `0x0040ea54` | C | **112** | **13,888** | 0 | 122 | 14,010 | `CMatrix4Base<float>::setbyproduct_nocheck(…)` |
+| 28 | `0x0035e118` | C | **112** | **16,144** | 27 | 149 | 16,320 | `CMatrix4Base<float>::mult(…)` |
+| 29 | `0x003232c0` | C | **130** | **11,980** | 21 | 156 | 12,157 | `CMatrix4<float>::getInverse(…)` |
+| 30 | `0x0040ea54` | C | **112** | **16,144** | 0 | 122 | 16,266 | `CMatrix4Base<float>::setbyproduct_nocheck(…)` |
 
-(Full list: `DH2Work-scratch\rank3.py`. `CMatrix4Base<float>::mult` and `getInverse` appear
-low in the *table order* only because the table sorts by total, and their loop-span term is
-near zero; on the soft-float term alone they are 3rd and 2nd in the whole engine after
-`CCoronasSceneNode::render`.)
+(Full list: `DH2Work-scratch\rank3.py`. `CMatrix4Base<float>::mult` and
+`setbyproduct_nocheck` tie at 16,144, the second-highest soft-float cost in the engine;
+`getInverse` is 11,980. They appear low in *table order* only because the table sorts by
+total and their loop-span term is near zero. Note the helpers differ in size by up to 57x —
+`__aeabi_fsub` is an 8-byte Thumb tail-call into `__aeabi_fadd` (3 instructions measured)
+while `__aeabi_fmul` is 124 and `__aeabi_fadd` 171 — so a function's soft-float cost must be
+summed per helper, not multiplied by one constant.)
 
 ### 9.3 The matrix kernels are the best ratio in the engine
 
 | function | addr | soft-float call sites | soft-float cost | its own instructions | leverage |
 |---|---|---:|---:|---:|---:|
-| `CMatrix4Base<float>::mult(…)` | `0x0035e118` | 112 | 13,888 | 498 | **27.9×** |
-| `CMatrix4<float>::getInverse(…)` | `0x003232c0` | 130 | 16,120 | 520 | **31.0×** |
-| `CMatrix4Base<float>::setbyproduct_nocheck(…)` | `0x0040ea54` | 112 | 13,888 | 408 | **34.0×** |
-| `Application::_CheckGamepad()` | `0x00321164` | 152 | 19,228 | 1,520 | 12.6× |
-| `CCoronasSceneNode::render(void*)` | `0x006e5d14` | 268 | 36,219 | 1,226 | 29.5× |
+| `CMatrix4Base<float>::setbyproduct_nocheck(…)` | `0x0040ea54` | 112 (64 mul, 48 add) | 16,144 | 408 | **39.6×** |
+| `CMatrix4Base<float>::mult(…)` | `0x0035e118` | 112 (64 mul, 48 add) | 16,144 | 498 | **32.4×** |
+| `quaternion::slerp(…)` | `0x00612d00` | 56 mul + 5 `sinf` (already ported) | 6,878 | 245 | 28.1× |
+| `CCoronasSceneNode::render(void*)` | `0x006e5d14` | 268 (129 add, 110 mul, 24 sub, …) | 36,219 | 1,226 | 29.5× |
+| `CMatrix4<float>::getInverse(…)` | `0x003232c0` | 130 (79 mul, 38 sub, 11 add) | 11,980 | 520 | **23.0×** |
+| `Application::_CheckGamepad()` | `0x00321164` | 152 (76 add, 38 mul, 38 cmp) | 19,228 | 1,520 | 12.7× |
 
 "Leverage" = soft-float call cost ÷ the function's own instruction count: how much translated
 work the port deletes per instruction it has to reimplement. The matrix kernels win on every
@@ -808,11 +812,14 @@ recommendation in §6 puts `mult` first even though `CCoronasSceneNode::render` 
 The order in §6 stands, with one change of reason:
 
 * **`CMatrix4Base<float>::mult` `0x0035e118` — still first, now for a measured reason.**
-  Not "the 22–26× case in the abstract" but "112 call sites × 124 translated instructions =
-  13,888 instructions of pure soft-float overhead per invocation, deleted by a body of 498
-  instructions that becomes ~150 ARM64 instructions".
-* **`CMatrix4<float>::getInverse` `0x003232c0` — still second**, highest single-function
-  soft-float cost among the matrix bodies (130 sites, 16,120).
+  Not "the 22–26× case in the abstract" but "64 × 124 + 48 × 171 = **16,144** translated
+  instructions of pure soft-float overhead per invocation, deleted by a body of 498
+  instructions that becomes ~150 ARM64 instructions". Its identical-cost sibling
+  `setbyproduct_nocheck` `0x0040ea54` (same 112 sites, 408 own instructions, leverage 39.6×)
+  should be ported in the same sitting.
+* **`CMatrix4<float>::getInverse` `0x003232c0` — still second**, 130 sites but only 11,980
+  instructions of soft-float cost, because 38 of its 130 sites are `__aeabi_fsub`, the
+  3-instruction Thumb tail-call. It stays second because 130 call sites still vanish.
 * **`Application::_CheckGamepad` `0x00321164` — still third**, and now the top of the
   corrected ranking as well (152 sites, 19,228). It remains third in *porting order* only
   because the two matrix kernels are cheaper to port and easier to verify.
