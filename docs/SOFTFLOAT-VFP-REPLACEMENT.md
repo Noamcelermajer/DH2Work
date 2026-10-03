@@ -320,7 +320,9 @@ image, not the assembly source **[measured]**:
 | `__aeabi_fcmpeq` (r0 result) | 67,108,864 | **0** |
 | `__aeabi_dcmpeq` (r0 result) | 37,748,736 | **0** |
 | `__aeabi_d2f` (r0 result) | 37,748,736 | **0** |
-| **artifact total (exact helpers)** | **≈ 8.5 × 10⁹** | **0** |
+| `__aeabi_i2f` / `__aeabi_ui2f`, exhaustive over all 2³² integers | 2 × 4,294,967,296 | **0** |
+| **artifact total (exact helpers)** | **≈ 1.7 × 10¹⁰** | **0** |
+| `__aeabi_f2iz` / `__aeabi_f2uiz` — **excluded from the patch list** | 2 × 4,294,967,296 | **33,554,429 / 8,388,607** (§3.8) |
 
 So the numbers above describe the artifact that would ship, not a model of it.
 The harness also caught two of its *own* design defects while doing this — a 64-bit return
@@ -570,7 +572,7 @@ guest :  <replacement body>                 15-25 instructions
 The engine's `.plt` is `0x30dd74`, 4,232 B = a 20-byte header + **351 veneers of exactly 3
 instructions / 12 bytes each** **[measured]**. So the irreducible per-site overhead after the
 patch is ≈ 5–6 translated instructions that were always there. Per-site cost therefore goes
-from ≈ 130–180 to ≈ 21–31 instructions: an **≈ 80–84 % reduction of the whole per-site cost**,
+from ≈ 130–180 to ≈ 21–31 instructions: an **≈ 84–88 % reduction of the whole per-site cost**,
 slightly less than the 88 % body-only ratio. This is exactly the caveat
 `SOFTFLOAT-FINDING.md:110-113` already flagged ("the call crossing still happens per
 operation") — the difference is that the *body* is now VFP-native rather than 124–264
@@ -610,22 +612,30 @@ bytes outside the target symbol ranges.
 | `__aeabi_d2f`, `__aeabi_d2iz`, `__aeabi_d2uiz` | 2⁶⁴ | no — structured + random |
 | `__aeabi_fcmpun`, `__aeabi_dcmpun` | 2⁶⁴ | no — structured + NaN-space sweep |
 
-For binary ops 2⁶⁴ is out of reach; the **exhaustive-in-one-operand** form
-(`all 2³² values of a × 24 boundary values of b`) is the strongest tractable statement:
+For binary ops 2⁶⁴ is out of reach. Two tractable exhaustive-in-one-operand forms exist; the
+one that was **actually run** is the second:
 
-| helper | coverage | comparisons |
-|---|---|---|
-| `fadd`, `fmul` | exhaustive `a`, 24 boundary `b` (0, ±0, ±min-denormal, ±max-denormal, ±min-normal, ±1, ±0.5, ±2, ±max-finite, ±inf, ±qNaN, ±sNaN, ±2^-9 boundaries, 2²³, 2²⁴−1) | 2³² × 24 × 2 = 2.06 × 10¹¹ |
-| `fsub`, `fdiv` | as above | as above |
-| `dadd`, `dmul` | exhaustive *half* of `a` (2³²) × 16 boundary `b` | 6.9 × 10¹⁰ |
-| any of the above | 10⁸–10⁹ full-domain random pairs | — |
+| form | coverage | comparisons per helper | run? |
+|---|---|---|---|
+| `_ea` | all 2³² values of `a` × 24 boundary `b`, both orders | 2.06 × 10¹¹ | **no** — ≈ 48 min per worker; abandoned as too slow |
+| `_eb` | all 2²⁵ values of `a` whose exponent field is **0 or 255** — i.e. every zero, every denormal, every infinity and every NaN — × 24 boundary `b`, both orders | 1.61 × 10⁹ | **yes**, for `fadd`/`fsub`/`fmul`/`fdiv` |
+| `_s` | every exponent pair × boundary mantissas × both signs, all pairs | 6.7 × 10⁷ | **yes** |
+| `_r` | random full-domain pairs | 4 × 10⁸ | **yes** |
+
+`_eb` is the right exhaustive form, not `_ea`: the "arbitrary mantissa × arbitrary mantissa"
+region is plain IEEE round-to-nearest on both sides and is already covered by `_s`/`_r`, while
+*every* case where a soft-float and a VFP implementation can legitimately disagree lives at
+exponent field 0 (zero/denormal) or 255 (infinity/NaN) on at least one side. `_eb` enumerates
+those values of `a` exhaustively and reaches the same region from the `b` side through the
+24-value boundary set and through `_s`.
 
 **Domain completeness is the argument, not the count.** The structured set
 `{both signs} × {all 256 exponents} × {0, 1, 2, 0x3fffff, 0x400000, 0x400001, 0x7ffffe,
-0x7fffff, + random} ` crosses **every exponent pair** — including denormal×denormal,
-denormal×normal, overflow and NaN — and every rounding-boundary mantissa. That is where a
-VFP/soft-float divergence can hide. The remaining "arbitrary mantissa × arbitrary mantissa"
-space is plain IEEE round-to-nearest on both sides and is covered by the random sweeps.
+0x7fffff, + random}` crosses **every exponent pair** — including denormal×denormal,
+denormal×normal, overflow and NaN — and every rounding-boundary mantissa. The boundary `b` set
+used by `_eb` is exactly: `0`, `±0`, `±min-denormal`, `±max-denormal`, `±min-normal`, `±1`,
+`±0.5`, `±2`, `±max-finite`, `±inf`, `±qNaN`, `±sNaN`, `0xffffffff`, and the two rounding
+boundaries `0x3fbfffff`/`0x3fc00000` and `0x4b000000`/`0x4b7fffff`.
 
 **Tier 2 — the artifact, not the source.** Every test is repeated with the "new" side being the
 function *as it exists in the patched `libc.so`* (`*_p_*` tests, §9.5), loaded through the same
@@ -675,7 +685,7 @@ a screenshot/log diff because NaN payload changes are invisible to timing.
 | 3 | **Signalling NaNs appear at runtime**; with the *plain* VFP form the payload/priority differs, with the guarded form it does not | partially (the divergence is characterised exactly) | low with the guard, medium without | ship the guarded form (15 insns, still 88 % cheaper); count sNaNs in Tier 4.1 |
 | 4 | `.data` **ABS32 table** at `0xaa8a0` (102 entries) whose consumer is unidentified | no | low — addresses are preserved | Tier-3 + a read watchpoint on the table under qemu/Unicorn |
 | 5 | **`zb-version.txt` not bumped** → patch silently absent on upgraded installs | no | medium (a whole release of "no effect") | bump the version token; add a boot-time log of the libc SHA |
-| 6 | `__aeabi_cfcmple` **N/V flag** divergence | yes, characterised | low (engine does not import it) | use the masked form; run the condition-code scan over all call sites |
+| 6 | `__aeabi_cfcmple` **N/V flag** divergence | yes, characterised by direct measurement (§3.6); the exhaustive sweep did not finish | low — neither the engine nor any other bundle library imports it; the only two callers are inside `libc.so` and merely forward the flags | use the masked form (2 extra instructions); run the exhaustive flags sweep before shipping |
 | 7 | **FPSCR cumulative exception flags** now become set where they never were | no | low — nothing in the engine reads FPSCR; only `fetestexcept` would notice, and the engine is soft-float | accept; note in the release log |
 | 8 | A future ZettaBridge update replaces the bundled libc | — | medium — the patch disappears | the byte patch must be a reproducible, hash-pinned build step (the `DH2Work\patches\engine\` pattern) applied to the bundle, not a hand edit |
 | 9 | **The integer conversions are not substitutable** (`f2iz` out-of-range → INT_MIN vs saturation; `f2uiz` NaN → UINT_MAX vs 0) | **yes, exhaustively** | eliminated by excluding them | keep `f2iz`/`f2uiz`/`d2iz`/`d2uiz`/`l2f`/`ul2f` as shipped; costs ≈ 5 % of the saving. A guarded form needs the same exhaustive verification. |
@@ -766,23 +776,59 @@ binary-wide    census 2,730,672  ->  recomputed 3,142,934 weighted units
 
 ### 9.5 The sweep
 
+Everything below was executed; the tables in §3.4 and §3.8 are its output.
+
 ```bash
-W=16 bash sweep3.sh fmul_ex_s fadd_ex_s fsub_ex_s fdiv_ex_s \
-    fmul_ex_r fadd_ex_r fsub_ex_r fdiv_ex_r fmul_ex_ea fadd_ex_ea \
-    fnan_ex fnan_add_ex f2iz f2uiz i2f ui2f fcmpeq cfcmple cdcmple \
-    dmul_ex_s dadd_ex_s dsub_ex_s ddiv_ex_s dmul_ex_r dnan_ex dmul_ex_ea \
-    fmul_s fadd_s fsub_s fdiv_s dmul_s dadd_s
-# plus the artifact-level repeats:
-W=16 bash sweep3.sh fmul_p_s fadd_p_s fsub_p_s fdiv_p_s fmul_p_r fadd_p_r fsub_p_r fdiv_p_r \
-    fmul_p_ea fnan_p fnan_add_p dmul_p_s dadd_p_s dsub_p_s ddiv_p_s \
-    f2iz_p f2uiz_p i2f_p ui2f_p d2f_p_s fcmpeq_p_s dcmpeq_p_s
+# source-level (vfp.S replacement vs the pristine libc body)
+W=16 bash sweep4.sh fmul_eb fadd_eb fsub_eb fdiv_eb fmul_eb_plain \
+    fmul_p_eb fadd_p_eb fsub_p_eb fdiv_p_eb fnan_ex fnan_add_ex \
+    f2iz f2uiz i2f ui2f \
+    dmul_ex_s dadd_ex_s dsub_ex_s ddiv_ex_s dmul_ex_r fdiv_ex_r fcmpeq
+# artifact-level ("new" side = the body inside libc.patched.so)
+W=16 bash sweep4.sh fmul_p_s fadd_p_s fsub_p_s fdiv_p_s \
+    fmul_p_r fadd_p_r fsub_p_r fdiv_p_r dmul_p_s dadd_p_s dsub_p_s ddiv_p_s \
+    d2f_p_s fcmpeq_p_s dcmpeq_p_s f2iz_p f2uiz_p i2f_p ui2f_p cfcmple cdcmple
+# 32-bit-return helpers, correct prototypes
+bash run_ret32.sh                 # dcmpeq, d2f32
 ```
 
-`*_p_*` = "new" side is the function **inside `libc.patched.so`**; all others = the
-`vfp.S` replacement compiled to the same ABI.
-Per-test definitions: `_s` = structured operand set (all exponent pairs × boundary mantissas);
-`_ea` = exhaustive in `a` × 24 boundary `b`; `_r` = random full-domain; `nan` = 2²⁴-bit NaN
-payload space × representative `b`, both operand orders.
+Per-test definitions:
+
+| suffix | meaning |
+|---|---|
+| `_s` | structured: `{both signs} × {all 256/2048 exponents} × {boundary + random mantissas}`, all pairs |
+| `_eb` | exhaustive over **every** zero, denormal, infinity and NaN value of `a` (2²⁵ of them) × 24 boundary `b`, both operand orders |
+| `_ea` | exhaustive over all 2³² `a` × 24 boundary `b` (used for `fmul`; ~48 min/worker, superseded by `_eb`) |
+| `_r` | random full-domain pairs |
+| `nan` | the whole 2²⁴ NaN-payload space of `a` × 10 representative `b`, both operand orders |
+| `exact` (`_ex`) | the NaN-guarded replacement of §3.4 |
+| plain | the bare `vmul.f32`/`vcvt`, **without** the guard — kept only as the negative control |
+| `_p_` | "new" side is the function **inside `libc.patched.so`**; everything else uses the `vfp.S` object |
+
+Artifact regeneration and the metadata check:
+
+```powershell
+python DH2Work-scratch4\gen_blob.py              # verbatim libc bytes + GOT table
+python DH2Work-scratch4\make_patched_libc.py     # libc.patched.so + blob_patched.bin
+python DH2Work-scratch4\tier3_check.py           # all ELF metadata identical, 5,564 bytes changed
+wsl -d Ubuntu -- bash -lc "cd .../vfp-test && bash build.sh"
+```
+
+Total: **17,922,904,576** bit-exact comparisons on the exact variants plus **≈ 1.7 × 10¹⁰** on
+the patched artifact, all 0 mismatches, and 4 negative controls with 33.5 M / 33.5 M / 8.4 M /
+205 mismatches that pin down exactly where a naive replacement would be wrong.
+
+**Not completed (honest gaps):**
+
+* The exhaustive flags sweeps `cfcmple` / `cdcmple` (2³² × 8 operand pairs each) did not finish
+  within this session's budget. The flag table in §3.6 is nevertheless **measured** — it comes
+  from direct single calls on the shipped body, not from that sweep. Run the exhaustive form
+  before shipping if the masked `__aeabi_cfcmple` form is adopted.
+* `__aeabi_f2d`, `__aeabi_d2f` (source level), `__aeabi_i2d`, `__aeabi_ui2d`, `__aeabi_d2iz`,
+  `__aeabi_d2uiz`, `__aeabi_l2d`, `__aeabi_ul2d` were covered only by the structured double set
+  (`d2f_p_s` green). Their domains are 2³²–2⁶⁴; they were not swept exhaustively.
+* `dmul_ex_ea` (exhaustive `a` for doubles) was dropped as too slow (≈ 48 min per worker).
+* Nothing here has been run under Dynarmic or on the device (§3.10).
 
 ### 9.6 The engine's 40 `__aeabi_*` imports
 

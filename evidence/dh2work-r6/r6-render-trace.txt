@@ -1,0 +1,84 @@
+1791043800404 tid=31009 start locale=en_GB preferEnglish=false fit16by9=false preserveContext=false
+1791043800404 tid=31009 asset probe=character_properties_pystructnames.bin exists=true bytes=5032
+1791043800405 tid=31009 asset sha256=character_properties_pystructnames.bin 7c955f759840dc7808b17ddb54213ce886abd5cdf6607cacc9048a3626803cc2
+1791043800405 tid=31009 asset probe=character_properties.bin exists=false bytes=0
+1791043800405 tid=31009 asset probe=character_models_dictionary_pyarraynames.bin exists=true bytes=1755
+1791043800405 tid=31009 asset sha256=character_models_dictionary_pyarraynames.bin d731c154e9208b66b84476d97a08366ad1d3e1a074c1fc59889e03b847661fc9
+1791043800405 tid=31009 model probe=/storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae exists=true bytes=3207072
+1791043800406 tid=31009 model first32=42524553feff00003c000000a0ef300017250000000000003c00000098940000
+1791043800422 tid=31009 Zirconia_DRM created
+1791043800425 tid=31009 Zirconia_DRM started
+1791043800425 tid=31009 Zirconia_DRM resumed
+1791043800816 tid=31009 Zirconia_DRM paused
+1791043801209 tid=31009 DungeonHunter2 created
+1791043801243 tid=31009 DungeonHunter2 started
+1791043801243 tid=31009 DungeonHunter2 resumed
+1791043801273 tid=31073 surface created #1 EGL=android.opengl.EGLContext@372b87d8 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830
+1791043801687 tid=31009 Zirconia_DRM stopped
+1791043801688 tid=31009 Zirconia_DRM destroyed
+1791043801945 tid=31073 surface initialization returned
+1791043801945 tid=31073 surface size=2184x1968 view=2184x1968
+1791043801945 tid=31073 surface resize returned
+1791043801947 tid=31073 engine running
+1791043801947 tid=31073 render returned frames=1 elapsedMs=729
+1791043802992 tid=31009 DungeonHunter2 paused
+1791043803040 tid=31009 MyVideoView created
+1791043803042 tid=31009 MyVideoView started
+1791043803042 tid=31009 MyVideoView resumed
+1791043803931 tid=31009 DungeonHunter2 saved state
+1791043803933 tid=31009 DungeonHunter2 stopped
+1791043817001 tid=31009 MyVideoView paused
+1791043817009 tid=31009 DungeonHunter2 started
+1791043817009 tid=31009 DungeonHunter2 resumed
+1791043817029 tid=31073 surface created #2 EGL=android.opengl.EGLContext@37319db8 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830
+1791043817034 tid=31073 surface initialization returned
+1791043817034 tid=31073 surface size=2184x1968 view=2184x1968
+1791043817034 tid=31073 surface resize returned
+1791043817048 tid=31073 surface size=2184x1968 view=2184x1968
+1791043817048 tid=31073 surface resize returned
+1791043817779 tid=31009 MyVideoView stopped
+1791043817779 tid=31009 MyVideoView destroyed
+1791043842839 tid=31073 render returned frames=120 elapsedMs=41621
+1791043863179 tid=31073 render returned frames=240 elapsedMs=61961
+1791043865182 tid=31073 render returned frames=360 elapsedMs=63964
+1791043868141 tid=31073 render returned frames=480 elapsedMs=66923
+1791043872218 tid=31073 render returned frames=600 elapsedMs=71000
+1791043877014 tid=31073 render returned frames=720 elapsedMs=75796
+1791043881505 tid=31073 render returned frames=840 elapsedMs=80287
+1791043886401 tid=31073 render returned frames=960 elapsedMs=85183
+1791043892019 tid=31073 render returned frames=1080 elapsedMs=90801
+1791043897124 tid=31073 render returned frames=1200 elapsedMs=95906
+1791043899931 tid=31073 render returned frames=1320 elapsedMs=98713
+1791043902880 tid=31073 render returned frames=1440 elapsedMs=101663
+1791043907226 tid=31073 render returned frames=1560 elapsedMs=106008
+1791043911829 tid=31073 render returned frames=1680 elapsedMs=110611
+1791043916910 tid=31073 render returned frames=1800 elapsedMs=115692
+1791043919681 tid=31073 render returned frames=1920 elapsedMs=118463
+1791043922603 tid=31073 render returned frames=2040 elapsedMs=121385
+1791043924879 tid=31073 render returned frames=2160 elapsedMs=123661
+1791043927130 tid=31073 render returned frames=2280 elapsedMs=125912
+1791043929344 tid=31073 render returned frames=2400 elapsedMs=128127
+1791043931600 tid=31073 render returned frames=2520 elapsedMs=130383
+1791043933880 tid=31073 render returned frames=2640 elapsedMs=132663
+1791043937442 tid=31073 render returned frames=2760 elapsedMs=136224
+1791043943171 tid=31073 render returned frames=2880 elapsedMs=141953
+1791043948754 tid=31073 render returned frames=3000 elapsedMs=147536
+1791043953751 tid=31073 render returned frames=3120 elapsedMs=152534
+1791043958625 tid=31073 render returned frames=3240 elapsedMs=157407
+1791043963044 tid=31073 render returned frames=3360 elapsedMs=161827
+1791043968500 tid=31073 render returned frames=3480 elapsedMs=167282
+1791043972847 tid=31073 render returned frames=3600 elapsedMs=171630
+1791043977752 tid=31073 render returned frames=3720 elapsedMs=176534
+1791043982864 tid=31073 render returned frames=3840 elapsedMs=181647
+1791043987466 tid=31073 render returned frames=3960 elapsedMs=186248
+1791043992432 tid=31073 render returned frames=4080 elapsedMs=191214
+1791043997474 tid=31073 render returned frames=4200 elapsedMs=196257
+1791044001850 tid=31073 render returned frames=4320 elapsedMs=200633
+1791044007011 tid=31073 render returned frames=4440 elapsedMs=205793
+1791044012068 tid=31073 render returned frames=4560 elapsedMs=210850
+1791044017507 tid=31073 render returned frames=4680 elapsedMs=216289
+1791044023241 tid=31073 render returned frames=4800 elapsedMs=222023
+1791044028032 tid=31073 render returned frames=4920 elapsedMs=226815
+1791044032803 tid=31073 render returned frames=5040 elapsedMs=231586
+1791044038416 tid=31073 render returned frames=5160 elapsedMs=237198
+1791044042989 tid=31073 render returned frames=5280 elapsedMs=241771
