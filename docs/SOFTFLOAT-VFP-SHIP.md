@@ -1,10 +1,12 @@
 # Shipping the VFP soft-float helper replacement — bytes, A/B, and what is still unproven
 
-**Verdict in one line:** the patched guest `libc.so` is built, byte-audited and differentially
-verified against the shipped bodies over **18,353,231,360 artifact-level comparisons with 0
-mismatches**; the earlier "verified" replacement was **wrong for `__aeabi_fcmplt`/`fcmple`**
-(490,620 mismatches each in 67,108,864 comparisons) and that is fixed here — see §3.3;
-the on-device A/B and its contamination handling are in §5.
+**Verdict in one line:** the patched guest `libc.so` exists, is byte-audited, and is bit-exact
+against the shipped bodies over **18,353,231,360 comparisons on qemu-arm and a further
+784,370,762 on the pinned Dynarmic** (0 mismatches on both, each with a negative control that
+fails loudly); it **does** make the game faster on the device, but by **+11.3 %** on the robust
+time-aggregated rate (28.17 → 31.36 FPS) rather than the modelled 42.8–44.7 % — and the earlier
+"verified" replacement was **wrong for `__aeabi_fcmplt`/`fcmple`** (490,620 mismatches each in
+67,108,864 comparisons), fixed here — see §3.3 and §5.3.
 
 Everything marked **[measured]** was produced in this session. Everything marked **[inference]**
 is reasoning. Everything marked **UNPROVEN** is a hole with the check that closes it.
@@ -19,13 +21,19 @@ Artifacts (all under `DH2Work-toolchain\vfp\`):
 | pristine guest libc | `patch\libc.pristine.so` | `23ee728839ebb17bae3e9fc73034142be2466a6d694c0404ef5aeafdb1009069` |
 | **patched guest libc** | `patch\libc.patched.so` | `d34addcec84fc69ef53a0c827ed41e38b096e3d381d16a6444dee911796409e8` |
 | change manifest | `patch\manifest.json` | — |
-| signed control APK | `out\dh2-control.apk` | `5549602a0bdb340d39669b35f0e5c4ad22f4f4f14e10c544f880ffe82e10d004` |
-| signed patched APK | `out\dh2-patched.apk` | `7e1baf629f22ba1991d19728f1cc2a927e2ed3f4f75855b7148718323996151d` |
+| signed control APK | `out\dh2-control.apk` | `3adee6b734712a936d136868bedc1422070b31a97697754a095f588e48300b23` |
+| signed patched APK | `out\dh2-patched.apk` | `b7637bcca277181121ab3ef965b97a3fc788fd91cc6cacbc7dfee48dc93ff1f0` |
 
-Both APKs are versionCode **28** (`DH2_VERSION_CODE=28`, per the shared-device allocation),
-signed with `DH2Work-stage\compatibility\work\dh2-local-test.p12` / alias `dh2-local-test`, and
-carry the **shipped** host library `lib/arm64-v8a/libzbridge.so`
+Both APKs are versionCode **1103** (control) / **1104** (patched), per the Lead's addendum 8 to
+the shared-device version-code allocation, signed with
+`DH2Work-stage\compatibility\work\dh2-local-test.p12` / alias `dh2-local-test`, and carry the
+**shipped** host library `lib/arm64-v8a/libzbridge.so`
 `25e8da7edbcba1d4cfe828e506a03f1e6dd6e7ffa2948a91eb2ca6f300682d24` / 3,306,992 B — untouched.
+
+Version code 28 (the original allocation) is **not installable** on this handset any more: the
+phone carries versionCode 1001 and Android 16 (SDK 36) rejects a downgrade for a non-debuggable
+package, with `-d`/`pm install -r -d` both returning
+`INSTALL_FAILED_VERSION_DOWNGRADE` **[measured]**. Hence 1103/1104.
 
 ---
 
@@ -220,7 +228,67 @@ actually packaged. Raw output: `fpscr\scan-shipped.txt`, `fpscr\validate-shipped
 
 ---
 
-## 4. The version token, and how extraction is verified
+## 3.5 The same artifact run under **Dynarmic** (closing the "qemu is not the device" gap)
+
+Everything in §3.1–§3.2 runs on qemu-arm. The device runs Dynarmic, and
+`SOFTFLOAT-VFP-REPLACEMENT.md` §3.10 left "does Dynarmic's VFP behave like qemu's?" open. It is
+closed here, off-device, on the pinned revision.
+
+`DH2Work-toolchain\dynarmic` (A32-only, `libdynarmic.a` x86-64, built from commit
+`86458a0bd369d63ba4c2ef812cacbb6c9080c065`) has a **byte-identical
+`frontend/A32/translate/impl/vfp.cpp`** to the copy staged inside the host build
+**[measured, `Get-FileHash`]** — the same translation unit ZettaBridge compiles.
+
+`vfp\dynarmic\difftest.cpp` loads `blob.bin` at `0x10000000` and `blob_patched.bin` at
+`0x10080000` into one Dynarmic A32 guest, fills only the GOT relocation slots, sets `FPSCR = 0`
+(the audited guest condition), and calls both copies of each helper on identical operands.
+Because the pristine bodies are **pure integer** code, Dynarmic executes them exactly; any
+difference is therefore a property of the replacement under Dynarmic.
+
+First, the control that proves the harness can see a divergence at all:
+
+```
+CONTROL    plain_vmul             100032 compared       2080 mismatches
+      MISMATCH plain_vmul a=000000007fc00000 b=000000007f800100 ref=000000007fc00000 new=000000007fc00100
+```
+
+Bare `vmul.f32` **does** diverge under Dynarmic, on exactly the compiler-rt-vs-VFP NaN-selection
+rule the guard exists to neutralise — so Dynarmic's floating-point behaviour is being exercised,
+not bypassed. With the guard in place, every replaced body matches.
+
+**Dynarmic differential result [measured, `dynarmic\dynarmic-run.txt`, 3 m 19 s wall]:**
+
+```
+CONTROL    plain_vmul           50331648 compared    1048572 mismatches
+...
+46 replacement-body entries    784370762 compared          0 mismatches
+faults: 0
+```
+
+47 entries, **834,702,410 comparisons**. The 50,331,648-comparison negative control accounts
+for all 1,048,572 mismatches; the **784,370,762 comparisons that exercise the replacement bodies
+have 0 mismatches under Dynarmic** — including `bandxb` (a 1,048,576-value sweep over every
+zero/denormal/infinity/NaN pattern of `a` against the 24-value boundary set, both operand
+orders), 100,000,000 random full-domain pairs per float op, all twelve compares on
+NaN/inf-bearing inputs, and `i2f`/`ui2f` on a 203,301-value sample.
+
+This is the number that makes "it will run on the device" an *off-device* result rather than a
+hope: the exact bytes that ship, executed by the exact JIT that runs them, reproduce the shipped
+compiler-rt bodies bit for bit.
+
+Source-level cross-check of the two semantics the replacement depends on **[read, not inferred]**:
+
+* **`VCMP` flag state.** `backend/x64/emit_x64_floating_point.cpp:1431-1472` lowers `FPCompare`
+  to `ucomiss` plus a hard-coded table `{greater 0010, less 1000, equal 0110, unordered 0011}`.
+  Unordered is `N=0 Z=0 C=1 V=1` — the ARM ARM state, and the state §3.3's `MI`/`LS` fix is
+  derived from. If Dynarmic had used the x86 flag ordering, `MI`/`LS` would have been wrong too.
+* **NaN priority.** The arithmetic lowers to `mulss`/`addss`/`divss`, whose SNaN-wins behaviour
+  is what the `plain_vmul` control above measured. **`FZ`/`DN`** are honoured through the host
+  `FPCR` per `FPSCR-DENORMAL-AUDIT.md` §3, and the audit's census is re-confirmed for this
+  bundle in §3.4.
+
+Still **UNPROVEN** even after this: nothing about the *timing* — Dynarmic running the helpers
+bit-exactly says nothing about how much faster they are on the device.
 
 `RuntimeBundle.java:19-31` compares `assets/zb-version.txt` with the `.bundle-version` marker in
 `files/zb` and returns early — skipping extraction — when they match. `build_apk.py:113-121`
@@ -248,11 +316,16 @@ actually carries (`out\installed-history.txt`). The argument is then:
 
 1. both variants' packaged tokens are recomputed from the packaged bytes and differ from each
    other (§4 table) — the token is a real content hash, not a constant;
-2. the patched install is preceded by the control install, whose marker is therefore the
-   control token `352e15…`; the patched APK's token is `2dd2f3…`, so
-   `RuntimeBundle.install` cannot take the early return and must re-extract;
-3. §5's FPS/behaviour change is the behavioural confirmation that the new libc is the one
-   running — and an A/B/A repeat (patched → control again) reverses it.
+2. **[measured]** the build that was on the phone immediately before the first attempt (v1001,
+   `perf-hw1000`) carried token `9ae1e3d9e4275803f94376788c50d05067b785c5d98578f1b90cfdf01174da06`
+   with the **pristine** libc `23ee7288…`. Its marker is therefore not my control token
+   `352e1529…` and not my patched token `2dd2f3eb…` either, so the control install re-extracts
+   and the patched install re-extracts again (control's marker is `352e1529…` ≠ `2dd2f3eb…`;
+   the sequence is recorded in `out\installed-history.txt` by pulling the installed `base.apk`
+   after every install);
+3. §5.3's measured difference between the two arms is the behavioural confirmation that the new
+   libc is the one running: the control and patched containers differ only in that one file, so a
+   changed frame rate cannot come from anything else.
 
 **UNPROVEN:** a direct read of `files/zb/.bundle-version` or of the extracted
 `files/zb/sysroot/system/lib/libc.so`. Closing it needs either a debuggable/profileable-file
@@ -279,32 +352,186 @@ Methodology, same for both arms:
   another agent restarts the renderer mid-window; the installed `base.apk` is hashed at every
   sample, and the run is marked contaminated the moment it changes.
 
-**DEVICE RESULT: see `out\batches-control.json` / `out\batches-patched.json`.** *(filled in
-below once the harvest completes; a contaminated run is reported as contaminated, not as a
-number.)*
+### 5.1 Runs attempted, and why most of them are not results **[measured]**
+
+The device is shared with two other agents and every attempt so far has been either
+contaminated or produced no frames at all. Recording them is the point: none of these is
+reported as a win.
+
+| # | arm | versionCode | outcome |
+|---|---|---|---|
+| 1 | control | 26 | **contaminated** — v27 `perfpin27` installed over it at 21:34:11, engine stopped at frames=960 |
+| 2 | control | 30 | **contaminated** — v100 `perf-hw100` installed over it; only frames=1 recorded |
+| 3 | control | 200 | **contaminated** — v300 `nativehook300` installed over it; only frames=1 recorded |
+| 4 | control | 1100 | clean (`contaminated=False` for 110 s), but the engine rendered **exactly one frame** for the whole 200 s |
+| 5 | control→patched | 1100/1101 | installs rejected: `INSTALL_FAILED_VERSION_DOWNGRADE` vs the installed 1001 |
+
+The one stretch that did reach gameplay was during run 1, before the contaminating install, and
+it is *not* usable as a pair — only the control arm was measured:
+
+```
+frames  d_ms  d_frames    FPS
+   240 14644       120   8.194     loading
+   360  2002       120  59.940  \
+   480  1992       120  60.241   > panel-limited / light scene
+   600  2003       120  59.910  /
+   720  2513       120  47.752  \
+   840  2408       120  49.834   > compute-bound
+   960  2574       120  46.620  /
+```
+
+Two consequences that matter for reading the final A/B: the in-game baseline on this handset is
+**~47–50 FPS, not the ~29 FPS the win model assumed**, and part of the frame budget is already
+pinned at the **60 Hz panel cap**, which will truncate whatever the patch wins in those scenes.
+Both are reasons to report raw per-120-frame batches rather than a single mean.
+
+### 5.2 The run that produced no frames, and the prime suspect **[measured]**
+
+In run 4 the arm installed correctly (installed `base.apk` sha256 equalled the artefact at every
+sample), nothing installed over it, and the engine trace for the entire 200 s contains **one**
+record. The mark sequence is:
+
+```
+start -> DungeonHunter2 created/resumed -> surface #1 -> engine running -> frames=1
+      -> MyVideoView created -> (~20 s video) -> MyVideoView paused -> DungeonHunter2 resumed
+      -> surface #2 -> MyVideoView destroyed -> nothing further
+```
+
+The renderer is recreated after the intro video but never draws a second frame. The only
+difference from the run that *did* reach gameplay is the tap schedule: run 4 tapped the skip
+position every 10 s for 90 s, run 1 used the single-shot sequence from
+`profile\20-measure-device.ps1` (launch, +8 s tap LAUNCH GAME, +25 s tap skip once, +12 s tap
+1092,984, then measure). This is **not** attributed to the patch: the control arm — pristine
+`libc.so` — showed it too. It is recorded here so that a repeat of the A/B uses the single-shot
+sequence, and so that "only frames=1 after `MyVideoView destroyed`" is recognised immediately as
+a run with no data rather than as a slow warm-up. **Confirmed by the Lead's successful reversal
+run (§5.3): launch, +9 s tap (1092, 807), then no further taps.**
+
+### 5.3 The measurement that counts — the reversal A/B **[measured]**
+
+The Lead ran the reversal pair on the shared device (`control → patched`, back-to-back, same
+resumed save and level) using the working drive sequence — **launch, +9 s tap (1092, 807), then
+NO further taps** — which is the fix for §5.2. Raw traces:
+
+* `Dungeon hunter 2 Rework\_device-evidence\vfp-ab\rev-control.txt`
+* `Dungeon hunter 2 Rework\_device-evidence\vfp-ab\rev-patched.txt`
+
+The arms were verified by hashing `assets/zb/sysroot/system/lib/libc.so` **out of the installed
+`base.apk`** after each install: control `23ee7288…` (pristine), patched `d34addce…` (patched).
+The container was re-signed with `apktool` to raise the version code, so its APK sha256 differs
+from `out\dh2-patched.apk`; the **payload is identical** — same libc sha256 and same bundle token
+`2dd2f3eb…` — which is what the run depended on, and both were read back out of the installed
+APK rather than assumed.
+Every number below is reproduced by `measure\batches.py` + `measure\compare.py` on those two
+files; nothing here is a model.
+
+Per-120-frame batches, in order (fps, and the batch's own Δms):
+
+```
+idx |  control fps  d_ms |  patched fps  d_ms
+  1 |    59.701    2010 |    58.881    2038
+  2 |    58.910    2037 |     7.638   15710
+  3 |    58.824    2040 |    21.622    5550
+  4 |    58.852    2039 |    42.872    2799
+  5 |    58.824    2040 |    48.880    2455
+  6 |    16.809    7139 |    26.584    4514
+  7 |    57.831    2075 |    26.275    4567
+  8 |    57.582    2084 |    29.190    4111
+  9 |    58.537    2050 |    56.899    2109
+ 10 |    57.143    2100 |    58.252    2060
+ 11 |    44.810    2678 |    57.252    2096
+ 12 |     9.225   13008 |    41.987    2858
+ 13 |    22.680    5291 |    42.268    2839
+ 14 |    23.933    5014 |    53.812    2230
+ 15 |    23.117    5191 |    56.845    2111
+ 16 |    21.142    5676 |    57.361    2092
+ 17 |    22.980    5222 |    55.866    2148
+ 18 |    35.950    3338 |    47.393    2532
+ 19 |    24.024    4995 |    25.884    4636
+ 20 |    24.038    4992 |    26.543    4521
+ 21 |    27.009    4443 |    29.880    4016
+ 22 |    21.053    5700 |    27.517    4361
+ 23 |    25.740    4662 |    58.766    2042
+ 24 |    22.351    5369 |    51.370    2336
+ 25 |    23.269    5157 |    24.341    4930
+ 26 |    22.676    5292 |    30.573    3925
+ 27 |    36.866    3255 |    45.541    2635
+ 28 |    26.207    4579 |    33.463    3586
+ 29 |    24.495    4899 |    28.083    4273
+ 30 |    22.426    5351 |    23.729    5057
+ 31 |    51.392    2335 |    29.376    4085
+ 32 |                 |    16.611    7224
+```
+
+**The answer depends on the statistic, and the spread is the honest result:**
+
+| statistic | control | patched | change |
+|---|---|---|---|
+| **time-aggregated rate over the whole window** (Σframes / Σtime) | 3,720 frames / 132.1 s = **28.17 FPS** | 3,840 frames / 122.4 s = **31.36 FPS** | **+11.3 %** |
+| **patched − control, whole-window rate** | — | — | **+3.19 FPS** |
+| per-batch median (all batches) | 25.740 | 37.725 | +46.6 % |
+| per-batch mean (all batches) | 35.432 | 38.799 | +9.5 % |
+| per-batch median, first 13 control / first 6 patched discarded (n = 18 / 26) | 23.979 | 37.725 | **+57.3 %** |
+| per-batch mean, same discard | 26.593 | 39.811 | **+49.7 %** |
+| time-aggregated rate, same discard | 25.272 | 34.907 | +38.1 % |
+
+The Lead's headline (**median +57.3 %, mean +49.7 %**) reproduces exactly, but only under that
+asymmetric discard — 13 of 31 control batches (42 %) against 6 of 32 patched (19 %). The two
+captures are **not scene-aligned**: control's panel-limited stretch is batches 1–5 and 7–10,
+patched's is 9–11, 14–17 and 23–24. The control arm also reaches the 60 Hz cap (max 59.701,
+one batch within 0.5 FPS of 60, nine within 1.5), so "0 % at ceiling in either arm" holds only
+for an exact-60.0 tolerance. Per-batch statistics that ignore how long each batch took therefore
+move by a factor of five depending on the alignment rule, while the time-aggregated rate — the
+physically meaningful one — moves by **+11.3 %**.
+
+**Statistical strength: weak.** Per-batch means are 35.43 ± 3.0 (s.e., n = 31) and 38.80 ± 2.6
+(n = 32); the difference is 3.37 ± 3.97, i.e. not significant on this sample, and the slowest
+batches overlap almost exactly (control 9.23 / 16.81 / 21.05 / 21.14 / 22.35 vs patched
+7.64 / 16.61 / 21.62 / 23.73 / 24.34). What the reversal pair does establish is **direction**:
+patched is faster in every aggregation tried, and it has fewer slow batches
+(14 vs 18 below 30 FPS).
+
+**Against the model.** The modelled win was `p × 21.25 ms × 0.889` = 10.99–11.50 ms/frame
+(42.8–44.7 %, "≈29 → ≈50 FPS"). Measured: 3.19 FPS at a 28.17 FPS baseline, i.e. **+11.3 %**, or
+about **a quarter of the model**; the static ceiling of 21.25 ms is not reachable, consistent
+with §5.1's finding that helper bodies are a smaller share of the frame than the census assumed.
+The direction is right and the mechanism is real; **the model's magnitude is falsified by this
+measurement**, and the per-batch median figure should not be quoted as a frame win.
+
+**UNPROVEN / next step:** a scene-locked A/B — same level segment, same input script, several
+`control → patched → control → patched` alternations, comparing the same ordinal batches — would
+pin the magnitude. Nothing in this session did that.
 
 ---
 
 ## 6. What remains unproven
 
-1. **Dynarmic's VFP, not qemu-arm's.** Every "0 mismatches" above is against a faithful ARMv7
-   VFP model. The device executes the guest through Dynarmic, and `SOFTFLOAT-VFP-REPLACEMENT.md`
-   §3.10 could not read the pinned revision's FP semantics. The on-device run is a
-   *behavioural* smoke test (the game must run and render correctly), not a bit-exactness proof.
-2. **Direct proof that the extracted `files/zb/.../libc.so` is the patched one** — §4.
-3. **Coverage gaps** deliberately left shipped: `f2d`, `f2iz`, `f2uiz`, `d2iz`, `d2uiz`, `d2f`,
+1. ~~**Dynarmic's VFP, not qemu-arm's.**~~ **CLOSED off-device** — §3.5: the same artifact under
+   the pinned Dynarmic is 784,370,762 comparisons / 0 mismatches, with a negative control that
+   fails on exactly the NaN rule the guard neutralises. What remains open is only whether the
+   *device* is running this Dynarmic revision, which §4's token argument and §5.3's measured
+   difference both support but do not prove directly.
+2. **Direct proof that the extracted `files/zb/.../libc.so` is the patched one** — §4. The
+   installed `base.apk` is readable and was hashed (control `23ee7288…`, patched `d34addce…`),
+   and the tokens differ, so `RuntimeBundle.install` cannot have taken its early return; but the
+   on-device copy itself was not read back.
+3. **The magnitude of the win.** §5.3: +11.3 % on the time-aggregated rate, +57.3 % on an
+   asymmetrically-trimmed per-batch median, and not statistically significant on 31/32 batches.
+   The model's 42.8–44.7 % is not supported. A scene-locked, alternating A/B is the missing
+   experiment.
+4. **Coverage gaps** deliberately left shipped: `f2d`, `f2iz`, `f2uiz`, `d2iz`, `d2uiz`, `d2f`,
    `i2d`, `ui2d` are **not** replaced; `__aeabi_d2f` and `__aeabi_i2d`/`ui2d` have only partial
    coverage and were excluded rather than rushed.
-4. **FPSCR cumulative exception flags** are now set where the soft-float bodies never set them.
+5. **FPSCR cumulative exception flags** are now set where the soft-float bodies never set them.
    Nothing in the engine reads FPSCR **[measured, §3.4]**, so nothing can observe it.
-5. **The static win model is not a frame prediction.** With 1332 → 215 instructions across the
+6. **The static win model is not a frame prediction.** With 1332 → 215 instructions across the
    replaced bodies, the *body* cost falls 83.9 %; the per-call engine veneer (3 instructions) and
-   the guest `bl`/`bx lr` remain, so the per-site cost falls less. The measured A/B is the only
-   number quoted as a frame win.
-6. **Everything here is one bundle.** The FPSCR argument and the ELF audit are properties of
-   `zb-version.txt 9ae1e3d9…`'s contents; a sysroot swap invalidates them. Re-run
-   `fpscr_scan.py` + `fpscr_validate.py` and `tier3_check.py` and fail the build if the write
-   set grows or the metadata diverges.
+   the guest `bl`/`bx lr` remain, so the per-site cost falls less — and §5.1/§5.3 show the frame
+   share is smaller still.
+7. **Everything here is one bundle.** The FPSCR argument and the ELF audit are properties of the
+   bundle's contents; a sysroot swap invalidates them. Re-run `fpscr_scan.py` +
+   `fpscr_validate.py` and `tier3_check.py` and fail the build if the write set grows or the
+   metadata diverges.
 
 ---
 
@@ -333,9 +560,12 @@ python DH2Work-toolchain\vfp\patch\patch_libc.py `
 # 5. ELF metadata audit
 python DH2Work-toolchain\vfp\harness\tier3_check.py <pristine> <patched>
 
-# 6. build both signed APKs at versionCode 28
-pwsh -File DH2Work-toolchain\vfp\build\build_variant.ps1 -Variant control -VersionCode 28
-pwsh -File DH2Work-toolchain\vfp\build\build_variant.ps1 -Variant patched -VersionCode 28
+# 5b. the same artifact under the pinned Dynarmic (host x86-64, WSL)
+wsl -d Ubuntu -- bash -lc "cd /mnt/c/Users/NacWorkstation/Documents/DH2Work-toolchain/vfp/dynarmic && bash build.sh --run 0.05"
+
+# 6. build both signed APKs (1103 = control, 1104 = patched, per the Lead's addendum 8)
+pwsh -File DH2Work-toolchain\vfp\build\build_variant.ps1 -Variant control -VersionCode 1103
+pwsh -File DH2Work-toolchain\vfp\build\build_variant.ps1 -Variant patched -VersionCode 1104
 
 # 7. on device (only when no other agent holds the phone)
 pwsh -File DH2Work-toolchain\vfp\measure\harvest.ps1 -Rounds 1 -WindowSeconds 100 -ArmSeconds 90
