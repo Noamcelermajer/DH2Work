@@ -21,15 +21,17 @@ dumps, no `.pseudo.c` pseudocode, no from-scratch C++ engine sources).
 
 ## Read this first: honest status
 
-**Playable gameplay has been demonstrated on emulators, not on a physical
-phone.** The last physical-device evidence in this repository stops at Test 4
-(SIGSEGV while reopening the prince model). Test 5 fixed that cause in code and
-passed host/translator tests, but was **never confirmed on the Fold7**. Tests 6
-through 11 and the 16 KiB work are emulator-only.
+**Playable gameplay is now demonstrated on the physical phone.** The DH2Work build
+line was carried onto the connected Fold7 and validated there: **eight consecutive
+launches with no startup fault**, and a continuous run of **23,520 frames over 917 s
+(15.3 minutes) with zero SIGSEGV** — after fixing the two defects that had blocked it.
+See [FOLD7-VALIDATION.md](docs/FOLD7-VALIDATION.md) for the record and its explicit list
+of what remains unverified. The earlier compatibility evidence in the table below is
+emulator-based; the Fold7 row now reflects the DH2Work builds.
 
 | Environment | Highest verified result | Evidence |
 | --- | --- | --- |
-| Galaxy Z Fold7 `SM-F966B`, Android 16, 4 KiB pages | Tests 1–4 only: native init, JNI registration, opening cinematic, then abort (Test 3 `SIGABRT`, Test 4 `SIGSEGV`). Test 5 never retested on the phone. | [evidence/phone-test3/](evidence/phone-test3/), [evidence/phone-test4/](evidence/phone-test4/) |
+| Galaxy Z Fold7 `SM-F966B`, Android 16, 4 KiB pages | **DH2Work r4-sync**: 8/8 clean launches, 23,520 frames over 917 s continuous with no crash, 16:9 confirmed at 2184x1228 on the unfolded panel, ~22–30 FPS. Earlier phone work stopped at Test 4. | [docs/FOLD7-VALIDATION.md](docs/FOLD7-VALIDATION.md), [evidence/dh2work-r4/](evidence/dh2work-r4/), [evidence/phone-test3/](evidence/phone-test3/), [evidence/phone-test4/](evidence/phone-test4/) |
 | Android 9 x86 AVD, original ARM32 guest via the OS native bridge | Animated menu, save selection, saved 3D level, movement/combat; save-job thread exhaustion removed by a one-instruction engine patch | [patches/thread-exhaustion/README.md](patches/thread-exhaustion/README.md) |
 | Android 17 / API 37.0 x86_64 AVD, 4 KiB pages, arm64 wrapper + ZettaBridge | Full main menu, `Start Game` → saved level at 100 %, live 3D gameplay and HUD, joystick movement, working pause/return, updated save timestamp, cold-relaunch reload; combat damage (enemy + health bar removed) and English UI in Test 11 | [STANDALONE-TEST9-PATH.md](docs/design/STANDALONE-TEST9-PATH.md), [STANDALONE-TEST10-VIEWPORT.md](docs/design/STANDALONE-TEST10-VIEWPORT.md), [STANDALONE-TEST11-LANGUAGE.md](docs/design/STANDALONE-TEST11-LANGUAGE.md) |
 | Android 17 / API 37.2 x86_64 AVD, **16 KiB** pages, experimental bridge | Strict experimental build reached title, saved-character menu, saved level, HUD and movement — but the 16 KiB mapper has six documented code-level blockers and the shipped launcher still refuses 16 KiB hosts | [patches/16k-port/README.md](patches/16k-port/README.md) |
@@ -48,13 +50,13 @@ Reproduced and fixed (with hash-pinned patches and host tests):
 * The original engine treated Android absolute paths as relative when `WorkingDirectory` was non-empty, duplicating the cache root → 20-byte ARM patch at engine VA `0x56dd9c`.
 * A lowercased repeated cache root on deferred model reopen → `dh2_repeated_cache_root` retry in the Storm guard.
 * Flat `qata/3d/textures/*.tga` requests that live under `data/3d/textures/` → texture-path fallback.
-* Per-frame `pthread_create` for save jobs exhausting the guest address space → optional one-instruction engine patch to the existing synchronous path (diagnostic; not the shipped default).
+* Per-frame `pthread_create` for save jobs exhausting the guest address space → **one-instruction engine patch at RVA `0x32c534`** routing the per-frame `BNE` to the existing synchronous `Savegame::UpdateJobs()` path at `0x32cc34`. Earlier work called this a diagnostic; it is now the **shipped default** in the DH2Work build (engine `ad33304f…`), and it removed the crash that killed three consecutive runs at ~7 minutes. See [evidence/dh2work-r4/](evidence/dh2work-r4/).
 * Saved-language preference: the native `getLanguage()` used `dh2_settings.savegame`, not the phone locale → `LanguagePreference` rewrites the four-byte `Language` field, with a byte-verified backup.
 
 Still open / unverified:
 
 * **16 KiB host pages.** The default runtime maps 4 KiB guest pages directly and `Dh2Activity` refuses any host page size other than 4096. `patches/16k-port/` is experimental and lists the remaining blockers (file-mapping materialisation, `madvise`/`msync`/`mremap`, fastmem disabled, bridge pointer audits, staging bounds, full 4 KiB/16 KiB suites).
-* **Display geometry.** The `Fit game to 16:9` option is experimental; Test 9 saw a cropped menu reappear after a cold restart, and Test 10 added the fitted `nativeSetPhone` size plus a viewport restore that held across two cold relaunches. Fold/unfold and touch alignment on hardware are untested.
+* **Display geometry.** The `Fit game to 16:9` option is **confirmed on hardware**: with it enabled on the unfolded inner panel (2184x1968, aspect 1.11:1) the surface becomes exactly `2184x1228`, letterboxed and undistorted. Touch alignment under the letterbox and cover-display behaviour remain untested. The older Test 9/Test 10 emulator findings are in [STANDALONE-TEST10-VIEWPORT.md](docs/design/STANDALONE-TEST10-VIEWPORT.md).
 * **GL error.** A `GL_INVALID_ENUM` (0x0500) was observed during Test 5; its effect is unassessed. Some `.tga` opens are logged missing even while the level renders.
 * **Android 17 x86_64 native bridge.** Test 7 aborted at ~272 s in `libndk_translation.so` (`berberis` `mmap`) and Test 8 in the engine at `libDungeonHunter2.so+0x60b2b8`; both are emulator address-space/translation-layer findings.
 * **Toolchain transcript.** `javac` on the private Windows host prints an `AccessDeniedException` while closing Android 37 `android.jar` even though it exits 0 and emits the expected classes. Treat the class count/D8/APK checks as the real signal.
