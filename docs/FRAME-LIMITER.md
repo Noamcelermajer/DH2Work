@@ -173,10 +173,18 @@ The prior call-graph note in the task is partly wrong and needs correcting:
 005311bc  b    #0x530fc8     ; else tail-call appUpdate
 ```
 
-`appUpdate` (`0x530fc8`) then runs, per frame: `time()` (`bl 0x30e580`) for a wall-clock
-stamp, an `Application::Update` virtual call on `[r4+0x10]` (`bl 0x32ccc4`), then
-`snprintf` (`bl 0x30e868`) into a 16-byte stack buffer and
-`__aeabi_ui2f`/`__aeabi_fdiv` for a counter. No wait, no yield, no frame-budget compare.
+`appUpdate` (`0x530fc8`) then runs, per frame:
+
+* `time()` (`bl 0x30e580`) for a wall-clock stamp;
+* a debug-switch probe: `DebugSwitches::load()` (`bl 0x337888`), a bounded string copy
+  (`_M_allocate_block` `0x31167c` + `memcpy` `0x30e868` + explicit NUL) of a 15-character
+  switch name into a 16-byte stack buffer, then `DebugSwitches::GetSwitch` (`bl 0x337a88`).
+  The name length matches a `DebugSwitches` entry such as `TraceAllLoadedTextureInf`
+  (`.rodata` `0x8bf230`);
+* `glitch::IDevice::run()` (`bl 0x671b24`) on the non-rendering path at `0x530ffc`;
+* the `Application::Update` virtual call through `[r4+0x10]` (`bl 0x32ccc4`).
+
+No wait, no yield, no frame-budget compare anywhere in the function.
 
 `Application::Update` (`0x32ccc4`) is where a limiter would live, and it does not have one:
 
