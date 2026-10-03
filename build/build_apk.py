@@ -154,6 +154,13 @@ for node in app.findall('activity'):
         node.set(a('name'),'com.zettabridge.launcher.Dh2Activity')
         node.set(a('configChanges'),'orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden')
     else:node.set(a('exported'),'false')
+# NOTE: the ~60 FPS plateau is the 60 Hz panel, not an engine cap (see docs/FRAME-LIMITER.md),
+# but it can NOT be lifted from the manifest: aapt2 rejects `android:preferredDisplayModeId`
+# with "attribute android:preferredDisplayModeId not found" - it is a
+# WindowManager.LayoutParams field, not a framework manifest attribute. Any fix must be
+# programmatic (WindowManager.LayoutParams.preferredDisplayModeId on a *visible* window, or
+# Surface.setFrameRate), and must target the guest's own Stubs activity, which is created by
+# the ZettaBridge launcher rather than by our code. Left unimplemented deliberately.
 # Performance work needs function-level attribution, and simpleperf refuses to
 # attach to a normal release app ('cpu-cycles:u: Permission denied').  A
 # <profileable android:shell="true"/> profile build is permitted from adb shell
