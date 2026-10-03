@@ -503,7 +503,7 @@ Java_..._GameRenderer_nativeRender  0x005311a0
 
 `nativeOnDrawFrame` is `bx lr` (an empty stub): the frame loop is entered through `nativeRender` → `appUpdate`. `nativeInit` (`0x005311c8`) → `appInit` (`0x00530ba8`); `JNI_OnLoad` (`0x0053224c`) plus the 548 `.init_array` constructors are the load-time roots.
 
-### 4.2 The four purpose classes
+### 4.2 The five caller-side purpose classes
 
 | class | test applied | FP functions | FP call sites | weighted units |
 |---|---|--:|--:|--:|
@@ -619,6 +619,7 @@ expected_ms_per_frame(function)  = saved_ms_once_per_frame × frame_confidence
 | reachability evidence | confidence factor |
 |---|--:|
 | a static caller inside the frame closure (`on-frame`) | 0.60 |
+| only callers one step outside the frame closure (`one-hop`) | 0.35 |
 | no static caller anywhere, entry address in a data section (`virtual`) | 0.30 |
 | no static caller and no data reference (`orphan`) | 0.25 |
 | every static caller outside the frame closure (`off-frame`) | 0.30 |
