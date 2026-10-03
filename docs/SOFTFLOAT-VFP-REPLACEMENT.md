@@ -411,6 +411,12 @@ for `__fixsfsi`, `UINT_MAX` for `__fixunssfsi`, including for NaN), while ARM VF
 saturates toward the representable end and returns 0 for NaN. These are different *observable
 values*, not a NaN-payload nuance.
 
+**Confirmed on the artifact, not just the source:** with the "new" side being the
+`__aeabi_f2iz`/`__aeabi_f2uiz` bodies *inside `libc.patched.so`*, the exhaustive sweeps
+reproduce the identical mismatch counts — **33,554,429** and **8,388,607** respectively over
+all 2³² inputs **[measured]**. This is why they are excluded from the recommended patch list,
+and it is a concrete demonstration that the artifact-level tests (§6 Tier 2) are load-bearing.
+
 **Recommendation: leave `__aeabi_f2iz`, `__aeabi_f2uiz`, `__aeabi_d2iz`, `__aeabi_d2uiz`,
 `__aeabi_l2f`, `__aeabi_ul2f` at their shipped bodies in the first pass.** They are the
 *cheapest* helpers anyway (21–26 instructions for the single-precision ones: `f2iz` 23,
