@@ -17,7 +17,13 @@ JIT. Section 5 states exactly what that costs us.
 
 ---
 
-## 1. Headline: the FP premise does not hold for this binary
+## 1. Headline: the engine's FP is guest soft-float — the FP premise holds, through a different mechanism
+
+> **Read §9 with this section.** My first draft of §1 concluded that because the engine has no
+> FP opcodes, the FP cost model could not apply. **That was wrong.** The `__aeabi_*` helpers
+> are guest ARM32 libc bodies (124–264 translated instructions each) and they *are* translated.
+> §9 carries the evidence, the corrected cost model and the corrected ranking. §1's
+> observations stand; only their interpretation changed.
 
 **[derived] `libDungeonHunter2.so` contains essentially no floating-point instructions.**
 
@@ -664,6 +670,10 @@ python imports.py
 python final.py ; python mktable2.py
 # the arithmetic in section 1
 python budget.py
+# section 9: where the soft-float helpers live, and what they cost
+python helpers.py          # guest-libc symbol report
+python helpercost.py       # sizes / instruction counts / VFP use -> helpers.json
+python rank3.py            # corrected ranking by measured soft-float cost
 ```
 
 Spot checks used while writing this:

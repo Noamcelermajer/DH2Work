@@ -83,3 +83,61 @@ The alternative — raising the sysctl — needs root and would not travel to a 
 * `malloc(4194304)` failing first (4 MB) and then a smaller one shows the engine retries and
   keeps going before finally writing through a null — so the failure is not a single
   unlucky allocation.
+
+## Correction: this hypothesis is ranked below one with better evidence
+
+A concurrent code-level investigation (`docs/GUEST-MEMORY-INVESTIGATION.md`) established the
+actual mechanism and found stronger evidence for **guest 32-bit VA exhaustion/fragmentation
+inside the wrapper's single 4 GiB guest reservation**, which outranks the `vm.max_map_count`
+idea above (that one predicts *size-independent* failure, and the observed failures are
+size-dependent).
+
+Mechanism, verified in code:
+
+* the guest is **one 4 GiB reservation**, `mmap(nullptr, 4 GiB + 64 KiB, PROT_NONE,
+  MAP_NORESERVE)`, with guest address `g` at `base + g`
+  (`core/src/guest_memory.cpp:38-45`, `core/include/zb/guest_memory.h:8`);
+* every guest allocation is served inside it, bounded only by `mmap_limit = 0xFE000000`
+  (`core/include/zb/process.h:31-36`, enforced at `core/src/syscalls.cpp:313/317/282/400`) —
+  **no arena budget and no configuration knob**;
+* guest `mmap` can fail in exactly two places: `find_free(size, mmap_limit) == 0`
+  (`syscalls.cpp:317-318`), or the host `mmap(MAP_FIXED)` failing (`syscalls.cpp:325-328`).
+  `find_free` is highest-fit downward (`guest_memory.cpp:91-104`).
+
+The stronger evidence is in the captured guest log, which I had not parsed for this:
+**785 consecutive `pthread_create failed: couldn't allocate 1052672-bytes mapped space`**
+over 34 seconds — all the *same* size — alongside `malloc(4194304)` and then
+`malloc(1429956)` failing **while every allocation below 1 MB still succeeds** and load steps
+0→10 keep progressing. Size-selective and persistent, with the process still alive for
+another 34 s: that is fragmentation/upper-window exhaustion, not a ceiling and not
+overcommit.
+
+## Correction: the proximate fault IS a wide-stdio null `FILE*`
+
+I claimed earlier that the memory finding *overrode* the project's recorded blocker. That was
+too strong and is corrected here.
+
+The reported `pc libc+0x675d8` is imprecise (`crash-precise: no`) and resolves into
+**`__vfwscanf`** (the `bl __fgetwc_unlock` call, symbol VA `0x66dfc`) — which is the *same
+wide-stdio region* as the documented `0x675a0` in the `vfwprintf` wrapper. So the project's
+proximate description — a null/dangling `FILE*` dereferenced in wide stdio — was
+**essentially correct**, and the fault being a *write* of `0x0` is consistent with it.
+
+What is new is the **root cause upstream of it**: the engine's `malloc` returns NULL because a
+guest `mmap` failed, and the engine propagates NULL onward instead of checking it. The
+documented proximate diagnosis and this root cause are not in conflict; they are different
+layers of the same crash.
+
+## The measurement that settles it
+
+Instrument the `find_free`-failure branch (`syscalls.cpp:317`) to write, at failure: the
+requested size, the **largest contiguous free run**, and total free pages, into
+`zb-runtime-report.txt`. Then:
+
+* `run << request` with large total free → **fragmentation confirmed**;
+* `run >= request` → the host `mmap`/VMA path is failing instead, and `vm.max_map_count`
+  becomes the question again (it is `Permission denied` to `adb shell` on this device, so it
+  is currently UNKNOWN).
+
+That instrumentation is a change to `syscalls.cpp`, so it needs a `libzbridge.so` rebuild —
+which is now proven reproducible byte-for-byte, so it is available today.
