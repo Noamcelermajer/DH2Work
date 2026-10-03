@@ -158,6 +158,14 @@ in the first 32 bytes, so the loop that a rewrite would speed up is the part tha
 | the ARM32 and AArch64 case generators agree | FNV-1a over the record block, the weight window and the packed bone word: **identical** on case 0 (`0x8a99c944` → `0x3242f027` → `0x69d67dd2`), plus 8 record words | `tools/run_gen_diff.py` |
 | the guest's soft-float ABI | the two helper leaves assembled from source, disassembled back, and executed | `arm32/hf_vfp_leaves.S` |
 
+**One open discrepancy in that last row.** `run_gen_diff.py` reports a second, additive identity
+(`sum(record) + sum(weights)`) whose ARM32 value (`0xdeabd8c6`) does not match the Python one
+(`0x9fc037c6`), while the FNV-1a over the same bytes matches exactly. Since a hash match on the same
+input means the input is the same, the disagreement is in the additive probe, not in the material —
+but it is unexplained, and it is listed here rather than removed so that the next person does not
+have to rediscover it. The FNV-1a chain and the eight record words are the identities the comparator
+actually relies on.
+
 **Not measured — the bit-exactness comparison.** The ARM32 reference image builds, loads, and
 executes the spliced loop; the driver generates material, fills the synthetic frame and enters
 `loop1` (`--until 0x73000000` stops there with the frame correct at `[sp,#0x48] = record base`,
