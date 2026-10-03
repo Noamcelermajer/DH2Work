@@ -1,0 +1,195 @@
+1791037590268 tid=28510 start locale=en_GB preferEnglish=false fit16by9=false preserveContext=false
+1791037590268 tid=28510 asset probe=character_properties_pystructnames.bin exists=true bytes=5032
+1791037590268 tid=28510 asset sha256=character_properties_pystructnames.bin 7c955f759840dc7808b17ddb54213ce886abd5cdf6607cacc9048a3626803cc2
+1791037590269 tid=28510 asset probe=character_properties.bin exists=false bytes=0
+1791037590269 tid=28510 asset probe=character_models_dictionary_pyarraynames.bin exists=true bytes=1755
+1791037590269 tid=28510 asset sha256=character_models_dictionary_pyarraynames.bin d731c154e9208b66b84476d97a08366ad1d3e1a074c1fc59889e03b847661fc9
+1791037590269 tid=28510 model probe=/storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae exists=true bytes=3207072
+1791037590269 tid=28510 model first32=42524553feff00003c000000a0ef300017250000000000003c00000098940000
+1791037590287 tid=28510 Zirconia_DRM created
+1791037590291 tid=28510 Zirconia_DRM started
+1791037590291 tid=28510 Zirconia_DRM resumed
+1791037590558 tid=28510 Zirconia_DRM paused
+1791037590842 tid=28510 DungeonHunter2 created
+1791037590877 tid=28510 DungeonHunter2 started
+1791037590877 tid=28510 DungeonHunter2 resumed
+1791037590901 tid=28614 surface created #1 EGL=android.opengl.EGLContext@372b7c18 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830
+1791037591310 tid=28510 Zirconia_DRM stopped
+1791037591310 tid=28510 Zirconia_DRM destroyed
+1791037591377 tid=28614 surface initialization returned
+1791037591377 tid=28614 surface size=2184x1968 view=2184x1968
+1791037591377 tid=28614 surface resize returned
+1791037591378 tid=28614 engine running
+1791037591378 tid=28614 render returned frames=1 elapsedMs=522
+1791037593776 tid=28614 render returned frames=120 elapsedMs=2919
+1791037593776 tid=28510 DungeonHunter2 paused
+1791037593813 tid=28510 MyVideoView created
+1791037593817 tid=28510 MyVideoView started
+1791037593818 tid=28510 MyVideoView resumed
+1791037593852 tid=28510 DungeonHunter2 saved state
+1791037593854 tid=28510 DungeonHunter2 stopped
+1791037625237 tid=28510 MyVideoView paused
+1791037625243 tid=28510 DungeonHunter2 started
+1791037625244 tid=28510 DungeonHunter2 resumed
+1791037625277 tid=28614 surface created #2 EGL=android.opengl.EGLContext@373186c8 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830
+1791037625280 tid=28614 surface initialization returned
+1791037625280 tid=28614 surface size=2184x1968 view=2184x1968
+1791037625280 tid=28614 surface resize returned
+1791037625294 tid=28614 surface size=2184x1968 view=2184x1968
+1791037625294 tid=28614 surface resize returned
+1791037626018 tid=28510 MyVideoView stopped
+1791037626018 tid=28510 MyVideoView destroyed
+1791037641158 tid=28614 render returned frames=240 elapsedMs=50301
+1791037648455 tid=28614 render returned frames=360 elapsedMs=57598
+1791037651499 tid=28614 render returned frames=480 elapsedMs=60643
+1791037665312 tid=28614 render returned frames=600 elapsedMs=74455
+1791037667353 tid=28614 render returned frames=720 elapsedMs=76496
+1791037669396 tid=28614 render returned frames=840 elapsedMs=78539
+1791037671436 tid=28614 render returned frames=960 elapsedMs=80579
+1791037673477 tid=28614 render returned frames=1080 elapsedMs=82620
+1791037675516 tid=28614 render returned frames=1200 elapsedMs=84660
+1791037677552 tid=28614 render returned frames=1320 elapsedMs=86695
+1791037679597 tid=28614 render returned frames=1440 elapsedMs=88740
+1791037681637 tid=28614 render returned frames=1560 elapsedMs=90780
+1791037683676 tid=28614 render returned frames=1680 elapsedMs=92819
+1791037685717 tid=28614 render returned frames=1800 elapsedMs=94860
+1791037687757 tid=28614 render returned frames=1920 elapsedMs=96900
+1791037689796 tid=28614 render returned frames=2040 elapsedMs=98939
+1791037691836 tid=28614 render returned frames=2160 elapsedMs=100979
+1791037693877 tid=28614 render returned frames=2280 elapsedMs=103020
+1791037695914 tid=28614 render returned frames=2400 elapsedMs=105057
+1791037697956 tid=28614 render returned frames=2520 elapsedMs=107099
+1791037700531 tid=28614 render returned frames=2640 elapsedMs=109674
+1791037714595 tid=28614 render returned frames=2760 elapsedMs=123738
+1791037716642 tid=28614 render returned frames=2880 elapsedMs=125785
+1791037719267 tid=28614 render returned frames=3000 elapsedMs=128410
+1791037723576 tid=28614 render returned frames=3120 elapsedMs=132720
+1791037728881 tid=28614 render returned frames=3240 elapsedMs=138024
+1791037733578 tid=28614 render returned frames=3360 elapsedMs=142721
+1791037738643 tid=28614 render returned frames=3480 elapsedMs=147787
+1791037743677 tid=28614 render returned frames=3600 elapsedMs=152820
+1791037748653 tid=28614 render returned frames=3720 elapsedMs=157796
+1791037753934 tid=28614 render returned frames=3840 elapsedMs=163078
+1791037757530 tid=28614 render returned frames=3960 elapsedMs=166673
+1791037761000 tid=28614 render returned frames=4080 elapsedMs=170143
+1791037764496 tid=28614 render returned frames=4200 elapsedMs=173639
+1791037766795 tid=28614 render returned frames=4320 elapsedMs=175938
+1791037768943 tid=28614 render returned frames=4440 elapsedMs=178087
+1791037771312 tid=28614 render returned frames=4560 elapsedMs=180455
+1791037775720 tid=28614 render returned frames=4680 elapsedMs=184863
+1791037779430 tid=28614 render returned frames=4800 elapsedMs=188573
+1791037783603 tid=28614 render returned frames=4920 elapsedMs=192746
+1791037788880 tid=28614 render returned frames=5040 elapsedMs=198024
+1791037793390 tid=28614 render returned frames=5160 elapsedMs=202533
+1791037797822 tid=28614 render returned frames=5280 elapsedMs=206966
+1791037802924 tid=28614 render returned frames=5400 elapsedMs=212068
+1791037817041 tid=28614 render returned frames=5520 elapsedMs=226185
+1791037819201 tid=28614 render returned frames=5640 elapsedMs=228345
+1791037822401 tid=28614 render returned frames=5760 elapsedMs=231544
+1791037826803 tid=28614 render returned frames=5880 elapsedMs=235946
+1791037831165 tid=28614 render returned frames=6000 elapsedMs=240308
+1791037836458 tid=28614 render returned frames=6120 elapsedMs=245602
+1791037841232 tid=28614 render returned frames=6240 elapsedMs=250375
+1791037846060 tid=28614 render returned frames=6360 elapsedMs=255204
+1791037848618 tid=28614 render returned frames=6480 elapsedMs=257761
+1791037861755 tid=28614 render returned frames=6600 elapsedMs=270898
+1791037863795 tid=28614 render returned frames=6720 elapsedMs=272938
+1791037865835 tid=28614 render returned frames=6840 elapsedMs=274978
+1791037869870 tid=28614 render returned frames=6960 elapsedMs=279013
+1791037874177 tid=28614 render returned frames=7080 elapsedMs=283320
+1791037879397 tid=28614 render returned frames=7200 elapsedMs=288540
+1791037884637 tid=28614 render returned frames=7320 elapsedMs=293780
+1791037889181 tid=28614 render returned frames=7440 elapsedMs=298324
+1791037894897 tid=28614 render returned frames=7560 elapsedMs=304041
+1791037899540 tid=28614 render returned frames=7680 elapsedMs=308684
+1791037903926 tid=28614 render returned frames=7800 elapsedMs=313069
+1791037908613 tid=28614 render returned frames=7920 elapsedMs=317757
+1791037913022 tid=28614 render returned frames=8040 elapsedMs=322165
+1791037917470 tid=28614 render returned frames=8160 elapsedMs=326613
+1791037922337 tid=28614 render returned frames=8280 elapsedMs=331480
+1791037926896 tid=28614 render returned frames=8400 elapsedMs=336039
+1791037931555 tid=28614 render returned frames=8520 elapsedMs=340699
+1791037936575 tid=28614 render returned frames=8640 elapsedMs=345718
+1791037941176 tid=28614 render returned frames=8760 elapsedMs=350320
+1791037946476 tid=28614 render returned frames=8880 elapsedMs=355619
+1791037951194 tid=28614 render returned frames=9000 elapsedMs=360338
+1791037956363 tid=28614 render returned frames=9120 elapsedMs=365506
+1791037961762 tid=28614 render returned frames=9240 elapsedMs=370905
+1791037965554 tid=28614 render returned frames=9360 elapsedMs=374698
+1791037970622 tid=28614 render returned frames=9480 elapsedMs=379765
+1791037976136 tid=28614 render returned frames=9600 elapsedMs=385280
+1791037981515 tid=28614 render returned frames=9720 elapsedMs=390659
+1791037986988 tid=28614 render returned frames=9840 elapsedMs=396131
+1791037991569 tid=28614 render returned frames=9960 elapsedMs=400712
+1791037996629 tid=28614 render returned frames=10080 elapsedMs=405773
+1791038001361 tid=28614 render returned frames=10200 elapsedMs=410504
+1791038006357 tid=28614 render returned frames=10320 elapsedMs=415500
+1791038012277 tid=28614 render returned frames=10440 elapsedMs=421420
+1791038016748 tid=28614 render returned frames=10560 elapsedMs=425891
+1791038022001 tid=28614 render returned frames=10680 elapsedMs=431144
+1791038026619 tid=28614 render returned frames=10800 elapsedMs=435762
+1791038031483 tid=28614 render returned frames=10920 elapsedMs=440627
+1791038036368 tid=28614 render returned frames=11040 elapsedMs=445511
+1791038039562 tid=28614 render returned frames=11160 elapsedMs=448706
+1791038043071 tid=28614 render returned frames=11280 elapsedMs=452215
+1791038048520 tid=28614 render returned frames=11400 elapsedMs=457663
+1791038051225 tid=28614 render returned frames=11520 elapsedMs=460369
+1791038056318 tid=28614 render returned frames=11640 elapsedMs=465462
+1791038061917 tid=28614 render returned frames=11760 elapsedMs=471060
+1791038066839 tid=28614 render returned frames=11880 elapsedMs=475982
+1791038072404 tid=28614 render returned frames=12000 elapsedMs=481547
+1791038077456 tid=28614 render returned frames=12120 elapsedMs=486600
+1791038082550 tid=28614 render returned frames=12240 elapsedMs=491693
+1791038086659 tid=28614 render returned frames=12360 elapsedMs=495802
+1791038091437 tid=28614 render returned frames=12480 elapsedMs=500581
+1791038096026 tid=28614 render returned frames=12600 elapsedMs=505170
+1791038101191 tid=28614 render returned frames=12720 elapsedMs=510334
+1791038105261 tid=28614 render returned frames=12840 elapsedMs=514404
+1791038108789 tid=28614 render returned frames=12960 elapsedMs=517932
+1791038112125 tid=28614 render returned frames=13080 elapsedMs=521269
+1791038114194 tid=28614 render returned frames=13200 elapsedMs=523337
+1791038116221 tid=28614 render returned frames=13320 elapsedMs=525365
+1791038118266 tid=28614 render returned frames=13440 elapsedMs=527409
+1791038120357 tid=28614 render returned frames=13560 elapsedMs=529500
+1791038124474 tid=28614 render returned frames=13680 elapsedMs=533617
+1791038128707 tid=28614 render returned frames=13800 elapsedMs=537850
+1791038133008 tid=28614 render returned frames=13920 elapsedMs=542151
+1791038138228 tid=28614 render returned frames=14040 elapsedMs=547371
+1791038142527 tid=28614 render returned frames=14160 elapsedMs=551670
+1791038147592 tid=28614 render returned frames=14280 elapsedMs=556735
+1791038151355 tid=28614 render returned frames=14400 elapsedMs=560498
+1791038156240 tid=28614 render returned frames=14520 elapsedMs=565383
+1791038160799 tid=28614 render returned frames=14640 elapsedMs=569943
+1791038166505 tid=28614 render returned frames=14760 elapsedMs=575648
+1791038171564 tid=28614 render returned frames=14880 elapsedMs=580707
+1791038176417 tid=28614 render returned frames=15000 elapsedMs=585561
+1791038178968 tid=28614 render returned frames=15120 elapsedMs=588111
+1791038181010 tid=28614 render returned frames=15240 elapsedMs=590153
+1791038183051 tid=28614 render returned frames=15360 elapsedMs=592193
+1791038185099 tid=28614 render returned frames=15480 elapsedMs=594242
+1791038188604 tid=28614 render returned frames=15600 elapsedMs=597747
+1791038193166 tid=28614 render returned frames=15720 elapsedMs=602310
+1791038197969 tid=28614 render returned frames=15840 elapsedMs=607113
+1791038203720 tid=28614 render returned frames=15960 elapsedMs=612863
+1791038208221 tid=28614 render returned frames=16080 elapsedMs=617364
+1791038212800 tid=28614 render returned frames=16200 elapsedMs=621944
+1791038217862 tid=28614 render returned frames=16320 elapsedMs=627005
+1791038230597 tid=28614 render returned frames=16440 elapsedMs=639740
+1791038235785 tid=28614 render returned frames=16560 elapsedMs=644928
+1791038240514 tid=28614 render returned frames=16680 elapsedMs=649657
+1791038244846 tid=28614 render returned frames=16800 elapsedMs=653989
+1791038249634 tid=28614 render returned frames=16920 elapsedMs=658778
+1791038254214 tid=28614 render returned frames=17040 elapsedMs=663357
+1791038257827 tid=28614 render returned frames=17160 elapsedMs=666970
+1791038259893 tid=28614 render returned frames=17280 elapsedMs=669036
+1791038263698 tid=28614 render returned frames=17400 elapsedMs=672841
+1791038268455 tid=28614 render returned frames=17520 elapsedMs=677599
+1791038272560 tid=28614 render returned frames=17640 elapsedMs=681703
+1791038277032 tid=28614 render returned frames=17760 elapsedMs=686175
+1791038280984 tid=28614 render returned frames=17880 elapsedMs=690128
+1791038285563 tid=28614 render returned frames=18000 elapsedMs=694706
+1791038290843 tid=28614 render returned frames=18120 elapsedMs=699986
+1791038294975 tid=28614 render returned frames=18240 elapsedMs=704118
+1791038299561 tid=28614 render returned frames=18360 elapsedMs=708704
+1791038304391 tid=28614 render returned frames=18480 elapsedMs=713534
+1791038309361 tid=28614 render returned frames=18600 elapsedMs=718504

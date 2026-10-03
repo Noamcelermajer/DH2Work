@@ -1,0 +1,12 @@
+{
+  "purpose": "emulator-only synchronous save-job scheduling diagnostic",
+  "input_sha256": "45891aad9e7a5b1d84a5218f91926a04bd13a62ce104cb29beca7c70228c93c4",
+  "output_sha256": "ad33304fe17654ff5e05606323d977c89687c96bc8ce4722983ec6e092bb5f5f",
+  "site_rva": "0x32c534",
+  "old_target_rva": "0x32cb74",
+  "new_target_rva": "0x32cc34",
+  "old_bytes": "8e01001a",
+  "new_bytes": "be01001a",
+  "changed_bytes": 1,
+  "runtime_validated": false
+}
