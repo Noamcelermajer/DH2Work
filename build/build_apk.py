@@ -154,6 +154,13 @@ for node in app.findall('activity'):
         node.set(a('name'),'com.zettabridge.launcher.Dh2Activity')
         node.set(a('configChanges'),'orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden')
     else:node.set(a('exported'),'false')
+# Performance work needs function-level attribution, and simpleperf refuses to
+# attach to a normal release app ('cpu-cycles:u: Permission denied').  A
+# <profileable android:shell="true"/> profile build is permitted from adb shell
+# without making the app debuggable.  Opt-in so shipped builds stay untouched.
+if os.environ.get('DH2_PROFILEABLE')=='1':
+    ET.SubElement(app,'profileable',{a('shell'):'true'})
+    print('Manifest marked profileable for adb shell (profile build)',flush=True)
 manifest_path=OUT/'AndroidManifest.xml';tree.write(manifest_path,encoding='utf-8',xml_declaration=True)
 
 # Ship upstream licensing notices with the personal compatibility build.

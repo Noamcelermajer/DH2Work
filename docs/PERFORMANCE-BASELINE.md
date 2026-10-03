@@ -112,24 +112,36 @@ build. The unstripped symbol table is exactly what makes it feasible, and `leaf_
 Tier 3 is where "hundreds of FPS" would come from if the engine allowed it; it does not, so
 Tier 3 is best judged as *"60 FPS with headroom and no JIT"*, not as a frame-rate number.
 
-## 6. What is needed to choose between tiers
+## 6. Where the 25.7 ms actually goes (measured)
 
-We have the *size* of the problem (25.7 ms/frame, 77% of one core) but not yet its
-*composition* — how much is JIT'd guest code vs the GL driver vs stall. That needs a
-function-level profile, and `simpleperf` is present on the device but refuses to attach
-without root:
+`simpleperf` cannot attach with `-p` (it needs root), but a build carrying
+`<profileable android:shell="true"/>` — opt-in via `DH2_PROFILEABLE=1` in `build_apk.py` —
+is accepted by `simpleperf record --app`. 15,580 samples over 10 s while the game rendered:
 
-```text
-failed to open perf event file for event_type cpu-cycles:u: Permission denied
-```
+| Overhead | Shared object | Reading |
+| ---: | --- | --- |
+| **82.68%** | `unknown` (anonymous executable memory) | **the guest's ARM32 code, JIT-translated by Dynarmic** |
+| **15.11%** | `libzbridge.so` | the translator itself: dispatch, helpers, block plumbing |
+| 0.91% | `libc.so` | |
+| 0.24% | `libart.so` | |
+| 0.19% | `libgui.so` | |
+| **0.16%** | **`libGLESv2_adreno.so`** | **the GPU driver is a rounding error** |
+| 0.09% | `libhwui.so` | |
+| 0.05% | `vulkan.adreno.so` | |
 
-Two ways forward, both cheap:
+This agrees exactly with the resolution A/B in section 2 and settles the composition:
 
-1. Build our own APK with `android:debuggable="true"` (or `profileable`) so `simpleperf -p`
-   is permitted, then attribute by DSO: `libzbridge.so` (translation + JIT'd code) vs
-   `libGLESv2_adreno.so` (driver) vs the guest libraries.
-2. A cheap proxy already available: the wrapper counts GL calls and native calls, and the
-   stall fraction (~23%) bounds how much is driver-entry rather than CPU.
+* **≈ 83% is the game's own code executed through the translator.** That is the thing to
+  attack, and it is why tier 2 replaces that code with native ARM64 instead of touching the
+  renderer.
+* **≈ 15% is translator overhead** — the ceiling for pure tuning (tier 1). Worth taking, but
+  it cannot reach 60 FPS alone.
+* **≈ 0.2% is the GL driver.** Graphics modernisation is not a performance lever here.
+
+The translator's own 15% is concentrated in one tight cluster — `libzbridge.so +0x15b6f0`,
+`+0x15c704`, `+0x15c724`, `+0x15c744`, `+0x15c784`, `+0x15c8b4`, `+0x15c8cc`, all inside about
+`0x200` bytes and together worth ~5–6% of total CPU. The shipped `libzbridge.so` carries no
+useful local symbols in that range, so naming it needs a disassembly pass.
 
 ## 7. Reproducing these numbers
 
