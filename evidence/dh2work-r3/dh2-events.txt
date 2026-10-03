@@ -1,0 +1,29 @@
+1791036142891 tid=2857 start locale=en_GB preferEnglish=false fit16by9=true preserveContext=false
+1791036142891 tid=2857 asset probe=character_properties_pystructnames.bin exists=true bytes=5032
+1791036142891 tid=2857 asset sha256=character_properties_pystructnames.bin 7c955f759840dc7808b17ddb54213ce886abd5cdf6607cacc9048a3626803cc2
+1791036142891 tid=2857 asset probe=character_properties.bin exists=false bytes=0
+1791036142891 tid=2857 asset probe=character_models_dictionary_pyarraynames.bin exists=true bytes=1755
+1791036142891 tid=2857 asset sha256=character_models_dictionary_pyarraynames.bin d731c154e9208b66b84476d97a08366ad1d3e1a074c1fc59889e03b847661fc9
+1791036142891 tid=2857 model probe=/storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae exists=true bytes=3207072
+1791036142891 tid=2857 model first32=42524553feff00003c000000a0ef300017250000000000003c00000098940000
+1791036142904 tid=2857 Zirconia_DRM created
+1791036142907 tid=2857 Zirconia_DRM started
+1791036142907 tid=2857 Zirconia_DRM resumed
+1791036143145 tid=2857 Zirconia_DRM paused
+1791036143356 tid=2857 DungeonHunter2 created
+1791036143378 tid=2857 DungeonHunter2 started
+1791036143379 tid=2857 DungeonHunter2 resumed
+1791036143418 tid=3062 surface created #1 EGL=android.opengl.EGLContext@372b9638 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830
+1791036143821 tid=3062 surface initialization returned
+1791036143821 tid=3062 surface size=2184x1228 view=2184x1228
+1791036143822 tid=3062 surface resize returned
+1791036143822 tid=3062 engine running
+1791036143822 tid=3062 render returned frames=1 elapsedMs=464
+1791036143911 tid=2857 Zirconia_DRM stopped
+1791036143911 tid=2857 Zirconia_DRM destroyed
+1791036145558 tid=2857 DungeonHunter2 paused
+1791036145604 tid=2857 MyVideoView created
+1791036145608 tid=2857 MyVideoView started
+1791036145608 tid=2857 MyVideoView resumed
+1791036145644 tid=2857 DungeonHunter2 saved state
+1791036145647 tid=2857 DungeonHunter2 stopped
