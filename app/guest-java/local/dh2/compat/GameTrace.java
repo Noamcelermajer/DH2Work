@@ -15,6 +15,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 /** Per-session lifecycle and frame milestones. Rendering remains on the original GL thread. */
 public final class GameTrace {
     private static Context context;
+    private static volatile boolean engineRunning;
     private static File events;
     private static boolean preserve,fit,english;
     public static void initialize(Context c){
@@ -84,10 +85,19 @@ public final class GameTrace {
             public void onSurfaceChanged(GL10 gl,int w,int h){event("surface size="+w+"x"+h+" view="+view.getWidth()+"x"+view.getHeight());renderer.onSurfaceChanged(gl,w,h);event("surface resize returned");}
             public void onDrawFrame(GL10 gl){
                 renderer.onDrawFrame(gl);frames++;
+                if(frames==1){
+                    // The engine's globals are not all populated until it has drawn a
+                    // frame. The accelerometer listener can reach nativeSetOrientation
+                    // before that, which faults on an unguarded null global inside
+                    // SetFinalOrientation. The guest smali guard reads this flag and
+                    // defers the sensor-driven orientation call until it is true.
+                    engineRunning=true;event("engine running");
+                }
                 if(frames==1 || frames%120==0)event("render returned frames="+frames+" elapsedMs="+(SystemClock.elapsedRealtime()-started));
             }
         };
     }
     public static boolean fitEnabled(){return fit;}
+    public static boolean engineRunning(){return engineRunning;}
     private GameTrace(){}
 }

@@ -1,0 +1,158 @@
+zettabridge-runtime-report 1
+plugin: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS targetSdk 24
+proxy-loads: 3
+proxy-failures: 0
+proxy-loaded: libnativeinterface.so jni=0x00010006
+proxy-loaded: libDungeonHunter2.so jni=0x00010004
+proxy-loaded: libStormGLOFT.so jni=0x00010006
+jni-onload-calls: 2
+jni-onload: libDungeonHunter2.so ok jni=0x00010004
+jni-onload: libStormGLOFT.so ok jni=0x00010006
+registered-natives: 36
+unimplemented-host-calls: 0
+unimplemented-distinct: 0
+first-unimplemented: (none)
+guest-exit: guest SIGSEGV: read of 0x0001c9c8, pc 0xfdad3304 in /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x67304
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2FileGuard recovered repeated root: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: DH2FileGuard  DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: stdio: DH2Model opened: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae
+guest-log: liblog: å Áj½ŸR    libc  malloc(4194304) failed: returning null pointer
+guest-log: liblog: _DEBUG_OUT  Could not open file :  /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/qata/3d/textures/atlas_fx_particles_002.tga
+guest-log: liblog: StormGLOFT  Optimized shader: 232
+guest-log: liblog: StormGLOFT  Optimized shader: 233
+guest-log: liblog: StormGLOFT  Optimized shader: 235
+guest-log: liblog: StormGLOFT  Optimized shader: 236
+guest-log: liblog: StormGLOFT  Optimized shader: 238
+guest-log: liblog: StormGLOFT  Optimized shader: 239
+guest-log: liblog: å Áj’ïö"   libc  malloc(4194304) failed: returning null pointer
+guest-log: liblog: _DEBUG_OUT  Could not open file :  /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/qata/3d/textures/atlas_fx_particles_002.tga
+guest-log: liblog: å Áj‹Z #   libc  malloc(4194304) failed: returning null pointer
+guest-log: liblog: _DEBUG_OUT  Could not open file :  /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/qata/3d/textures/atlas_fx_particles_002.tga
+guest-log: liblog: _DEBUG_OUT  $percentLoaded: 18
+guest-log: liblog: _DEBUG_OUT  **************************************m_loadStep 7
+guest-log: liblog: _DEBUG_OUT  $percentLoaded: 21
+guest-log: liblog: _DEBUG_OUT  **************************************m_loadStep 8
+guest-log: liblog: _DEBUG_OUT  $percentLoaded: 23
+guest-log: liblog: _DEBUG_OUT  **************************************m_loadStep 9
+guest-log: liblog: _DEBUG_OUT  $percentLoaded: 26
+guest-log: liblog: _DEBUG_OUT  **************************************m_loadStep 10
+guest-log: liblog: å ÁjØ}¦(   libc  malloc(3584208) failed: returning null pointer
+native-calls: com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativeAccelerometer=18230 com/gameloft/android/GAND/GloftD2SS/GameRenderer.nativeRender=10603 com/gameloft/android/GAND/GloftD2SS/GameGLSurfaceView.nativeOnTouch=9379 com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativeCanInterrupt=14 com/gameloft/android/GAND/GloftD2SS/GameRenderer.nativeOnSurfaceChanged=3 com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativeResume=2 com/gameloft/android/GAND/GloftD2SS/GLMediaPlayer.nativeInit=2 com/gameloft/android/GAND/GloftD2SS/GLMediaPlayer.nativeGetTotalSoundsOfSameInstance=2 total=38252
+opened-1: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/v2quests_pyarraynames.bin
+opened-2: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/worldmap_pyarraynames.bin
+opened-3: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/character_models_dictionary_pyarraynames.bin
+opened-4: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/animations_dictionary_pyarraynames.bin
+opened-5: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/effects_dictionary_pyarraynames.bin
+opened-6: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/projectiles_dictionary_pyarraynames.bin
+opened-7: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/game_objects_dictionary_pyarraynames.bin
+opened-8: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/common_text_pyarraynames.bin
+opened-9: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/sdd_dungeon_hunter_2_iphone_pyarraynames.bin
+opened-10: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/PyData/character_properties_pystructnames.bin
+opened-11: /storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/fontin smallcaps.ttf
+opened-12: /storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/wqy-zenhei.ttf
+opened-13: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/scripts_pyscripts.bin
+opened-14: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/scripts_pyscriptnames.bin
+opened-15: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/PyData/scripts/001_SWAMP_pyscripts.bin
+opened-16: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/PyData/scripts/001_SWAMP_pyscriptnames.bin
+open-failed-1: pydata/skills_pyarraynames.bin errno=2
+open-failed-2: pydata/sounds_pyarraynames.bin errno=2
+open-failed-3: pydata/spawn_groups_pyarraynames.bin errno=2
+open-failed-4: pydata/trophies_pyarraynames.bin errno=2
+open-failed-5: pydata/v2conditions_pyarraynames.bin errno=2
+open-failed-6: pydata/v2eventmanager_pyarraynames.bin errno=2
+open-failed-7: pydata/v2quests_pyarraynames.bin errno=2
+open-failed-8: pydata/worldmap_pyarraynames.bin errno=2
+open-failed-9: pydata/character_models_dictionary_pyarraynames.bin errno=2
+open-failed-10: pydata/animations_dictionary_pyarraynames.bin errno=2
+open-failed-11: pydata/effects_dictionary_pyarraynames.bin errno=2
+open-failed-12: pydata/projectiles_dictionary_pyarraynames.bin errno=2
+open-failed-13: pydata/game_objects_dictionary_pyarraynames.bin errno=2
+open-failed-14: pydata/common_text_pyarraynames.bin errno=2
+open-failed-15: pydata/sdd_dungeon_hunter_2_iphone_pyarraynames.bin errno=2
+open-failed-16: PyData/character_properties_pystructnames.bin errno=2
+gl-calls: 6571031
+gl-first-call: glGetIntegerv tid=1641
+gl-egl-context-current: yes
+gl-first-error: glGetError 0x0500
+gl-rejections: 86
+gl-rejection-1: glDrawElements: client vertex attribute range is unreadable args=0x4,0x90,0x1403,0x5abea6e8
+gl-rejection-2: glDrawElements: client vertex attribute range is unreadable args=0x4,0x90,0x1403,0x5abea6e8
+gl-rejection-3: glDrawElements: client vertex attribute range is unreadable args=0x4,0x90,0x1403,0x5abea6e8
+gl-rejection-4: glDrawElements: client vertex attribute range is unreadable args=0x4,0x90,0x1403,0x5abea6e8
+egl-swaps: 0
+egl-observation: current context created outside guest EGL bridge; Java swaps are not counted
+egl-first-error: (none)
+jni-runtime-start: ok
+jni-loading: libStormGLOFT.so
+crash-recent-jni-calls: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA
+crash-recent-egl-calls: (none)
+crash-registers: r0=59e01af8 r1=0001c9c8 r2=00000150 r3=0000003c r4=5a566da0 r5=0001c840 r6=fb0766c0 r7=fb076710 r8=fb0766e8 r9=fd494f58 r10=fcc1a12c r11=ecc91c20 r12=80000000 r13=fb0765b8 r14=fcc24c6c r15=fdad3304
+crash-state: cpsr=a0010010 tls=fb07748c tid=1641 guest-tid=1654
+crash-pc: /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x67304
+crash-lr: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x5a1c6c
+crash-stack: 59e01970 fcc24c6c ed4b8cf0 fd017a98 fb0766c0 fcc1e424 00000000 00000000
+crash-precise: no
+crash-stack-candidate-1: sp+0x4=0xfcc24c6c /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x5a1c6c
+crash-stack-candidate-2: sp+0xc=0xfd017a98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98
+crash-stack-candidate-3: sp+0x14=0xfcc1e424 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x59b424
+crash-stack-candidate-4: sp+0x54=0xfd017a98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98
+crash-stack-candidate-5: sp+0xd8=0xfd017a98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98
+crash-stack-candidate-6: sp+0xec=0xfcc1a12c /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x59712c
+crash-stack-candidate-7: sp+0xf4=0xfcb928f0 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x50f8f0
+crash-stack-candidate-8: sp+0x10c=0xfd017a98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98
+crash-stack-candidate-9: sp+0x124=0xfcba3ca8 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x520ca8
+crash-stack-candidate-10: sp+0x130=0xfcfde0e0 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x95a0e0
+crash-stack-candidate-11: sp+0x158=0xfcf5f940 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x8dc940
+crash-stack-candidate-12: sp+0x168=0xfd017a98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98
+crash-stack-candidate-13: sp+0x17c=0xfcba50cc /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x5220cc
+crash-stack-candidate-14: sp+0x1cc=0xfcba6e00 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x523e00
+crash-stack-candidate-15: sp+0x1d8=0xfd017a98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98
+crash-stack-candidate-16: sp+0x1dc=0xfcf5fac0 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x8dcac0
+watch-threads-1: 1590:dh2.fold7:guest S cpu=35 in=do_epoll_wait | 1606:SharedPreferenc S cpu=0 in=futex_wait_queue | 1608:AsyncTask #1 S cpu=0 in=futex_wait_queue | 1610:TracingMuxer S cpu=0 in=do_sys_poll | 1611:pool-5-thread-1 S cpu=0 in=futex_wait_queue | 1612:Thread-2 S cpu=15 in=futex_wait_queue | 1625:InsetsAnimation S cpu=0 in=do_epoll_wait | 1627:Thread-2 R cpu=0 in=0 | 1633:Thread-2 S cpu=0 in=futex_wait_queue | 1638:InteractionJank S cpu=0 in=do_epoll_wait
+watch-threads-2: 1641:GLThread 1356 S cpu=97 in=futex_wait_queue | 1650:OkHttp Connecti S cpu=0 in=futex_wait_queue | 1654:Thread-2 S cpu=0 in=futex_wait_queue | 1660:Thread-5 S cpu=9 in=__arm64_sys_nanosleep | 1661:GLThread 1356 S cpu=4 in=__arm64_sys_nanosleep | 1662:GLThread 1356 S cpu=3 in=__arm64_sys_nanosleep | 1665:AudioTrack S cpu=0 in=futex_wait_queue | 1668:AudioPortEventH S cpu=0 in=do_epoll_wait
+watch-threads-platform: 19 runtime threads hidden
+watch-1: 1612=sys:rt_sigprocmask x606 stuck=6 S cpu=15 in=futex_wait_queue | 1628=sys:exit x115 stuck=6 gone | 1633=sys:writev x1670 stuck=6 S cpu=0 in=futex_wait_queue | 1654=sys:nanosleep x288231 stuck=6 S cpu=0 in=futex_wait_queue | 1659=sys:exit x11 stuck=6 gone | 1663=sys:exit x10 stuck=6 gone | 1664=sys:exit x10 stuck=6 gone | 1670=sys:exit x10 stuck=6 gone | recent-jni: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementTyp...
+watch-2: 1612=sys:rt_sigprocmask x606 stuck=9 S cpu=15 in=futex_wait_queue | 1628=sys:exit x115 stuck=9 gone | 1633=sys:writev x1670 stuck=9 S cpu=0 in=futex_wait_queue | 1654=sys:nanosleep x288231 stuck=9 S cpu=0 in=futex_wait_queue | 1659=sys:exit x11 stuck=9 gone | 1663=sys:exit x10 stuck=9 gone | 1664=sys:exit x10 stuck=9 gone | 1670=sys:exit x10 stuck=9 gone | recent-jni: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementTyp...
+watch-3: 1612=sys:rt_sigprocmask x606 stuck=12 S cpu=15 in=futex_wait_queue | 1628=sys:exit x115 stuck=12 gone | 1659=sys:exit x11 stuck=12 gone | 1663=sys:exit x10 stuck=12 gone | 1664=sys:exit x10 stuck=12 gone | 1670=sys:exit x10 stuck=12 gone | 1671=sys:exit x10 stuck=12 gone | 1708=sys:exit x10 stuck=12 gone | recent-jni: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimiti...
+watch-4: 1612=sys:rt_sigprocmask x606 stuck=15 S cpu=15 in=futex_wait_queue | 1628=sys:exit x115 stuck=15 gone | 1659=sys:exit x11 stuck=15 gone | 1663=sys:exit x10 stuck=15 gone | 1664=sys:exit x10 stuck=15 gone | 1670=sys:exit x10 stuck=15 gone | 1671=sys:exit x10 stuck=15 gone | 1708=sys:exit x10 stuck=15 gone | recent-jni: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimiti...
+watch-5: 1612=sys:rt_sigprocmask x606 stuck=18 S cpu=15 in=futex_wait_queue | 1628=sys:exit x115 stuck=18 gone | 1633=sys:gettimeofday x1680 stuck=6 S cpu=0 in=futex_wait_queue | 1659=sys:exit x11 stuck=18 gone | 1663=sys:exit x10 stuck=18 gone | 1664=sys:exit x10 stuck=18 gone | 1670=sys:exit x10 stuck=18 gone | 1671=sys:exit x10 stuck=18 gone | recent-jni: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength Ge...

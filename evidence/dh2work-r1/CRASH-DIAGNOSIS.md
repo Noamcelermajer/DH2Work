@@ -210,8 +210,55 @@ pinned Test 10 guest therefore needs the Test 5-era Storm sources from
 | `symbolicate.py` | symbolises a guest PC/LR against the pristine engine |
 | `disas_chain.py` | disassembles `nativeSetOrientation` → `SetFinalOrientation` and resolves PC-relative literals |
 
-## 7. Still unverified
+## 7. The second crash: the long run, and it looks like the documented one
 
-* Physical-device gameplay beyond ~64 s and ~1200 frames on this revision.
-* The 5-minute map-load `vfwprintf` crash (not reached).
+The successful launch was left running. It died at **16:40:53** after **388 s (~6.5 min)**
+and **10,560 frames**, with a completely different fault:
+
+```text
+guest-exit: guest SIGSEGV: read of 0x0001c9c8, pc <libc> +0x67304
+crash-lr : libDungeonHunter2.so offset 0x5a1c6c
+crash-registers: r0=59e01af8 r1=0001c9c8 r2=00000150 r3=0000003c
+                 r14=fcc24c6c r15=fdad3304   crash-precise: no
+```
+
+`gl-calls: 6571031`, `nativeAccelerometer=18230`, `nativeRender=10603`,
+`nativeOnTouch=9379`, `native-calls total=38252`.
+
+Symbolising the two addresses:
+
+* **LR `+0x5a1c6c`** is inside `glitch::video::IBuffer::copy()` (`0x5a1c1c`), on the
+  instruction immediately after `bl 0x30e868`.
+* **`0x30e868`** is a **PLT veneer** (`add ip, pc, #…; ldr pc, [ip, #…]`) — a call to an
+  imported libc function, which is why the fault sits in `libc.so` while the return address
+  is in the engine.
+* The instruction stream is self-consistent with `IBuffer::copy()` doing
+  `memcpy(dst, src, size)`: it checks `[this+0xc]` (size), saves `[this+8]` (old data),
+  calls `operator new[]` (`0x5341a8`) with that size, stores the new pointer back to
+  `[this+8]`, reloads `[this+0xc]` into `r2`, then calls the veneer. At the fault the
+  registers are `dst=0x59e01af8`, `src=0x0001c9c8`, `n=0x150` (336) — **a 336-byte copy
+  from an invalid source pointer**.
+* **`crash-stack-candidate-3: +0x59b424`** lands in
+  `glitch::scene::createMeshCopy(…)` (`0x59b2a4`) at the instruction right after its
+  `bl 0x5a1c1c` — so the call chain is
+  `createMeshCopy()` → `IBuffer::copy()` → libc copy.
+
+`createMeshCopy` is a **mesh-copy during scene setup**, and the documented blocker is
+*"a crash after roughly five minutes of play while a new map loads … during script or map
+initialisation"*. The placement, the timing and the mesh-copy frame all agree, and the libc
+offset (`0x67304`) is close to the documented one (`0x675a0`) — plausibly the same region of
+a different guest libc build. The event trace does not itself record map loads (it only
+logs surface lifecycle and render milestones), so *"this is the documented map-load crash"*
+is a well-supported inference, not a proven identity.
+
+Either way this is now a much tighter target than "a wide stdio print with a null `FILE*`":
+a **336-byte copy from source `0x0001c9c8` inside `createMeshCopy`**.
+
+## 8. Still unverified
+
+* Whether the section 3b readiness guard actually removes the startup crash — r2 is built
+  and verified but not yet exercised on the device.
+* Whether orientation/tilt still works *after* the first frame, i.e. that the guard defers
+  the call rather than dropping it.
+* The second crash is still unreproduced after the fix and unfixed.
 * Audio, saves/reload, quests, all levels, 16 KB pages, ZettaBridge performance.

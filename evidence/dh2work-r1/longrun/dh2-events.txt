@@ -1,0 +1,127 @@
+1791034460081 tid=1590 start locale=en_GB preferEnglish=false fit16by9=false preserveContext=false
+1791034460081 tid=1590 asset probe=character_properties_pystructnames.bin exists=true bytes=5032
+1791034460082 tid=1590 asset sha256=character_properties_pystructnames.bin 7c955f759840dc7808b17ddb54213ce886abd5cdf6607cacc9048a3626803cc2
+1791034460082 tid=1590 asset probe=character_properties.bin exists=false bytes=0
+1791034460082 tid=1590 asset probe=character_models_dictionary_pyarraynames.bin exists=true bytes=1755
+1791034460082 tid=1590 asset sha256=character_models_dictionary_pyarraynames.bin d731c154e9208b66b84476d97a08366ad1d3e1a074c1fc59889e03b847661fc9
+1791034460082 tid=1590 model probe=/storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae exists=true bytes=3207072
+1791034460082 tid=1590 model first32=42524553feff00003c000000a0ef300017250000000000003c00000098940000
+1791034460093 tid=1590 Zirconia_DRM created
+1791034460095 tid=1590 Zirconia_DRM started
+1791034460095 tid=1590 Zirconia_DRM resumed
+1791034460335 tid=1590 Zirconia_DRM paused
+1791034460573 tid=1590 DungeonHunter2 created
+1791034460599 tid=1590 DungeonHunter2 started
+1791034460599 tid=1590 DungeonHunter2 resumed
+1791034460620 tid=1641 surface created #1 EGL=android.opengl.EGLContext@372b74f8 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830
+1791034461042 tid=1590 Zirconia_DRM stopped
+1791034461042 tid=1590 Zirconia_DRM destroyed
+1791034461058 tid=1641 surface initialization returned
+1791034461058 tid=1641 surface size=2184x1968 view=2184x1968
+1791034461058 tid=1641 surface resize returned
+1791034461059 tid=1641 render returned frames=1 elapsedMs=482
+1791034461761 tid=1590 DungeonHunter2 paused
+1791034461805 tid=1590 MyVideoView created
+1791034461811 tid=1590 MyVideoView started
+1791034461811 tid=1590 MyVideoView resumed
+1791034462737 tid=1590 DungeonHunter2 saved state
+1791034462739 tid=1590 DungeonHunter2 stopped
+1791034474685 tid=1590 MyVideoView paused
+1791034474690 tid=1590 DungeonHunter2 started
+1791034474690 tid=1590 DungeonHunter2 resumed
+1791034474710 tid=1641 surface created #2 EGL=android.opengl.EGLContext@37318e08 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830
+1791034474715 tid=1641 surface initialization returned
+1791034474715 tid=1641 surface size=2184x1968 view=2184x1968
+1791034474715 tid=1641 surface resize returned
+1791034474724 tid=1641 surface size=2184x1968 view=2184x1968
+1791034474724 tid=1641 surface resize returned
+1791034475472 tid=1590 MyVideoView stopped
+1791034475472 tid=1590 MyVideoView destroyed
+1791034490474 tid=1641 render returned frames=120 elapsedMs=29897
+1791034497721 tid=1641 render returned frames=240 elapsedMs=37145
+1791034501806 tid=1641 render returned frames=360 elapsedMs=41229
+1791034505881 tid=1641 render returned frames=480 elapsedMs=45304
+1791034509923 tid=1641 render returned frames=600 elapsedMs=49347
+1791034512350 tid=1641 render returned frames=720 elapsedMs=51773
+1791034514839 tid=1641 render returned frames=840 elapsedMs=54262
+1791034517216 tid=1641 render returned frames=960 elapsedMs=56639
+1791034519262 tid=1641 render returned frames=1080 elapsedMs=58685
+1791034523948 tid=1641 render returned frames=1200 elapsedMs=63371
+1791034526060 tid=1641 render returned frames=1320 elapsedMs=65483
+1791034530392 tid=1641 render returned frames=1440 elapsedMs=69816
+1791034532459 tid=1641 render returned frames=1560 elapsedMs=71882
+1791034534501 tid=1641 render returned frames=1680 elapsedMs=73924
+1791034536544 tid=1641 render returned frames=1800 elapsedMs=75967
+1791034538585 tid=1641 render returned frames=1920 elapsedMs=78008
+1791034540622 tid=1641 render returned frames=2040 elapsedMs=80046
+1791034542663 tid=1641 render returned frames=2160 elapsedMs=82087
+1791034544703 tid=1641 render returned frames=2280 elapsedMs=84126
+1791034546750 tid=1641 render returned frames=2400 elapsedMs=86173
+1791034548793 tid=1641 render returned frames=2520 elapsedMs=88216
+1791034550832 tid=1641 render returned frames=2640 elapsedMs=90256
+1791034564676 tid=1641 render returned frames=2760 elapsedMs=104099
+1791034566719 tid=1641 render returned frames=2880 elapsedMs=106142
+1791034568761 tid=1641 render returned frames=3000 elapsedMs=108184
+1791034570799 tid=1641 render returned frames=3120 elapsedMs=110222
+1791034572840 tid=1641 render returned frames=3240 elapsedMs=112263
+1791034574880 tid=1641 render returned frames=3360 elapsedMs=114303
+1791034576920 tid=1641 render returned frames=3480 elapsedMs=116343
+1791034578958 tid=1641 render returned frames=3600 elapsedMs=118382
+1791034581000 tid=1641 render returned frames=3720 elapsedMs=120423
+1791034583039 tid=1641 render returned frames=3840 elapsedMs=122463
+1791034585078 tid=1641 render returned frames=3960 elapsedMs=124501
+1791034587120 tid=1641 render returned frames=4080 elapsedMs=126543
+1791034590972 tid=1641 render returned frames=4200 elapsedMs=130396
+1791034595890 tid=1641 render returned frames=4320 elapsedMs=135313
+1791034601151 tid=1641 render returned frames=4440 elapsedMs=140575
+1791034606492 tid=1641 render returned frames=4560 elapsedMs=145915
+1791034611227 tid=1641 render returned frames=4680 elapsedMs=150650
+1791034617207 tid=1641 render returned frames=4800 elapsedMs=156630
+1791034621247 tid=1641 render returned frames=4920 elapsedMs=160671
+1791034626588 tid=1641 render returned frames=5040 elapsedMs=166011
+1791034631730 tid=1641 render returned frames=5160 elapsedMs=171154
+1791034636934 tid=1641 render returned frames=5280 elapsedMs=176358
+1791034640010 tid=1641 render returned frames=5400 elapsedMs=179433
+1791034645520 tid=1641 render returned frames=5520 elapsedMs=184943
+1791034651234 tid=1641 render returned frames=5640 elapsedMs=190658
+1791034656097 tid=1641 render returned frames=5760 elapsedMs=195520
+1791034661517 tid=1641 render returned frames=5880 elapsedMs=200940
+1791034665559 tid=1641 render returned frames=6000 elapsedMs=204982
+1791034671440 tid=1641 render returned frames=6120 elapsedMs=210863
+1791034676874 tid=1641 render returned frames=6240 elapsedMs=216297
+1791034682708 tid=1641 render returned frames=6360 elapsedMs=222131
+1791034687190 tid=1641 render returned frames=6480 elapsedMs=226613
+1791034691783 tid=1641 render returned frames=6600 elapsedMs=231206
+1791034696332 tid=1641 render returned frames=6720 elapsedMs=235755
+1791034701807 tid=1641 render returned frames=6840 elapsedMs=241230
+1791034707121 tid=1641 render returned frames=6960 elapsedMs=246544
+1791034711986 tid=1641 render returned frames=7080 elapsedMs=251409
+1791034716905 tid=1641 render returned frames=7200 elapsedMs=256328
+1791034723133 tid=1641 render returned frames=7320 elapsedMs=262556
+1791034727935 tid=1641 render returned frames=7440 elapsedMs=267358
+1791034732707 tid=1641 render returned frames=7560 elapsedMs=272131
+1791034737090 tid=1641 render returned frames=7680 elapsedMs=276513
+1791034742841 tid=1641 render returned frames=7800 elapsedMs=282265
+1791034748666 tid=1641 render returned frames=7920 elapsedMs=288089
+1791034754232 tid=1641 render returned frames=8040 elapsedMs=293655
+1791034759434 tid=1641 render returned frames=8160 elapsedMs=298857
+1791034764009 tid=1641 render returned frames=8280 elapsedMs=303432
+1791034769390 tid=1641 render returned frames=8400 elapsedMs=308813
+1791034775208 tid=1641 render returned frames=8520 elapsedMs=314632
+1791034780765 tid=1641 render returned frames=8640 elapsedMs=320188
+1791034785985 tid=1641 render returned frames=8760 elapsedMs=325409
+1791034791312 tid=1641 render returned frames=8880 elapsedMs=330735
+1791034794893 tid=1641 render returned frames=9000 elapsedMs=334316
+1791034799119 tid=1641 render returned frames=9120 elapsedMs=338543
+1791034801181 tid=1641 render returned frames=9240 elapsedMs=340605
+1791034805043 tid=1641 render returned frames=9360 elapsedMs=344467
+1791034810357 tid=1641 render returned frames=9480 elapsedMs=349780
+1791034815215 tid=1641 render returned frames=9600 elapsedMs=354638
+1791034820675 tid=1641 render returned frames=9720 elapsedMs=360098
+1791034826323 tid=1641 render returned frames=9840 elapsedMs=365747
+1791034832335 tid=1641 render returned frames=9960 elapsedMs=371759
+1791034836453 tid=1641 render returned frames=10080 elapsedMs=375876
+1791034840471 tid=1641 render returned frames=10200 elapsedMs=379895
+1791034845094 tid=1641 render returned frames=10320 elapsedMs=384518
+1791034847143 tid=1641 render returned frames=10440 elapsedMs=386566
+1791034849362 tid=1641 render returned frames=10560 elapsedMs=388785

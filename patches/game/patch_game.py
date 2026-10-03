@@ -60,6 +60,26 @@ s=s[:start]+part+s[end:]
 needle='invoke-virtual {p0, v0}, Lcom/gameloft/android/GAND/GloftD2SS/DungeonHunter2;->setContentView(Landroid/view/View;)V'
 assert s.count(needle)==1
 s=s.replace(needle,'invoke-static {p0, v0}, Llocal/dh2/compat/GameTrace;->installContent(Landroid/app/Activity;Landroid/view/View;)V');p.write_text(s)
+# The accelerometer listener calls nativeSetOrientation directly from
+# onSensorChanged.  Inside the wrapper a sensor event can arrive before the engine
+# has populated its globals, and SetFinalOrientation then dereferences an unguarded
+# null global: the observed guest fault is 'read of 0x0000004c' at
+# libDungeonHunter2.so offset 0x530a88.  Defer only the sensor-driven call until the
+# renderer has drawn its first frame.  The tilt flag p0->O is deliberately left
+# untouched so the flip is applied on a later event rather than silently dropped.
+s=p.read_text()
+orientation_call='    invoke-static {v0}, Lcom/gameloft/android/GAND/GloftD2SS/DungeonHunter2;->nativeSetOrientation(I)V'
+orientation_guard=('    invoke-static {}, Llocal/dh2/compat/GameTrace;->engineRunning()Z\n'
+                   '    move-result v4\n'
+                   '    if-eqz v4, :cond_1\n')
+start=s.index('.method public onSensorChanged(');end=s.index('.end method',start)
+part=s[start:end]
+assert part.count('.locals 4')==1, 'Unexpected onSensorChanged frame'
+assert part.count(orientation_call)==2, 'Expected both sensor-driven orientation calls'
+part=part.replace('.locals 4','.locals 5',1).replace(orientation_call,orientation_guard+orientation_call)
+s=s[:start]+part+s[end:]
+p.write_text(s)
+orientation_guard_applied=True
 p=target/'smali/com/gameloft/android/GAND/GloftD2SS/GameRenderer.smali'
 s=p.read_text();start=s.index('.method public onSurfaceChanged(');end=s.index('.end method',start)
 part=s[start:end];assert '.locals 0' in part
@@ -72,5 +92,5 @@ part=part.replace('.locals 0',""".locals 1
 p.write_text(s[:start]+part+s[end:])
 subprocess.run([sys.executable,str(ROOT/'patch_storm.py'),'--output',str(target/'lib/armeabi-v7a/libStormGLOFT.so')],check=True)
 subprocess.run([sys.executable,str(ROOT/'patch_engine.py'),'--output',str(target/'lib/armeabi-v7a/libDungeonHunter2.so')],check=True)
-(ROOT/'game-patch-report.json').write_text(json.dumps({'path_changes':changes,'total':sum(x['path_lookups'] for x in changes),'media_playlist_query_fixed':True,'native_engine_modified':True,'engine_change':'20-byte POSIX absolute path recognition fix','storm_patch_library_modified':True,'licensing_decisions_modified':False},indent=2)+'\n')
+(ROOT/'game-patch-report.json').write_text(json.dumps({'path_changes':changes,'total':sum(x['path_lookups'] for x in changes),'media_playlist_query_fixed':True,'native_engine_modified':True,'engine_change':'20-byte POSIX absolute path recognition fix','storm_patch_library_modified':True,'sensor_orientation_guard':'defer the onSensorChanged nativeSetOrientation call until GameTrace::engineRunning() is set by the renderer first frame','licensing_decisions_modified':False},indent=2)+'\n')
 print('Patched',sum(x['path_lookups'] for x in changes),'Java path lookups, Storm private-linker ABI use, and engine absolute-path classification.')

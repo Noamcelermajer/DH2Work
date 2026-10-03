@@ -1,0 +1,9 @@
+Android process exit history (newest first)
+Sat Oct 03 16:40:53 GMT+03:00 2026 process=local.dh2.fold7:guest pid=1590 reason=1 status=139 pssKiB=0 rssKiB=341256 description=
+Sat Oct 03 16:34:09 GMT+03:00 2026 process=local.dh2.fold7:guest pid=999 reason=1 status=139 pssKiB=0 rssKiB=0 description=
+Sat Oct 03 16:34:06 GMT+03:00 2026 process=local.dh2.fold7:guest pid=879 reason=1 status=139 pssKiB=0 rssKiB=0 description=
+Sat Oct 03 16:34:06 GMT+03:00 2026 process=local.dh2.fold7:guest pid=30270 reason=2 status=9 pssKiB=0 rssKiB=441032 description=
+Sat Oct 03 16:33:33 GMT+03:00 2026 process=local.dh2.fold7 pid=29752 reason=10 status=0 pssKiB=0 rssKiB=124088 description=[REMOVE TASK] remove task
+Sat Oct 03 16:32:27 GMT+03:00 2026 process=local.dh2.fold7 pid=29698 reason=10 status=0 pssKiB=0 rssKiB=0 description=[REMOVE TASK] remove task
+Sat Oct 03 16:32:27 GMT+03:00 2026 process=local.dh2.fold7 pid=28819 reason=10 status=0 pssKiB=0 rssKiB=119032 description=[REMOVE TASK] remove task
+Sat Oct 03 16:30:47 GMT+03:00 2026 process=local.dh2.fold7:guest pid=28997 reason=1 status=139 pssKiB=0 rssKiB=0 description=
