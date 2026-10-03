@@ -1,0 +1,12 @@
+monitor start 17:06:59
+guest died at 17:14:41 after 462s
+ACTIVITY MANAGER PROCESS EXIT INFO (dumpsys activity exit-info)
+Last Timestamp of Persistence Into Persistent Storage: 2026-10-03 17:10:53.847
+  package: local.dh2.fold7
+    Historical Process Exit for uid=10623
+        ApplicationExitInfo #0:
+          timestamp=2026-10-03 17:14:32.435 pid=10884 realUid=10623 packageUid=10623 definingUid=10623 user=0
+I/zbridge (10884): guest SIGSEGV: write of 0x00000000, pc 0xfdb185d8
+total 212
+-rw-rw---- 1 u0_a339 media_rw 182754 2026-10-03 16:41 DH2-diagnostics (1).zip
+-rw-rw---- 1 u0_a339 media_rw  29020 2026-10-03 16:31 DH2-diagnostics.zip
