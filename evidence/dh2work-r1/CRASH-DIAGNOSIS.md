@@ -211,7 +211,7 @@ pinned Test 10 guest therefore needs the Test 5-era Storm sources from
 | `disas_chain.py` | disassembles `nativeSetOrientation` → `SetFinalOrientation` and resolves PC-relative literals |
 | `symbol_at.py` | symbolises any (library, offset) pair, honouring `$a`/`$t` mapping symbols |
 | `resolve_veneer.py` | resolves an engine PLT veneer to its imported symbol through `.rel.plt` |
-| `longrun/` | runtime report, event and exit traces for the 388 s run and its `memcpy` crash |
+| `longrun/` | runtime report, event and exit traces for the 388 s run and the `IBuffer::copy` crash |
 
 ## 7. The second crash: the long run, and it looks like the documented one
 
@@ -233,18 +233,50 @@ Symbolising the two addresses:
 * **LR `+0x5a1c6c`** is inside `glitch::video::IBuffer::copy()` (`0x5a1c1c`), on the
   instruction immediately after `bl 0x30e868`.
 * **`0x30e868`** is a **PLT veneer** (`add ip, pc, #…; ldr pc, [ip, #…]`) that resolves —
-  via the engine's `.rel.plt` — to **`memcpy`**. That is why the fault sits in `libc.so`
-  while the return address is in the engine.
+  via the engine's `.rel.plt` (GOT slot `0x994e44`) — to the imported symbol **`memcpy`**.
+  That is why the return address is in the engine while the fault sits in guest `libc`.
 * The instruction stream is self-consistent with `IBuffer::copy()` doing
   `memcpy(dst, src, size)`: it checks `[this+0xc]` (size), saves `[this+8]` (old data),
   calls `operator new[]` (`0x5341a8`) with that size, stores the new pointer back to
-  `[this+8]`, reloads `[this+0xc]` into `r2`, then calls the veneer. At the fault the
-  registers are `dst=0x59e01af8`, `src=0x0001c9c8`, `n=0x150` (336) — **a 336-byte copy
-  from an invalid source pointer**.
+  `[this+8]`, reloads `[this+0xc]` into `r2`, then calls the veneer. The registers are
+  `dst=0x59e01af8`, `src=0x0001c9c8`, `n=0x150` (336) — consistent with a 336-byte copy
+  from an invalid source pointer.
 * **`crash-stack-candidate-3: +0x59b424`** lands in
   `glitch::scene::createMeshCopy(…)` (`0x59b2a4`) at the instruction right after its
   `bl 0x5a1c1c` — so the call chain is
-  `createMeshCopy()` → `IBuffer::copy()` → libc copy.
+  `createMeshCopy()` → `IBuffer::copy()` → the `memcpy` import.
+
+### 7b. Correction: the faulting libc frame is NOT identified
+
+An earlier revision of this document stated that the fault was *inside* `memcpy`. **That is
+wrong and is retracted.** `memcpy` and `memmove` are both exported at guest
+`libc.so +0x68280` (size `0x28c`), and the reported PC was `+0x67304` — outside them. No
+exported symbol brackets `0x67304` either, so it names an internal function at best.
+
+The wrapper's own library attribution is also **internally inconsistent for this crash**:
+
+| Derived from | Address | Reported | Implied libc base |
+| --- | --- | --- | --- |
+| `crash-pc` | `0xfdad3304` | libc `+0x67304` | `0xfda6c000` |
+| stack candidate | `0xfdb07f93` (Thumb, bit 0 set) | libc `+0x56f92` | `0xfdab1000` |
+
+Those bases differ by `0x45000`. `/proc/<pid>/maps` is denied to `adb shell`, so it cannot be
+resolved from the host. `crash-precise: no` means `crash-pc` is a JIT block start anyway.
+
+**What survives this correction**, because it is verified independently of the libc
+attribution:
+
+1. The veneer at `0x30e868` is `memcpy` — established from the engine's own `.rel.plt`
+   relocation, not from the guest crash report.
+2. LR `+0x5a1c6c` is exactly the instruction after that `bl`, and the stack candidate
+   `+0x59b424` is exactly the instruction after `createMeshCopy`'s `bl` into
+   `IBuffer::copy()`. Landing on post-call instructions in both frames is a strong
+   signature of a genuine call chain.
+3. The fault address `0x0001c9c8` is precise (it is `si_addr`), and 336 is a plausible
+   length for a mesh sub-buffer.
+
+So the *chain* and the *bad pointer* are established; the identity of the libc frame on top
+is not.
 
 `createMeshCopy` is a **mesh-copy during scene setup**, and the documented blocker is
 *"a crash after roughly five minutes of play while a new map loads … during script or map
