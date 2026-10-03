@@ -1,0 +1,30 @@
+.method public static initMediaList()V
+    .locals 2
+
+    sget-object v0, Lcom/gameloft/android/GAND/GloftD2SS/DungeonHunter2;->o:Lcom/gameloft/android/GAND/GloftD2SS/DungeonHunter2;
+
+    invoke-static {v0}, Llocal/dh2/compat/MediaQueries;->queryPlaylists(Landroid/content/Context;)Landroid/database/Cursor;
+
+    move-result-object v0
+
+    new-instance v1, Lcom/gameloft/android/GAND/GloftD2SS/MediaPlayList;
+
+    invoke-direct {v1, v0}, Lcom/gameloft/android/GAND/GloftD2SS/MediaPlayList;-><init>(Landroid/database/Cursor;)V
+
+    sput-object v1, Lcom/gameloft/android/GAND/GloftD2SS/Musicplayer;->a:Lcom/gameloft/android/GAND/GloftD2SS/MediaPlayList;
+
+    invoke-static {}, Lcom/gameloft/android/GAND/GloftD2SS/MediaPlayList;->GetPlayListName()[Ljava/lang/String;
+
+    move-result-object v1
+
+    sput-object v1, Lcom/gameloft/android/GAND/GloftD2SS/Musicplayer;->b:[Ljava/lang/String;
+
+    if-eqz v0, :cond_0
+
+    invoke-interface {v0}, Landroid/database/Cursor;->close()V
+
+    :cond_0
+    invoke-static {}, Lcom/gameloft/android/GAND/GloftD2SS/Musicplayer;->nativeInitplayer()V
+
+    return-void
+.end method

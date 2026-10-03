@@ -1,0 +1,27 @@
+[
+  {
+    "case": "abort",
+    "exit": 134,
+    "persisted": true
+  },
+  {
+    "case": "threads",
+    "exit": 134,
+    "persisted": true
+  },
+  {
+    "case": "exit",
+    "exit": 42,
+    "persisted": true
+  },
+  {
+    "case": "caught",
+    "exit": 0,
+    "persisted": true
+  },
+  {
+    "case": "fault",
+    "exit": 139,
+    "persisted": true
+  }
+]

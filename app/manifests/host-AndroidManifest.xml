@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="local.dh2.fold7" android:versionCode="4" android:versionName="1.0-test4">
+
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application android:name="com.zettabridge.launcher.ZbApplication" android:allowBackup="false" android:label="Dungeon Hunter 2 - Fold7 Test" android:icon="@drawable/dh2_icon" android:theme="@android:style/Theme.Material.Light.DarkActionBar" android:extractNativeLibs="true" android:usesCleartextTraffic="true">
+
+        <activity android:name="com.zettabridge.launcher.Dh2Activity" android:exported="true" android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        
+        
+        <activity android:name="com.zettabridge.launcher.PluginSwitchActivity" android:exported="false" android:excludeFromRecents="true" android:taskAffinity="local.dh2.fold7.switch" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity android:name="com.zettabridge.launcher.GuestLaunchActivity" android:exported="false" android:process=":guest" android:taskAffinity="local.dh2.fold7.guest" android:theme="@android:style/Theme.NoDisplay" />
+
+        
+        <activity android:name="com.zettabridge.launcher.Stubs$Standard" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|density|screenSize|smallestScreenSize|layoutDirection|colorMode" android:exported="false" android:hardwareAccelerated="true" android:launchMode="standard" android:process=":guest" android:taskAffinity="local.dh2.fold7.guest" android:theme="@android:style/Theme.Material.NoActionBar" />
+        <activity android:name="com.zettabridge.launcher.Stubs$Landscape" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|density|screenSize|smallestScreenSize|layoutDirection|colorMode" android:exported="false" android:hardwareAccelerated="true" android:launchMode="standard" android:process=":guest" android:screenOrientation="sensorLandscape" android:taskAffinity="local.dh2.fold7.guest" android:theme="@android:style/Theme.Material.NoActionBar" />
+        <activity android:name="com.zettabridge.launcher.Stubs$Portrait" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|density|screenSize|smallestScreenSize|layoutDirection|colorMode" android:exported="false" android:hardwareAccelerated="true" android:launchMode="standard" android:process=":guest" android:screenOrientation="sensorPortrait" android:taskAffinity="local.dh2.fold7.guest" android:theme="@android:style/Theme.Material.NoActionBar" />
+        <activity android:name="com.zettabridge.launcher.Stubs$SingleTop" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|density|screenSize|smallestScreenSize|layoutDirection|colorMode" android:exported="false" android:hardwareAccelerated="true" android:launchMode="singleTop" android:process=":guest" android:taskAffinity="local.dh2.fold7.guest" android:theme="@android:style/Theme.Material.NoActionBar" />
+        <activity android:name="com.zettabridge.launcher.Stubs$SingleTask" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|density|screenSize|smallestScreenSize|layoutDirection|colorMode" android:exported="false" android:hardwareAccelerated="true" android:launchMode="singleTask" android:process=":guest" android:taskAffinity="local.dh2.fold7.guest" android:theme="@android:style/Theme.Material.NoActionBar" />
+        <activity android:name="com.zettabridge.launcher.Stubs$SingleInstance" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|density|screenSize|smallestScreenSize|layoutDirection|colorMode" android:exported="false" android:hardwareAccelerated="true" android:launchMode="singleInstance" android:process=":guest" android:taskAffinity="local.dh2.fold7.guest" android:theme="@android:style/Theme.Material.NoActionBar" />
+        
+        <uses-library android:name="org.apache.http.legacy" android:required="false" /></application>
+<uses-sdk android:minSdkVersion="29" android:targetSdkVersion="35" /><uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /><uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /><uses-permission android:name="android.permission.BLUETOOTH" /><uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /></manifest>

@@ -1,0 +1,14 @@
+/workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so: unchanged
+test4-rooted-absolute PASS
+test5-rooted-absolute PASS
+test5-root-without-slash PASS
+test5-rooted-relative PASS
+test5-relative-root-without-slash PASS
+test5-empty-root-absolute PASS
+test4-phone-absolute PASS
+test5-phone-absolute PASS
+test5-phone-relative PASS
+test5-missing-absolute PASS
+test5-missing-relative PASS
+test5-directory PASS
+test5-colon-path PASS

@@ -1,0 +1,22 @@
+[
+  "/opt/dh2-android-sdk/emulator/emulator",
+  "-avd",
+  "DH2_API30",
+  "-no-window",
+  "-no-audio",
+  "-no-boot-anim",
+  "-no-snapshot",
+  "-no-metrics",
+  "-gpu",
+  "swiftshader_indirect",
+  "-cores",
+  "2",
+  "-memory",
+  "2048",
+  "-port",
+  "5554",
+  "-feature",
+  "-Vulkan",
+  "-accel",
+  "off"
+]

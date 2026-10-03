@@ -1,0 +1,31 @@
+{
+  "checks": {
+    "valid_apk_structure": true,
+    "package_unchanged": true,
+    "minimum_sdk_21": true,
+    "target_sdk_24": true,
+    "version_code_103": true,
+    "launcher_preserved": true,
+    "no_added_permissions": true,
+    "startup_application_registered": true,
+    "native_library_extraction_enabled": true,
+    "legacy_http_dependency_declared": true,
+    "zip_crc": true,
+    "exactly_three_armv7_libraries": true,
+    "native_libraries_byte_identical": true,
+    "assets_raw_data_translations_unchanged": true,
+    "compat_classes_present": true,
+    "eleven_phone_calls_redirected": true,
+    "no_remaining_unguarded_identifier_calls": true,
+    "startup_creates_external_directory": true,
+    "v1_signature_present": true,
+    "v2_signature_present": true,
+    "v3_signature_present": true
+  },
+  "static_checks_passed": true,
+  "output_sha256": "924db616e73c1ce9c2c100814b00f8f4f6df5fd6d8efb33154ed7d3e8ccbedf1",
+  "runtime_testing": "NOT PERFORMED: no connected Android device or emulator",
+  "cache_verification": "NOT PERFORMED: uploaded cache ZIP unavailable",
+  "arm64_support": false,
+  "modern_android_playability": "UNVERIFIED"
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "file": "smali/com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.smali",
+    "guarded_phone_calls": 1
+  },
+  {
+    "file": "smali/com/gameloft/android/GAND/GloftD2SS/GLUtils/Device.smali",
+    "guarded_phone_calls": 2
+  },
+  {
+    "file": "smali/com/gameloft/android/GAND/GloftD2SS/GetNpost.smali",
+    "guarded_phone_calls": 1
+  },
+  {
+    "file": "smali/com/gameloft/android/GAND/GloftD2SS/IGPActivity.smali",
+    "guarded_phone_calls": 1
+  },
+  {
+    "file": "smali/com/gameloft/android/GAND/GloftD2SS/installer/utils/Tracking.smali",
+    "guarded_phone_calls": 1
+  },
+  {
+    "file": "smali/com/samsung/zirconia/DevInfoRetriever.smali",
+    "guarded_phone_calls": 3
+  },
+  {
+    "file": "smali/com/samsungapps/plasma/b.smali",
+    "guarded_phone_calls": 2
+  }
+]

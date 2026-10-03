@@ -1,0 +1,625 @@
+--------- beginning of system
+10-01 19:21:41.302   502   529 E HistoricalRegistry: Interaction before persistence initialized
+10-01 19:21:41.465   406   406 W iorapd  : Reconnect to package manager service: 16 times
+--------- beginning of main
+10-01 19:21:41.512   157   157 I lowmemorykiller: lmkd data connection established
+10-01 19:21:41.519   502   543 I ActivityManager: Connection with lmkd established
+10-01 19:21:41.564   502   502 D SystemServerTiming: SetSystemProcess took to complete: 366ms
+10-01 19:21:41.578   380   380 I audioserver: Waiting for sensor privacy service
+10-01 19:21:41.564   502   502 I SystemServerTiming: InitWatchdog
+10-01 19:21:41.583   502   530 W system_server: Long monitor contention with owner main (502) at void com.android.server.am.ActivityManagerService.setSystemProcess()(ActivityManagerService.java:2133) waiters=1 in void com.android.server.am.ActivityManagerService.registerUidObserver(android.app.IUidObserver, int, int, java.lang.String) for 248ms
+10-01 19:21:41.605   399   399 I cameraserver: Waiting for sensor privacy service
+10-01 19:21:41.622   502   502 D SystemServerTiming: InitWatchdog took to complete: 41ms
+10-01 19:21:41.648   502   502 I SystemServerTiming: StartOverlayManagerService
+10-01 19:21:41.872   401   427 E idmap2d : failed to parse idmap header
+--------- beginning of kernel
+10-01 19:21:41.799     0     0 I init    : Control message: Processed ctl.start for 'idmap2d' from pid: 502 (system_server)
+10-01 19:21:42.029   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:42.162   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:42.260   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:42.369   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:42.473   401   583 E idmap2d : no resources were overlaid
+10-01 19:21:42.501   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:42.643   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:42.786   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:42.931   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:43.050   401   583 I chatty  : uid=1000(system) /system/bin/idmap2d identical 1 line
+10-01 19:21:43.099   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:43.164   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:43.230   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:43.275   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:43.374   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:43.532   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:43.541   406   406 D iorapd  : iorapd.perfetto.enable = true
+10-01 19:21:43.542   406   406 D iorapd  : iorapd.readahead.enable = true
+10-01 19:21:43.542   406   406 D iorapd  : iorapd.maintenance.min_traces = 1
+10-01 19:21:43.675   406   406 W iorapd  : Reconnect to package manager service: 1 times
+10-01 19:21:43.703   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:43.814   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:43.901   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:44.125   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:44.219   588   588 D iorap.prefetcherd: Installing minijail
+10-01 19:21:44.238   588   588 W iorap.prefetcherd: No seccomp filter defined for this architecture.
+10-01 19:21:44.292   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:44.396   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:44.524   401   427 I chatty  : uid=1000(system) /system/bin/idmap2d identical 1 line
+10-01 19:21:44.612   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:44.703   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:44.719   502   579 D PackageManager: Size of mPackageChangeObservers after registry is 1
+10-01 19:21:44.746   406   406 I iorapd  : iorapd (the prefetchening) readied up
+10-01 19:21:44.783   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:44.836   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:44.881   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:44.926   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:44.963   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:45.098   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:45.130   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:45.152   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:45.229   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:45.451   401   583 I chatty  : uid=1000(system) /system/bin/idmap2d identical 2 lines
+10-01 19:21:45.550   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:45.623   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:45.666   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:45.687   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:45.805   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:45.843   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:45.922   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:45.973     0     0 W healthd : battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=300000 cc=10 chg=a
+10-01 19:21:46.115   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:46.220   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:46.366   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:46.393   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:46.438   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:46.463   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:46.491   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:46.579   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:46.658   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:46.740   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:46.824   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:46.876   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:46.931   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:47.015   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:47.090   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:47.176   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:47.267   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:47.308   401   401 E idmap2d : failed to parse idmap header
+10-01 19:21:47.346   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:47.426   401   583 E idmap2d : failed to parse idmap header
+10-01 19:21:47.524   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:47.901   502   502 D SystemServerTiming: StartOverlayManagerService took to complete: 6253ms
+10-01 19:21:47.902   502   502 I SystemServerTiming: StartSensorPrivacyService
+10-01 19:21:47.907   502   502 D SystemServerTiming: StartSensorPrivacyService took to complete: 5ms
+10-01 19:21:47.911   502   502 D SystemServerTiming: startBootstrapServices took to complete: 57303ms
+10-01 19:21:47.912   502   502 I SystemServerTiming: startCoreServices
+10-01 19:21:47.912   502   502 I SystemServerTiming: StartSystemConfigService
+10-01 19:21:47.912   502   502 I SystemServiceManager: Starting com.android.server.SystemConfigService
+10-01 19:21:47.913   502   539 I SystemServerTimingAsync: InitThreadPoolExec:StartSensorService
+10-01 19:21:47.914   502   539 D SystemServerInitThreadPool: Started executing StartSensorService
+10-01 19:21:47.914   502   539 I SystemServerTimingAsync: StartSensorService
+10-01 19:21:47.723   401   427 E idmap2d : failed to parse idmap header
+10-01 19:21:47.915   502   539 D SensorService: nuSensorService starting...
+10-01 19:21:47.941   502   502 D SystemServerTiming: StartSystemConfigService took to complete: 29ms
+10-01 19:21:47.941   502   502 I SystemServerTiming: StartBatteryService
+10-01 19:21:47.942   502   502 I SystemServiceManager: Starting com.android.server.BatteryService
+10-01 19:21:48.027   502   502 I android_os_HwBinder: HwBinder: Starting thread pool for getting: android.hardware.health@2.0::IHealth/default
+10-01 19:21:48.039   399   399 I HidlServiceManagement: Registered android.frameworks.cameraservice.service@2.1::ICameraService/default (start delay of 109507ms)
+10-01 19:21:48.081   399   399 I CameraService: CameraService pinged cameraservice proxy
+10-01 19:21:48.083   399   399 I cameraserver: ServiceManager: 0xe9000b90 done instantiate
+10-01 19:21:48.134   502   539 W SensorService: Goldfish 3-axis Accelerometer's max range 39.299999 is not a multiple of the resolution 0.000248
+10-01 19:21:48.134   502   539 W SensorService: Goldfish 3-axis Gyroscope's max range 16.459999 is not a multiple of the resolution 0.001000
+10-01 19:21:48.135   502   539 I SensorService: Reported power 0.000000 not deemed sane, clamping to 0.001000
+10-01 19:21:48.135   502   539 W SensorService: Goldfish 3-axis Gyroscope (uncalibrated)'s max range 16.459999 is not a multiple of the resolution 0.001000
+10-01 19:21:48.154   502   539 I SensorService: Generated new HMAC key.
+10-01 19:21:48.174   502   598 D SensorService: nuSensorService thread starting...
+10-01 19:21:48.203   502   597 D SensorService: new thread SensorEventAckReceiver
+10-01 19:21:48.219   502   539 E HistoricalRegistry: Interaction before persistence initialized
+10-01 19:21:48.235   502   539 D SystemServerTimingAsync: StartSensorService took to complete: 321ms
+10-01 19:21:48.236   502   539 D SystemServerInitThreadPool: Finished executing StartSensorService
+10-01 19:21:48.236   502   539 D SystemServerTimingAsync: InitThreadPoolExec:StartSensorService took to complete: 322ms
+10-01 19:21:48.257   502   502 I android_os_HwBinder: HwBinder: Starting thread pool for getting: android.hidl.manager@1.0::IServiceManager/default
+10-01 19:21:48.266   502   502 I HealthServiceWrapper: health: HealthServiceWrapper listening to instance default
+10-01 19:21:48.266   502   502 I BatteryService: health: Waited 0ms and received the update.
+10-01 19:21:48.272   502   599 I android_os_HwBinder: HwBinder: Starting thread pool for getting: android.hardware.health@2.0::IHealth/default
+10-01 19:21:48.276   502   502 W SystemServiceManager: Service com.android.server.BatteryService took 302 ms in onStart
+10-01 19:21:48.276   502   502 D SystemServerTiming: StartBatteryService took to complete: 334ms
+10-01 19:21:48.281   502   502 I SystemServerTiming: StartUsageService
+10-01 19:21:48.281   502   502 I SystemServiceManager: Starting com.android.server.usage.UsageStatsService
+10-01 19:21:48.363   502   502 W SystemServiceManager: Service com.android.server.usage.UsageStatsService took 66 ms in onStart
+10-01 19:21:48.370   502   502 D SystemServerTiming: StartUsageService took to complete: 88ms
+10-01 19:21:48.374   502   502 I SystemServerTiming: StartWebViewUpdateService
+10-01 19:21:48.375   502   502 I SystemServiceManager: Starting com.android.server.webkit.WebViewUpdateService
+10-01 19:21:48.427   502   502 D SystemServerTiming: StartWebViewUpdateService took to complete: 52ms
+10-01 19:21:48.427   502   502 I SystemServerTiming: StartCachedDeviceStateService
+10-01 19:21:48.428   502   502 I SystemServiceManager: Starting com.android.server.CachedDeviceStateService
+10-01 19:21:48.431   502   502 D SystemServerTiming: StartCachedDeviceStateService took to complete: 3ms
+10-01 19:21:48.431   502   502 I SystemServerTiming: StartBinderCallsStatsService
+10-01 19:21:48.432   502   502 I SystemServiceManager: Starting com.android.server.BinderCallsStatsService$LifeCycle
+10-01 19:21:48.451   502   502 D SystemServerTiming: StartBinderCallsStatsService took to complete: 18ms
+10-01 19:21:48.451   502   502 I SystemServerTiming: StartLooperStatsService
+10-01 19:21:48.452   502   502 I SystemServiceManager: Starting com.android.server.LooperStatsService$Lifecycle
+10-01 19:21:48.489   502   502 D SystemServerTiming: StartLooperStatsService took to complete: 38ms
+10-01 19:21:48.490   502   502 I SystemServerTiming: StartRollbackManagerService
+10-01 19:21:48.490   502   502 I SystemServiceManager: Starting com.android.server.rollback.RollbackManagerService
+10-01 19:21:48.518   404   404 D installd: Found quota mount /dev/block/dm-5 at /data
+10-01 19:21:48.519   404   404 D installd: Found quota mount /dev/block/dm-5 at /data/user/0
+10-01 19:21:48.558   502   502 I PackageWatchdog: Syncing state, reason: added new observer
+10-01 19:21:48.559   502   502 I PackageWatchdog: Not pruning observers, elapsed time: 0ms
+10-01 19:21:48.559   502   502 I PackageWatchdog: Cancelling state sync, nothing to sync
+10-01 19:21:48.564   502   540 I PackageWatchdog: Saving observer state to file
+10-01 19:21:48.589   502   570 W system_server: Long monitor contention with owner PackageManager (557) at void com.android.server.pm.PackageManagerService$PackageHandler.doHandleMessage(android.os.Message)(PackageManagerService.java:1797) waiters=0 in void com.android.server.pm.PackageManagerService.lambda$new$9$PackageManagerService(java.util.List, int) for 349ms
+10-01 19:21:48.601   502   502 W SystemServiceManager: Service com.android.server.rollback.RollbackManagerService took 110 ms in onStart
+10-01 19:21:48.601   502   502 D SystemServerTiming: StartRollbackManagerService took to complete: 111ms
+10-01 19:21:48.602   502   502 I SystemServerTiming: StartBugreportManagerService
+10-01 19:21:48.602   502   502 I SystemServiceManager: Starting com.android.server.os.BugreportManagerService
+10-01 19:21:48.605   502   502 D SystemServerTiming: StartBugreportManagerService took to complete: 3ms
+10-01 19:21:48.606   502   502 I SystemServerTiming: GpuService
+10-01 19:21:48.606   502   502 I SystemServiceManager: Starting com.android.server.gpu.GpuService
+10-01 19:21:48.606   502   502 D SystemServerTiming: GpuService took to complete: 0ms
+10-01 19:21:48.606   502   502 D SystemServerTiming: startCoreServices took to complete: 694ms
+10-01 19:21:48.607   502   502 I SystemServerTiming: startOtherServices
+10-01 19:21:48.608   502   502 I SystemServerTiming: StartKeyAttestationApplicationIdProviderService
+10-01 19:21:48.612   502   539 I SystemServerTimingAsync: InitThreadPoolExec:SecondaryZygotePreload
+10-01 19:21:48.612   502   539 D SystemServerInitThreadPool: Started executing SecondaryZygotePreload
+10-01 19:21:48.612   502   539 I SystemServer: SecondaryZygotePreload
+10-01 19:21:48.612   502   539 I SystemServerTimingAsync: SecondaryZygotePreload
+10-01 19:21:48.617   502   502 D SystemServerTiming: StartKeyAttestationApplicationIdProviderService took to complete: 9ms
+10-01 19:21:48.617   502   502 I SystemServerTiming: StartKeyChainSystemService
+10-01 19:21:48.618   502   502 I SystemServiceManager: Starting com.android.server.security.KeyChainSystemService
+10-01 19:21:48.621   502   502 D SystemServerTiming: StartKeyChainSystemService took to complete: 4ms
+10-01 19:21:48.622   502   502 I SystemServerTiming: StartSchedulingPolicyService
+10-01 19:21:48.626   502   502 D SystemServerTiming: StartSchedulingPolicyService took to complete: 4ms
+10-01 19:21:48.626   502   502 I SystemServerTiming: StartTelecomLoaderService
+10-01 19:21:48.627   502   502 I SystemServiceManager: Starting com.android.server.telecom.TelecomLoaderService
+10-01 19:21:48.628   502   502 D SystemServerTiming: StartTelecomLoaderService took to complete: 2ms
+10-01 19:21:48.628   502   502 I SystemServerTiming: StartTelephonyRegistry
+10-01 19:21:48.669   502   502 D SystemServerTiming: StartTelephonyRegistry took to complete: 41ms
+10-01 19:21:48.669   502   502 I SystemServerTiming: StartEntropyMixer
+10-01 19:21:48.703   502   502 W EntropyMixer: No existing entropy file -- first boot?
+10-01 19:21:48.752   273   273 I Zygote  : Lazily preloading resources.
+10-01 19:21:48.754   273   273 D Zygote  : begin preload
+10-01 19:21:48.756   273   273 I Zygote  : Calling ZygoteHooks.beginPreload()
+10-01 19:21:48.811   502   502 I EntropyMixer: Added HW RNG output to entropy pool
+10-01 19:21:48.811   502   502 I EntropyMixer: Writing entropy...
+10-01 19:21:48.950   502   502 D SystemServerTiming: StartEntropyMixer took to complete: 263ms
+10-01 19:21:48.951   502   502 I SystemServerTiming: StartAccountManagerService
+10-01 19:21:48.951   502   502 I SystemServiceManager: Starting com.android.server.accounts.AccountManagerService$Lifecycle
+10-01 19:21:48.990   502   502 D CompatibilityChangeReporter: Compat change id reported: 148180766; UID 1000; state: ENABLED
+10-01 19:21:48.998   502   502 D SystemServerTiming: StartAccountManagerService took to complete: 47ms
+10-01 19:21:48.999   502   502 I SystemServerTiming: StartContentService
+10-01 19:21:48.999   502   502 I SystemServiceManager: Starting com.android.server.content.ContentService$Lifecycle
+10-01 19:21:49.140   502   502 W SystemServiceManager: Service com.android.server.content.ContentService$Lifecycle took 141 ms in onStart
+10-01 19:21:49.141   273   273 D ZygoteInitTiming_lazy: BeginPreload took to complete: 387ms
+10-01 19:21:49.142   273   273 I Zygote  : Preloading classes...
+10-01 19:21:49.140   502   502 D SystemServerTiming: StartContentService took to complete: 141ms
+10-01 19:21:49.149   502   502 I SystemServerTiming: InstallSystemProviders
+10-01 19:21:49.164   273   273 W Zygote  : Class not found for preloading: android.app.-$$Lambda$ResourcesManager$QJ7UiVk_XS90KuXAsIjIEym1DnM
+10-01 19:21:49.543   502   502 I system_server: The ClassLoaderContext is a special shared library.
+10-01 19:21:50.000   273   477 I zygote  : Background young concurrent copying GC freed 13511(980KB) AllocSpace objects, 0(0B) LOS objects, 29% free, 1140KB/1614KB, paused 7.296ms total 235.642ms
+10-01 19:21:50.247   273   477 I zygote  : Background young concurrent copying GC freed 5980(319KB) AllocSpace objects, 0(0B) LOS objects, 31% free, 1109KB/1614KB, paused 11.887ms total 201.744ms
+10-01 19:21:51.648   273   477 I zygote  : Background young concurrent copying GC freed 5569(370KB) AllocSpace objects, 0(0B) LOS objects, 24% free, 1220KB/1614KB, paused 10.947ms total 207.321ms
+10-01 19:21:51.693   502   502 W SettingsState: No settings state /data/system/users/0/settings_system.xml
+10-01 19:21:51.711   502   502 I SettingsState: directory info for directory/file /data/system/users/0/settings_system.xml with stacktrace 
+10-01 19:21:51.711   502   502 I SettingsState: java.lang.Exception
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.logSettingsDirectoryInformation(SettingsState.java:892)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.readStateSyncLocked(SettingsState.java:1011)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.<init>(SettingsState.java:292)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.ensureSettingsStateLocked(SettingsProvider.java:2783)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.migrateLegacySettingsForUserLocked(SettingsProvider.java:3152)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.migrateAllLegacySettingsIfNeeded(SettingsProvider.java:3117)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.<init>(SettingsProvider.java:2587)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider.onCreate(SettingsProvider.java:347)
+10-01 19:21:51.711   502   502 I SettingsState: 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2388)
+10-01 19:21:51.711   502   502 I SettingsState: 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2358)
+10-01 19:21:51.711   502   502 I SettingsState: 	at android.app.ActivityThread.installProvider(ActivityThread.java:7239)
+10-01 19:21:51.711   502   502 I SettingsState: 	at android.app.ActivityThread.installContentProviders(ActivityThread.java:6780)
+10-01 19:21:51.711   502   502 I SettingsState: 	at android.app.ActivityThread.installSystemProviders(ActivityThread.java:7431)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.server.am.ActivityManagerService.installSystemProviders(ActivityManagerService.java:7917)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.server.SystemServer.startOtherServices(SystemServer.java:1116)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.server.SystemServer.run(SystemServer.java:592)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.server.SystemServer.main(SystemServer.java:408)
+10-01 19:21:51.711   502   502 I SettingsState: 	at java.lang.reflect.Method.invoke(Native Method)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:592)
+10-01 19:21:51.711   502   502 I SettingsState: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:925)
+10-01 19:21:51.712   502   502 I SettingsState: ancestor directory /data/system/users/0 exists
+10-01 19:21:51.713   502   502 I SettingsState: ancestor directory /data/system/users/0 permissions: r: true w: true x: true
+10-01 19:21:51.714   502   502 I SettingsState: ancestor's parent directory /data/system/users permissions: r: true w: true x: true
+10-01 19:21:51.975   502   502 W SettingsState: No settings state /data/system/users/0/settings_secure.xml
+10-01 19:21:51.982   502   502 I SettingsState: directory info for directory/file /data/system/users/0/settings_secure.xml with stacktrace 
+10-01 19:21:51.982   502   502 I SettingsState: java.lang.Exception
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.logSettingsDirectoryInformation(SettingsState.java:892)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.readStateSyncLocked(SettingsState.java:1011)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.<init>(SettingsState.java:292)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.ensureSettingsStateLocked(SettingsProvider.java:2783)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.migrateLegacySettingsForUserLocked(SettingsProvider.java:3161)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.migrateAllLegacySettingsIfNeeded(SettingsProvider.java:3117)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.<init>(SettingsProvider.java:2587)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider.onCreate(SettingsProvider.java:347)
+10-01 19:21:51.982   502   502 I SettingsState: 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2388)
+10-01 19:21:51.982   502   502 I SettingsState: 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2358)
+10-01 19:21:51.982   502   502 I SettingsState: 	at android.app.ActivityThread.installProvider(ActivityThread.java:7239)
+10-01 19:21:51.982   502   502 I SettingsState: 	at android.app.ActivityThread.installContentProviders(ActivityThread.java:6780)
+10-01 19:21:51.982   502   502 I SettingsState: 	at android.app.ActivityThread.installSystemProviders(ActivityThread.java:7431)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.server.am.ActivityManagerService.installSystemProviders(ActivityManagerService.java:7917)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.server.SystemServer.startOtherServices(SystemServer.java:1116)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.server.SystemServer.run(SystemServer.java:592)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.server.SystemServer.main(SystemServer.java:408)
+10-01 19:21:51.982   502   502 I SettingsState: 	at java.lang.reflect.Method.invoke(Native Method)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:592)
+10-01 19:21:51.982   502   502 I SettingsState: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:925)
+10-01 19:21:51.983   502   502 I SettingsState: ancestor directory /data/system/users/0 exists
+10-01 19:21:51.983   502   502 I SettingsState: ancestor directory /data/system/users/0 permissions: r: true w: true x: true
+10-01 19:21:51.983   502   502 I SettingsState: ancestor's parent directory /data/system/users permissions: r: true w: true x: true
+10-01 19:21:52.077   502   502 D SettingsProvider: Generated and saved new ANDROID_ID [6c017fef863cc4b4] for user 0
+10-01 19:21:52.175   502   502 W SettingsState: No settings state /data/system/users/0/settings_global.xml
+10-01 19:21:52.176   502   502 I SettingsState: directory info for directory/file /data/system/users/0/settings_global.xml with stacktrace 
+10-01 19:21:52.176   502   502 I SettingsState: java.lang.Exception
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.logSettingsDirectoryInformation(SettingsState.java:892)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.readStateSyncLocked(SettingsState.java:1011)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.<init>(SettingsState.java:292)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.ensureSettingsStateLocked(SettingsProvider.java:2783)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.migrateLegacySettingsForUserLocked(SettingsProvider.java:3172)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.migrateAllLegacySettingsIfNeeded(SettingsProvider.java:3117)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.<init>(SettingsProvider.java:2587)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider.onCreate(SettingsProvider.java:347)
+10-01 19:21:52.176   502   502 I SettingsState: 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2388)
+10-01 19:21:52.176   502   502 I SettingsState: 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2358)
+10-01 19:21:52.176   502   502 I SettingsState: 	at android.app.ActivityThread.installProvider(ActivityThread.java:7239)
+10-01 19:21:52.176   502   502 I SettingsState: 	at android.app.ActivityThread.installContentProviders(ActivityThread.java:6780)
+10-01 19:21:52.176   502   502 I SettingsState: 	at android.app.ActivityThread.installSystemProviders(ActivityThread.java:7431)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.server.am.ActivityManagerService.installSystemProviders(ActivityManagerService.java:7917)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.server.SystemServer.startOtherServices(SystemServer.java:1116)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.server.SystemServer.run(SystemServer.java:592)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.server.SystemServer.main(SystemServer.java:408)
+10-01 19:21:52.176   502   502 I SettingsState: 	at java.lang.reflect.Method.invoke(Native Method)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:592)
+10-01 19:21:52.176   502   502 I SettingsState: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:925)
+10-01 19:21:52.187   502   502 I SettingsState: ancestor directory /data/system/users/0 exists
+10-01 19:21:52.187   502   502 I SettingsState: ancestor directory /data/system/users/0 permissions: r: true w: true x: true
+10-01 19:21:52.188   502   502 I SettingsState: ancestor's parent directory /data/system/users permissions: r: true w: true x: true
+10-01 19:21:52.204   273   273 E ActivityRecognitionHardware: activity_recognition HAL is deprecated. class_init is effectively a no-op
+10-01 19:21:52.403   502   570 D SystemServerTimingAsync: AppDataPrepare took to complete: 13545ms
+10-01 19:21:52.405   502   570 I PackageManager: Deferred reconcileAppsData finished 179 packages
+10-01 19:21:52.405   502   570 D SystemServerInitThreadPool: Finished executing prepareAppData
+10-01 19:21:52.406   502   570 D SystemServerTimingAsync: InitThreadPoolExec:prepareAppData took to complete: 13601ms
+10-01 19:21:52.406   502   570 I SystemServerTimingAsync: InitThreadPoolExec:SchedulingPolicyService.<init>
+10-01 19:21:52.406   502   570 D SystemServerInitThreadPool: Started executing SchedulingPolicyService.<init>
+10-01 19:21:52.459   502   502 D SettingsProvider: Setting [com.google.android.gms/.autofill.service.AutofillService] as Autofill Service for user 0
+10-01 19:21:52.562   502   570 I SchedulingPolicyService: Moving 431 back to group default
+10-01 19:21:52.575   502   570 D SystemServerInitThreadPool: Finished executing SchedulingPolicyService.<init>
+10-01 19:21:52.575   502   570 D SystemServerTimingAsync: InitThreadPoolExec:SchedulingPolicyService.<init> took to complete: 169ms
+10-01 19:21:52.599   273   477 I zygote  : Background young concurrent copying GC freed 3373(228KB) AllocSpace objects, 0(0B) LOS objects, 0% free, 3057KB/3057KB, paused 7.220ms total 353.984ms
+10-01 19:21:52.759   502   502 W SettingsState: No settings state /data/system/users/0/settings_config.xml
+10-01 19:21:52.766   502   502 I SettingsState: directory info for directory/file /data/system/users/0/settings_config.xml with stacktrace 
+10-01 19:21:52.766   502   502 I SettingsState: java.lang.Exception
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.logSettingsDirectoryInformation(SettingsState.java:892)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.readStateSyncLocked(SettingsState.java:1011)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.<init>(SettingsState.java:292)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.ensureSettingsStateLocked(SettingsProvider.java:2783)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.ensureSettingsForUserLocked(SettingsProvider.java:2748)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.peekSettingsStateLocked(SettingsProvider.java:3091)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.getSettingsNamesLocked(SettingsProvider.java:2713)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.syncSsaidTableOnStart(SettingsProvider.java:2695)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.<init>(SettingsProvider.java:2588)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider.onCreate(SettingsProvider.java:347)
+10-01 19:21:52.766   502   502 I SettingsState: 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2388)
+10-01 19:21:52.766   502   502 I SettingsState: 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2358)
+10-01 19:21:52.766   502   502 I SettingsState: 	at android.app.ActivityThread.installProvider(ActivityThread.java:7239)
+10-01 19:21:52.766   502   502 I SettingsState: 	at android.app.ActivityThread.installContentProviders(ActivityThread.java:6780)
+10-01 19:21:52.766   502   502 I SettingsState: 	at android.app.ActivityThread.installSystemProviders(ActivityThread.java:7431)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.server.am.ActivityManagerService.installSystemProviders(ActivityManagerService.java:7917)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.server.SystemServer.startOtherServices(SystemServer.java:1116)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.server.SystemServer.run(SystemServer.java:592)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.server.SystemServer.main(SystemServer.java:408)
+10-01 19:21:52.766   502   502 I SettingsState: 	at java.lang.reflect.Method.invoke(Native Method)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:592)
+10-01 19:21:52.766   502   502 I SettingsState: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:925)
+10-01 19:21:52.766   502   502 I SettingsState: ancestor directory /data/system/users/0 exists
+10-01 19:21:52.767   502   502 I SettingsState: ancestor directory /data/system/users/0 permissions: r: true w: true x: true
+10-01 19:21:52.767   502   502 I SettingsState: ancestor's parent directory /data/system/users permissions: r: true w: true x: true
+10-01 19:21:52.775   502   502 W SettingsState: No settings state /data/system/users/0/settings_ssaid.xml
+10-01 19:21:52.776   502   502 I SettingsState: directory info for directory/file /data/system/users/0/settings_ssaid.xml with stacktrace 
+10-01 19:21:52.776   502   502 I SettingsState: java.lang.Exception
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.logSettingsDirectoryInformation(SettingsState.java:892)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.readStateSyncLocked(SettingsState.java:1011)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.providers.settings.SettingsState.<init>(SettingsState.java:292)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.ensureSettingsStateLocked(SettingsProvider.java:2783)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.ensureSettingsForUserLocked(SettingsProvider.java:2771)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.peekSettingsStateLocked(SettingsProvider.java:3091)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.getSettingsNamesLocked(SettingsProvider.java:2713)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.syncSsaidTableOnStart(SettingsProvider.java:2695)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider$SettingsRegistry.<init>(SettingsProvider.java:2588)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.providers.settings.SettingsProvider.onCreate(SettingsProvider.java:347)
+10-01 19:21:52.776   502   502 I SettingsState: 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2388)
+10-01 19:21:52.776   502   502 I SettingsState: 	at android.content.ContentProvider.attachInfo(ContentProvider.java:2358)
+10-01 19:21:52.776   502   502 I SettingsState: 	at android.app.ActivityThread.installProvider(ActivityThread.java:7239)
+10-01 19:21:52.776   502   502 I SettingsState: 	at android.app.ActivityThread.installContentProviders(ActivityThread.java:6780)
+10-01 19:21:52.776   502   502 I SettingsState: 	at android.app.ActivityThread.installSystemProviders(ActivityThread.java:7431)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.server.am.ActivityManagerService.installSystemProviders(ActivityManagerService.java:7917)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.server.SystemServer.startOtherServices(SystemServer.java:1116)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.server.SystemServer.run(SystemServer.java:592)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.server.SystemServer.main(SystemServer.java:408)
+10-01 19:21:52.776   502   502 I SettingsState: 	at java.lang.reflect.Method.invoke(Native Method)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:592)
+10-01 19:21:52.776   502   502 I SettingsState: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:925)
+10-01 19:21:52.782   502   502 I SettingsState: ancestor directory /data/system/users/0 exists
+10-01 19:21:52.783   502   502 I SettingsState: ancestor directory /data/system/users/0 permissions: r: true w: true x: true
+10-01 19:21:52.783   502   502 I SettingsState: ancestor's parent directory /data/system/users permissions: r: true w: true x: true
+10-01 19:21:53.133   273   477 I zygote  : Background concurrent copying GC freed 11616(562KB) AllocSpace objects, 16(424KB) LOS objects, 49% free, 3478KB/6956KB, paused 4.150ms total 515.534ms
+10-01 19:21:53.258   502   502 D SystemServerTiming: InstallSystemProviders took to complete: 4108ms
+10-01 19:21:53.258   502   502 I SystemServerTiming: StartDropBoxManager
+10-01 19:21:53.258   502   502 I SystemServiceManager: Starting com.android.server.DropBoxManagerService
+10-01 19:21:53.273   502   502 D SystemServerTiming: StartDropBoxManager took to complete: 15ms
+10-01 19:21:53.274   502   502 I SystemServerTiming: StartVibratorService
+10-01 19:21:53.284   158   158 I servicemanager: Found android.hardware.vibrator.IVibrator/default in device VINTF manifest.
+10-01 19:21:53.322   312   312 I android.hardware.vibrator-service.example: Vibrator reporting capabilities
+10-01 19:21:53.331   312   312 I android.hardware.vibrator-service.example: Vibrator off
+10-01 19:21:53.332   312   312 I android.hardware.vibrator-service.example: Vibrator reporting capabilities
+10-01 19:21:53.366   502   502 D SystemServerTiming: StartVibratorService took to complete: 92ms
+10-01 19:21:53.366   502   502 I SystemServerTiming: StartDynamicSystemService
+10-01 19:21:53.374   502   502 D SystemServerTiming: StartDynamicSystemService took to complete: 7ms
+10-01 19:21:53.375   502   502 I SystemServerTiming: StartConsumerIrService
+10-01 19:21:53.338   312   312 I chatty  : uid=1000(system) android.hardwar identical 1 line
+10-01 19:21:53.339   312   312 I android.hardware.vibrator-service.example: Vibrator reporting capabilities
+10-01 19:21:53.379   159   159 I hwservicemanager: getTransport: Cannot find entry android.hardware.ir@1.0::IConsumerIr/default in either framework or device manifest.
+10-01 19:21:53.383   502   502 D SystemServerTiming: StartConsumerIrService took to complete: 8ms
+10-01 19:21:53.383   502   502 I SystemServerTiming: StartAlarmManagerService
+10-01 19:21:53.438   502   502 D AlarmManagerService: Kernel timezone updated to 0 minutes west of GMT
+10-01 19:21:53.475   502   502 E HistoricalRegistry: Interaction before persistence initialized
+10-01 19:21:53.483   502   502 W SystemServiceManager: Service com.android.server.AlarmManagerService took 86 ms in onStart
+10-01 19:21:53.484   502   502 D SystemServerTiming: StartAlarmManagerService took to complete: 100ms
+10-01 19:21:53.484   502   502 I SystemServerTiming: StartInputManagerService
+10-01 19:21:53.498   502   502 I InputManager: Initializing input manager, mUseDevInputEventForAudioJack=true
+10-01 19:21:53.571   502   502 D SystemServerTiming: StartInputManagerService took to complete: 87ms
+10-01 19:21:53.572   502   502 I SystemServerTiming: StartWindowManagerService
+10-01 19:21:53.631   502   535 I WindowManager: No existing display settings, starting empty
+10-01 19:21:53.699   502   535 I WindowTracing: Setting window tracing log level to 1
+10-01 19:21:53.699   502   535 I WindowTracing: Setting window tracing buffer capacity to 2097152bytes
+10-01 19:21:53.822   502   502 D SystemServerTiming: StartWindowManagerService took to complete: 250ms
+10-01 19:21:53.823   502   502 I SystemServerTiming: SetWindowManagerService
+10-01 19:21:53.830   502   534 I DropBoxManagerService: add tag=system_server_strictmode isTagEnabled=true flags=0x2
+10-01 19:21:54.211   159   159 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device manifest.
+10-01 19:21:54.225   338   378 I Gralloc4: mapper 4.x is not supported
+10-01 19:21:54.296   338   378 D HostConnection: createUnique: call
+10-01 19:21:54.303   338   378 D HostConnection: HostConnection::get() New Host Connection established 0x744530a2f510, tid 378
+10-01 19:21:54.075   502   534 I chatty  : uid=1000(system) android.io identical 3 lines
+10-01 19:21:54.111   502   534 I DropBoxManagerService: add tag=system_server_strictmode isTagEnabled=true flags=0x2
+10-01 19:21:54.475   502   502 I ActivityTaskManager: Loaded persisted task ids for user 0
+10-01 19:21:54.546   502   536 W system_server: Long monitor contention with owner main (502) at void com.android.server.wm.TaskChangeNotificationController.forAllLocalListeners(com.android.server.wm.TaskChangeNotificationController$TaskStackConsumer, android.os.Message)(TaskChangeNotificationController.java:351) waiters=0 in void com.android.server.wm.WindowAnimator.lambda$new$1$WindowAnimator(long) for 622ms
+10-01 19:21:54.552   502   532 W system_server: Long monitor contention with owner main (502) at java.lang.String com.android.server.am.ActivityManagerService.checkContentProviderAccess(java.lang.String, int)(ActivityManagerService.java:6828) waiters=0 in int com.android.server.am.ActivityManagerService.broadcastIntentWithFeature(android.app.IApplicationThread, java.lang.String, android.content.Intent, java.lang.String, android.content.IIntentReceiver, int, java.lang.String, android.os.Bundle, java.lang.String[], int, android.os.Bundle, boolean, boolean, int) for 599ms
+10-01 19:21:54.555   502   532 W Looper  : Drained
+10-01 19:21:54.556   502   532 W Looper  : Slow dispatch took 602ms android.fg h=com.android.server.DropBoxManagerService$DropBoxManagerBroadcastHandler c=null m=1
+10-01 19:21:54.561   502   533 W system_server: Long monitor contention with owner main (502) at java.lang.String com.android.server.am.ActivityManagerService.checkContentProviderAccess(java.lang.String, int)(ActivityManagerService.java:6828) waiters=1 in java.lang.String com.android.server.am.ActivityManagerService.checkContentProviderAccess(java.lang.String, int) for 489ms
+10-01 19:21:54.565   502   502 D SystemServerTiming: SetWindowManagerService took to complete: 737ms
+10-01 19:21:54.566   502   502 I SystemServerTiming: WindowManagerServiceOnInitReady
+10-01 19:21:54.566   502   532 W Looper  : Slow delivery took 549ms android.fg h=com.android.server.DropBoxManagerService$DropBoxManagerBroadcastHandler c=null m=1
+10-01 19:21:54.604   502   533 W Looper  : Slow dispatch took 551ms android.ui h=com.android.server.wm.DisplayPolicy$PolicyHandler c=com.android.server.wm.-$$Lambda$o8Xf30aea0t-A93AFKY5pBW0IDI@1130468 m=0
+10-01 19:21:54.733   502   533 W ShortcutManager: Unable to add bookmark: com.google.android.talk/com.google.android.talk.SigningInActivity
+10-01 19:21:54.733   502   533 W ShortcutManager: android.content.pm.PackageManager$NameNotFoundException: ComponentInfo{com.google.android.talk/com.google.android.talk.SigningInActivity}
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at android.app.ApplicationPackageManager.getActivityInfo(ApplicationPackageManager.java:467)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at com.android.server.policy.ShortcutManager.loadShortcuts(ShortcutManager.java:142)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at com.android.server.policy.ShortcutManager.<init>(ShortcutManager.java:62)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at com.android.server.policy.PhoneWindowManager.init(PhoneWindowManager.java:1793)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at com.android.server.wm.WindowManagerService$5.run(WindowManagerService.java:1131)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at android.os.Handler$BlockingRunnable.run(Handler.java:961)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at android.os.Handler.handleCallback(Handler.java:938)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at android.os.Looper.loop(Looper.java:223)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at com.android.server.ServiceThread.run(ServiceThread.java:44)
+10-01 19:21:54.733   502   533 W ShortcutManager: 	at com.android.server.UiThread.run(UiThread.java:45)
+10-01 19:21:54.818   502   502 D SystemServerTiming: WindowManagerServiceOnInitReady took to complete: 252ms
+10-01 19:21:54.819   502   502 I SystemServerTiming: StartInputManager
+10-01 19:21:54.819   502   502 I InputManager: Starting input manager
+10-01 19:21:54.825   502   570 I SystemServerTimingAsync: InitThreadPoolExec:StartHidlServices
+10-01 19:21:54.825   502   570 D SystemServerInitThreadPool: Started executing StartHidlServices
+10-01 19:21:54.825   502   570 I SystemServerTimingAsync: StartHidlServices
+10-01 19:21:54.831   502   533 W Looper  : Slow dispatch took 203ms android.ui h=android.os.Handler c=android.os.Handler$BlockingRunnable@d301c6a m=0
+10-01 19:21:54.851   502   570 I HidlServiceManagement: Registered android.frameworks.sensorservice@1.0::ISensorManager/default (start delay of 85335ms)
+10-01 19:21:54.871   502   570 I HidlServiceManagement: Registered android.frameworks.schedulerservice@1.0::ISchedulingPolicyService/default (start delay of 85356ms)
+10-01 19:21:54.898   502   608 D EventHub: No input device configuration file found for device 'Power Button'.
+10-01 19:21:54.931   502   608 W EventHub: Unable to disable kernel key repeat for /dev/input/event0: Function not implemented
+10-01 19:21:54.932   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:54.932   502   608 I EventHub: New device: id=1, fd=153, path='/dev/input/event0', name='Power Button', classes=0x1, configuration='', keyLayout='/system/usr/keylayout/Generic.kl', keyCharacterMap='/system/usr/keychars/Generic.kcm', builtinKeyboard=false, 
+10-01 19:21:54.947   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:54.947   502   608 I EventHub: New device: id=2, fd=154, path='/dev/input/event2', name='virtio_input_multi_touch_1', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_1.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:54.950   502   502 I InputManager: Enabling motion classifier because just booted: feature enabled, long press timeout = 400
+10-01 19:21:54.951   502   502 I InputClassifier: Enabling motion classifier
+10-01 19:21:54.954   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:54.954   502   608 I EventHub: New device: id=3, fd=155, path='/dev/input/event11', name='virtio_input_multi_touch_10', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_10.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:54.958   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:54.958   502   608 I EventHub: New device: id=4, fd=156, path='/dev/input/event8', name='virtio_input_multi_touch_7', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_7.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:54.962   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:54.962   502   608 I EventHub: New device: id=5, fd=157, path='/dev/input/event5', name='virtio_input_multi_touch_4', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_4.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:54.966   502   502 D SystemServerTiming: StartInputManager took to complete: 147ms
+10-01 19:21:54.967   502   502 I SystemServerTiming: DisplayManagerWindowManagerAndInputReady
+10-01 19:21:54.970   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:54.970   502   608 I EventHub: New device: id=6, fd=158, path='/dev/input/event9', name='virtio_input_multi_touch_8', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_8.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:54.974   502   570 I HidlServiceManagement: Registered android.frameworks.stats@1.0::IStats/default (start delay of 85459ms)
+10-01 19:21:54.983   502   570 D SystemServerTimingAsync: StartHidlServices took to complete: 149ms
+10-01 19:21:48.154     0     0 W healthd : battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=300000 cc=10 chg=a
+10-01 19:21:55.173     0     0 I init    : starting service 'vendor.input.classifier-1-0'...
+10-01 19:21:55.374     0     0 I init    : Control message: Processed ctl.interface_start for 'android.hardware.input.classifier@1.0::IInputClassifier/default' from pid: 159 (/system/bin/hwservicemanager)
+10-01 19:21:54.994   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:54.994   502   608 I EventHub: New device: id=7, fd=159, path='/dev/input/event13', name='qwerty2', classes=0xa3, configuration='/vendor/usr/idc/qwerty2.idc', keyLayout='/vendor/usr/keylayout/qwerty.kl', keyCharacterMap='/system/usr/keychars/qwerty2.kcm', builtinKeyboard=true, 
+10-01 19:21:54.998   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:54.998   502   608 I EventHub: New device: id=8, fd=160, path='/dev/input/event12', name='virtio_input_multi_touch_11', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_11.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:55.003   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:55.003   502   608 I EventHub: New device: id=9, fd=161, path='/dev/input/event7', name='virtio_input_multi_touch_6', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_6.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:55.006   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:55.006   502   608 I EventHub: New device: id=10, fd=162, path='/dev/input/event4', name='virtio_input_multi_touch_3', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_3.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:55.007   502   608 D EventHub: No input device configuration file found for device 'AT Translated Set 2 keyboard'.
+10-01 19:21:55.014   502   502 D SystemServerTiming: DisplayManagerWindowManagerAndInputReady took to complete: 47ms
+10-01 19:21:55.014   502   502 I SystemServerTiming: StartBluetoothService
+10-01 19:21:55.015   502   502 I SystemServiceManager: Starting com.android.server.BluetoothService
+10-01 19:21:55.025   502   570 D SystemServerInitThreadPool: Finished executing StartHidlServices
+10-01 19:21:55.026   502   570 D SystemServerTimingAsync: InitThreadPoolExec:StartHidlServices took to complete: 201ms
+10-01 19:21:55.036   159   159 I hwservicemanager: Since android.hardware.input.classifier@1.0::IInputClassifier/default is not registered, trying to start it as a lazy HAL.
+10-01 19:21:55.054   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:55.054   502   608 I EventHub: New device: id=11, fd=163, path='/dev/input/event1', name='AT Translated Set 2 keyboard', classes=0x83, configuration='', keyLayout='/system/usr/keylayout/Generic.kl', keyCharacterMap='/system/usr/keychars/Generic.kcm', builtinKeyboard=false, 
+10-01 19:21:55.062   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:55.062   502   608 I EventHub: New device: id=12, fd=164, path='/dev/input/event6', name='virtio_input_multi_touch_5', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_5.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:55.066   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:55.066   502   608 I EventHub: New device: id=13, fd=165, path='/dev/input/event3', name='virtio_input_multi_touch_2', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_2.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:55.074   502   608 I EventHub: usingClockIoctl=true
+10-01 19:21:55.075   502   608 I EventHub: New device: id=14, fd=166, path='/dev/input/event10', name='virtio_input_multi_touch_9', classes=0x94, configuration='/vendor/usr/idc/virtio_input_multi_touch_9.idc', keyLayout='', keyCharacterMap='', builtinKeyboard=false, 
+10-01 19:21:55.133   159   159 I hwservicemanager: Since android.hardware.input.classifier@1.0::IInputClassifier/default is not registered, trying to start it as a lazy HAL.
+10-01 19:21:55.135   502   609 I HidlServiceManagement: getService: Trying again for android.hardware.input.classifier@1.0::IInputClassifier/default...
+10-01 19:21:55.143   502   608 I InputReader: Device added: id=-1, eventHubId=-1, name='Virtual', descriptor='a718a782d34bc767f4689c232d64d527998ea7fd',sources=0x00000301
+10-01 19:21:55.180   502   608 I InputReader: Touch device 'virtio_input_multi_touch_9' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.193   502   608 I InputReader: Device added: id=2, eventHubId=14, name='virtio_input_multi_touch_9', descriptor='ac8abc2b3d95a68148a903fffc0a312b4dd19302',sources=0x80005002
+10-01 19:21:55.194   502   608 I InputReader: Touch device 'virtio_input_multi_touch_2' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.195   502   608 I InputReader: Device added: id=3, eventHubId=13, name='virtio_input_multi_touch_2', descriptor='929d4636b8e04f50240a26561429a6e91c9eff9e',sources=0x80005002
+10-01 19:21:55.196   502   608 I InputReader: Touch device 'virtio_input_multi_touch_5' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.201   502   608 I InputReader: Device added: id=4, eventHubId=12, name='virtio_input_multi_touch_5', descriptor='a009ac16f7539a9e4072c1f537120c35a8163d3b',sources=0x80005002
+10-01 19:21:55.202   502   608 I InputReader: Device added: id=5, eventHubId=11, name='AT Translated Set 2 keyboard', descriptor='485d69228e24f5e46da1598745890b214130dbc4',sources=0x80000101
+10-01 19:21:55.203   502   608 I InputReader: Touch device 'virtio_input_multi_touch_3' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.203   502   608 I InputReader: Device added: id=6, eventHubId=10, name='virtio_input_multi_touch_3', descriptor='d02b0eff93435c71d7fcb0c5db2c4e01c700002e',sources=0x80005002
+10-01 19:21:55.204   502   608 I InputReader: Touch device 'virtio_input_multi_touch_6' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.209   502   608 I InputReader: Device added: id=7, eventHubId=9, name='virtio_input_multi_touch_6', descriptor='0b49b597447c4c7be1d009f9a86bbed08b2e6b6d',sources=0x80005002
+10-01 19:21:55.210   502   608 I InputReader: Touch device 'virtio_input_multi_touch_11' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.210   502   608 I InputReader: Device added: id=8, eventHubId=8, name='virtio_input_multi_touch_11', descriptor='e760666b71e579617395a5018f318365e9f44147',sources=0x80005002
+10-01 19:21:55.211   502   608 I InputReader: Device added: id=0, eventHubId=0, name='qwerty2', descriptor='e9ac6dde47cf0ffa91b87f7b85e6f8de0933fc98',sources=0x80000301
+10-01 19:21:55.212   502   608 I InputReader: Touch device 'virtio_input_multi_touch_8' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.212   502   608 I InputReader: Device added: id=9, eventHubId=6, name='virtio_input_multi_touch_8', descriptor='df0ec362af5f2fec5a1bbb512f6e9556bd6b3fcf',sources=0x80005002
+10-01 19:21:55.217   502   608 I InputReader: Touch device 'virtio_input_multi_touch_4' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.218   502   608 I InputReader: Device added: id=10, eventHubId=5, name='virtio_input_multi_touch_4', descriptor='3e50b6575df319e017bd447766007caeb20ef93b',sources=0x80005002
+10-01 19:21:55.219   502   608 I InputReader: Touch device 'virtio_input_multi_touch_7' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.219   502   608 I InputReader: Device added: id=11, eventHubId=4, name='virtio_input_multi_touch_7', descriptor='e1c836c7be888adb29ca6646292e486f96461e97',sources=0x80005002
+10-01 19:21:55.220   502   608 I InputReader: Touch device 'virtio_input_multi_touch_10' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.220   502   608 I InputReader: Device added: id=12, eventHubId=3, name='virtio_input_multi_touch_10', descriptor='03d5168c37d991df1726df002537cd6ccc5b68cb',sources=0x80005002
+10-01 19:21:55.246   502   608 I InputReader: Touch device 'virtio_input_multi_touch_1' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:55.246   502   608 I InputReader: Device added: id=13, eventHubId=2, name='virtio_input_multi_touch_1', descriptor='43db9dd6fa61939c1b516cd9522f0fe93926a00b',sources=0x80005002
+10-01 19:21:55.246   502   608 I InputReader: Device added: id=14, eventHubId=1, name='Power Button', descriptor='26d13db3fa0f6bd5d05831266fb01ea6c500b88c',sources=0x00000101
+10-01 19:21:55.379   502   502 D BluetoothManagerService: Loading stored name and address
+10-01 19:21:55.380   502   502 D BluetoothManagerService: Stored bluetooth Name=null,Address=null
+10-01 19:21:55.393   502   502 D BluetoothManagerService: Bluetooth persisted state: 1
+10-01 19:21:55.393   502   502 D BluetoothManagerService: Startup: Bluetooth persisted state is ON.
+10-01 19:21:55.395   502   502 D BluetoothManagerService: Detected SystemUiUid: 10157
+10-01 19:21:55.395   502   502 D SystemServerTiming: StartBluetoothService took to complete: 380ms
+10-01 19:21:55.396   502   502 I SystemServerTiming: IpConnectivityMetrics
+10-01 19:21:55.396   502   502 I SystemServiceManager: Starting com.android.server.connectivity.IpConnectivityMetrics
+10-01 19:21:55.422   502   502 D SystemServerTiming: IpConnectivityMetrics took to complete: 26ms
+10-01 19:21:55.423   502   502 I SystemServerTiming: NetworkWatchlistService
+10-01 19:21:55.423   502   502 I SystemServiceManager: Starting com.android.server.net.watchlist.NetworkWatchlistService$Lifecycle
+10-01 19:21:55.534   502   613 I WatchlistLoggingHandler: Start aggregating watchlist records.
+10-01 19:21:55.543   502   502 W SystemServiceManager: Service com.android.server.net.watchlist.NetworkWatchlistService$Lifecycle took 120 ms in onStart
+10-01 19:21:55.543   502   502 D SystemServerTiming: NetworkWatchlistService took to complete: 120ms
+10-01 19:21:55.543   502   502 I SystemServerTiming: PinnerService
+10-01 19:21:55.544   502   502 I SystemServiceManager: Starting com.android.server.PinnerService
+10-01 19:21:55.630   502   502 E HistoricalRegistry: Interaction before persistence initialized
+10-01 19:21:55.660   502   502 D SystemServerTiming: PinnerService took to complete: 116ms
+10-01 19:21:55.660   502   502 I SystemServerTiming: IorapForwardingService
+10-01 19:21:55.681   502   502 I SystemServiceManager: Starting com.google.android.startop.iorap.IorapForwardingService
+10-01 19:21:55.703   502   502 W BackgroundDexOptService: SysProp pm.dexopt.downgrade_after_inactive_days not set
+10-01 19:21:55.705   502   502 I IorapForwardingService: Connected to iorapd native service.
+10-01 19:21:55.706   502   502 D SystemServerTiming: IorapForwardingService took to complete: 25ms
+10-01 19:21:55.706   502   502 I SystemServerTiming: SignedConfigService
+10-01 19:21:55.707   502   502 D SystemServerTiming: SignedConfigService took to complete: 1ms
+10-01 19:21:55.707   502   502 I SystemServerTiming: AppIntegrityService
+10-01 19:21:55.707   502   502 I SystemServiceManager: Starting com.android.server.integrity.AppIntegrityManagerService
+10-01 19:21:55.830   502   502 W SystemServiceManager: Service com.android.server.integrity.AppIntegrityManagerService took 123 ms in onStart
+10-01 19:21:55.830   502   502 D SystemServerTiming: AppIntegrityService took to complete: 123ms
+10-01 19:21:55.846   502   502 I WindowManager: SAFE MODE not enabled
+10-01 19:21:55.846   502   502 I SystemServerTiming: StartInputMethodManagerLifecycle
+10-01 19:21:55.847   502   502 I SystemServiceManager: Starting com.android.server.inputmethod.InputMethodManagerService$Lifecycle
+10-01 19:21:55.921   502   502 D SystemServerTiming: StartInputMethodManagerLifecycle took to complete: 75ms
+10-01 19:21:55.922   502   502 I SystemServerTiming: StartAccessibilityManagerService
+10-01 19:21:55.922   502   502 I SystemServiceManager: Starting com.android.server.accessibility.AccessibilityManagerService$Lifecycle
+10-01 19:21:56.010   502   502 D SystemServerTiming: StartAccessibilityManagerService took to complete: 88ms
+10-01 19:21:56.011   502   502 I SystemServerTiming: MakeDisplayReady
+10-01 19:21:56.107   502   502 I ActivityTaskManager: Config changes=20005df8 {1.0 ?mcc?mnc [en_US] ldltr sw360dp w360dp h568dp 320dpi nrml port ?uimode ?night -touch qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1184) mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.2}
+10-01 19:21:55.375     0     0 I chatty  : uid=0(root) logd identical 1 line
+10-01 19:21:56.170     0     0 I init    : Control message: Processed ctl.interface_start for 'android.hardware.input.classifier@1.0::IInputClassifier/default' from pid: 159 (/system/bin/hwservicemanager)
+10-01 19:21:56.303     0     0 I init    : processing action (sys.sysctl.extra_free_kbytes=*) from (/system/etc/init/hw/init.rc:1002)
+10-01 19:21:56.137   502   609 W HidlServiceManagement: Waited one second for android.hardware.input.classifier@1.0::IInputClassifier/default
+10-01 19:21:56.139   159   159 I hwservicemanager: Since android.hardware.input.classifier@1.0::IInputClassifier/default is not registered, trying to start it as a lazy HAL.
+10-01 19:21:56.140   502   609 I HidlServiceManagement: getService: Trying again for android.hardware.input.classifier@1.0::IInputClassifier/default...
+10-01 19:21:56.195   502   502 I WindowManager: Override config changes=60007dfc {1.0 ?mcc?mnc [en_US] ldltr sw360dp w360dp h568dp 320dpi nrml port ?uimode ?night -touch qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1184) mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.2} for displayId=0
+10-01 19:21:56.274   502   535 W system_server: Long monitor contention with owner main (502) at void com.android.server.wm.PinnedStackController.notifyMovementBoundsChanged(boolean)(PinnedStackController.java:297) waiters=1 in void com.android.server.wm.WindowManagerService.notifyHardKeyboardStatusChange() for 242ms
+10-01 19:21:56.275   502   536 W system_server: Long monitor contention with owner main (502) at void com.android.server.wm.PinnedStackController.notifyMovementBoundsChanged(boolean)(PinnedStackController.java:297) waiters=2 in void com.android.server.wm.WindowAnimator.lambda$new$1$WindowAnimator(long) for 158ms
+10-01 19:21:56.281   502   533 W Looper  : Slow dispatch took 251ms android.ui h=android.hardware.display.DisplayManagerGlobal$DisplayListenerDelegate c=null m=2
+10-01 19:21:56.330   502   502 I ActivityTaskManager: Config changes=8 {1.0 ?mcc?mnc [en_US] ldltr sw360dp w360dp h568dp 320dpi nrml port ?uimode ?night finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1184) mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.4}
+10-01 19:21:56.418   502   502 I WindowManager: Override config changes=8 {1.0 ?mcc?mnc [en_US] ldltr sw360dp w360dp h568dp 320dpi nrml port ?uimode ?night finger qwerty/v/v dpad/v winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1184) mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.4} for displayId=0
+10-01 19:21:56.439   502   535 I InputManager-JNI: Viewport [0] to add: local:8141241408256768, isActive: true
+10-01 19:21:56.448   502   608 I InputReader: Reconfiguring input devices, changes=DISPLAY_INFO | 
+10-01 19:21:56.457   502   608 I InputReader: Device reconfigured: id=13, name='virtio_input_multi_touch_1', size 720x1280, orientation 0, mode 1, display id 0
+10-01 19:21:56.458   502   608 I InputReader: Touch device 'virtio_input_multi_touch_10' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:56.458   502   608 I InputReader: Touch device 'virtio_input_multi_touch_7' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:56.459   502   608 I InputReader: Touch device 'virtio_input_multi_touch_4' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:56.459   502   608 I InputReader: Touch device 'virtio_input_multi_touch_8' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:56.459   502   608 I InputReader: Touch device 'virtio_input_multi_touch_11' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:56.459   502   608 I InputReader: Touch device 'virtio_input_multi_touch_6' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:56.459   502   608 I InputReader: Touch device 'virtio_input_multi_touch_3' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:56.459   502   608 I InputReader: Touch device 'virtio_input_multi_touch_5' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:56.460   502   608 I InputReader: Touch device 'virtio_input_multi_touch_2' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:56.460   502   608 I InputReader: Touch device 'virtio_input_multi_touch_9' could not query the properties of its associated display.  The device will be inoperable until the display size becomes available.
+10-01 19:21:56.473   502   502 D SystemServerTiming: MakeDisplayReady took to complete: 462ms
+10-01 19:21:56.474   502   502 I SystemServerTiming: StartStorageManagerService
+10-01 19:21:56.474   502   502 I SystemServiceManager: Starting com.android.server.StorageManagerService$Lifecycle
+10-01 19:21:56.492   612   612 I HidlServiceManagement: Registered android.hardware.input.classifier@1.0::IInputClassifier/default (start delay of 1193ms)
+10-01 19:21:56.602   404   404 D installd: Found quota mount /dev/block/dm-5 at /data
+10-01 19:21:56.603   404   404 D installd: Found quota mount /dev/block/dm-5 at /data/user/0
+10-01 19:21:56.608   612   612 I HidlServiceManagement: Removing namespace from process name android.hardware.input.classifier@1.0-service.default to classifier@1.0-service.default.
+10-01 19:21:56.623   159   159 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-01 19:21:56.700   502   617 D StorageManagerService: Thinking about init, mBootCompleted=false, mDaemonConnected=true
+10-01 19:21:56.700   502   617 D StorageManagerService: Thinking about reset, mBootCompleted=false, mDaemonConnected=true
+10-01 19:21:56.705   502   502 W SystemServiceManager: Service com.android.server.StorageManagerService$Lifecycle took 230 ms in onStart
+10-01 19:21:56.707   502   502 D SystemServerTiming: StartStorageManagerService took to complete: 233ms
+10-01 19:21:56.707   502   502 I SystemServerTiming: StartStorageStatsService
+10-01 19:21:56.707   502   502 I SystemServiceManager: Starting com.android.server.usage.StorageStatsService$Lifecycle
+10-01 19:21:56.729   404   404 D installd: Found quota mount /dev/block/dm-5 at /data
+10-01 19:21:56.730   404   404 D installd: Found quota mount /dev/block/dm-5 at /data/user/0
+10-01 19:21:56.738   502   617 D StorageManagerService: Thinking about init, mBootCompleted=false, mDaemonConnected=true
+10-01 19:21:56.739   502   617 D StorageManagerService: Thinking about reset, mBootCompleted=false, mDaemonConnected=true
+10-01 19:21:56.754   404   567 D installd: Found quota mount /dev/block/dm-5 at /data
+10-01 19:21:56.754   404   567 D installd: Found quota mount /dev/block/dm-5 at /data/user/0
+10-01 19:21:56.824   502   502 W SystemServiceManager: Service com.android.server.usage.StorageStatsService$Lifecycle took 116 ms in onStart
+10-01 19:21:56.837   502   502 D SystemServerTiming: StartStorageStatsService took to complete: 130ms
+10-01 19:21:56.838   502   502 I SystemServerTiming: StartUiModeManager
+10-01 19:21:56.838   502   502 I SystemServiceManager: Starting com.android.server.UiModeManagerService
+10-01 19:21:56.848   502   570 I SystemServerTimingAsync: InitThreadPoolExec:UiModeManager.onStart
+10-01 19:21:56.849   502   570 D SystemServerInitThreadPool: Started executing UiModeManager.onStart
+10-01 19:21:56.863   502   502 D SystemServerTiming: StartUiModeManager took to complete: 21ms
+10-01 19:21:56.863   502   502 I SystemServerTiming: UpdatePackagesIfNeeded
+10-01 19:21:56.863   502   502 I Watchdog: Pausing HandlerChecker: main thread for reason: dexopt. Pause count: 1
+10-01 19:21:57.007   502   534 W ActivityManager: Slow operation: 83ms so far, now at startProcess: done creating new process record
+10-01 19:21:57.007   502   534 W ActivityManager: Slow operation: 84ms so far, now at startProcess: returning with proc on hold
+10-01 19:21:57.026   502   570 D SystemServerInitThreadPool: Finished executing UiModeManager.onStart
+10-01 19:21:57.026   502   570 D SystemServerTimingAsync: InitThreadPoolExec:UiModeManager.onStart took to complete: 178ms
+10-01 19:21:57.030   502   502 I PackageDexOptimizer: Running dexopt (dexoptNeeded=1) on: /apex/com.android.extservices/priv-app/GoogleExtServices/GoogleExtServices.apk pkg=com.google.android.ext.services isa=x86_64 dexoptFlags=public targetFilter=quicken oatDir=null classLoaderContext=PCL[]{}
+10-01 19:21:57.068   404   567 V installd: DexInv: --- BEGIN '/apex/com.android.extservices/priv-app/GoogleExtServices/GoogleExtServices.apk' ---
+10-01 19:21:57.250   273   477 I zygote  : Background young concurrent copying GC freed 54368(2605KB) AllocSpace objects, 6(280KB) LOS objects, 45% free, 3825KB/6956KB, paused 893us total 292.815ms
+10-01 19:21:57.695   619   619 W dex2oat32: Unexpected CPU variant for X86 using defaults: x86_64
+10-01 19:21:57.719   619   619 I dex2oat32: /apex/com.android.art/bin/dex2oat32 --input-vdex-fd=-1 --output-vdex-fd=9 --updatable-bcp-packages-file=/system/etc/updatable-bcp-packages.txt --resolve-startup-const-strings=true --max-image-block-size=524288 --compiler-filter=quicken --classpath-dir=/apex/com.android.extservices/priv-app/GoogleExtServices --class-loader-context=PCL[]{} --generate-mini-debug-info --compact-dex-level=none --compilation-reason=first-boot
+10-01 19:21:57.856     0     0 I init    : Sending signal 9 to service 'idmap2d' (pid 401) process group...
+10-01 19:21:57.858   619   619 I dex2oat32: setting boot class path to /apex/com.android.art/javalib/core-oj.jar:/apex/com.android.art/javalib/core-libart.jar:/apex/com.android.art/javalib/core-icu4j.jar:/apex/com.android.art/javalib/okhttp.jar:/apex/com.android.art/javalib/bouncycastle.jar:/apex/com.android.art/javalib/apache-xml.jar:/system/framework/framework.jar:/system/framework/ext.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/ims-common.jar:/system/framework/framework-atb-backward-compatibility.jar
+10-01 19:21:57.924   502   579 W OverlayManager: service 'idmap' died
+10-01 19:21:57.942     0     0 I libprocessgroup: Successfully killed process cgroup uid 1000 pid 401 in 85ms
+10-01 19:21:57.950     0     0 I init    : Control message: Processed ctl.stop for 'idmap2d' from pid: 502 (system_server)
+10-01 19:21:57.951     0     0 I init    : Service 'idmap2d' (pid 401) received signal 9
+10-01 19:21:57.945   502   532 W Looper  : Drained
+10-01 19:21:57.946   502   532 W Looper  : Slow dispatch took 100ms android.fg h=android.os.Handler c=com.android.server.om.-$$Lambda$IdmapDaemon$Connection$4U-n0RSv1BPv15mvu8B8zXARcpk@9e239ad m=0
+10-01 19:21:58.170   619   619 W dex2oat32: Method Lcom/google/common/collect/Maps$SortedKeySet;.map is abstract, but the declaring class is neither abstract nor an interface in dex file GoogleExtServices.apk
+10-01 19:21:59.611   273   273 I zygote  : Thread[1,tid=273,Native,Thread*=0xdf6c1c10,peer=0x12e403b0,"main"] recursive attempt to load library "libmedia_jni.so"
+10-01 19:21:59.619   273   273 I zygote  : Thread[1,tid=273,Native,Thread*=0xdf6c1c10,peer=0x12e403b0,"main"] recursive attempt to load library "libmedia_jni.so"
+10-01 19:21:59.620   273   273 D MtpDeviceJNI: register_android_mtp_MtpDevice
+10-01 19:21:59.626   273   273 I zygote  : Thread[1,tid=273,Native,Thread*=0xdf6c1c10,peer=0x12e403b0,"main"] recursive attempt to load library "libmedia_jni.so"
+10-01 19:21:59.627   273   273 I zygote  : Thread[1,tid=273,Native,Thread*=0xdf6c1c10,peer=0x12e403b0,"main"] recursive attempt to load library "libmedia_jni.so"
+10-01 19:21:59.770   273   273 W Zygote  : Class not found for preloading: android.media.MediaRouter$Static$Client$1
+10-01 19:21:59.771   273   273 W Zygote  : Class not found for preloading: android.media.MediaRouter$Static$Client$2
+10-01 19:21:59.975   619   619 W dex2oat32: Verification of java.util.LinkedHashMap com.google.common.collect.Maps.newLinkedHashMap() took 100.248ms (59.85 bytecodes/s) (768B approximate peak alloc)
+10-01 19:21:59.982   619   621 W dex2oat32: Verification of boolean com.google.common.collect.Sets.removeAllImpl(java.util.Set, java.util.Iterator) took 113.242ms (158.95 bytecodes/s) (992B approximate peak alloc)
+10-01 19:22:00.026   273   273 W Zygote  : Class not found for preloading: android.net.shared.Inet4AddressUtils
+10-01 19:22:00.027   273   273 W Zygote  : Class not found for preloading: android.net.shared.InetAddressUtils
+10-01 19:22:00.810   273   273 W Zygote  : Class not found for preloading: android.view.-$$Lambda$cZhmLzK8aetUdx4VlP9w5jR7En0
+10-01 19:22:00.912   273   273 W Zygote  : Class not found for preloading: android.view.autofill.-$$Lambda$AutofillManager$AutofillManagerClient$vxNm6RuuD-r5pkiSxNSBBd1w_Qc
+10-01 19:22:00.920   273   273 W Zygote  : Class not found for preloading: android.view.contentcapture.-$$Lambda$MainContentCaptureSession$1$JPRO-nNGZpgXrKr4QC_iQiTbQx0
+10-01 19:22:00.925   273   273 W Zygote  : Class not found for preloading: android.view.contentcapture.-$$Lambda$MainContentCaptureSession$1$Xhq3WJibbalS1G_W3PRC2m7muhM
+10-01 19:22:00.928   273   273 W Zygote  : Class not found for preloading: android.view.contentcapture.MainContentCaptureSession$1
+10-01 19:22:01.211   273   477 I zygote  : Background young concurrent copying GC freed 59363(2363KB) AllocSpace objects, 5(128KB) LOS objects, 32% free, 4694KB/6956KB, paused 27.514ms total 698.243ms
+10-01 19:22:01.256   619   619 I dex2oat32: dex2oat took 3.651s (2.508s cpu) (threads: 2) arena alloc=1936B (1936B) java alloc=502KB (514064B) native alloc=1540KB (1577232B) free=1510KB (1546832B)
+10-01 19:22:01.257   273   273 W Zygote  : Class not found for preloading: com.android.internal.telephony.-$$Lambda$SubscriptionController$VCQsMNqRHpN3RyoXYzh2YUwA2yc
+10-01 19:22:01.258   273   273 W Zygote  : Class not found for preloading: com.android.internal.telephony.-$$Lambda$SubscriptionController$u5xE-urXR6ElZ50305_6guo20Fc
+10-01 19:22:01.316   404   567 V installd: DexInv: --- END '/apex/com.android.extservices/priv-app/GoogleExtServices/GoogleExtServices.apk' (success) ---
+10-01 19:22:01.362   502   502 I system_server: The ClassLoaderContext is a special shared library.
+10-01 19:22:01.654     0     0 D logd    : logdr: UID=2000 GID=2000 PID=622 n tail=500 logMask=99 pid=0 start=0ns timeout=0ns

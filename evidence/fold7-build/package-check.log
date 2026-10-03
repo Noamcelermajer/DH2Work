@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "apk_crc_ok": true,
+    "no_duplicate_zip_entries": true,
+    "only_arm64_host_libraries": true,
+    "host_is_aarch64": true,
+    "host_loads_align_16k": true,
+    "native_alias_api_exported": true,
+    "guest_crc_ok": true,
+    "engine_unchanged": true,
+    "storm_fix_packaged": true,
+    "path_helper_present": true,
+    "media_query_helper_present": true,
+    "media_query_helper_referenced": true,
+    "setup_and_cache_classes_present": true,
+    "runtime_matches_tested_build": true,
+    "application_id_unique": true,
+    "main_activity_correct": true,
+    "min_sdk_29": true,
+    "target_sdk_35": true,
+    "upgrade_version_2": true,
+    "native_hook_test_passed": true
+  },
+  "sha256": "37cc8b3f77641df5b71638bee6e36f2a9181ecf2f69d3591d88d147b681d59b2",
+  "bytes": 13757664,
+  "cache_test_cases": 13,
+  "native_probe_inputs": 4096,
+  "native_entry_points_tested_with_inert_vm": true,
+  "android_art_tested": false,
+  "phone_tested": false,
+  "gameplay_tested": false,
+  "requires_host_page_size": 4096
+}

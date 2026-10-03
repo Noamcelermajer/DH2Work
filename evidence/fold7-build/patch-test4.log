@@ -1,0 +1,2 @@
+Patched Storm legacy linker handle dereference: /workspace/scratch/283fa0994529/dh2-work/fold7-build/game-tree/lib/armeabi-v7a/libStormGLOFT.so
+Patched 31 Java path lookups and Storm private-linker ABI use; engine unchanged.

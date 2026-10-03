@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-01",
+  "base_commit": "ded2115ee60048666e5fd146f80693613e70dadb",
+  "verification": "Executed from a clean clone with this handoff staged; no SDK download, application rebuild or device test performed by this handoff check.",
+  "snapshot_entries_verified": 2195,
+  "runtime_bundle_entries_verified": 22,
+  "original_libraries_verified": {
+    "libDungeonHunter2.so": "36498eb8180ffb74759e6305e9596db999f18583d460f3b8534abcb6022f5e80",
+    "libStormGLOFT.so": "be6beaab782944e5ce39cca8e850fd03de654e4236c9329621043adcbee291e1",
+    "libnativeinterface.so": "180b582cbb7e7004c94fe771f8c8013dad4c74a9317ee4baff08c542da4ff0da"
+  },
+  "current_local_source_and_report_files_matched": 162,
+  "missing_authored_files": [],
+  "different_authored_files": [],
+  "existing_destination_refused": true,
+  "apk_sha256": "e6b81ec649e25bb32c6ec7f3f477d5ef1c2a79b7af43b7ca7643518c5f5e1b8d",
+  "excluded": "Reproducible build intermediates and external toolchain/AVD binaries; snapshot retains final generated smali and source/patch/test evidence.",
+  "runtime_cumulative_patch_matches_local_checkout": true,
+  "runtime_cumulative_patch_sha256": "97109771bbf071864a4e9aa8d73536b63be6ea3f50387871ae9420d2187cf3ae",
+  "concurrent_reconstruction_handoff_preserved": "6ebdad3eb60205215b667edbaf088ead8b4ec085"
+}

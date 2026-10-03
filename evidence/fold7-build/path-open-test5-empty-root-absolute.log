@@ -1,0 +1,17 @@
+linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+[zb] sysroot has no /system/etc/ld.config.arm.txt; using the device file
+[zb] sysroot has no /linkerconfig/ld.config.txt; using the device file
+linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+[zb] sysroot has no /system/etc/ld.config.txt; using the device file
+[zb] sysroot has no /system/etc/ld.config.txt; using the device file
+[zb] sysroot has no /odm/lib; using the device file
+[zb] sysroot has no /vendor/lib; using the device file
+[zb] sysroot has no /odm/lib/libnetd_client.so; using the device file
+[zb] sysroot has no /vendor/lib/libnetd_client.so; using the device file
+WorkingDirectory=
+CFileSystem::open input=/workspace/scratch/283fa0994529/dh2-work/fold7-build/file-fixtures/data/3d/characters/prince/prince_modular.bdae patched=1
+CFileSystem::open returned=file errno=0
+PASS original FILE content intact
+PASS file-open contract

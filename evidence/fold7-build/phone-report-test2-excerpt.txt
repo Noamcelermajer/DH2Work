@@ -1,0 +1,18 @@
+Owner-provided report excerpt, 2026-10-01. Not a fresh local/device test.
+Model SM-F966B; Android 16; arm64-v8a; page size 4096; versionCode 2.
+Optional media playlists: 0
+proxy-loads: 3; proxy-failures: 0; registered-natives: 36
+unimplemented-host-calls: 0
+nativeRender: 322; nativeAccelerometer: 1283; nativeOnSurfaceChanged: 3
+GLMediaPlayer.nativeInit: 2; GLMediaPlayer.nativeGetTotalSoundsOfSameInstance: 2
+native-calls total: 1815
+Last recorded successful open: data/PyData/character_properties_pystructnames.bin
+Other successful opens included cache pyarraynames files and fonts.
+Only recorded open failures: initial libdl.so/libc.so guest/plugin search probes, errno 2.
+gl-calls: 18078; gl-first-call: glGetIntegerv tid=8806
+gl-egl-context-current: yes; gl-first-error: glGetError 0x0500
+egl-swaps: 0; egl-thread-mismatch: current=0 gl=8806; egl-first-error: none
+guest-exit: guest exited with status 134
+zb-errors.txt: No report recorded yet.
+Owner: Game launched in Russian; resolution issues.
+Correction at 21:14 Asia/Jerusalem: Cinematic did not crash. Game crashed AFTER the cinematic, during loading, when a small fairy appeared.

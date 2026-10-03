@@ -1,0 +1,9 @@
+diff --git a/fold7-build/java/com/zettabridge/launcher/Dh2Activity.java b/fold7-build/java/com/zettabridge/launcher/Dh2Activity.java
+--- a/fold7-build/java/com/zettabridge/launcher/Dh2Activity.java
++++ b/fold7-build/java/com/zettabridge/launcher/Dh2Activity.java
+@@ -169,4 +169,4 @@ public class Dh2Activity extends Activity {
+         try {
+             long page=android.system.Os.sysconf(android.system.OsConstants._SC_PAGESIZE);
+-            if(page!=4096)throw new IOException("This translation runtime currently requires 4096-byte memory pages. This phone reports "+page+". Please share the diagnostic report.");
++            if(page!=16384)throw new IOException("This experimental 16 KiB runtime requires 16384-byte memory pages. This emulator reports "+page+".");
+             setBusy(true,"Starting a fresh diagnostic run...");

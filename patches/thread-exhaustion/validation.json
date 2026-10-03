@@ -1,0 +1,42 @@
+{
+  "scope": "isolated emulator-only save-job scheduling diagnostic",
+  "input_engine_sha256": "45891aad9e7a5b1d84a5218f91926a04bd13a62ce104cb29beca7c70228c93c4",
+  "patched_engine_sha256": "ad33304fe17654ff5e05606323d977c89687c96bc8ce4722983ec6e092bb5f5f",
+  "test7_unsigned_guest_sha256": "302ae407d27dc6b94501e3e92c64dd9817b4742b3a45f7e134413f4cd40027bd",
+  "diagnostic_unsigned_guest_sha256": "8168af36b2d82cf6b897da2fe4ec382c816f6498840e3bb61aede2f23c877e20",
+  "diagnostic_signed_guest_sha256": "d23680d7d544e33ae1d6c4ee2c26ff7c7b173fb0a46aa1bc99742e271e7f1e16",
+  "changed_apk_entries": ["lib/armeabi-v7a/libDungeonHunter2.so"],
+  "patch": {
+    "site_rva": "0x32c534",
+    "old_bne_target_rva": "0x32cb74",
+    "new_bne_target_rva": "0x32cc34",
+    "changed_engine_bytes": 1
+  },
+  "host_static_test": "PASS",
+  "runtime": {
+    "avd": "DH2_API28_X86",
+    "android_release": "9",
+    "abi": "x86,armeabi-v7a,armeabi",
+    "ram_mb": 4096,
+    "cache_file_count": 6833,
+    "cache_bytes": 648357710,
+    "max_load_step": 37,
+    "loading_percent": 100,
+    "interactive_saved_level_rendered": true,
+    "input_caused_visible_change": true,
+    "alive_about_30_seconds_after_gameplay": true,
+    "threads_after_gameplay": 26,
+    "vm_size_kib_after_gameplay": 2172492,
+    "vm_rss_kib_after_gameplay": 339312,
+    "pthread_create_failures": 0,
+    "not_created_logs": 0,
+    "translation_memory_aborts": 0,
+    "fatal_signals": 0,
+    "screenshot_sha256": "de8b590f858d23ac89ab0fe18327a6a7697aa0bc5ee52c0101b0b6159e06c972",
+    "log_sha256": "52c11f7c7917ee148d0e2aef491c955df8cc58f3a73b0c9c79f2523289bba6ee"
+  },
+  "baseline_test6_pthread_create_failures": 3188,
+  "android17_wrapper_validated": false,
+  "save_persistence_validated": false,
+  "long_term_stability_validated": false
+}

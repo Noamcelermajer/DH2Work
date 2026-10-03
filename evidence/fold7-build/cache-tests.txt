@@ -1,0 +1,1 @@
+CacheArchiveTest PASS: 13 cases (layouts, exact bytes, invalid paths, invalid ZIP, OBB refusal, cancellation, replacement)

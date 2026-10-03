@@ -1,0 +1,41 @@
+zettabridge-runtime-report 1
+plugin: (none)
+proxy-loads: 0
+proxy-failures: 0
+jni-onload-calls: 0
+registered-natives: 0
+unimplemented-host-calls: 0
+unimplemented-distinct: 0
+first-unimplemented: (none)
+guest-exit: guest SIGSEGV: write of 0x00000000, pc 0xfdc9f142 in /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so offset 0x48142
+guest-log: stdio: linker :  Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+guest-log: stdio: WARNING: linker:
+guest-log: stdio: Warning: failed to find generated linker configuration from "
+guest-log: stdio: /linkerconfig/ld.config.txt
+guest-log: stdio: "
+guest-log: stdio:
+guest-log: stdio: diagnostic  writev marker
+guest-log: stdio: diagnostic write marker
+native-calls: (none) total=0
+opened-1: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libdl.so
+opened-2: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so
+open-failed-1: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libnetd_client.so errno=2
+open-failed-2: /odm/lib/libnetd_client.so errno=2
+open-failed-3: /vendor/lib/libnetd_client.so errno=2
+gl-calls: 0
+gl-first-call: (none)
+gl-egl-context-current: (unknown)
+gl-first-error: (none)
+egl-swaps: 0
+egl-first-error: (none)
+crash-recent-jni-calls: (none)
+crash-recent-egl-calls: (none)
+crash-registers: r0=00000004 r1=00000000 r2=00000000 r3=00000000 r4=3fffd614 r5=feffe9b0 r6=00000002 r7=00000000 r8=00000000 r9=00000000 r10=00000000 r11=feffe9a8 r12=ffffffff r13=feffe978 r14=3fffd7a4 r15=fdc9f142
+crash-state: cpsr=600c0030 tls=fdd6d48c tid=328
+crash-pc: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so offset 0x48142
+crash-lr: /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x7a4
+crash-stack: 00000000 00000000 00000000 00000000 00000000 3fffd57c 00000000 00000000
+crash-precise: no
+crash-stack-candidate-1: sp+0x14=0x3fffd57c /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x57c
+crash-stack-candidate-2: sp+0x1e8=0x3fffd034 /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x34
+crash-stack-candidate-3: sp+0x218=0x3fffd510 /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x510

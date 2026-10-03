@@ -1,0 +1,41 @@
+1790878937558 tid=20686 start locale=en_GB preferEnglish=true fit16by9=true preserveContext=true
+1790878937558 tid=20686 asset probe=character_properties_pystructnames.bin exists=true bytes=5032
+1790878937559 tid=20686 asset sha256=character_properties_pystructnames.bin 7c955f759840dc7808b17ddb54213ce886abd5cdf6607cacc9048a3626803cc2
+1790878937559 tid=20686 asset probe=character_properties.bin exists=false bytes=0
+1790878937559 tid=20686 asset probe=character_models_dictionary_pyarraynames.bin exists=true bytes=1755
+1790878937559 tid=20686 asset sha256=character_models_dictionary_pyarraynames.bin d731c154e9208b66b84476d97a08366ad1d3e1a074c1fc59889e03b847661fc9
+1790878937584 tid=20686 Zirconia_DRM created
+1790878937587 tid=20686 Zirconia_DRM started
+1790878937587 tid=20686 Zirconia_DRM resumed
+1790878937937 tid=20686 Zirconia_DRM paused
+1790878938281 tid=20686 DungeonHunter2 created
+1790878938329 tid=20686 DungeonHunter2 started
+1790878938329 tid=20686 DungeonHunter2 resumed
+1790878938363 tid=20767 surface created #1 EGL=android.opengl.EGLContext@372b9718 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830
+1790878938783 tid=20686 Zirconia_DRM stopped
+1790878938784 tid=20686 Zirconia_DRM destroyed
+1790878939045 tid=20767 surface initialization returned
+1790878939045 tid=20767 surface size=2184x1228 view=2184x1228
+1790878939046 tid=20767 surface resize returned
+1790878939047 tid=20767 render returned frames=1 elapsedMs=758
+1790878940698 tid=20686 DungeonHunter2 paused
+1790878940727 tid=20686 MyVideoView created
+1790878940734 tid=20686 MyVideoView started
+1790878940734 tid=20686 MyVideoView resumed
+1790878941208 tid=20686 DungeonHunter2 saved state
+1790878941210 tid=20686 DungeonHunter2 stopped
+1790878950092 tid=20686 MyVideoView paused
+1790878950097 tid=20686 DungeonHunter2 started
+1790878950097 tid=20686 DungeonHunter2 resumed
+1790878950113 tid=20767 surface size=2184x1228 view=2184x1228
+1790878950113 tid=20767 surface resize returned
+1790878950128 tid=20767 surface size=2184x1228 view=2184x1228
+1790878950128 tid=20767 surface resize returned
+1790878950894 tid=20686 MyVideoView stopped
+1790878950894 tid=20686 MyVideoView destroyed
+1790878968738 tid=20767 render returned frames=120 elapsedMs=30449
+1790878970737 tid=20767 render returned frames=240 elapsedMs=32447
+1790878972735 tid=20767 render returned frames=360 elapsedMs=34446
+1790878974743 tid=20767 render returned frames=480 elapsedMs=36454
+1790878980376 tid=20767 render returned frames=600 elapsedMs=42087
+1790878986019 tid=20767 render returned frames=720 elapsedMs=47730

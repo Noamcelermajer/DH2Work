@@ -1,0 +1,45 @@
+{
+  "input_sha256": "36498eb8180ffb74759e6305e9596db999f18583d460f3b8534abcb6022f5e80",
+  "output_sha256": "45891aad9e7a5b1d84a5218f91926a04bd13a62ce104cb29beca7c70228c93c4",
+  "patch_vaddr": "0x56dd9c",
+  "patch_bytes": 20,
+  "replacement_hex": "60009de50200001a0030d0e52f0053e32000001a",
+  "instructions": [
+    "0056dd9c ldr r0, [sp, #0x60]",
+    "0056dda0 bne #0x56ddb0",
+    "0056dda4 ldrb r3, [r0]",
+    "0056dda8 cmp r3, #0x2f",
+    "0056ddac bne #0x56de34"
+  ],
+  "scope": "CFileSystem::open path classification only; existing colon and relative-path behavior retained"
+}
+Patched Storm legacy linker handle dereference: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libStormGLOFT.so
+/workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so: unchanged
+/workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libnativeinterface.so: unchanged
+/workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libStormGLOFT.so: unchanged
+linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+[zb] sysroot has no /system/etc/ld.config.arm.txt; using the device file
+[zb] sysroot has no /linkerconfig/ld.config.txt; using the device file
+linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+[zb] sysroot has no /system/etc/ld.config.txt; using the device file
+[zb] sysroot has no /system/etc/ld.config.txt; using the device file
+[zb] sysroot has no /odm/lib; using the device file
+[zb] sysroot has no /vendor/lib; using the device file
+[zb] sysroot has no /odm/lib/libnetd_client.so; using the device file
+[zb] sysroot has no /vendor/lib/libnetd_client.so; using the device file
+Loading DungeonHunter2...
+PASS loaded DungeonHunter2
+Loading StormGLOFT...
+PASS loaded StormGLOFT
+Loading nativeinterface...
+PASS loaded nativeinterface
+PASS original engine log2 and integer encoding: 4096 inputs
+Calling DungeonHunter2 JNI_OnLoad with inert VM...
+PASS DungeonHunter2 JNI_OnLoad: 0x10004
+Calling StormGLOFT JNI_OnLoad with inert VM...
+PASS StormGLOFT JNI_OnLoad: 0x10006
+PASS shader and GL-string GOT hooks and original inline hook are installed
+PASS native load probe; Android framework and gameplay remain untested
+

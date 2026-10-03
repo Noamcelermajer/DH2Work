@@ -1,0 +1,38 @@
+User-supplied diagnostic excerpt, received 2026-10-01.
+This is a focused transcription of the supplied report, not a fresh test run.
+
+Model: SM-F966B
+Android: 16
+ABIs: [arm64-v8a]
+Page size: 4096
+Cache: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS
+proxy-loads: 3
+proxy-failures: 0
+proxy-loaded: libnativeinterface.so jni=0x00010006
+proxy-loaded: libDungeonHunter2.so jni=0x00010004
+proxy-loaded: libStormGLOFT.so jni=0x00010006
+jni-onload-calls: 2
+jni-onload: libDungeonHunter2.so ok jni=0x00010004
+jni-onload: libStormGLOFT.so ok jni=0x00010006
+registered-natives: 36
+unimplemented-host-calls: 0
+unimplemented-distinct: 0
+first-unimplemented: (none)
+guest-exit: (none)
+native-calls: com/samsung/zirconia/NativeInterface.checkLicenseFile2=1 com/samsung/zirconia/NativeInterface.checkLicenseFile=1 total=2
+gl-calls: 0
+gl-first-call: (none)
+gl-egl-context-current: (unknown)
+gl-first-error: (none)
+egl-swaps: 0
+egl-first-error: (none)
+jni-runtime-start: ok
+jni-loading: libStormGLOFT.so
+
+Repeated activity-start failures at 2026-10-01 20:49:23 and 20:49:27:
+java.lang.RuntimeException: Unable to start activity ComponentInfo{local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance}
+Caused by: java.lang.IllegalArgumentException: Invalid column *
+    at android.content.ContentResolver.query(ContentResolver.java:1123)
+    at android.app.Activity.managedQuery(Activity.java:3918)
+    at com.gameloft.android.GAND.GloftD2SS.Musicplayer.initMediaList(Unknown Source:15)
+    at com.gameloft.android.GAND.GloftD2SS.DungeonHunter2.onCreate(Unknown Source:267)

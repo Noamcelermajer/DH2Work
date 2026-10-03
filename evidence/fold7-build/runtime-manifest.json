@@ -1,0 +1,90 @@
+{
+  "assets/zb/guest/lib/libEGL.so": {
+    "bytes": 5432,
+    "sha256": "63411c309d471448a8eece533ec7771f18b29a07fa07cefce7b5b34de729829b"
+  },
+  "assets/zb/guest/lib/libGLESv1_CM.so": {
+    "bytes": 13164,
+    "sha256": "d6b5ef042fb0814d5634428b64e4941720030d29165ad4eb8d0addf48ee5b9cf"
+  },
+  "assets/zb/guest/lib/libGLESv2.so": {
+    "bytes": 24668,
+    "sha256": "f3534fbe0019ab387d643edf03ec1a9323e19768aa6e4850c39979c1c037ad5b"
+  },
+  "assets/zb/guest/lib/libandroid.so": {
+    "bytes": 21200,
+    "sha256": "dee509a55055fa1a134b5800ce407c241c5862e81157cda9943e82be9e7c103f"
+  },
+  "assets/zb/guest/lib/libjnigraphics.so": {
+    "bytes": 1588,
+    "sha256": "e78baaf39c3e8c8a2389a2a00a2e7d470ad54c71246fc6c44e67954ccca322c5"
+  },
+  "assets/zb/guest/lib/libzbcompat.so": {
+    "bytes": 3764,
+    "sha256": "43d99a49d681cd63110fb1e921e0281756a31c332b3eeddc193f490abb23925b"
+  },
+  "assets/zb/guest/lib/libzbjni.so": {
+    "bytes": 35744,
+    "sha256": "9bd1f0d25f8dd9e84a59ee44193d1b936e223baaac1b521e05f1ae4f7132f9e4"
+  },
+  "assets/zb/guest/zbhost": {
+    "bytes": 6324,
+    "sha256": "0547fb40bab92800e0354c84eba25afdde5c1142a956581ad49a677806f478f7"
+  },
+  "assets/zb/host/libzbproxy.so": {
+    "bytes": 7152,
+    "sha256": "aa570093a188d288edf072cac1a5553c426824884ad416d7ce0ab3f4d71f9205"
+  },
+  "assets/zb/sysroot/system/bin/linker": {
+    "bytes": 2059744,
+    "sha256": "2d3fa2c759b300455a0389e387c01dc4f417185681c474be394fb249aa175a1e"
+  },
+  "assets/zb/sysroot/system/lib/ld-android.so": {
+    "bytes": 2868,
+    "sha256": "2c50b0042ce775edc8a9746e64b08c4e2190ea4b2c584d90357a2794431a5612"
+  },
+  "assets/zb/sysroot/system/lib/libc++.so": {
+    "bytes": 849492,
+    "sha256": "b721b7449e6a356b0a3a7c8f8d2bcf7e5db097179da2d2e669a8c1b1b2ba5cd9"
+  },
+  "assets/zb/sysroot/system/lib/libc.so": {
+    "bytes": 992808,
+    "sha256": "23ee728839ebb17bae3e9fc73034142be2466a6d694c0404ef5aeafdb1009069"
+  },
+  "assets/zb/sysroot/system/lib/libdl.so": {
+    "bytes": 5452,
+    "sha256": "a308c0a7dee0218fb1a6cfbadc6223a9faecd21ab7d7619b7db19f22510b3114"
+  },
+  "assets/zb/sysroot/system/lib/libdl_android.so": {
+    "bytes": 3344,
+    "sha256": "ecdd0c2b38a51ed51917da68efc618512b137cb2b92d445edb534cd745af8039"
+  },
+  "assets/zb/sysroot/system/lib/liblog.so": {
+    "bytes": 42964,
+    "sha256": "4342a7cbdfeb6f149ef84323849edb8a351fe59fd798fba5250f0b45d147440f"
+  },
+  "assets/zb/sysroot/system/lib/libm.so": {
+    "bytes": 127092,
+    "sha256": "1f1e67803af788849cb91cca01ccb61597d23b127df1a9816ff55984ab3e42e3"
+  },
+  "assets/zb/sysroot/system/lib/libstdc++.so": {
+    "bytes": 10304,
+    "sha256": "7433e7b63f2120a15a8f300c1b8e9d7cbdfbc7061228da8548f4b8672f09b0f2"
+  },
+  "assets/zb/sysroot/system/lib/libz.so": {
+    "bytes": 74948,
+    "sha256": "96cc1297aab336a54cff0448ad4c0713e8eeaa9bd002c3eb2df24c30fa571920"
+  },
+  "assets/zb-files.txt": {
+    "bytes": 551,
+    "sha256": "8e4c30252721a157072c34234c0ab3a63fe24301ead80e0aced0d981e8dc4300"
+  },
+  "assets/zb-version.txt": {
+    "bytes": 65,
+    "sha256": "726095d24a7ce809943fdcc523791f18b444dad9bfba6546dc337c1605db6427"
+  },
+  "jniLibs/arm64-v8a/libzbridge.so": {
+    "bytes": 3306992,
+    "sha256": "25e8da7edbcba1d4cfe828e506a03f1e6dd6e7ffa2948a91eb2ca6f300682d24"
+  }
+}

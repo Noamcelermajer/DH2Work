@@ -1,0 +1,62 @@
+zettabridge-runtime-report 1
+plugin: (none)
+proxy-loads: 0
+proxy-failures: 0
+jni-onload-calls: 0
+registered-natives: 0
+unimplemented-host-calls: 0
+unimplemented-distinct: 0
+first-unimplemented: (none)
+guest-exit: guest exited with status 0
+guest-log: stdio: linker :  Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+guest-log: stdio: WARNING: linker:
+guest-log: stdio: Warning: failed to find generated linker configuration from "
+guest-log: stdio: /linkerconfig/ld.config.txt
+guest-log: stdio: "
+guest-log: stdio:
+guest-log: stdio: WorkingDirectory=/workspace/scratch/283fa0994529/dh2-work/fold7-build/file-fixtures/
+guest-log: stdio: CFileSystem::open input=Z:valid.bin patched=1
+guest-log: stdio: CFileSystem::open returned=file errno=0
+guest-log: stdio: PASS original FILE content intact
+guest-log: stdio:
+guest-log: stdio: PASS file-open contract
+guest-log: stdio:
+native-calls: (none) total=0
+opened-1: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libdl_android.so
+opened-2: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libzbcompat.so
+opened-3: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libGLESv2.so
+opened-4: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libstdc++.so
+opened-5: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libm.so
+opened-6: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libGLESv1_CM.so
+opened-7: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/liblog.so
+opened-8: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc++.so
+opened-9: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libStormGLOFT.so
+opened-10: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libz.so
+opened-11: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libEGL.so
+opened-12: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libandroid.so
+opened-13: /data/data/com.gameloft.android.GAND.GloftD2SS/lib/libStormGLOFT.so
+opened-14: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so
+opened-15: /data/data/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so
+opened-16: Z:valid.bin
+open-failed-1: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libnetd_client.so errno=2
+open-failed-2: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libnetd_client.so errno=2
+open-failed-3: /odm/lib/libnetd_client.so errno=2
+open-failed-4: /vendor/lib/libnetd_client.so errno=2
+open-failed-5: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libdl_android.so errno=2
+open-failed-6: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libdl_android.so errno=2
+open-failed-7: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libstdc++.so errno=2
+open-failed-8: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libstdc++.so errno=2
+open-failed-9: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libm.so errno=2
+open-failed-10: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libm.so errno=2
+open-failed-11: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/liblog.so errno=2
+open-failed-12: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/liblog.so errno=2
+open-failed-13: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libc++.so errno=2
+open-failed-14: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libc++.so errno=2
+open-failed-15: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libz.so errno=2
+open-failed-16: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libz.so errno=2
+gl-calls: 0
+gl-first-call: (none)
+gl-egl-context-current: (unknown)
+gl-first-error: (none)
+egl-swaps: 0
+egl-first-error: (none)

@@ -1,0 +1,191 @@
+diff --git a/core/include/zb/guest_memory.h b/core/include/zb/guest_memory.h
+index eb96843..6724e85 100644
+--- a/core/include/zb/guest_memory.h
++++ b/core/include/zb/guest_memory.h
+@@ -39,6 +39,7 @@ public:
+ 
+     bool ok() const { return base_ != nullptr; }
+     std::uint8_t* base() const { return base_; }
++    std::uint32_t host_page_size() const { return host_page_size_; }
+ 
+     // addr must be page-aligned; len is rounded up to pages; prot uses PROT_* values.
+     bool map_anon(std::uint32_t addr, std::uint64_t len, int prot);
+@@ -59,8 +60,11 @@ public:
+ 
+ private:
+     void set_flags(std::uint32_t addr, std::uint64_t len, std::uint8_t flags);
++    bool ensure_coarse_backing(std::uint32_t addr, std::uint64_t len);
++    bool coarse_chunk_has_guest_pages(std::uint64_t chunk) const;
+ 
+     std::uint8_t* base_ = nullptr;
++    std::uint32_t host_page_size_ = 0;
+     std::vector<std::uint8_t> pages_;
+ };
+ 
+diff --git a/core/src/guest_memory.cpp b/core/src/guest_memory.cpp
+index 1aa42ea..4687996 100644
+--- a/core/src/guest_memory.cpp
++++ b/core/src/guest_memory.cpp
+@@ -1,9 +1,13 @@
+ #include "zb/guest_memory.h"
+ 
+ #include <sys/mman.h>
++#include <unistd.h>
+ 
+ #include <cerrno>
+ #include <cstring>
++#include <memory>
++#include <new>
++#include <vector>
+ 
+ #include "zb/log.h"
+ 
+@@ -36,6 +40,12 @@ int host_prot(int guest_prot) {
+ }
+ 
+ GuestMemory::GuestMemory() : pages_(static_cast<std::size_t>(kGuestSpaceSize >> 12), 0) {
++    const long host_page = sysconf(_SC_PAGESIZE);
++    if (host_page != kPageSize && host_page != 16384) {
++        log("unsupported host page size: %ld", host_page);
++        return;
++    }
++    host_page_size_ = static_cast<std::uint32_t>(host_page);
+     void* p = mmap(nullptr, kGuestSpaceSize + kGuardSize, PROT_NONE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_NORESERVE, -1, 0);
+     if (p == MAP_FAILED) {
+         log("cannot reserve guest address space: %s", std::strerror(errno));
+@@ -52,9 +62,47 @@ void GuestMemory::set_flags(std::uint32_t addr, std::uint64_t len, std::uint8_t
+     std::memset(pages_.data() + (addr >> 12), flags, static_cast<std::size_t>(page_round_up(len) >> 12));
+ }
+ 
++bool GuestMemory::coarse_chunk_has_guest_pages(std::uint64_t chunk) const {
++    const std::uint64_t first = chunk >> 12;
++    for (std::uint64_t i = first; i < first + (host_page_size_ >> 12); ++i) {
++        if (pages_[i] & kPageMapped) return true;
++    }
++    return false;
++}
++
++bool GuestMemory::ensure_coarse_backing(std::uint32_t addr, std::uint64_t len) {
++    const std::uint64_t mask = host_page_size_ - 1;
++    const std::uint64_t first = static_cast<std::uint64_t>(addr) & ~mask;
++    const std::uint64_t end = (static_cast<std::uint64_t>(addr) + len + mask) & ~mask;
++    std::vector<std::uint64_t> created;
++    for (std::uint64_t chunk = first; chunk < end; chunk += host_page_size_) {
++        if (coarse_chunk_has_guest_pages(chunk)) continue;
++        void* p = mmap(base_ + chunk, host_page_size_, PROT_READ | PROT_WRITE,
++                       MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED, -1, 0);
++        if (p != MAP_FAILED) {
++            created.push_back(chunk);
++            continue;
++        }
++        const int error = errno;
++        for (const std::uint64_t fresh : created) {
++            mmap(base_ + fresh, host_page_size_, PROT_NONE,
++                 MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED | MAP_NORESERVE, -1, 0);
++        }
++        errno = error;
++        return false;
++    }
++    return true;
++}
++
+ bool GuestMemory::map_anon(std::uint32_t addr, std::uint64_t len, int prot) {
+     len = page_round_up(len);
+     if (!ok() || !range_valid(addr, len)) return false;
++    if (host_page_size_ != kPageSize) {
++        if (!ensure_coarse_backing(addr, len)) return false;
++        std::memset(base_ + addr, 0, static_cast<std::size_t>(len));
++        set_flags(addr, len, flags_from_prot(prot));
++        return true;
++    }
+     void* p = mmap(base_ + addr, len, host_prot(prot), MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED, -1, 0);
+     if (p == MAP_FAILED) return false;
+     set_flags(addr, len, flags_from_prot(prot));
+@@ -64,6 +112,36 @@ bool GuestMemory::map_anon(std::uint32_t addr, std::uint64_t len, int prot) {
+ bool GuestMemory::map_file(std::uint32_t addr, std::uint64_t len, int prot, int share_flags, int fd, std::uint64_t offset) {
+     len = page_round_up(len);
+     if (!ok() || !range_valid(addr, len)) return false;
++    if (host_page_size_ != kPageSize) {
++        // Prototype: private file mappings are materialized before replacing guest pages.
++        // Shared mappings and SIGBUS on access beyond EOF need separate semantics.
++        if ((share_flags & (MAP_SHARED | MAP_PRIVATE)) != MAP_PRIVATE || (offset & kPageMask)) {
++            errno = ENOTSUP;
++            return false;
++        }
++        std::unique_ptr<std::uint8_t[]> image(new (std::nothrow) std::uint8_t[static_cast<std::size_t>(len)]);
++        if (!image) {
++            errno = ENOMEM;
++            return false;
++        }
++        std::uint64_t done = 0;
++        while (done < len) {
++            const ssize_t n = pread(fd, image.get() + done, static_cast<std::size_t>(len - done),
++                                    static_cast<off_t>(offset + done));
++            if (n > 0) {
++                done += static_cast<std::uint64_t>(n);
++            } else if (n == 0) {
++                std::memset(image.get() + done, 0, static_cast<std::size_t>(len - done));
++                break;
++            } else if (errno != EINTR) {
++                return false;
++            }
++        }
++        if (!ensure_coarse_backing(addr, len)) return false;
++        std::memcpy(base_ + addr, image.get(), static_cast<std::size_t>(len));
++        set_flags(addr, len, flags_from_prot(prot));
++        return true;
++    }
+     int flags = (share_flags & (MAP_SHARED | MAP_PRIVATE)) | MAP_FIXED;
+     void* p = mmap(base_ + addr, len, host_prot(prot), flags, fd, static_cast<off_t>(offset));
+     if (p == MAP_FAILED) return false;
+@@ -74,6 +152,11 @@ bool GuestMemory::map_file(std::uint32_t addr, std::uint64_t len, int prot, int
+ bool GuestMemory::protect(std::uint32_t addr, std::uint64_t len, int prot) {
+     len = page_round_up(len);
+     if (!ok() || !range_valid(addr, len) || !accessible(addr, len, 0)) return false;
++    if (host_page_size_ != kPageSize) {
++        // The checked JIT callbacks and host_ptr enforce guest-granular permissions.
++        set_flags(addr, len, flags_from_prot(prot));
++        return true;
++    }
+     if (mprotect(base_ + addr, len, host_prot(prot)) != 0) return false;
+     set_flags(addr, len, flags_from_prot(prot));
+     return true;
+@@ -82,6 +165,21 @@ bool GuestMemory::protect(std::uint32_t addr, std::uint64_t len, int prot) {
+ bool GuestMemory::unmap(std::uint32_t addr, std::uint64_t len) {
+     len = page_round_up(len);
+     if (!ok() || !range_valid(addr, len)) return false;
++    if (host_page_size_ != kPageSize) {
++        for (std::uint64_t page = addr; page < static_cast<std::uint64_t>(addr) + len; page += kPageSize) {
++            if (pages_[page >> 12] & kPageMapped) std::memset(base_ + page, 0, kPageSize);
++        }
++        set_flags(addr, len, 0);
++        const std::uint64_t mask = host_page_size_ - 1;
++        const std::uint64_t first = static_cast<std::uint64_t>(addr) & ~mask;
++        const std::uint64_t end = (static_cast<std::uint64_t>(addr) + len + mask) & ~mask;
++        for (std::uint64_t chunk = first; chunk < end; chunk += host_page_size_) {
++            if (coarse_chunk_has_guest_pages(chunk)) continue;
++            if (mmap(base_ + chunk, host_page_size_, PROT_NONE,
++                     MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED | MAP_NORESERVE, -1, 0) == MAP_FAILED) return false;
++        }
++        return true;
++    }
+     void* p = mmap(base_ + addr, len, PROT_NONE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED | MAP_NORESERVE, -1, 0);
+     if (p == MAP_FAILED) return false;
+     set_flags(addr, len, 0);
+diff --git a/core/src/guest_thread.cpp b/core/src/guest_thread.cpp
+index 49d0852..846fc6d 100644
+--- a/core/src/guest_thread.cpp
++++ b/core/src/guest_thread.cpp
+@@ -55,7 +55,11 @@ GuestThread::GuestThread(GuestMemory& mem, Dynarmic::ExclusiveMonitor* monitor,
+     cfg.global_monitor = monitor;
+     cfg.processor_id = processor_id;
+     cfg.arch_version = Dynarmic::A32::ArchVersion::v8;
+-    cfg.fastmem_pointer = static_cast<std::uintptr_t>(reinterpret_cast<std::uintptr_t>(mem.base()));
++    // A 16 KiB host page can contain four differently protected 4 KiB guest pages.
++    // Direct fastmem would bypass GuestMemory's per-guest-page permission checks.
++    if (mem.host_page_size() == kPageSize) {
++        cfg.fastmem_pointer = static_cast<std::uintptr_t>(reinterpret_cast<std::uintptr_t>(mem.base()));
++    }
+     cfg.coprocessors[15] = cp15_;
+     cfg.define_unpredictable_behaviour = true;
+     cfg.enable_cycle_counting = false;

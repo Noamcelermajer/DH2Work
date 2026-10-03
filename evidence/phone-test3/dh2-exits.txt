@@ -1,0 +1,2 @@
+Android process exit history (newest first)
+Thu Oct 01 21:23:09 GMT+03:00 2026 process=local.dh2.fold7:guest pid=20686 reason=1 status=134 pssKiB=0 rssKiB=565416 description=

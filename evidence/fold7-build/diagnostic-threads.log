@@ -1,0 +1,22 @@
+linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+[zb] sysroot has no /system/etc/ld.config.arm.txt; using the device file
+[zb] sysroot has no /linkerconfig/ld.config.txt; using the device file
+linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+[zb] sysroot has no /system/etc/ld.config.txt; using the device file
+[zb] sysroot has no /system/etc/ld.config.txt; using the device file
+[zb] sysroot has no /odm/lib; using the device file
+[zb] sysroot has no /vendor/lib; using the device file
+[zb] sysroot has no /odm/lib/libnetd_client.so; using the device file
+[zb] sysroot has no /vendor/lib/libnetd_client.so; using the device file
+diagnostic writev marker
+diagnostic write marker
+[zb] guest terminated by signal 6
+[zb]   r0  00000000  r1  00000140  r2  00000006  r3  feffe898
+[zb]   r4  feffe898  r5  00000140  r6  00000140  r7  0000016b
+[zb]   r8  00000000  r9  ffffffff  r10 00000000  r11 feffe970
+[zb]   r12 feffe8a8  r13 feffe890  r14 fdc637eb  r15 fdc637fe
+[zb]   cpsr 00070030  tls fdd6d48c  tid 320
+[zb]   pc in /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so offset 0x4b7fe
+[zb]   lr in /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so offset 0x4b7eb

@@ -1,0 +1,14 @@
+# This repository pins SHA-256 values for patches, patch reports and build
+# inputs, and applies .patch files with `git apply`.  A CRLF checkout silently
+# changes every one of those hashes and makes `git apply` fail, so force LF in
+# the working tree on every platform instead of inheriting core.autocrlf.
+* text=auto eol=lf
+
+# Binary or opaque artifacts must never be line-ending translated.
+*.apk binary
+*.jar binary
+*.aar binary
+*.p12 binary
+*.zip binary
+*.so binary
+*.png binary

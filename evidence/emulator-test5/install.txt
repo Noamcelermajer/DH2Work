@@ -1,0 +1,3 @@
+Performing Streamed Install
+adb: failed to install <WORKSPACE>/deliverables/Dungeon-Hunter-2-Fold7-test5.apk: cmd: Failure calling service package: Broken pipe (32)
+

@@ -1,0 +1,1175 @@
+--------- beginning of main
+10-01 21:46:15.810  3741  3741 W libprocessgroup: A JoinCgroup action in the SystemMemoryProcess profile is used for controller memory in the cgroup v2 hierarchy and will be ignored
+10-01 21:46:15.859  3612  3612 I DecorView: setWindowBackground: isPopOver=false color=0 d=android.graphics.drawable.ColorDrawable@3631270
+10-01 21:46:15.871  3612  3612 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:15.872  3612  3612 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:15.886  3747  3747 I Zygote  : Process 3747 created for local.dh2.fold7:guest
+10-01 21:46:15.886  3747  3747 I dh2.fold7:guest: Using CollectorTypeCMC GC.
+10-01 21:46:15.890  3747  3747 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+10-01 21:46:15.891  3747  3747 D ActivityThread: setConscryptValidator
+10-01 21:46:15.891  3747  3747 D ActivityThread: setConscryptValidator - put
+10-01 21:46:15.897  3747  3747 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/org.apache.http.legacy.jar
+10-01 21:46:15.898  3747  3747 D nativeloader: Configuring clns-9 for other apk /data/app/~~logC8QVE75STZT_-f3zvkw==/local.dh2.fold7-676Sr0Vv_-TvNcN5T-bfIw==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~logC8QVE75STZT_-f3zvkw==/local.dh2.fold7-676Sr0Vv_-TvNcN5T-bfIw==/lib/arm64:/data/app/~~logC8QVE75STZT_-f3zvkw==/local.dh2.fold7-676Sr0Vv_-TvNcN5T-bfIw==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/local.dh2.fold7
+10-01 21:46:15.898  3747  3747 D CompatChangeReporter: Compat change id reported: 202956589; UID 10613; state: ENABLED
+10-01 21:46:15.900  3747  3747 V GraphicsEnvironment: Currently set values for:
+10-01 21:46:15.900  3747  3747 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+10-01 21:46:15.900  3747  3747 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+10-01 21:46:15.900  3747  3747 V GraphicsEnvironment: local.dh2.fold7 is not listed in per-application setting
+10-01 21:46:15.900  3747  3747 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+10-01 21:46:15.900  3747  3747 V GraphicsEnvironment: No special selections for ANGLE, returning default driver choice
+10-01 21:46:15.900  3747  3747 V GraphicsEnvironment: App is not on the allowlist for updatable production driver.
+10-01 21:46:15.902  3747  3747 D nativeloader: Load /data/app/~~logC8QVE75STZT_-f3zvkw==/local.dh2.fold7-676Sr0Vv_-TvNcN5T-bfIw==/lib/arm64/libzbridge.so using class loader ns clns-9 (caller=/data/app/~~logC8QVE75STZT_-f3zvkw==/local.dh2.fold7-676Sr0Vv_-TvNcN5T-bfIw==/base.apk): ok
+10-01 21:46:15.903  3747  3747 W dh2.fold7:guest: Unsupported class loader: java.lang.Class<org.lsposed.hiddenapibypass.CoreOjClassLoader>
+10-01 21:46:15.921  3747  3747 W dh2.fold7:guest: Unsupported class loader: java.lang.Class<org.lsposed.hiddenapibypass.CoreOjClassLoader>
+10-01 21:46:15.921  3747  3747 W dh2.fold7:guest: Unsupported class loader: java.lang.Class<org.lsposed.hiddenapibypass.CoreOjClassLoader>
+10-01 21:46:15.922  3747  3747 I zb-launcher: hidden API exemptions installed: true
+10-01 21:46:15.922  3747  3747 I zb-launcher: guest Instrumentation installed
+10-01 21:46:15.922  3747  3747 I zb-launcher: package manager virtualization installed
+--------- beginning of system
+10-01 21:46:15.924  3747  3747 W Looper  : Loop again would have the queued messages be executed before this one completed.
+10-01 21:46:15.926  3747  3747 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+10-01 21:46:15.927  3747  3747 D CompatChangeReporter: Compat change id reported: 312399441; UID 10613; state: ENABLED
+10-01 21:46:15.928  3747  3747 V Configuration: Updating configuration, locales updated from [] to [en_GB]
+10-01 21:46:15.928  3747  3747 W PackageParsing: Ignoring duplicate uses-permissions/uses-permissions-sdk-m: android.permission.ACCESS_NETWORK_STATE in package: com.gameloft.android.GAND.GloftD2SS at: Binary XML file line #14
+10-01 21:46:15.929  3747  3747 D DesktopExperienceFlags: Toggle override initialized to: false
+10-01 21:46:15.930  3747  3747 W dh2.fold7:guest: Unsupported class loader: java.lang.Class<com.zettabridge.launcher.PluginClassLoader>
+10-01 21:46:15.932  3747  3747 W dh2.fold7:guest: Unsupported class loader: java.lang.Class<com.zettabridge.launcher.PluginClassLoader>
+10-01 21:46:15.932  3747  3747 W dh2.fold7:guest: Unsupported class loader: java.lang.Class<com.zettabridge.launcher.PluginClassLoader>
+10-01 21:46:15.933  3747  3747 I zbridge : guest JNI runtime: plugin /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS activated (targetSdk 24)
+10-01 21:46:15.934  3747  3747 I zb-launcher: plugin com.gameloft.android.GAND.GloftD2SS: application local.dh2.compat.CompatApplication attached
+10-01 21:46:15.939  3747  3747 D CompatChangeReporter: Compat change id reported: 309578419; UID 10613; state: ENABLED
+10-01 21:46:15.939  3747  3747 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+10-01 21:46:15.941  3747  3747 I DecorView: setWindowBackground: isPopOver=false color=ff010102 d=null
+10-01 21:46:15.942  3747  3747 D ActivityThread: local.dh2.fold7 will use render engine as VK
+10-01 21:46:15.942  3747  3747 D HWUI    : HWUI - treat SMPTE_170M as sRGB
+10-01 21:46:15.943  3747  3784 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+10-01 21:46:15.943  3747  3784 D HWUI    : CacheManager constructor. deviceInfo=(1080, 1920)
+10-01 21:46:15.943  3747  3784 D vulkan  : searching for layers in '/data/app/~~logC8QVE75STZT_-f3zvkw==/local.dh2.fold7-676Sr0Vv_-TvNcN5T-bfIw==/lib/arm64'
+10-01 21:46:15.943  3747  3784 D vulkan  : searching for layers in '/data/app/~~logC8QVE75STZT_-f3zvkw==/local.dh2.fold7-676Sr0Vv_-TvNcN5T-bfIw==/base.apk!/lib/arm64-v8a'
+10-01 21:46:15.944  3747  3747 I DecorView: setWindowBackground: isPopOver=false color=ff010102 d=android.graphics.drawable.StateListDrawable@3e88e06
+10-01 21:46:15.945  3747  3747 W BitmapFactory: Null Options, creating a new one.
+10-01 21:46:15.945  3747  3747 I Kumiho-Kumiho: getPackageName: local.dh2.fold7
+10-01 21:46:15.945  3747  3747 E Kumiho-Kumiho: updateList: Failed to read policy, trying default path
+10-01 21:46:15.946  3747  3747 D Kumiho-Kumiho: updateList: Adding package 'com.whatsapp' to third-party list
+10-01 21:46:15.946  3747  3747 D Kumiho-Kumiho: updateList: Adding package 'com.facebook.orca' to third-party list
+10-01 21:46:15.946  3747  3747 D Kumiho-Kumiho: updateList: Adding package 'org.telegram.messenger' to third-party list
+10-01 21:46:15.946  3747  3747 D Kumiho-Kumiho: updateList: Adding package 'com.kakao.talk' to third-party list
+10-01 21:46:15.946  3747  3747 D Kumiho-Kumiho: updateList: Adding package 'jp.naver.line.android' to third-party list
+10-01 21:46:15.946  3747  3747 D Kumiho-Kumiho: updateList: Adding package 'com.discord' to third-party list
+10-01 21:46:15.946  3747  3747 D Kumiho-Kumiho: updateList: Adding package 'com.tencent.mm' to third-party list
+10-01 21:46:15.946  3747  3747 D Kumiho-Kumiho: updateList: Adding package 'com.snapchat.android' to third-party list
+10-01 21:46:15.946  3747  3747 I Kumiho-Kumiho: getPackageName: local.dh2.fold7
+10-01 21:46:15.948  3747  3784 E Adreno-AppProfiles: QSPM AIDL service doesn't exist
+10-01 21:46:15.949  3747  3784 I AdrenoVK-0: ===== BEGIN DUMP OF OVERRIDDEN SETTINGS =====
+10-01 21:46:15.949  3747  3784 I AdrenoVK-0: ===== END DUMP OF OVERRIDDEN SETTINGS =====
+10-01 21:46:15.950  3747  3747 I local.dh2.fold7:savemessages: SmDR: Starting...
+10-01 21:46:15.950  3747  3784 D qdgralloc: Fetching IMapper5 from QtiMapper5
+10-01 21:46:15.953  3747  3747 I local.dh2.fold7:savemessages: ListFiles[0] = data.save
+10-01 21:46:15.953  3747  3747 I local.dh2.fold7:savemessages: ListFiles[1] = geoid_map
+10-01 21:46:15.953  3747  3747 I local.dh2.fold7:savemessages: ListFiles[2] = images
+10-01 21:46:15.953  3747  3747 I local.dh2.fold7:savemessages: ListFiles[3] = notification_classifier_head.tflite
+10-01 21:46:15.953  3747  3747 I local.dh2.fold7:savemessages: ListFiles[4] = webkit
+10-01 21:46:15.953  3747  3747 I local.dh2.fold7:savemessages: data.save : Restoring...
+10-01 21:46:15.955  3747  3747 I local.dh2.fold7:savemessages: data.save: Successfully restored
+10-01 21:46:15.955  3747  3747 I local.dh2.fold7:savemessages: Restoring completed
+10-01 21:46:15.956  3747  3784 I SnapAlloc: Graphics lib is available
+10-01 21:46:15.957  3747  3747 W libc    : Access denied finding property "ro.serialno"
+10-01 21:46:15.958  3747  3747 D Zirconia: isEmulator: false
+10-01 21:46:15.958  3747  3747 D Zirconia: isApplicationHacked: false
+10-01 21:46:15.958  3747  3747 D Zirconia: threadPriority :5
+10-01 21:46:15.958  3747  3747 D Zirconia: zirconiaError :0
+10-01 21:46:15.958  3747  3747 D Zirconia: checkLocalOnly :false
+10-01 21:46:15.958  3747  3747 D Zirconia: applicationID :local.dh2.fold7
+10-01 21:46:15.958  3747  3747 D Zirconia: deviceIMEI :
+10-01 21:46:15.958  3747  3747 D Zirconia: deviceIMSI :
+10-01 21:46:15.958  3747  3747 D Zirconia: deviceModel :q7qxxx
+10-01 21:46:15.958  3747  3747 D Zirconia: deviceMIN :
+10-01 21:46:15.958  3747  3747 D Zirconia: licenseFilePath :/data/user/0/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/app_zirconia/zirconia.dat
+10-01 21:46:15.960  3747  3784 I Adreno-UNKNOWN: Using previously loaded IMapper library.
+10-01 21:46:15.960  3747  3786 D nativeloader: Configuring clns-10 for other apk . target_sdk_version=35, uses_libraries=ALL, library_path=, permitted_path=/data:/mnt/expand
+10-01 21:46:15.960  3747  3786 D nativeloader: Extending system_exposed_libraries: libhumantracking.arcsoft.so:libface_recognition.arcsoft.so:libgallery_pic_best.arcsoft.so:libPortraitDistortionCorrection.arcsoft.so:libPortraitDistortionCorrectionCali.arcsoft.so:libface_landmark.arcsoft.so:libFacialStickerEngine.arcsoft.so:libfrtracking_engine.arcsoft.so:libFaceRecognition.arcsoft.so:libveengine.arcsoft.so:lib_pet_detection.arcsoft.so:libae_bracket_hdr.arcsoft.so:libdualcam_virap.v2.arcsoft.so:libhybrid_high_dynamic_range.arcsoft.so:libimage_enhancement.arcsoft.so:libFacialAttributeDetection.arcsoft.so:libmultisourceseparator.audio.samsung.so:libaudiomirroring_jni.audiomirroring.samsung.so:libBeauty_v4.camera.samsung.so:libmodelshot.camera.samsung.so:libexifa.camera.samsung.so:libjpega.camera.samsung.so:libOpenCv.camera.samsung.so:libAIDeflicker.camera.samsung.so:libDeflickerHDR.camera.samsung.so:libaifrcInterface.camera.samsung.so:libBestPhoto.camera.samsung.so:libC2paDps.camera.samsung.so:libVideoClassifier.camera.samsung.so:libImageScreener.camera.sam
+10-01 21:46:15.961  3747  3784 I AdrenoVK-0: QUALCOMM build          : f61dec9117, I68b0a64d7e
+10-01 21:46:15.961  3747  3784 I AdrenoVK-0: Build Date              : 03/26/26
+10-01 21:46:15.961  3747  3784 I AdrenoVK-0: Shader Compiler Version : E031.47.18.50
+10-01 21:46:15.961  3747  3784 I AdrenoVK-0: Local Branch            : 
+10-01 21:46:15.961  3747  3784 I AdrenoVK-0: Remote Branch           : refs/tags/AU_LINUX_ANDROID_LA.VENDOR.15.4.0.11.00.00.1088.862
+10-01 21:46:15.961  3747  3784 I AdrenoVK-0: Remote Branch           : NONE
+10-01 21:46:15.961  3747  3784 I AdrenoVK-0: Reconstruct Branch      : NOTHING
+10-01 21:46:15.961  3747  3784 I AdrenoVK-0: Build Config            : S P 18.0.0 AArch64
+10-01 21:46:15.962  3747  3747 D ViewRootImpl: desktopMode is false
+10-01 21:46:15.962  3747  3747 D CompatChangeReporter: Compat change id reported: 349153669; UID 10613; state: ENABLED
+10-01 21:46:15.962  3747  3786 D nativeloader: Load /data/user/0/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/proxy/libnativeinterface.so using isolated ns clns-10 (caller=/data/user/0/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/base.apk): ok
+10-01 21:46:15.962  3747  3784 I AdrenoVK-0: Driver Path             : /vendor/lib64/hw/vulkan.adreno.so
+10-01 21:46:15.962  3747  3784 I AdrenoVK-0: Driver Version          : 0800.64.7
+10-01 21:46:15.962  3747  3784 I AdrenoVK-0: PFP                     : 0x01500077
+10-01 21:46:15.962  3747  3784 I AdrenoVK-0: ME                      : 0x01500014
+10-01 21:46:15.962  3747  3784 I AdrenoVK-0: Application Name    : android framework
+10-01 21:46:15.962  3747  3784 I AdrenoVK-0: Process Name        : local.dh2.fold7:guest
+10-01 21:46:15.962  3747  3784 I AdrenoVK-0: Application Version : 0x00000000
+10-01 21:46:15.962  3747  3784 I AdrenoVK-0: Engine Name         : android framework
+10-01 21:46:15.962  3747  3784 I AdrenoVK-0: Engine Version      : 0x00000000
+10-01 21:46:15.962  3747  3784 I AdrenoVK-0: Api Version         : 0x00401000
+10-01 21:46:15.962  3747  3747 I ViewRootImpl: dVRR is disabled
+10-01 21:46:15.962  3747  3747 D HardwareRenderer: onDisplayChanged. displayId=0 current wxh=1968x2184 mLargest wxh=0x0
+10-01 21:46:15.963  3747  3747 D HardwareRenderer: Set largestWidth and largestHeight as logical resolution. (1968x2184)
+10-01 21:46:15.965  3747  3784 D HWUI    : setMaxSurfaceArea requested wxh=(1968,2184) requestedSurfaceArea(4298112) mMaxSurfaceArea(2073600)
+10-01 21:46:15.965  3747  3784 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-01 21:46:15.969  3747  3747 D InsetsController: Setting requestedVisibleTypes to 240 (was 503)
+10-01 21:46:15.969  3747  3747 I InsetsController: setRequestedVisibleTypes: visible=false, mask=statusBars navigationBars captionBar systemOverlays, host=local.dh2.fold7/com.zettabridge.launcher.Stubs$Standard, from=android.view.InsetsController.controlAnimationUnchecked:1646 android.view.InsetsController.applyAnimation:2278 android.view.InsetsController.applyAnimation:2207 android.view.InsetsController.hide:1581 android.view.InsetsController.hide:1521 android.view.PendingInsetsController$HideRequest.replay:295 android.view.PendingInsetsController.replayAndAttach:208 android.view.ViewRootImpl.setView:1967 android.view.WindowManagerGlobal.addView:606 android.view.WindowManagerImpl.addView:167 
+10-01 21:46:15.969  3747  3790 E perf_hint: Session ID too large, must fit 32-bit integer
+10-01 21:46:15.970  3747  3747 D InputTransport: Input channel constructed: 'b85b169', fd=116
+10-01 21:46:15.970  3747  3747 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Stubs$Standard, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(0, 88 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(1450, 18 - 1520, 88), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 1968, 2184), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:15.970  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: synced displayState. AttachInfo displayState=2
+10-01 21:46:15.970  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: setView = com.android.internal.policy.DecorView@fb5126c IsHRR=false mFlingFrameRateChange=0 TM=true
+10-01 21:46:15.970  3747  3747 I IDS_TAG : Starting IDS observe window
+10-01 21:46:15.970  3747  3747 I IDS_TAG : Getting Shared Preference for com.zettabridge.launcher.ZbApplication@38853cc uid = 10613
+10-01 21:46:15.971  3747  3747 I IDS_TAG : App com.zettabridge.launcher.ZbApplication@38853cc has not finished training
+10-01 21:46:15.971  3747  3784 D HWUI    : HWUI - treat SMPTE_170M as sRGB
+10-01 21:46:15.971  3747  3747 I IDS_TAG : Closing IDS observe window
+10-01 21:46:15.971  3747  3747 I IDS_TAG : Getting Shared Preference for com.zettabridge.launcher.ZbApplication@38853cc uid = 10613
+10-01 21:46:15.971  3747  3747 I IDS_TAG : IDS count updated to 2 for com.zettabridge.launcher.ZbApplication@38853cc
+10-01 21:46:15.971  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: WindowInsets changed: 1968x2184 statusBars:[0,89,0,0] navigationBars:[0,0,0,39] mandatorySystemGestures:[0,89,0,84] 
+10-01 21:46:15.971  3747  3747 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda16@28d9cca
+10-01 21:46:15.973  3747  3747 E BufferQueueProducer: Unable to open libpenguin.so: dlopen failed: library "libpenguin.so" not found.
+10-01 21:46:15.973  3747  3747 E dh2.fold7:guest: Unable to open libpenguin.so: dlopen failed: library "libpenguin.so" not found.
+10-01 21:46:15.973  3747  3747 I BufferQueueProducer: [](id:ea300000000,api:0,p:-752696688,c:3747) setDequeueTimeout:2077252342
+10-01 21:46:15.974  3747  3747 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= VRI[Stubs$Standard]@9aa6e7d mNativeObject= 0xb400007953210430 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3603 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 android.view.Choreographer.doCallbacks:1423 android.view.Choreographer.doFrame:1348 android.view.Choreographer$FrameDisplayEventReceiver.run:1930 
+10-01 21:46:15.974  3747  3747 I BLASTBufferQueue_Java: update, w= 1968 h= 2184 mName = VRI[Stubs$Standard]@9aa6e7d mNativeObject= 0xb400007953210430 sc.mNativeObject= 0xb400007a53218e50 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3608 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:15.974  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: Relayout returned: old=(0,0,1968,2184) new=(0,0,1968,2184) relayoutAsync=false req=(1968,2184)0 dur=2 res=0x200003 s={true 0xb4000078b3238310} ch=true seqId=0
+10-01 21:46:15.974  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: performConfigurationChange setNightDimText nightDimLevel=0
+10-01 21:46:15.974  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: WindowInsets changed: statusBars:null navigationBars:null 
+10-01 21:46:15.974  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: mThreadedRenderer.initialize() mSurface={isValid=true 0xb4000078b3238310} hwInitialized=true
+10-01 21:46:15.974  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: reportNextDraw android.view.ViewRootImpl.performTraversals:5507 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 
+10-01 21:46:15.974  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: Setup new sync=wmsSync-VRI[Stubs$Standard]@9aa6e7d#0
+10-01 21:46:15.974  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: Creating new active sync group VRI[Stubs$Standard]@9aa6e7d#1
+10-01 21:46:15.975  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: registerCallbacksForSync syncBuffer=false
+10-01 21:46:15.975  3747  3789 D VRI[Stubs$Standard]@9aa6e7d: Received frameDrawingCallback syncResult=0 frameNum=1.
+10-01 21:46:15.975  3747  3789 I VRI[Stubs$Standard]@9aa6e7d: mWNT: t=0xb400007993238f80 mBlastBufferQueue=0xb400007953210430 fn= 1 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$12.onFrameDraw:15561 android.view.ThreadedRenderer$1.onFrameDraw:751 <bottom of call stack> 
+10-01 21:46:15.975  3747  3789 I VRI[Stubs$Standard]@9aa6e7d: Setting up sync and frameCommitCallback
+10-01 21:46:15.976  3747  3784 I AdrenoUtils: <ReadGpuID:366>: Reading chip ID through GSL
+10-01 21:46:15.982  3747  3784 I AdrenoVK-0: Shader compilation failed for shaderType: 0
+10-01 21:46:15.982  3747  3784 I AdrenoVK-0: Pipeline create failed
+10-01 21:46:16.015  3747  3784 I BLASTBufferQueue: [VRI[Stubs$Standard]@9aa6e7d#0](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:16.015  3747  3784 I SurfaceComposerClient: apply transaction with the first frame. layerId: 274892, bufferData(ID: 16093242458112, frameNumber: 1)
+10-01 21:46:16.016  3747  3784 I VRI[Stubs$Standard]@9aa6e7d: Received frameCommittedCallback lastAttemptedDrawFrameNum=1 didProduceBuffer=true
+10-01 21:46:16.016  3747  3784 D HWUI    : CFMS:: SetUp Pid : 3747    Tid : 3784
+10-01 21:46:16.016  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: reportDrawFinished seqId=0
+10-01 21:46:16.016  3747  3747 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Stubs$Standard, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(0, 88 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(1450, 18 - 1520, 88), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 1968, 2184), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:16.017  3747  3747 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Stubs$Standard, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(0, 88 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(1450, 18 - 1520, 88), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 1968, 2184), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=false mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=false mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:16.017  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: handleResized, frames=ClientWindowFrames{frame=[0,0][1968,2184] display=[0,0][1968,2184] parentFrame=[0,0][0,0]} displayId=0 dragResizing=false compatScale=1.0 frameChanged=false attachedFrameChanged=false configChanged=false displayChanged=false compatScaleChanged=false dragResizingChanged=false
+10-01 21:46:16.017  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: handleResized mSyncSeqId = 0
+10-01 21:46:16.017  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: reportNextDraw android.view.ViewRootImpl.handleResized:2995 android.view.ViewRootImpl.-$$Nest$mhandleResized:0 android.view.ViewRootImpl$W.resized:14200 android.app.servertransaction.WindowStateResizeItem.execute:81 android.app.servertransaction.WindowStateTransactionItem.execute:62 
+10-01 21:46:16.027  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: Setup new sync=wmsSync-VRI[Stubs$Standard]@9aa6e7d#2
+10-01 21:46:16.027  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: Creating new active sync group VRI[Stubs$Standard]@9aa6e7d#3
+10-01 21:46:16.027  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: registerCallbacksForSync syncBuffer=false
+10-01 21:46:16.027  3747  3790 D VRI[Stubs$Standard]@9aa6e7d: Received frameDrawingCallback syncResult=0 frameNum=2.
+10-01 21:46:16.027  3747  3790 I VRI[Stubs$Standard]@9aa6e7d: Setting up sync and frameCommitCallback
+10-01 21:46:16.027  3747  3784 I VRI[Stubs$Standard]@9aa6e7d: Received frameCommittedCallback lastAttemptedDrawFrameNum=2 didProduceBuffer=false
+10-01 21:46:16.027  3747  3784 I BLASTBufferQueue_Java: gatherPendingTransactions, mName= VRI[Stubs$Standard]@9aa6e7d mNativeObject= 0xb400007953210430 frameNumber= 2 caller= android.view.ViewRootImpl$12.lambda$onFrameDraw$3:15645 android.view.ViewRootImpl$12.$r8$lambda$CTo3ExVBk8akdVTGlqHPAoYLRVI:0 android.view.ViewRootImpl$12$$ExternalSyntheticLambda1.onFrameCommit:0 android.view.ThreadedRenderer$1.lambda$onFrameDraw$0:763 android.view.ThreadedRenderer$1$$ExternalSyntheticLambda0.onFrameCommit:0 <bottom of call stack> 
+10-01 21:46:16.027  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: reportDrawFinished seqId=0
+10-01 21:46:16.039  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: mThreadedRenderer.initializeIfNeeded()#2 mSurface={isValid=true 0xb4000078b3238310}
+10-01 21:46:16.039  3747  3747 D InputMethodManagerUtils: startInputInner - Id : 0
+10-01 21:46:16.039  3747  3747 I InputMethodManager: startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+10-01 21:46:16.042  3747  3747 D InsetsController: hide(ime())
+10-01 21:46:16.042  3747  3747 I ImeTracker: local.dh2.fold7:1377cd15: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+10-01 21:46:16.042  3612  3612 D InputTransport: Input channel destroyed: 'ClientS', fd=116
+10-01 21:46:16.043  3747  3776 D InputTransport: Input channel constructed: 'ClientS', fd=140
+10-01 21:46:16.044  3747  3791 I zbridge : sysroot has no /system/etc/ld.config.arm.txt; using the device file
+10-01 21:46:16.044  3747  3791 I zbridge : sysroot has no /linkerconfig/ld.config.txt; using the device file
+10-01 21:46:16.045  3747  3791 I zbridge : sysroot has no /linkerconfig/ld.config.txt; using the device file
+10-01 21:46:16.050  3747  3791 I zbridge : sysroot has no /system/xbin; using the device file
+10-01 21:46:16.050  3747  3791 I zbridge : sysroot has no /system_ext/bin; using the device file
+10-01 21:46:16.050  3747  3791 I zbridge : sysroot has no /product/bin; using the device file
+10-01 21:46:16.050  3747  3791 I zbridge : sysroot has no /odm/bin; using the device file
+10-01 21:46:16.050  3747  3791 I zbridge : sysroot has no /vendor/bin; using the device file
+10-01 21:46:16.133  3747  3786 I zbridge : guest JNI runtime started: /data/data/local.dh2.fold7/files/zb/guest/zbhost 24 libzbjni.so
+10-01 21:46:16.192  3747  3786 I zbridge : guest JNI library /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libnativeinterface.so loaded: 4 natives bound, 0 classes skipped, JNI version 0x00010006
+10-01 21:46:16.199  3747  3747 D ActivityThread: local.dh2.fold7 will use render engine as VK
+10-01 21:46:16.203  3747  3747 D nativeloader: Load /data/user/0/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/proxy/libDungeonHunter2.so using class loader ns clns-10 (caller=/data/user/0/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/base.apk): ok
+10-01 21:46:16.229  3612  3612 I VRI[Dh2Activity]@cbdf3bc: handleAppVisibility mAppVisible = true visible = false
+10-01 21:46:16.229  3612  3612 D VRI[Dh2Activity]@cbdf3bc: visibilityChanged oldVisibility=true newVisibility=false
+10-01 21:46:16.247  3612  3612 I VRI[Dh2Activity]@cbdf3bc: Relayout returned: old=(0,0,1968,2184) new=(0,0,1968,2184) relayoutAsync=false req=(1968,2184)8 dur=2 res=0x200002 s={false 0x0} ch=true seqId=0
+10-01 21:46:16.247  3612  3612 D VRI[Dh2Activity]@cbdf3bc: Not drawing due to not visible. Reason=!mAppVisible && !mForceDecorViewVisibility
+10-01 21:46:16.369  3747  3747 I zbridge : guest JNI library /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so loaded: 32 natives bound, 0 classes skipped, JNI version 0x00010004
+10-01 21:46:16.370  3747  3747 D nativeloader: Load /data/user/0/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/proxy/libStormGLOFT.so using class loader ns clns-10 (caller=/data/user/0/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/base.apk): ok
+10-01 21:46:16.378  3747  3804 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=local.dh2.fold7
+10-01 21:46:16.386  3747  3817 D StormGLOFT: hook info node: custom_hook_info_nativeSetPhone
+10-01 21:46:16.388  3747  3817 D StormGLOFT: hook info node: custom_hook_info_nativeResize
+10-01 21:46:16.388  3747  3817 D StormGLOFT: hook info node: custom_hook_info_nativeGetWidth
+10-01 21:46:16.389  3747  3817 D StormGLOFT: Try to hook Java_com_gameloft_android_GAND_GloftD2SS_DungeonHunter2_nativeSetPhone in lib libDungeonHunter2
+10-01 21:46:16.406  3747  3817 D StormGLOFT: hooking:   Java_com_gameloft_android_GAND_GloftD2SS_DungeonHunter2_nativeSetPhone = 0xfcd37e78 
+10-01 21:46:16.406  3747  3817 D StormGLOFT: ARM using 0xfc4055a4
+10-01 21:46:16.406  3747  3817 D StormGLOFT: Hooked Java_com_gameloft_android_GAND_GloftD2SS_DungeonHunter2_nativeSetPhone in lib libDungeonHunter2
+10-01 21:46:16.406  3747  3817 D StormGLOFT: Try to hook Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeResize in lib libDungeonHunter2
+10-01 21:46:16.411  3747  3817 D StormGLOFT: hooking:   Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeResize = 0xfcd3617c 
+10-01 21:46:16.411  3747  3817 D StormGLOFT: ARM using 0xfc405690
+10-01 21:46:16.411  3747  3817 D StormGLOFT: Hooked Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeResize in lib libDungeonHunter2
+10-01 21:46:16.411  3747  3817 D StormGLOFT: Try to hook nativeGetWidth in lib libDungeonHunter2
+10-01 21:46:16.416  3747  3817 D StormGLOFT: hooking:   nativeGetWidth = 0xfcd36a1c 
+10-01 21:46:16.416  3747  3817 D StormGLOFT: ARM using 0xfc405754
+10-01 21:46:16.416  3747  3817 D StormGLOFT: Hooked nativeGetWidth in lib libDungeonHunter2
+10-01 21:46:16.416  3747  3817 I StormGLOFT: Hook is auto loaded!
+10-01 21:46:16.417  3747  3817 I StormGLOFT: In hook_inline_function.
+10-01 21:46:16.418  3747  3817 I StormGLOFT: uiHookAddr is FCD35C50 in arm mode
+10-01 21:46:16.418  3747  3817 I StormGLOFT: InlineHook
+10-01 21:46:16.418  3747  3817 I StormGLOFT: HookArm()
+10-01 21:46:16.418  3747  3817 I StormGLOFT: Arm32 Opcode to fix 0 : e8830006
+10-01 21:46:16.418  3747  3817 I StormGLOFT: getTypeInArm : e8830006
+10-01 21:46:16.418  3747  3817 I StormGLOFT: Fix length : 4
+10-01 21:46:16.418  3747  3817 I StormGLOFT: getTypeInArm : e8830006
+10-01 21:46:16.418  3747  3817 I StormGLOFT: Arm32 Opcode to fix 1 : e59f1200
+10-01 21:46:16.418  3747  3817 I StormGLOFT: getTypeInArm : e59f1200
+10-01 21:46:16.418  3747  3817 I StormGLOFT: Fix length : 12
+10-01 21:46:16.418  3747  3817 I StormGLOFT: getTypeInArm : e59f1200
+10-01 21:46:16.419  3747  3817 I StormGLOFT: Fixing Arm !!!!!!!
+10-01 21:46:16.419  3747  3817 I StormGLOFT: sizeof(uint8_t) : 1
+10-01 21:46:16.419  3747  3817 I StormGLOFT: -------------START----------------
+10-01 21:46:16.419  3747  3817 I StormGLOFT: currentOpcode is e8830006
+10-01 21:46:16.419  3747  3817 I StormGLOFT: new_entry_addr : fc540010
+10-01 21:46:16.419  3747  3817 I StormGLOFT: THE ARM32 OPCODE IS e8830006
+10-01 21:46:16.419  3747  3817 I StormGLOFT: getTypeInArm : e8830006
+10-01 21:46:16.419  3747  3817 I StormGLOFT: OTHER_ARM
+10-01 21:46:16.419  3747  3817 I StormGLOFT: offset : 4
+10-01 21:46:16.419  3747  3817 I StormGLOFT: fixPos : 4
+10-01 21:46:16.419  3747  3817 I StormGLOFT: --------------END-----------------
+10-01 21:46:16.419  3747  3817 I StormGLOFT: -------------START----------------
+10-01 21:46:16.419  3747  3817 I StormGLOFT: currentOpcode is e59f1200
+10-01 21:46:16.419  3747  3817 I StormGLOFT: new_entry_addr : fc540010
+10-01 21:46:16.419  3747  3817 I StormGLOFT: THE ARM32 OPCODE IS e59f1200
+10-01 21:46:16.419  3747  3817 I StormGLOFT: getTypeInArm : e59f1200
+10-01 21:46:16.419  3747  3817 I StormGLOFT: ADR1_ARM ADR2_ARM LDR_ARM MOV_ARM
+10-01 21:46:16.419  3747  3817 I StormGLOFT: ADR1_ARM ADR2_ARM LDR_ARM
+10-01 21:46:16.419  3747  3817 I StormGLOFT: LDR_ARM
+10-01 21:46:16.419  3747  3817 I StormGLOFT: offset : 12
+10-01 21:46:16.419  3747  3817 I StormGLOFT: fixPos : 16
+10-01 21:46:16.419  3747  3817 I StormGLOFT: --------------END-----------------
+10-01 21:46:16.419  3747  3817 I StormGLOFT: pstInlineHook->backUpLength : 8
+10-01 21:46:16.419  3747  3817 I StormGLOFT: backUpPos : 8
+10-01 21:46:16.419  3747  3817 I StormGLOFT: fixPos : 16
+10-01 21:46:16.419  3747  3817 I StormGLOFT: Fix finish !
+10-01 21:46:16.422  3747  3747 I zbridge : guest JNI library /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libStormGLOFT.so loaded: 0 natives bound, 0 classes skipped, JNI version 0x00010006
+10-01 21:46:16.424  3747  3747 I DecorView: setWindowBackground: isPopOver=false color=ff010102 d=android.graphics.drawable.StateListDrawable@252b0a0
+10-01 21:46:16.449  3747  3747 I System.out: ------- Game::onCreate(), start installer ------
+10-01 21:46:16.481  3747  3747 V MediaPlayer-JNI: native_setup
+10-01 21:46:16.482  3747  3747 V MediaPlayerNative: constructor
+10-01 21:46:16.483  3747  3747 D AudioSystem: onNewServiceWithAdapter: media.audio_flinger service obtained 0xb4000078d33d1220
+10-01 21:46:16.484  3747  3747 D AudioSystem: getService: IAudioFlingerService retrieved: 0xb4000078a333f930  IAudioFlinger cached: 0xb4000078d33d1220
+10-01 21:46:16.485  3747  3747 V MediaPlayerNative: setListener
+10-01 21:46:16.485  3747  3747 V MediaPlayer-JNI: get_session_id()
+10-01 21:46:16.491  3747  3747 W dh2.fold7:guest: userfaultfd: MOVE ioctl seems unsupported: Socket operation on non-socket
+10-01 21:46:16.492  3747  3747 I dh2.fold7:guest: Explicit concurrent mark compact GC freed 3002KB AllocSpace bytes, 14(616KB) LOS objects, 91% free, 2205KB/26MB, paused 41us,266us total 6.693ms
+10-01 21:46:16.494  3747  3747 I System.out: Tracking ------------------------
+10-01 21:46:16.495  3747  3747 W libc    : Access denied finding property "ro.serialno"
+10-01 21:46:16.496  3747  3747 I System.out: Tracking ++++++++++++++++++++++++
+10-01 21:46:16.501  3747  3747 D SensorManager: registerListener :: 11, lsm6dsv_0 Accelerometer Non-wakeup, 20000, 0, 
+10-01 21:46:16.502  3747  3747 D ViewRootImpl: desktopMode is false
+10-01 21:46:16.502  3747  3747 I ViewRootImpl: dVRR is disabled
+10-01 21:46:16.502  3747  3784 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-01 21:46:16.505  3747  3747 D InsetsController: Setting requestedVisibleTypes to 240 (was 503)
+10-01 21:46:16.505  3747  3747 I InsetsController: setRequestedVisibleTypes: visible=false, mask=statusBars navigationBars captionBar systemOverlays, host=local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance, from=android.view.InsetsController.controlAnimationUnchecked:1646 android.view.InsetsController.applyAnimation:2278 android.view.InsetsController.applyAnimation:2207 android.view.InsetsController.hide:1581 android.view.InsetsController.hide:1521 android.view.PendingInsetsController$HideRequest.replay:295 android.view.PendingInsetsController.replayAndAttach:208 android.view.ViewRootImpl.setView:1967 android.view.WindowManagerGlobal.addView:606 android.view.WindowManagerImpl.addView:167 
+10-01 21:46:16.505  3747  3747 D InputTransport: Input channel constructed: '2b8f5b6', fd=150
+10-01 21:46:16.506  3747  3747 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 2184, 1968), mDisplayCutout=DisplayCutout{insets=Rect(88, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(18, 448 - 88, 518), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={1} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(2171, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(2171, 1955)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 1955)}]}  mRoundedCornerFrame=Rect(0, 0 - 2184, 1968), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(2068, 0 - 2184, 79) rotation=1}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=1 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,1929][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,1884][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,1929][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[2106,0][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:16.506  3747  3747 I VRI[Stubs$SingleInstance]@8130585: synced displayState. AttachInfo displayState=2
+10-01 21:46:16.506  3747  3747 I VRI[Stubs$SingleInstance]@8130585: setView = com.android.internal.policy.DecorView@cbade7 IsHRR=false mFlingFrameRateChange=0 TM=true
+10-01 21:46:16.506  3747  3789 E perf_hint: Session ID too large, must fit 32-bit integer
+10-01 21:46:16.506  3747  3747 D InsetsController: Ignore notifyFinished, because the animation has already been cancelled.
+10-01 21:46:16.507  3747  3784 D HWUI    : HWUI - treat SMPTE_170M as sRGB
+10-01 21:46:16.510  3747  3747 I SV[116955383 Stubs$SingleInstance]: onWindowVisibilityChanged(0) true com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ......I. 0,0-0,0} of VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:16.511  3747  3747 D SurfaceView: 116955383 updateSurface: has no frame
+10-01 21:46:16.511  3747  3747 D VRI[Stubs$SingleInstance]@8130585: WindowInsets changed: 1968x2184 statusBars:[0,79,0,0] mandatorySystemGestures:[0,79,0,0] 
+10-01 21:46:16.511  3747  3747 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda16@d5f9d94
+10-01 21:46:16.512  3747  3747 I BufferQueueProducer: [](id:ea300000001,api:0,p:-749957712,c:3747) setDequeueTimeout:2077252342
+10-01 21:46:16.512  3747  3747 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= VRI[Stubs$SingleInstance]@8130585 mNativeObject= 0xb400007953214c70 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3603 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 android.view.Choreographer.doCallbacks:1423 android.view.Choreographer.doFrame:1348 android.view.Choreographer$FrameDisplayEventReceiver.run:1930 
+10-01 21:46:16.512  3747  3747 I BLASTBufferQueue_Java: update, w= 2184 h= 1968 mName = VRI[Stubs$SingleInstance]@8130585 mNativeObject= 0xb400007953214c70 sc.mNativeObject= 0xb400007a5321b250 format= -3 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3608 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:16.513  3747  3747 I VRI[Stubs$SingleInstance]@8130585: Relayout returned: old=(0,0,1968,2184) new=(0,0,2184,1968) relayoutAsync=false req=(1968,2184)0 dur=1 res=0x200003 s={true 0xb4000078b32403d0} ch=true seqId=0
+10-01 21:46:16.513  3747  3747 I VRI[Stubs$SingleInstance]@8130585: performConfigurationChange setNightDimText nightDimLevel=0
+10-01 21:46:16.513  3747  3747 D VRI[Stubs$SingleInstance]@8130585: WindowInsets changed: 2184x1968 statusBars:null navigationBars:[0,0,0,39] mandatorySystemGestures:[0,79,0,84] 
+10-01 21:46:16.513  3747  3747 D VRI[Stubs$SingleInstance]@8130585: mThreadedRenderer.initialize() mSurface={isValid=true 0xb4000078b32403d0} hwInitialized=true
+10-01 21:46:16.513  3747  3747 D SurfaceView: 116955383 updateSurface: has no frame
+10-01 21:46:16.513  3747  3747 I SV[116955383 Stubs$SingleInstance]: windowStopped(false) true com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ......ID 0,0-2184,1968} of VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:16.513  3747  3747 D SurfaceView: 116955383 updateSurface: has no frame
+10-01 21:46:16.513  3747  3747 D VRI[Stubs$SingleInstance]@8130585: reportNextDraw android.view.ViewRootImpl.performTraversals:5507 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 
+10-01 21:46:16.513  3747  3747 I SurfaceView: 116955383 Changes: creating=true format=true size=true visible=true alpha=false hint=false left=true top=true z=false attached=true lifecycleStrategy=false
+10-01 21:46:16.514  3747  3747 I BufferQueueProducer: [](id:ea300000002,api:0,p:0,c:3747) setDequeueTimeout:2077252342
+10-01 21:46:16.516  3747  3747 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= 6f898f7 SurfaceView[local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance]@0 mNativeObject= 0xb40000795321cae0 caller= android.view.SurfaceView.createBlastSurfaceControls:1878 android.view.SurfaceView.updateSurface:1519 android.view.SurfaceView.lambda$new$0:283 android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU:0 android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw:0 android.view.ViewTreeObserver.dispatchOnPreDraw:1295 android.view.ViewRootImpl.performTraversals:5512 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:16.516  3747  3747 I BLASTBufferQueue_Java: update, w= 2184 h= 1968 mName = 6f898f7 SurfaceView[local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance]@0 mNativeObject= 0xb40000795321cae0 sc.mNativeObject= 0xb400007a5321f510 format= 4 caller= android.view.SurfaceView.createBlastSurfaceControls:1879 android.view.SurfaceView.updateSurface:1519 android.view.SurfaceView.lambda$new$0:283 android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU:0 android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw:0 android.view.ViewTreeObserver.dispatchOnPreDraw:1295 
+10-01 21:46:16.516  3747  3747 I SurfaceView: 116955383 Cur surface: Surface(name=null mNativeObject=0)/@0x831603d
+10-01 21:46:16.516  3747  3747 I SV[116955383 Stubs$SingleInstance]: pST: sr = Rect(0, 0 - 2184, 1968) sw = 2184 sh = 1968
+10-01 21:46:16.516  3747  3747 D SurfaceView: 116955383 performSurfaceTransaction RenderWorker position = [0, 0, 2184, 1968] surfaceSize = 2184x1968
+10-01 21:46:16.516  3747  3747 I SV[116955383 Stubs$SingleInstance]: updateSurface: mVisible = true mSurface.isValid() = true
+10-01 21:46:16.516  3747  3747 I SV[116955383 Stubs$SingleInstance]: updateSurface: mSurfaceCreated = false surfaceChanged = true visibleChanged = true
+10-01 21:46:16.516  3747  3747 I SurfaceView: 116955383 visibleChanged -- surfaceCreated
+10-01 21:46:16.516  3747  3747 I SV[116955383 Stubs$SingleInstance]: surfaceCreated 1 #8 com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ......ID 0,0-2184,1968}
+10-01 21:46:16.516  3747  3747 I SurfaceView: 116955383 surfaceChanged -- format=4 w=2184 h=1968
+10-01 21:46:16.516  3747  3747 I SV[116955383 Stubs$SingleInstance]: surfaceChanged (2184,1968) 1 #8 com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ......ID 0,0-2184,1968}
+10-01 21:46:16.516  3747  3747 I SurfaceView: 116955383 surfaceRedrawNeeded
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: QUALCOMM build                   : f61dec9117, I68b0a64d7e
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: Build Date                       : 03/26/26
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: OpenGL ES Shader Compiler Version: E031.47.18.50
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: Local Branch                     : 
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: Remote Branch                    : refs/tags/AU_LINUX_ANDROID_LA.VENDOR.15.4.0.11.00.00.1088.862
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: Remote Branch                    : NONE
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: Reconstruct Branch               : NOTHING
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: Build Config                     : S P 18.0.0 AArch64
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: Driver Path                      : /vendor/lib64/egl/libGLESv2_adreno.so
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: Driver Version                   : 0800.64.7
+10-01 21:46:16.523  3747  3825 I AdrenoGLES-0: Process Name                     : local.dh2.fold7:guest
+10-01 21:46:16.526  3747  3825 I AdrenoGLES-0: PFP: 0x01500077, ME: 0x01500014
+10-01 21:46:16.527  3747  3825 E Adreno-AppProfiles: QSPM AIDL service doesn't exist
+10-01 21:46:16.532  3747  3747 V SurfaceView: Layout: x=0 y=0 w=2184 h=1968, frame=Rect(0, 0 - 2184, 1968)
+10-01 21:46:16.532  3747  3747 D VRI[Stubs$SingleInstance]@8130585: Setup new sync=wmsSync-VRI[Stubs$SingleInstance]@8130585#5
+10-01 21:46:16.532  3747  3747 I VRI[Stubs$SingleInstance]@8130585: Creating new active sync group VRI[Stubs$SingleInstance]@8130585#6
+10-01 21:46:16.532  3747  3747 D VRI[Stubs$SingleInstance]@8130585: registerCallbacksForSync syncBuffer=false
+10-01 21:46:16.532  3747  3784 D SurfaceView: 116955383 updateSurfacePosition RenderWorker, frameNr = 1, position = [0, 0, 2184, 1968] surfaceSize = 2184x1968
+10-01 21:46:16.532  3747  3784 I SV[116955383 Stubs$SingleInstance]: uSP: rtp = Rect(0, 0 - 2184, 1968) rtsw = 2184 rtsh = 1968
+10-01 21:46:16.532  3747  3784 I SV[116955383 Stubs$SingleInstance]: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
+10-01 21:46:16.532  3747  3784 I SV[116955383 Stubs$SingleInstance]: aOrMT: VRI[Stubs$SingleInstance]@8130585 t = android.view.SurfaceControl$Transaction@5790b2c fN = 1 android.view.SurfaceView.-$$Nest$mapplyOrMergeTransaction:0 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:2029 android.graphics.RenderNode$CompositePositionUpdateListener.positionChanged:401 
+10-01 21:46:16.532  3747  3784 I VRI[Stubs$SingleInstance]@8130585: mWNT: t=0xb400007993232770 mBlastBufferQueue=0xb400007953214c70 fn= 1 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.SurfaceView.applyOrMergeTransaction:1960 android.view.SurfaceView.-$$Nest$mapplyOrMergeTransaction:0 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:2029 
+10-01 21:46:16.533  3747  3790 D VRI[Stubs$SingleInstance]@8130585: Received frameDrawingCallback syncResult=0 frameNum=1.
+10-01 21:46:16.533  3747  3790 I VRI[Stubs$SingleInstance]@8130585: mWNT: t=0xb40000799323f2f0 mBlastBufferQueue=0xb400007953214c70 fn= 1 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$12.onFrameDraw:15561 android.view.ThreadedRenderer$1.onFrameDraw:751 <bottom of call stack> 
+10-01 21:46:16.533  3747  3790 I VRI[Stubs$SingleInstance]@8130585: Setting up sync and frameCommitCallback
+10-01 21:46:16.534  3747  3784 I BLASTBufferQueue: [VRI[Stubs$SingleInstance]@8130585#1](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:16.534  3747  3784 I SurfaceComposerClient: apply transaction with the first frame. layerId: 274919, bufferData(ID: 16093242458116, frameNumber: 1)
+10-01 21:46:16.534  3747  3784 I VRI[Stubs$SingleInstance]@8130585: Received frameCommittedCallback lastAttemptedDrawFrameNum=1 didProduceBuffer=true
+10-01 21:46:16.534  3747  3784 D HWUI    : CFMS:: SetUp Pid : 3747    Tid : 3784
+10-01 21:46:16.534  3747  3747 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:16.534  3747  3747 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:16.549  3747  3853 I GLMediaPlayer: Player Init is OK
+10-01 21:46:16.553  3747  3747 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 2184, 1968), mDisplayCutout=DisplayCutout{insets=Rect(88, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(18, 448 - 88, 518), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={1} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(2171, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(2171, 1955)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 1955)}]}  mRoundedCornerFrame=Rect(0, 0 - 2184, 1968), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(2068, 0 - 2184, 79) rotation=1}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=1 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,1929][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,1884][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,1929][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[2106,0][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:16.553  3747  3825 D AudioSystem: onNewService: media.audio_policy service obtained 0xb4000078a334f920
+10-01 21:46:16.554  3747  3747 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 2184, 1968), mDisplayCutout=DisplayCutout{insets=Rect(88, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(18, 448 - 88, 518), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={1} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(2171, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(2171, 1955)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 1955)}]}  mRoundedCornerFrame=Rect(0, 0 - 2184, 1968), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(2068, 0 - 2184, 79) rotation=1}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=1 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,1929][2184,1968] mAttachedInsets=null mVisible=false mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,1884][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,1929][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[2106,0][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=false mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:16.554  3747  3747 I VRI[Stubs$SingleInstance]@8130585: handleResized, frames=ClientWindowFrames{frame=[0,0][2184,1968] display=[0,0][2184,1968] parentFrame=[0,0][0,0]} displayId=0 dragResizing=false compatScale=1.0 frameChanged=false attachedFrameChanged=false configChanged=false displayChanged=false compatScaleChanged=false dragResizingChanged=false
+10-01 21:46:16.554  3747  3747 I VRI[Stubs$SingleInstance]@8130585: handleResized mSyncSeqId = 0
+10-01 21:46:16.554  3747  3747 D VRI[Stubs$SingleInstance]@8130585: reportNextDraw android.view.ViewRootImpl.handleResized:2995 android.view.ViewRootImpl.-$$Nest$mhandleResized:0 android.view.ViewRootImpl$W.resized:14200 android.app.servertransaction.WindowStateResizeItem.execute:81 android.app.servertransaction.WindowStateTransactionItem.execute:62 
+10-01 21:46:16.554  3747  3825 D AudioSystem: getService: IAudioPolicyService retrieved: 0xb4000078a334f920  cached: 0xb4000078a334f920
+10-01 21:46:16.556  3747  3825 W SoundPool: Use of stream types is deprecated for operations other than volume control
+10-01 21:46:16.556  3747  3825 W SoundPool: See the documentation of SoundPool() for what to use instead with android.media.AudioAttributes to qualify your playback use case
+10-01 21:46:16.560  3747  3747 D VRI[Stubs$SingleInstance]@8130585: WindowInsets changed: navigationBars:null 
+10-01 21:46:16.560  3747  3747 D VRI[Stubs$SingleInstance]@8130585: Setup new sync=wmsSync-VRI[Stubs$SingleInstance]@8130585#7
+10-01 21:46:16.560  3747  3747 I VRI[Stubs$SingleInstance]@8130585: Creating new active sync group VRI[Stubs$SingleInstance]@8130585#8
+10-01 21:46:16.560  3747  3747 D VRI[Stubs$SingleInstance]@8130585: registerCallbacksForSync syncBuffer=false
+10-01 21:46:16.561  3747  3789 D VRI[Stubs$SingleInstance]@8130585: Received frameDrawingCallback syncResult=0 frameNum=2.
+10-01 21:46:16.561  3747  3789 I VRI[Stubs$SingleInstance]@8130585: Setting up sync and frameCommitCallback
+10-01 21:46:16.561  3747  3784 I VRI[Stubs$SingleInstance]@8130585: Received frameCommittedCallback lastAttemptedDrawFrameNum=2 didProduceBuffer=false
+10-01 21:46:16.561  3747  3784 I BLASTBufferQueue_Java: gatherPendingTransactions, mName= VRI[Stubs$SingleInstance]@8130585 mNativeObject= 0xb400007953214c70 frameNumber= 2 caller= android.view.ViewRootImpl$12.lambda$onFrameDraw$3:15645 android.view.ViewRootImpl$12.$r8$lambda$CTo3ExVBk8akdVTGlqHPAoYLRVI:0 android.view.ViewRootImpl$12$$ExternalSyntheticLambda1.onFrameCommit:0 android.view.ThreadedRenderer$1.lambda$onFrameDraw$0:763 android.view.ThreadedRenderer$1$$ExternalSyntheticLambda0.onFrameCommit:0 <bottom of call stack> 
+10-01 21:46:16.561  3747  3747 D VRI[Stubs$SingleInstance]@8130585: reportDrawFinished seqId=0
+10-01 21:46:16.561  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: handleAppVisibility mAppVisible = true visible = false
+10-01 21:46:16.561  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: visibilityChanged oldVisibility=true newVisibility=false
+10-01 21:46:16.567  3747  3853 I _DEBUG_OUT: app Init is 1111111111111111111111111 1280 
+10-01 21:46:16.568  3747  3853 I StormGLOFT: In RegisterHook.
+10-01 21:46:16.579  3747  3747 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Stubs$Standard, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(88, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(18, 448 - 88, 518), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={1} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 2184, 1968), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=false mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=false mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:16.579  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: Relayout returned: old=(0,0,1968,2184) new=(0,0,1968,2184) relayoutAsync=false req=(1968,2184)8 dur=1 res=0x200002 s={false 0x0} ch=true seqId=0
+10-01 21:46:16.579  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: Not drawing due to not visible. Reason=!mAppVisible && !mForceDecorViewVisibility
+10-01 21:46:16.593  3747  3825 I zbridge : GLES pname 0x8872 assumed to have one result element
+10-01 21:46:16.594  3747  3747 D VRI[Stubs$SingleInstance]@8130585: mThreadedRenderer.initializeIfNeeded()#2 mSurface={isValid=true 0xb4000078b32403d0}
+10-01 21:46:16.594  3747  3747 I System.out: **********************************FFFFFFFFFFocus : true
+10-01 21:46:16.594  3747  3825 I zbridge : GLES pname 0xd57 assumed to have one result element
+10-01 21:46:16.595  3747  3747 D InputMethodManagerUtils: startInputInner - Id : 0
+10-01 21:46:16.595  3747  3747 I InputMethodManager: startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+10-01 21:46:16.596  3747  3845 D InputTransport: Input channel constructed: 'ClientS', fd=118
+10-01 21:46:16.603  3747  3825 I zbridge : GLES pname 0x8ca6 assumed to have one result element
+10-01 21:46:16.604  3747  3825 I zbridge : GLES pname 0x8869 assumed to have one result element
+10-01 21:46:16.783  3747  3853 I StormGLOFT: Optimized shader: 1
+10-01 21:46:16.865  3612  3612 I VRI[Dh2Activity]@cbdf3bc: stopped(true) old = false
+10-01 21:46:16.865  3612  3612 D ViewRootImpl: Skipping stats log for color mode
+10-01 21:46:16.866  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: stopped(true) old = false
+10-01 21:46:16.866  3747  3747 D VRI[Stubs$Standard]@9aa6e7d: WindowStopped on local.dh2.fold7/com.zettabridge.launcher.Stubs$Standard set to true
+10-01 21:46:16.866  3747  3747 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+10-01 21:46:16.866  3747  3747 D ViewRootImpl: Skipping stats log for color mode
+10-01 21:46:16.866  3747  3747 I VRI[Stubs$Standard]@9aa6e7d: dispatchDetachedFromWindow
+10-01 21:46:16.867  3747  3747 D InputTransport: Input channel destroyed: 'b85b169', fd=116
+10-01 21:46:16.878  3612  3612 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(88, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(18, 448 - 88, 518), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={1} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 2184, 1968), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:16.878  3612  3612 I VRI[Dh2Activity]@cbdf3bc: Relayout returned: old=(0,0,1968,2184) new=(0,0,1968,2184) relayoutAsync=false req=(1968,2184)8 dur=1 res=0x200002 s={false 0x0} ch=false seqId=0
+10-01 21:46:16.878  3612  3691 D HWUI    : CacheManager::trimMemory(20)
+10-01 21:46:16.880  3747  3853 I StormGLOFT: Optimized shader: 2
+10-01 21:46:16.880  3747  3747 D BBA2    : setIsFg isFg = false; delayValue 3999ms
+10-01 21:46:16.894  3612  3612 D BBA2    : setIsFg isFg = false; delayValue 3999ms
+10-01 21:46:16.912  3747  3853 I StormGLOFT: Optimized shader: 4
+10-01 21:46:16.930  3747  3853 I StormGLOFT: Optimized shader: 5
+10-01 21:46:16.969  3747  3853 I _DEBUG_OUT: app Init is OK
+10-01 21:46:16.971  3747  3825 I BLASTBufferQueue: [6f898f7 SurfaceView[local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance]@0#2](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:16.971  3747  3825 I SurfaceComposerClient: apply transaction with the first frame. layerId: 274924, bufferData(ID: 16093242458117, frameNumber: 1)
+10-01 21:46:16.988  3747  3853 I _DEBUG_OUT: In startttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+10-01 21:46:17.021  3747  3853 I _DEBUG_OUT: In startttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt 111111111111111
+10-01 21:46:17.021  3747  3853 I _DEBUG_OUT:                                                                                                          
+10-01 21:46:17.021  3747  3853 I _DEBUG_OUT:                                                                                                           
+10-01 21:46:17.021  3747  3853 I _DEBUG_OUT:                                                                                                            
+10-01 21:46:17.027  3747  3825 I zbridge : unimplemented syscall sched_getparam (155)
+10-01 21:46:17.027  3747  3825 I zbridge : unimplemented syscall sched_get_priority_min (160)
+10-01 21:46:17.027  3747  3825 I zbridge : unimplemented syscall sched_get_priority_max (159)
+10-01 21:46:17.028  3747  3825 I zbridge : unimplemented syscall sched_setscheduler (156)
+10-01 21:46:17.029  3747  3853 I _DEBUG_OUT:                                                                                                        
+10-01 21:46:17.029  3747  3853 I _DEBUG_OUT:                                                                                                         
+10-01 21:46:17.036  3747  3825 D VRI[Stubs$SingleInstance]@8130585: reportDrawFinished seqId=0
+10-01 21:46:17.036  3747  3825 I SurfaceView: 116955383 finishedDrawing
+10-01 21:46:17.045  3747  3784 I AdrenoVK-0: Shader compilation failed for shaderType: 0
+10-01 21:46:17.045  3747  3784 I AdrenoVK-0: Pipeline create failed
+10-01 21:46:17.064  3747  3865 W AudioTrack: Use of stream types is deprecated for operations other than volume control
+10-01 21:46:17.064  3747  3865 W AudioTrack: See the documentation of AudioTrack() for what to use instead with android.media.AudioAttributes to qualify your playback use case
+10-01 21:46:17.547  3747  3853 I GLMediaPlayer: Player Init is OK__________________________________11111
+10-01 21:46:17.547  3747  3853 I GLMediaPlayer: Player Init is OK__________________________________222222
+10-01 21:46:17.554  3747  3853 I GLMediaPlayer: Player Init is OK__________________________________333333
+10-01 21:46:17.554  3747  3853 I GLMediaPlayer: Player Init is OK__________________________________444444
+10-01 21:46:17.891  3747  3747 D ActivityThread: local.dh2.fold7 will use render engine as VK
+10-01 21:46:17.895  3747  3747 I DecorView: setWindowBackground: isPopOver=false color=ff010102 d=android.graphics.drawable.StateListDrawable@9548fa8
+10-01 21:46:17.901  3747  3747 I System.out: *************onResume introvideo
+10-01 21:46:17.901  3747  3747 D ViewRootImpl: desktopMode is false
+10-01 21:46:17.901  3747  3747 I ViewRootImpl: dVRR is disabled
+10-01 21:46:17.901  3747  3784 D NativeCustomFrequencyManager: [NativeCFMS] BpCustomFrequencyManager::BpCustomFrequencyManager()
+10-01 21:46:17.902  3747  3747 D InsetsController: Setting requestedVisibleTypes to 240 (was 503)
+10-01 21:46:17.902  3747  3747 I InsetsController: setRequestedVisibleTypes: visible=false, mask=statusBars navigationBars captionBar systemOverlays, host=local.dh2.fold7/com.zettabridge.launcher.Stubs$Landscape, from=android.view.InsetsController.controlAnimationUnchecked:1646 android.view.InsetsController.applyAnimation:2278 android.view.InsetsController.applyAnimation:2207 android.view.InsetsController.hide:1581 android.view.InsetsController.hide:1521 android.view.PendingInsetsController$HideRequest.replay:295 android.view.PendingInsetsController.replayAndAttach:208 android.view.ViewRootImpl.setView:1967 android.view.WindowManagerGlobal.addView:606 android.view.WindowManagerImpl.addView:167 
+10-01 21:46:17.903  3747  3747 D InputTransport: Input channel constructed: 'e3ba92a', fd=172
+10-01 21:46:17.903  3747  3790 E perf_hint: Session ID too large, must fit 32-bit integer
+10-01 21:46:17.903  3747  3747 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Stubs$Landscape, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 2184, 1968), mDisplayCutout=DisplayCutout{insets=Rect(88, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(18, 448 - 88, 518), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={1} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(2171, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(2171, 1955)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 1955)}]}  mRoundedCornerFrame=Rect(0, 0 - 2184, 1968), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(2068, 0 - 2184, 79) rotation=1}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=1 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,1929][2184,1968] mAttachedInsets=null mVisible=false mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,1884][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,1929][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[2106,0][2184,1968] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=false mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][2184,79] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:17.904  3747  3747 I VRI[Stubs$Landscape]@f13a276: synced displayState. AttachInfo displayState=2
+10-01 21:46:17.904  3747  3747 I VRI[Stubs$Landscape]@f13a276: setView = com.android.internal.policy.DecorView@7d63b50 IsHRR=false mFlingFrameRateChange=0 TM=true
+10-01 21:46:17.904  3747  3784 D HWUI    : HWUI - treat SMPTE_170M as sRGB
+10-01 21:46:17.910  3747  3747 I SV[171640894 Stubs$Landscape]: onWindowVisibilityChanged(0) true android.widget.VideoView{a3b083e VFE...... .F....I. 0,0-0,0 #7f0b0031 app:id/surface_view} of VRI[Stubs$Landscape]@f13a276
+10-01 21:46:17.910  3747  3747 D SurfaceView: 171640894 updateSurface: has no frame
+10-01 21:46:17.910  3747  3747 D VRI[Stubs$Landscape]@f13a276: WindowInsets changed: 1968x2184 mandatorySystemGestures:[0,79,0,0] 
+10-01 21:46:17.910  3747  3747 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda16@c29d149
+10-01 21:46:17.910  3747  3747 I HWUI    : Using FreeType backend (prop=Auto)
+10-01 21:46:17.913  3747  3747 I BufferQueueProducer: [](id:ea300000003,api:0,p:-744717360,c:3747) setDequeueTimeout:2077252342
+10-01 21:46:17.913  3747  3747 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= VRI[Stubs$Landscape]@f13a276 mNativeObject= 0xb400007953210430 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3603 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 android.view.Choreographer.doCallbacks:1423 android.view.Choreographer.doFrame:1348 android.view.Choreographer$FrameDisplayEventReceiver.run:1930 
+10-01 21:46:17.913  3747  3747 I BLASTBufferQueue_Java: update, w= 2184 h= 1968 mName = VRI[Stubs$Landscape]@f13a276 mNativeObject= 0xb400007953210430 sc.mNativeObject= 0xb400007a5322d010 format= -3 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3608 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:17.914  3747  3747 I VRI[Stubs$Landscape]@f13a276: Relayout returned: old=(0,0,1968,2184) new=(0,0,2184,1968) relayoutAsync=false req=(1968,2184)0 dur=2 res=0x200003 s={true 0xb4000078b3408180} ch=true seqId=0
+10-01 21:46:17.914  3747  3747 I VRI[Stubs$Landscape]@f13a276: performConfigurationChange setNightDimText nightDimLevel=0
+10-01 21:46:17.914  3747  3747 D VRI[Stubs$Landscape]@f13a276: WindowInsets changed: 2184x1968 mandatorySystemGestures:[0,79,0,84] 
+10-01 21:46:17.914  3747  3747 D VRI[Stubs$Landscape]@f13a276: mThreadedRenderer.initialize() mSurface={isValid=true 0xb4000078b3408180} hwInitialized=true
+10-01 21:46:17.914  3747  3747 D SurfaceView: 171640894 updateSurface: has no frame
+10-01 21:46:17.914  3747  3747 I SV[171640894 Stubs$Landscape]: windowStopped(false) true android.widget.VideoView{a3b083e VFE...... .F....ID 0,0-2184,1968 #7f0b0031 app:id/surface_view} of VRI[Stubs$Landscape]@f13a276
+10-01 21:46:17.914  3747  3747 D SurfaceView: 171640894 updateSurface: has no frame
+10-01 21:46:17.914  3747  3747 D VRI[Stubs$Landscape]@f13a276: reportNextDraw android.view.ViewRootImpl.performTraversals:5507 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 
+10-01 21:46:17.914  3747  3747 I SurfaceView: 171640894 Changes: creating=true format=true size=true visible=true alpha=false hint=false left=true top=true z=false attached=true lifecycleStrategy=false
+10-01 21:46:17.914  3747  3747 I BufferQueueProducer: [](id:ea300000004,api:0,p:0,c:3747) setDequeueTimeout:2077252342
+10-01 21:46:17.915  3747  3747 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= a3b083e SurfaceView[local.dh2.fold7/com.zettabridge.launcher.Stubs$Landscape]@0 mNativeObject= 0xb400007953225b60 caller= android.view.SurfaceView.createBlastSurfaceControls:1878 android.view.SurfaceView.updateSurface:1519 android.view.SurfaceView.lambda$new$0:283 android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU:0 android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw:0 android.view.ViewTreeObserver.dispatchOnPreDraw:1295 android.view.ViewRootImpl.performTraversals:5512 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:17.915  3747  3747 I BLASTBufferQueue_Java: update, w= 2184 h= 1968 mName = a3b083e SurfaceView[local.dh2.fold7/com.zettabridge.launcher.Stubs$Landscape]@0 mNativeObject= 0xb400007953225b60 sc.mNativeObject= 0xb400007a5322d550 format= 4 caller= android.view.SurfaceView.createBlastSurfaceControls:1879 android.view.SurfaceView.updateSurface:1519 android.view.SurfaceView.lambda$new$0:283 android.view.SurfaceView.$r8$lambda$NfZyM_TG8F8lqzaOVZ7noREFjzU:0 android.view.SurfaceView$$ExternalSyntheticLambda1.onPreDraw:0 android.view.ViewTreeObserver.dispatchOnPreDraw:1295 
+10-01 21:46:17.915  3747  3747 I SurfaceView: 171640894 Cur surface: Surface(name=null mNativeObject=0)/@0xb1ad76f
+10-01 21:46:17.915  3747  3747 I SV[171640894 Stubs$Landscape]: pST: sr = Rect(0, 0 - 2184, 1968) sw = 2184 sh = 1968
+10-01 21:46:17.915  3747  3747 D SurfaceView: 171640894 performSurfaceTransaction RenderWorker position = [0, 0, 2184, 1968] surfaceSize = 2184x1968
+10-01 21:46:17.915  3747  3747 I SV[171640894 Stubs$Landscape]: updateSurface: mVisible = true mSurface.isValid() = true
+10-01 21:46:17.915  3747  3747 I SV[171640894 Stubs$Landscape]: updateSurface: mSurfaceCreated = false surfaceChanged = true visibleChanged = true
+10-01 21:46:17.915  3747  3747 I SurfaceView: 171640894 visibleChanged -- surfaceCreated
+10-01 21:46:17.915  3747  3747 I SV[171640894 Stubs$Landscape]: surfaceCreated 1 #8 android.widget.VideoView{a3b083e VFE...... .F....ID 0,0-2184,1968 #7f0b0031 app:id/surface_view}
+10-01 21:46:17.915  3747  3747 I SurfaceView: 171640894 surfaceChanged -- format=4 w=2184 h=1968
+10-01 21:46:17.915  3747  3747 I SV[171640894 Stubs$Landscape]: surfaceChanged (2184,1968) 1 #8 android.widget.VideoView{a3b083e VFE...... .F....ID 0,0-2184,1968 #7f0b0031 app:id/surface_view}
+10-01 21:46:17.915  3747  3747 I SurfaceView: 171640894 surfaceRedrawNeeded
+10-01 21:46:17.915  3747  3747 I SurfaceView: 171640894 finishedDrawing
+10-01 21:46:17.915  3747  3747 V SurfaceView: Layout: x=0 y=0 w=2184 h=1968, frame=Rect(0, 0 - 2184, 1968)
+10-01 21:46:17.915  3747  3747 D VRI[Stubs$Landscape]@f13a276: Setup new sync=wmsSync-VRI[Stubs$Landscape]@f13a276#10
+10-01 21:46:17.915  3747  3747 I VRI[Stubs$Landscape]@f13a276: Creating new active sync group VRI[Stubs$Landscape]@f13a276#11
+10-01 21:46:17.915  3747  3747 D VRI[Stubs$Landscape]@f13a276: registerCallbacksForSync syncBuffer=false
+10-01 21:46:17.915  3747  3784 D SurfaceView: 171640894 updateSurfacePosition RenderWorker, frameNr = 1, position = [0, 0, 2184, 1968] surfaceSize = 2184x1968
+10-01 21:46:17.915  3747  3784 I SV[171640894 Stubs$Landscape]: uSP: rtp = Rect(0, 0 - 2184, 1968) rtsw = 2184 rtsh = 1968
+10-01 21:46:17.915  3747  3784 I SV[171640894 Stubs$Landscape]: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
+10-01 21:46:17.916  3747  3784 I SV[171640894 Stubs$Landscape]: aOrMT: VRI[Stubs$Landscape]@f13a276 t = android.view.SurfaceControl$Transaction@1762468 fN = 1 android.view.SurfaceView.-$$Nest$mapplyOrMergeTransaction:0 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:2029 android.graphics.RenderNode$CompositePositionUpdateListener.positionChanged:401 
+10-01 21:46:17.916  3747  3784 I VRI[Stubs$Landscape]@f13a276: mWNT: t=0xb40000799324dc80 mBlastBufferQueue=0xb400007953210430 fn= 1 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.SurfaceView.applyOrMergeTransaction:1960 android.view.SurfaceView.-$$Nest$mapplyOrMergeTransaction:0 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:2029 
+10-01 21:46:17.916  3747  3789 D VRI[Stubs$Landscape]@f13a276: Received frameDrawingCallback syncResult=0 frameNum=1.
+10-01 21:46:17.916  3747  3789 I VRI[Stubs$Landscape]@f13a276: mWNT: t=0xb40000799324d590 mBlastBufferQueue=0xb400007953210430 fn= 1 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$12.onFrameDraw:15561 android.view.ThreadedRenderer$1.onFrameDraw:751 <bottom of call stack> 
+10-01 21:46:17.916  3747  3789 I VRI[Stubs$Landscape]@f13a276: Setting up sync and frameCommitCallback
+10-01 21:46:17.921  3747  3784 I AdrenoVK-0: Shader compilation failed for shaderType: 4
+10-01 21:46:17.921  3747  3784 I AdrenoVK-0: Pipeline create failed
+10-01 21:46:17.927  3747  3784 I BLASTBufferQueue: [VRI[Stubs$Landscape]@f13a276#3](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:17.927  3747  3784 I SurfaceComposerClient: apply transaction with the first frame. layerId: 274949, bufferData(ID: 16093242458122, frameNumber: 1)
+10-01 21:46:17.928  3747  3784 I VRI[Stubs$Landscape]@f13a276: Received frameCommittedCallback lastAttemptedDrawFrameNum=1 didProduceBuffer=true
+10-01 21:46:17.928  3747  3784 D HWUI    : CFMS:: SetUp Pid : 3747    Tid : 3784
+10-01 21:46:17.928  3747  3747 D VRI[Stubs$Landscape]@f13a276: reportDrawFinished seqId=0
+10-01 21:46:17.928  3747  3747 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:17.928  3747  3747 I System.out: **********************************FFFFFFFFFFocus : false
+10-01 21:46:17.941  3747  3817 I _DEBUG_OUT: 
+10-01 21:46:17.941  3747  3817 I _DEBUG_OUT: 
+10-01 21:46:17.941  3747  3817 I _DEBUG_OUT:  Application::OnInterruptPause 
+10-01 21:46:17.941  3747  3747 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:17.942  3747  3747 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=false, type=statusBars, host=local.dh2.fold7/com.zettabridge.launcher.Stubs$Landscape
+10-01 21:46:17.942  3747  3747 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=false, type=navigationBars, host=local.dh2.fold7/com.zettabridge.launcher.Stubs$Landscape
+10-01 21:46:17.955  3747  3747 D VRI[Stubs$Landscape]@f13a276: mThreadedRenderer.initializeIfNeeded()#2 mSurface={isValid=true 0xb4000078b3408180}
+10-01 21:46:17.955  3747  3747 I System.out: VideoView*************onWindowFocusChanged true
+10-01 21:46:17.955  3747  3747 I System.out: **************playVideo *****************
+10-01 21:46:17.959  3747  3747 V MediaPlayer-JNI: native_setup
+10-01 21:46:17.959  3747  3747 V MediaPlayerNative: constructor
+10-01 21:46:17.960  3747  3747 V MediaPlayerNative: setListener
+10-01 21:46:17.960  3747  3747 V MediaPlayer-JNI: get_session_id()
+10-01 21:46:17.962  3747  3747 V MediaPlayer-JNI: get_session_id()
+10-01 21:46:17.962  3747  3747 W MediaPlayer: Error setting data source via ContentResolver
+10-01 21:46:17.962  3747  3747 W MediaPlayer: java.io.FileNotFoundException: No content provider: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//intro.mp4
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.content.ContentResolver.openTypedAssetFileDescriptor(ContentResolver.java:2044)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1873)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.content.ContentResolver.openAssetFileDescriptor(ContentResolver.java:1788)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.media.MediaPlayer.attemptDataSource(MediaPlayer.java:1202)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1168)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.media.MediaPlayer.setDataSource(MediaPlayer.java:1192)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.widget.VideoView.openVideo(VideoView.java:412)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.widget.VideoView.setVideoURI(VideoView.java:287)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.widget.VideoView.setVideoURI(VideoView.java:270)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.widget.VideoView.setVideoPath(VideoView.java:261)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at com.gameloft.android.GAND.GloftD2SS.MyVideoView.b(Unknown Source:63)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at com.gameloft.android.GAND.GloftD2SS.MyVideoView.onWindowFocusChanged(Unknown Source:66)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at com.android.internal.policy.DecorView.onWindowFocusChanged(DecorView.java:2827)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.view.View.dispatchWindowFocusChanged(View.java:17901)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.view.ViewGroup.dispatchWindowFocusChanged(ViewGroup.java:1631)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.view.ViewRootImpl.dispatchFocusEvent(ViewRootImpl.java:6037)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.view.ViewRootImpl.handleWindowFocusChanged(ViewRootImpl.java:5920)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.view.ViewRootImpl.-$$Nest$mhandleWindowFocusChanged(Unknown Source:0)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.view.ViewRootImpl$ViewRootHandler.handleMessageImpl(ViewRootImpl.java:8475)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.view.ViewRootImpl$ViewRootHandler.handleMessage(ViewRootImpl.java:8383)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.os.Handler.dispatchMessage(Handler.java:132)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.os.Looper.dispatchMessage(Looper.java:358)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.os.Looper.loopOnce(Looper.java:288)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.os.Looper.loop(Looper.java:392)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at com.zettabridge.launcher.MainLooperGuard.lambda$install$0(MainLooperGuard.java:30)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at com.zettabridge.launcher.MainLooperGuard$$ExternalSyntheticLambda0.run(D8$$SyntheticClass:0)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.os.Handler.handleCallback(Handler.java:1070)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.os.Handler.dispatchMessage(Handler.java:125)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.os.Looper.dispatchMessage(Looper.java:358)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.os.Looper.loopOnce(Looper.java:288)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.os.Looper.loop(Looper.java:392)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at android.app.ActivityThread.main(ActivityThread.java:10346)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at java.lang.reflect.Method.invoke(Native Method)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:638)
+10-01 21:46:17.962  3747  3747 W MediaPlayer: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:972)
+10-01 21:46:17.965  3747  3747 V MediaPlayer-JNI: setDataSourceFD: fd 124
+10-01 21:46:17.965  3747  3747 V MediaPlayerNative: setDataSource(124, 0, 576460752303423487)
+10-01 21:46:17.987  3747  3747 V MediaPlayerNative: setVideoSurfaceTexture
+10-01 21:46:17.989  3747  3747 V MediaPlayer-JNI: setParameter: key 1400
+10-01 21:46:17.989  3747  3747 V MediaPlayerNative: MediaPlayer::setParameter(1400)
+10-01 21:46:17.990  3747  3747 V MediaPlayerNative: setVideoSurfaceTexture
+10-01 21:46:17.990  3747  3747 V MediaPlayerNative: prepareAsync
+10-01 21:46:17.990  3747  3747 V MediaPlayerNative: invoke 80
+10-01 21:46:17.990  3747  3747 D InputMethodManagerUtils: startInputInner - Id : 0
+10-01 21:46:17.990  3747  3747 I InputMethodManager: startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+10-01 21:46:17.991  3747  3747 D InsetsController: hide(ime())
+10-01 21:46:17.991  3747  3747 I ImeTracker: local.dh2.fold7:719fd485: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+10-01 21:46:17.992  3747  3845 D InputTransport: Input channel constructed: 'ClientS', fd=125
+10-01 21:46:17.993  3747  3747 D SV[171640894 Stubs$Landscape]: skip updating surface, 5
+10-01 21:46:18.026  3747  3845 V MediaPlayerNative: message received msg=5, ext1=1280, ext2=720
+10-01 21:46:18.026  3747  3845 V MediaPlayerNative: New video size 1280 x 720
+10-01 21:46:18.027  3747  3747 V MediaPlayerNative: getVideoWidth
+10-01 21:46:18.027  3747  3747 V MediaPlayer-JNI: getVideoWidth: 1280
+10-01 21:46:18.027  3747  3747 V MediaPlayerNative: getVideoHeight
+10-01 21:46:18.027  3747  3747 V MediaPlayer-JNI: getVideoHeight: 720
+10-01 21:46:18.027  3747  3747 D SurfaceView: 89248003 setFixedSize -1x-1 -> 1280x720
+10-01 21:46:18.027  3747  3845 V MediaPlayerNative: message received msg=1, ext1=0, ext2=0
+10-01 21:46:18.027  3747  3845 V MediaPlayerNative: MediaPlayer::notify() prepared
+10-01 21:46:18.043  3747  3747 I SurfaceView: 171640894 Changes: creating=false format=false size=true visible=false alpha=false hint=false left=false top=true z=false attached=true lifecycleStrategy=false
+10-01 21:46:18.043  3747  3747 I SurfaceView: 171640894 Cur surface: Surface(name=null mNativeObject=-5476376628477326896)/@0xb1ad76f
+10-01 21:46:18.044  3747  3747 I BLASTBufferQueue_Java: update, w= 1280 h= 720 mName = a3b083e SurfaceView[local.dh2.fold7/com.zettabridge.launcher.Stubs$Landscape]@0 mNativeObject= 0xb400007953225b60 sc.mNativeObject= 0xb400007a5322d550 format= 4 caller= android.view.SurfaceView.setBufferSize:1800 android.view.SurfaceView.performSurfaceTransaction:1295 android.view.SurfaceView.updateSurface:1550 android.view.SurfaceView.setFrame:746 android.view.View.layout:27362 android.widget.FrameLayout.layoutChildren:345 
+10-01 21:46:18.044  3747  3747 I SV[171640894 Stubs$Landscape]: pST: sr = Rect(0, 370 - 2184, 1598) sw = 1280 sh = 720
+10-01 21:46:18.044  3747  3747 D SurfaceView: 171640894 performSurfaceTransaction RenderWorker position = [0, 370, 2184, 1598] surfaceSize = 1280x720
+10-01 21:46:18.044  3747  3747 I SV[171640894 Stubs$Landscape]: updateSurface: mVisible = true mSurface.isValid() = true
+10-01 21:46:18.044  3747  3747 I SV[171640894 Stubs$Landscape]: updateSurface: mSurfaceCreated = true surfaceChanged = false visibleChanged = false
+10-01 21:46:18.044  3747  3747 I SurfaceView: 171640894 surfaceChanged -- format=4 w=1280 h=720
+10-01 21:46:18.044  3747  3747 I SV[171640894 Stubs$Landscape]: surfaceChanged (1280,720) 1 #5 android.widget.VideoView{a3b083e VFE...... .F....ID 0,370-2184,1598 #7f0b0031 app:id/surface_view aid=1073741824}
+10-01 21:46:18.044  3747  3747 I SurfaceView: 171640894 surfaceRedrawNeeded
+10-01 21:46:18.044  3747  3747 I SurfaceView: 171640894 finishedDrawing
+10-01 21:46:18.044  3747  3747 V SurfaceView: Layout: x=0 y=370 w=2184 h=1228, frame=Rect(0, 0 - 1280, 720)
+10-01 21:46:18.044  3747  3747 I VRI[Stubs$Landscape]@f13a276: registerCallbackForPendingTransactions
+10-01 21:46:18.044  3747  3784 D SurfaceView: 171640894 updateSurfacePosition RenderWorker, frameNr = 3, position = [0, 370, 2184, 1598] surfaceSize = 1280x720
+10-01 21:46:18.044  3747  3784 I SV[171640894 Stubs$Landscape]: uSP: rtp = Rect(0, 370 - 2184, 1598) rtsw = 1280 rtsh = 720
+10-01 21:46:18.044  3747  3784 I SV[171640894 Stubs$Landscape]: onSSPAndSRT: pl = 0 pt = 370 sx = 1.70625 sy = 1.7055556
+10-01 21:46:18.044  3747  3784 I SV[171640894 Stubs$Landscape]: aOrMT: VRI[Stubs$Landscape]@f13a276 t = android.view.SurfaceControl$Transaction@40c9eb9 fN = 3 android.view.SurfaceView.-$$Nest$mapplyOrMergeTransaction:0 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:2029 android.graphics.RenderNode$CompositePositionUpdateListener.positionChanged:401 
+10-01 21:46:18.044  3747  3784 I VRI[Stubs$Landscape]@f13a276: mWNT: t=0xb40000799323c4b0 mBlastBufferQueue=0xb400007953210430 fn= 3 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.SurfaceView.applyOrMergeTransaction:1960 android.view.SurfaceView.-$$Nest$mapplyOrMergeTransaction:0 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:2029 
+10-01 21:46:18.044  3747  3747 V MediaPlayerNative: invoke 76
+10-01 21:46:18.044  3747  3790 I VRI[Stubs$Landscape]@f13a276: mWNT: t=0xb4000079932484a0 mBlastBufferQueue=0xb400007953210430 fn= 3 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$10.onFrameDraw:6615 android.view.ViewRootImpl$4.onFrameDraw:2485 android.view.ThreadedRenderer$1.onFrameDraw:751 
+10-01 21:46:18.047  3747  3747 D MediaPlayerNative: getMetadata
+10-01 21:46:18.047  3747  3747 V MediaPlayerNative: getVideoWidth
+10-01 21:46:18.047  3747  3747 V MediaPlayer-JNI: getVideoWidth: 1280
+10-01 21:46:18.047  3747  3747 V MediaPlayerNative: getVideoHeight
+10-01 21:46:18.047  3747  3747 V MediaPlayer-JNI: getVideoHeight: 720
+10-01 21:46:18.047  3747  3747 V MediaPlayerNative: getVideoWidth
+10-01 21:46:18.047  3747  3747 V MediaPlayer-JNI: getVideoWidth: 1280
+10-01 21:46:18.048  3747  3747 V MediaPlayer-JNI: start
+10-01 21:46:18.048  3747  3747 V MediaPlayerNative: start
+10-01 21:46:18.062  3747  3747 I BLASTBufferQueue_Java: update, w= 2184 h= 1968 mName = VRI[Stubs$Landscape]@f13a276 mNativeObject= 0xb400007953210430 sc.mNativeObject= 0xb400007a53219f90 format= -3 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3592 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:18.062  3747  3747 I VRI[Stubs$Landscape]@f13a276: Relayout returned: old=(0,0,2184,1968) new=(0,0,2184,1968) relayoutAsync=false req=(2184,1968)0 dur=2 res=0x200000 s={true 0xb4000078b3408180} ch=false seqId=0
+10-01 21:46:18.120  3747  3803 V MediaPlayerNative: message received msg=5, ext1=1280, ext2=720
+10-01 21:46:18.121  3747  3803 V MediaPlayerNative: New video size 1280 x 720
+10-01 21:46:18.121  3747  3747 V MediaPlayerNative: getVideoWidth
+10-01 21:46:18.121  3747  3747 V MediaPlayer-JNI: getVideoWidth: 1280
+10-01 21:46:18.121  3747  3747 V MediaPlayerNative: getVideoHeight
+10-01 21:46:18.121  3747  3747 V MediaPlayer-JNI: getVideoHeight: 720
+10-01 21:46:18.127  3747  3747 D SV[171640894 Stubs$Landscape]: skip updating surface, 5
+10-01 21:46:18.127  3747  3803 V MediaPlayerNative: message received msg=211, ext1=0, ext2=0
+10-01 21:46:18.127  3747  3803 V MediaPlayerNative: message received msg=211, ext1=0, ext2=0
+10-01 21:46:18.127  3747  3803 V MediaPlayerNative: message received msg=6, ext1=0, ext2=0
+10-01 21:46:18.127  3747  3803 V MediaPlayerNative: Received media started message
+10-01 21:46:18.127  3747  3803 V MediaPlayerNative: message received msg=200, ext1=3, ext2=0
+10-01 21:46:18.127  3747  3803 W MediaPlayerNative: info/warning (3, 0)
+10-01 21:46:18.132  3747  3803 I BLASTBufferQueue: [a3b083e SurfaceView[local.dh2.fold7/com.zettabridge.launcher.Stubs$Landscape]@0#4](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:18.132  3747  3803 I SurfaceComposerClient: apply transaction with the first frame. layerId: 274955, bufferData(ID: 16093242458124, frameNumber: 1)
+10-01 21:46:18.136  3747  3803 V MediaPlayerNative: message received msg=10000, ext1=21, ext2=0
+10-01 21:46:18.238  3747  3803 V MediaPlayerNative: message received msg=211, ext1=0, ext2=0
+10-01 21:46:18.238  3747  3803 V MediaPlayerNative: message received msg=211, ext1=0, ext2=0
+10-01 21:46:18.238  3747  3803 V MediaPlayerNative: message received msg=211, ext1=0, ext2=0
+10-01 21:46:18.621  3747  3747 I VRI[Stubs$SingleInstance]@8130585: handleAppVisibility mAppVisible = true visible = false
+10-01 21:46:18.621  3747  3747 D VRI[Stubs$SingleInstance]@8130585: visibilityChanged oldVisibility=true newVisibility=false
+10-01 21:46:18.627  3747  3747 I SV[116955383 Stubs$SingleInstance]: onWindowVisibilityChanged(8) false com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ........ 0,0-2184,1968} of VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:18.627  3747  3747 I SurfaceView: 116955383 Changes: creating=false format=false size=false visible=true alpha=false hint=false left=false top=false z=false attached=true lifecycleStrategy=false
+10-01 21:46:18.627  3747  3747 I SurfaceView: 116955383 Cur surface: Surface(name=null mNativeObject=-5476376628479113328)/@0x831603d
+10-01 21:46:18.627  3747  3747 I SurfaceView: 116955383 surfaceDestroyed
+10-01 21:46:18.627  3747  3747 I SV[116955383 Stubs$SingleInstance]: surfaceDestroyed callback.size 1 #2 com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ........ 0,0-2184,1968}
+10-01 21:46:18.628  3747  3747 I SV[116955383 Stubs$SingleInstance]: updateSurface: mVisible = false mSurface.isValid() = true
+10-01 21:46:18.628  3747  3747 I SV[116955383 Stubs$SingleInstance]: releaseSurfaces: viewRoot = VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:18.628  3747  3747 V SurfaceView: Layout: x=0 y=0 w=2184 h=1968, frame=Rect(0, 0 - 2184, 1968)
+10-01 21:46:18.628  3747  3784 D SurfaceView: 240278907 windowPositionLost, frameNr = 0
+10-01 21:46:18.633  3747  3747 I VRI[Stubs$SingleInstance]@8130585: Relayout returned: old=(0,0,2184,1968) new=(0,0,2184,1968) relayoutAsync=false req=(2184,1968)8 dur=3 res=0x200002 s={false 0x0} ch=true seqId=0
+10-01 21:46:18.633  3747  3747 I SV[116955383 Stubs$SingleInstance]: windowStopped(true) false com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ........ 0,0-2184,1968} of VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:18.633  3747  3747 D SV[116955383 Stubs$SingleInstance]: updateSurface: surface is not valid
+10-01 21:46:18.633  3747  3747 I SV[116955383 Stubs$SingleInstance]: releaseSurfaces: viewRoot = VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:18.633  3747  3747 D VRI[Stubs$SingleInstance]@8130585: applyTransactionOnDraw applyImmediately
+10-01 21:46:18.633  3747  3747 D SV[116955383 Stubs$SingleInstance]: updateSurface: surface is not valid
+10-01 21:46:18.633  3747  3747 I SV[116955383 Stubs$SingleInstance]: releaseSurfaces: viewRoot = VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:18.633  3747  3747 D VRI[Stubs$SingleInstance]@8130585: applyTransactionOnDraw applyImmediately
+10-01 21:46:18.633  3747  3747 D VRI[Stubs$SingleInstance]@8130585: Not drawing due to not visible. Reason=!mAppVisible && !mForceDecorViewVisibility
+10-01 21:46:18.633  3747  3747 D VRI[Stubs$SingleInstance]@8130585: Pending transaction will not be applied in sync with a draw due to view not visible
+10-01 21:46:18.633  3747  3747 I VRI[Stubs$SingleInstance]@8130585: mWNT: t=0xb4000079932365e0 mBlastBufferQueue=0xnull fn= 0 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl.handleSyncRequestWhenNoAsyncDraw:6812 android.view.ViewRootImpl.performTraversals:5568 android.view.ViewRootImpl.doTraversal:3959 
+10-01 21:46:18.634  3747  3747 I VRI[Stubs$SingleInstance]@8130585: stopped(true) old = false
+10-01 21:46:18.634  3747  3747 D VRI[Stubs$SingleInstance]@8130585: WindowStopped on local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance set to true
+10-01 21:46:18.637  3747  3747 D SensorManager: unregisterListener
+10-01 21:46:18.643  3747  3747 D SV[116955383 Stubs$SingleInstance]: updateSurface: surface is not valid
+10-01 21:46:18.643  3747  3747 I SV[116955383 Stubs$SingleInstance]: releaseSurfaces: viewRoot = VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:18.643  3747  3747 D VRI[Stubs$SingleInstance]@8130585: applyTransactionOnDraw applyImmediately
+10-01 21:46:25.558  3747  3747 I VRI[Stubs$Landscape]@f13a276: registerCallbackForPendingTransactions
+10-01 21:46:25.560  3747  3789 I VRI[Stubs$Landscape]@f13a276: mWNT: t=0xb4000079932642f0 mBlastBufferQueue=0xb400007953210430 fn= 4 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$10.onFrameDraw:6615 android.view.ViewRootImpl$4.onFrameDraw:2485 android.view.ThreadedRenderer$1.onFrameDraw:751 
+10-01 21:46:25.639  3747  3747 I VRI[Stubs$Landscape]@f13a276: ViewPostIme pointer 0
+10-01 21:46:25.641  3747  3747 I VRI[Stubs$Landscape]@f13a276: call setFrameRateCategory for touch hint category=high hint, reason=touch, vri=VRI[Stubs$Landscape]@f13a276
+10-01 21:46:25.643  3747  3747 D Choreographer: BBA2 receive callback when in bg : 0
+10-01 21:46:25.683  3747  3747 D SV[171640894 Stubs$Landscape]: skip updating surface, 5
+10-01 21:46:25.688  3747  3784 I AdrenoVK-0: Shader compilation failed for shaderType: 0
+10-01 21:46:25.688  3747  3784 I AdrenoVK-0: Pipeline create failed
+10-01 21:46:25.708  3747  3784 I AdrenoVK-0: Shader compilation failed for shaderType: 0
+10-01 21:46:25.708  3747  3784 I AdrenoVK-0: Pipeline create failed
+10-01 21:46:26.268  3747  3747 I VRI[Stubs$Landscape]@f13a276: ViewPostIme pointer 1
+10-01 21:46:26.729  3747  3747 I VRI[Stubs$Landscape]@f13a276: ViewPostIme pointer 0
+10-01 21:46:26.834  3747  3747 I VRI[Stubs$Landscape]@f13a276: ViewPostIme pointer 1
+10-01 21:46:26.859  3747  3747 I System.out: **************onPause introvideo
+10-01 21:46:26.863  3747  3747 I VRI[Stubs$SingleInstance]@8130585: handleAppVisibility mAppVisible = false visible = true
+10-01 21:46:26.863  3747  3747 I VRI[Stubs$SingleInstance]@8130585: stopped(false) old = true
+10-01 21:46:26.863  3747  3747 D VRI[Stubs$SingleInstance]@8130585: WindowStopped on local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance set to false
+10-01 21:46:26.863  3747  3747 D ViewRootImpl: Skipping stats log for color mode
+10-01 21:46:26.872  3747  3747 D SensorManager: registerListener :: 11, lsm6dsv_0 Accelerometer Non-wakeup, 20000, 0, 
+10-01 21:46:26.872  3747  3747 I SV[116955383 Stubs$SingleInstance]: onWindowVisibilityChanged(0) false com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ........ 0,0-2184,1968} of VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:26.872  3747  3747 D SV[116955383 Stubs$SingleInstance]: updateSurface: surface is not valid
+10-01 21:46:26.872  3747  3747 I SV[116955383 Stubs$SingleInstance]: releaseSurfaces: viewRoot = VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:26.872  3747  3747 D VRI[Stubs$SingleInstance]@8130585: applyTransactionOnDraw applyImmediately
+10-01 21:46:26.876  3747  3747 I BufferQueueProducer: [](id:ea300000005,api:0,p:-749957712,c:3747) setDequeueTimeout:2077252342
+10-01 21:46:26.876  3747  3747 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= VRI[Stubs$SingleInstance]@8130585 mNativeObject= 0xb400007953214c70 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3603 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 android.view.Choreographer.doCallbacks:1423 android.view.Choreographer.doFrame:1348 android.view.Choreographer$FrameDisplayEventReceiver.run:1930 
+10-01 21:46:26.876  3747  3747 I BLASTBufferQueue_Java: update, w= 2184 h= 1968 mName = VRI[Stubs$SingleInstance]@8130585 mNativeObject= 0xb400007953214c70 sc.mNativeObject= 0xb400007a53220d10 format= -3 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3608 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:26.876  3747  3747 I VRI[Stubs$SingleInstance]@8130585: Relayout returned: old=(0,0,2184,1968) new=(0,0,2184,1968) relayoutAsync=false req=(2184,1968)0 dur=3 res=0x200003 s={true 0xb4000078b35d5950} ch=true seqId=0
+10-01 21:46:26.876  3747  3747 D VRI[Stubs$SingleInstance]@8130585: mThreadedRenderer.initialize() mSurface={isValid=true 0xb4000078b35d5950} hwInitialized=true
+10-01 21:46:26.876  3747  3747 I SV[116955383 Stubs$SingleInstance]: windowStopped(false) true com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ........ 0,0-2184,1968} of VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:26.876  3747  3747 I SurfaceView: 116955383 Changes: creating=true format=false size=false visible=true alpha=false hint=false left=false top=false z=false attached=true lifecycleStrategy=false
+10-01 21:46:26.877  3747  3747 I BufferQueueProducer: [](id:ea300000006,api:0,p:0,c:3747) setDequeueTimeout:2077252342
+10-01 21:46:26.877  3747  3747 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= 6f898f7 SurfaceView[local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance]@0 mNativeObject= 0xb40000795322c7c0 caller= android.view.SurfaceView.createBlastSurfaceControls:1878 android.view.SurfaceView.updateSurface:1519 android.view.SurfaceView.setWindowStopped:542 android.view.SurfaceView.surfaceCreated:2429 android.view.ViewRootImpl.notifySurfaceCreated:3520 android.view.ViewRootImpl.performTraversals:5350 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 
+10-01 21:46:26.877  3747  3747 I BLASTBufferQueue_Java: update, w= 2184 h= 1968 mName = 6f898f7 SurfaceView[local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance]@0 mNativeObject= 0xb40000795322c7c0 sc.mNativeObject= 0xb400007a5322d250 format= 4 caller= android.view.SurfaceView.createBlastSurfaceControls:1879 android.view.SurfaceView.updateSurface:1519 android.view.SurfaceView.setWindowStopped:542 android.view.SurfaceView.surfaceCreated:2429 android.view.ViewRootImpl.notifySurfaceCreated:3520 android.view.ViewRootImpl.performTraversals:5350 
+10-01 21:46:26.877  3747  3747 I SurfaceView: 116955383 Cur surface: Surface(name=null mNativeObject=0)/@0x831603d
+10-01 21:46:26.877  3747  3747 I SV[116955383 Stubs$SingleInstance]: pST: sr = Rect(0, 0 - 2184, 1968) sw = 2184 sh = 1968
+10-01 21:46:26.877  3747  3747 D SurfaceView: 116955383 performSurfaceTransaction RenderWorker position = [0, 0, 2184, 1968] surfaceSize = 2184x1968
+10-01 21:46:26.877  3747  3747 I SV[116955383 Stubs$SingleInstance]: updateSurface: mVisible = true mSurface.isValid() = true
+10-01 21:46:26.877  3747  3747 I SV[116955383 Stubs$SingleInstance]: updateSurface: mSurfaceCreated = false surfaceChanged = true visibleChanged = true
+10-01 21:46:26.877  3747  3747 I SurfaceView: 116955383 visibleChanged -- surfaceCreated
+10-01 21:46:26.877  3747  3747 I SV[116955383 Stubs$SingleInstance]: surfaceCreated 1 #1 com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ........ 0,0-2184,1968}
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: QUALCOMM build                   : f61dec9117, I68b0a64d7e
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: Build Date                       : 03/26/26
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: OpenGL ES Shader Compiler Version: E031.47.18.50
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: Local Branch                     : 
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: Remote Branch                    : refs/tags/AU_LINUX_ANDROID_LA.VENDOR.15.4.0.11.00.00.1088.862
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: Remote Branch                    : NONE
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: Reconstruct Branch               : NOTHING
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: Build Config                     : S P 18.0.0 AArch64
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: Driver Path                      : /vendor/lib64/egl/libGLESv2_adreno.so
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: Driver Version                   : 0800.64.7
+10-01 21:46:26.877  3747  3825 I AdrenoGLES-0: Process Name                     : local.dh2.fold7:guest
+10-01 21:46:26.882  3747  3825 I AdrenoGLES-0: PFP: 0x01500077, ME: 0x01500014
+10-01 21:46:26.883  3747  3825 E Adreno-AppProfiles: QSPM AIDL service doesn't exist
+10-01 21:46:26.887  3747  3747 I SurfaceView: 116955383 surfaceChanged -- format=4 w=2184 h=1968
+10-01 21:46:26.887  3747  3747 I SV[116955383 Stubs$SingleInstance]: surfaceChanged (2184,1968) 1 #1 com.gameloft.android.GAND.GloftD2SS.GameGLSurfaceView{6f898f7 V.E...... ........ 0,0-2184,1968}
+10-01 21:46:26.887  3747  3853 I GLMediaPlayer: Player Init is OK
+10-01 21:46:26.894  3747  3825 W SoundPool: Use of stream types is deprecated for operations other than volume control
+10-01 21:46:26.894  3747  3825 W SoundPool: See the documentation of SoundPool() for what to use instead with android.media.AudioAttributes to qualify your playback use case
+10-01 21:46:26.907  3747  3825 I BLASTBufferQueue: [6f898f7 SurfaceView[local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance]@0#6](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:26.907  3747  3825 I SurfaceComposerClient: apply transaction with the first frame. layerId: 274967, bufferData(ID: 16093242458144, frameNumber: 1)
+10-01 21:46:26.911  3747  3747 I SurfaceView: 116955383 surfaceRedrawNeeded
+10-01 21:46:26.911  3747  3747 V SurfaceView: Layout: x=0 y=0 w=2184 h=1968, frame=Rect(0, 0 - 2184, 1968)
+10-01 21:46:26.911  3747  3747 D VRI[Stubs$SingleInstance]@8130585: reportNextDraw android.view.ViewRootImpl.performTraversals:5507 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 
+10-01 21:46:26.911  3747  3747 D VRI[Stubs$SingleInstance]@8130585: Setup new sync=wmsSync-VRI[Stubs$SingleInstance]@8130585#14
+10-01 21:46:26.911  3747  3747 I VRI[Stubs$SingleInstance]@8130585: Creating new active sync group VRI[Stubs$SingleInstance]@8130585#15
+10-01 21:46:26.911  3747  3747 D VRI[Stubs$SingleInstance]@8130585: Start draw after previous draw not visible
+10-01 21:46:26.911  3747  3747 D VRI[Stubs$SingleInstance]@8130585: registerCallbacksForSync syncBuffer=false
+10-01 21:46:26.912  3747  3784 D SurfaceView: 116955383 updateSurfacePosition RenderWorker, frameNr = 1, position = [0, 0, 2184, 1968] surfaceSize = 2184x1968
+10-01 21:46:26.912  3747  3784 I SV[116955383 Stubs$SingleInstance]: uSP: rtp = Rect(0, 0 - 2184, 1968) rtsw = 2184 rtsh = 1968
+10-01 21:46:26.912  3747  3784 I SV[116955383 Stubs$SingleInstance]: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
+10-01 21:46:26.912  3747  3784 I SV[116955383 Stubs$SingleInstance]: aOrMT: VRI[Stubs$SingleInstance]@8130585 t = android.view.SurfaceControl$Transaction@7789e86 fN = 1 android.view.SurfaceView.-$$Nest$mapplyOrMergeTransaction:0 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:2029 android.graphics.RenderNode$CompositePositionUpdateListener.positionChanged:401 
+10-01 21:46:26.912  3747  3784 I VRI[Stubs$SingleInstance]@8130585: mWNT: t=0xb400007993266a40 mBlastBufferQueue=0xb400007953214c70 fn= 1 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.SurfaceView.applyOrMergeTransaction:1960 android.view.SurfaceView.-$$Nest$mapplyOrMergeTransaction:0 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:2029 
+10-01 21:46:26.912  3747  3790 D VRI[Stubs$SingleInstance]@8130585: Received frameDrawingCallback syncResult=0 frameNum=1.
+10-01 21:46:26.912  3747  3790 I VRI[Stubs$SingleInstance]@8130585: mWNT: t=0xb400007993266c90 mBlastBufferQueue=0xb400007953214c70 fn= 1 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$12.onFrameDraw:15561 android.view.ThreadedRenderer$1.onFrameDraw:751 <bottom of call stack> 
+10-01 21:46:26.912  3747  3790 I VRI[Stubs$SingleInstance]@8130585: Setting up sync and frameCommitCallback
+10-01 21:46:26.917  3747  3784 I BLASTBufferQueue: [VRI[Stubs$SingleInstance]@8130585#5](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:26.917  3747  3784 I SurfaceComposerClient: apply transaction with the first frame. layerId: 274961, bufferData(ID: 16093242458147, frameNumber: 1)
+10-01 21:46:26.918  3747  3784 I VRI[Stubs$SingleInstance]@8130585: Received frameCommittedCallback lastAttemptedDrawFrameNum=1 didProduceBuffer=true
+10-01 21:46:26.918  3747  3825 D VRI[Stubs$SingleInstance]@8130585: reportDrawFinished seqId=0
+10-01 21:46:26.918  3747  3747 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=false, type=statusBars, host=local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance
+10-01 21:46:26.918  3747  3825 I SurfaceView: 116955383 finishedDrawing
+10-01 21:46:26.918  3747  3747 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=false, type=navigationBars, host=local.dh2.fold7/com.zettabridge.launcher.Stubs$SingleInstance
+10-01 21:46:26.919  3747  3747 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:26.920  3747  3747 I System.out: VideoView*************onWindowFocusChanged false
+10-01 21:46:26.920  3747  3747 V MediaPlayer-JNI: pause
+10-01 21:46:26.920  3747  3747 V MediaPlayerNative: pause
+10-01 21:46:26.920  3747  3803 V MediaPlayerNative: message received msg=7, ext1=0, ext2=0
+10-01 21:46:26.920  3747  3747 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:26.921  3747  3803 V MediaPlayerNative: message received msg=211, ext1=0, ext2=0
+10-01 21:46:26.934  3747  3747 I BLASTBufferQueue_Java: update, w= 2184 h= 1968 mName = VRI[Stubs$Landscape]@f13a276 mNativeObject= 0xb400007953210430 sc.mNativeObject= 0xb400007a53219090 format= -3 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3592 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:26.934  3747  3747 I VRI[Stubs$Landscape]@f13a276: Relayout returned: old=(0,0,2184,1968) new=(0,0,2184,1968) relayoutAsync=false req=(2184,1968)0 dur=1 res=0x200000 s={true 0xb4000078b3408180} ch=false seqId=0
+10-01 21:46:26.934  3747  3747 I VRI[Stubs$Landscape]@f13a276: registerCallbackForPendingTransactions
+10-01 21:46:26.934  3747  3789 I VRI[Stubs$Landscape]@f13a276: mWNT: t=0xb40000799326b8e0 mBlastBufferQueue=0xb400007953210430 fn= 20 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl$10.onFrameDraw:6615 android.view.ViewRootImpl$4.onFrameDraw:2485 android.view.ThreadedRenderer$1.onFrameDraw:751 
+10-01 21:46:26.945  3747  3803 V MediaPlayerNative: message received msg=211, ext1=0, ext2=0
+10-01 21:46:26.957  3747  3747 D VRI[Stubs$SingleInstance]@8130585: mThreadedRenderer.initializeIfNeeded()#2 mSurface={isValid=true 0xb4000078b35d5950}
+10-01 21:46:26.957  3747  3747 I System.out: **********************************FFFFFFFFFFocus : true
+10-01 21:46:26.957  3747  3817 I _DEBUG_OUT: 
+10-01 21:46:26.957  3747  3817 I _DEBUG_OUT: 
+10-01 21:46:26.957  3747  3817 I _DEBUG_OUT:  Application::OnInterruptResume 
+10-01 21:46:26.957  3747  3817 I _DEBUG_OUT: 
+10-01 21:46:26.957  3747  3817 I _DEBUG_OUT: 
+10-01 21:46:26.957  3747  3817 I _DEBUG_OUT: 
+10-01 21:46:26.957  3747  3817 I _DEBUG_OUT:  GS_InterruptLoading::GS_InterruptLoading(int,bool) 
+10-01 21:46:26.962  3747  3747 D InputMethodManagerUtils: startInputInner - Id : 0
+10-01 21:46:26.962  3747  3747 I InputMethodManager: startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+10-01 21:46:26.967  3747  3803 D InputTransport: Input channel constructed: 'ClientS', fd=153
+10-01 21:46:26.978  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:26.978  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:26.978  3747  3853 I _DEBUG_OUT:  GS_InterruptLoading::Ctor ----> loading splash screen. 
+10-01 21:46:27.019  3747  3853 I StormGLOFT: Optimized shader: 1
+10-01 21:46:27.049  3747  3853 I StormGLOFT: Optimized shader: 2
+10-01 21:46:27.070  3747  3853 I StormGLOFT: Optimized shader: 4
+10-01 21:46:27.092  3747  3853 I StormGLOFT: Optimized shader: 5
+10-01 21:46:27.152  3747  3853 I StormGLOFT: Optimized shader: 7
+10-01 21:46:27.154  3747  3853 I StormGLOFT: Optimized shader: 8
+10-01 21:46:27.162  3747  3853 I StormGLOFT: Optimized shader: 10
+10-01 21:46:27.165  3747  3853 I StormGLOFT: Optimized shader: 11
+10-01 21:46:27.178  3747  3853 I StormGLOFT: Optimized shader: 13
+10-01 21:46:27.203  3747  3853 I StormGLOFT: Optimized shader: 14
+10-01 21:46:27.225  3747  3853 I StormGLOFT: Optimized shader: 16
+10-01 21:46:27.251  3747  3853 I StormGLOFT: Optimized shader: 17
+10-01 21:46:27.277  3747  3853 I StormGLOFT: Optimized shader: 19
+10-01 21:46:27.300  3747  3853 I StormGLOFT: Optimized shader: 20
+10-01 21:46:27.323  3747  3853 I StormGLOFT: Optimized shader: 22
+10-01 21:46:27.349  3747  3853 I StormGLOFT: Optimized shader: 23
+10-01 21:46:27.371  3747  3853 I StormGLOFT: Optimized shader: 25
+10-01 21:46:27.401  3747  3853 I StormGLOFT: Optimized shader: 26
+10-01 21:46:27.423  3747  3853 I StormGLOFT: Optimized shader: 28
+10-01 21:46:27.446  3747  3853 I StormGLOFT: Optimized shader: 29
+10-01 21:46:27.467  3747  3853 I StormGLOFT: Optimized shader: 31
+10-01 21:46:27.489  3747  3853 I StormGLOFT: Optimized shader: 32
+10-01 21:46:27.508  3747  3853 I StormGLOFT: Optimized shader: 34
+10-01 21:46:27.530  3747  3853 I StormGLOFT: Optimized shader: 35
+10-01 21:46:27.551  3747  3853 I StormGLOFT: Optimized shader: 37
+10-01 21:46:27.573  3747  3853 I StormGLOFT: Optimized shader: 38
+10-01 21:46:27.596  3747  3853 I _DEBUG_OUT: TEXTURE FILE [/storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/textures/splash_final.tga] 
+10-01 21:46:27.621  3747  3747 I VRI[Stubs$Landscape]@f13a276: handleAppVisibility mAppVisible = true visible = false
+10-01 21:46:27.621  3747  3747 D VRI[Stubs$Landscape]@f13a276: visibilityChanged oldVisibility=true newVisibility=false
+10-01 21:46:27.632  3747  3747 I SV[171640894 Stubs$Landscape]: onWindowVisibilityChanged(8) false android.widget.VideoView{a3b083e VFE...... .F...... 0,370-2184,1598 #7f0b0031 app:id/surface_view aid=1073741824} of VRI[Stubs$Landscape]@f13a276
+10-01 21:46:27.632  3747  3747 I SurfaceView: 171640894 Changes: creating=false format=false size=false visible=true alpha=false hint=false left=false top=false z=false attached=true lifecycleStrategy=false
+10-01 21:46:27.632  3747  3747 I SurfaceView: 171640894 Cur surface: Surface(name=null mNativeObject=-5476376628476137040)/@0xb1ad76f
+10-01 21:46:27.632  3747  3747 I SurfaceView: 171640894 surfaceDestroyed
+10-01 21:46:27.632  3747  3747 I SV[171640894 Stubs$Landscape]: surfaceDestroyed callback.size 1 #2 android.widget.VideoView{a3b083e VFE...... .F...... 0,370-2184,1598 #7f0b0031 app:id/surface_view aid=1073741824}
+10-01 21:46:27.632  3747  3747 V MediaPlayer-JNI: reset
+10-01 21:46:27.632  3747  3747 V MediaPlayerNative: reset
+10-01 21:46:27.644  3747  3747 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+10-01 21:46:27.644  3747  3747 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+10-01 21:46:27.644  3747  3747 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+10-01 21:46:27.644  3747  3747 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+10-01 21:46:27.645  3747  3747 V MediaPlayer-JNI: release
+10-01 21:46:27.645  3747  3747 V MediaPlayerNative: setListener
+10-01 21:46:27.645  3747  3747 V MediaPlayerNative: disconnect
+10-01 21:46:27.645  3747  3747 V MediaPlayerNative: destructor
+10-01 21:46:27.645  3747  3747 V MediaPlayerNative: disconnect
+10-01 21:46:27.647  3747  3747 I SV[171640894 Stubs$Landscape]: updateSurface: mVisible = false mSurface.isValid() = true
+10-01 21:46:27.648  3747  3747 I SV[171640894 Stubs$Landscape]: releaseSurfaces: viewRoot = VRI[Stubs$Landscape]@f13a276
+10-01 21:46:27.648  3747  3747 V SurfaceView: Layout: x=0 y=370 w=2184 h=1228, frame=Rect(0, 0 - 1280, 720)
+10-01 21:46:27.648  3747  3784 D SurfaceView: 24696544 windowPositionLost, frameNr = 0
+10-01 21:46:27.652  3747  3747 I VRI[Stubs$Landscape]@f13a276: Relayout returned: old=(0,0,2184,1968) new=(0,0,2184,1968) relayoutAsync=false req=(2184,1968)8 dur=2 res=0x200002 s={false 0x0} ch=true seqId=0
+10-01 21:46:27.652  3747  3747 I SV[171640894 Stubs$Landscape]: windowStopped(true) false android.widget.VideoView{a3b083e VFE...... .F...... 0,370-2184,1598 #7f0b0031 app:id/surface_view aid=1073741824} of VRI[Stubs$Landscape]@f13a276
+10-01 21:46:27.652  3747  3747 D SV[171640894 Stubs$Landscape]: updateSurface: surface is not valid
+10-01 21:46:27.652  3747  3747 I SV[171640894 Stubs$Landscape]: releaseSurfaces: viewRoot = VRI[Stubs$Landscape]@f13a276
+10-01 21:46:27.652  3747  3747 D VRI[Stubs$Landscape]@f13a276: applyTransactionOnDraw applyImmediately
+10-01 21:46:27.653  3747  3747 D SV[171640894 Stubs$Landscape]: updateSurface: surface is not valid
+10-01 21:46:27.653  3747  3747 I SV[171640894 Stubs$Landscape]: releaseSurfaces: viewRoot = VRI[Stubs$Landscape]@f13a276
+10-01 21:46:27.653  3747  3747 D VRI[Stubs$Landscape]@f13a276: applyTransactionOnDraw applyImmediately
+10-01 21:46:27.653  3747  3747 D VRI[Stubs$Landscape]@f13a276: Not drawing due to not visible. Reason=!mAppVisible && !mForceDecorViewVisibility
+10-01 21:46:27.653  3747  3747 D VRI[Stubs$Landscape]@f13a276: Pending transaction will not be applied in sync with a draw due to view not visible
+10-01 21:46:27.653  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:27.653  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:27.653  3747  3853 I _DEBUG_OUT:   GS_InterruptLoading::Dtor  ----> unloading splash screen. 
+10-01 21:46:27.653  3747  3747 I VRI[Stubs$Landscape]@f13a276: mWNT: t=0xb4000079932391d0 mBlastBufferQueue=0xnull fn= 0 HdrRenderState mRenderHdrSdrRatio=1.0 caller= android.view.ViewRootImpl.handleSyncRequestWhenNoAsyncDraw:6812 android.view.ViewRootImpl.performTraversals:5568 android.view.ViewRootImpl.doTraversal:3959 
+10-01 21:46:27.654  3747  3747 I VRI[Stubs$Landscape]@f13a276: stopped(true) old = false
+10-01 21:46:27.654  3747  3747 D VRI[Stubs$Landscape]@f13a276: WindowStopped on local.dh2.fold7/com.zettabridge.launcher.Stubs$Landscape set to true
+10-01 21:46:27.655  3747  3747 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+10-01 21:46:27.655  3747  3747 I SurfaceView: 171640894 Detaching SV
+10-01 21:46:27.655  3747  3747 D SV[171640894 Stubs$Landscape]: updateSurface: surface is not valid
+10-01 21:46:27.655  3747  3747 I SV[171640894 Stubs$Landscape]: releaseSurfaces: viewRoot = VRI[Stubs$Landscape]@f13a276
+10-01 21:46:27.655  3747  3747 D VRI[Stubs$Landscape]@f13a276: applyTransactionOnDraw applyImmediately
+10-01 21:46:27.655  3747  3747 I SV[171640894 Stubs$Landscape]: onDetachedFromWindow: tryReleaseSurfaces()
+10-01 21:46:27.655  3747  3747 I SV[171640894 Stubs$Landscape]: releaseSurfaces: viewRoot = VRI[Stubs$Landscape]@f13a276
+10-01 21:46:27.655  3747  3747 D VRI[Stubs$Landscape]@f13a276: applyTransactionOnDraw applyImmediately
+10-01 21:46:27.655  3747  3747 D ViewRootImpl: Skipping stats log for color mode
+10-01 21:46:27.655  3747  3747 I VRI[Stubs$Landscape]@f13a276: dispatchDetachedFromWindow
+10-01 21:46:27.656  3747  3747 D InputTransport: Input channel destroyed: 'e3ba92a', fd=172
+10-01 21:46:27.661  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:27.661  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:27.661  3747  3853 I _DEBUG_OUT:   ---------------LoadingStep_LoadBackground   2
+10-01 21:46:27.682  3747  3853 I _DEBUG_OUT: In Intializeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+10-01 21:46:27.707  3747  3853 I _DEBUG_OUT: In Intializeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee 11111111111111111
+10-01 21:46:39.826  3747  3853 I StormGLOFT: Optimized shader: 19
+10-01 21:46:39.828  3747  3853 I StormGLOFT: Optimized shader: 20
+10-01 21:46:39.831  3747  3853 I StormGLOFT: Optimized shader: 22
+10-01 21:46:39.848  3747  3853 I StormGLOFT: Optimized shader: 23
+10-01 21:46:39.862  3747  3853 I StormGLOFT: Optimized shader: 25
+10-01 21:46:39.879  3747  3853 I StormGLOFT: Optimized shader: 26
+10-01 21:46:39.891  3747  3853 I StormGLOFT: Optimized shader: 28
+10-01 21:46:39.910  3747  3853 I StormGLOFT: Optimized shader: 29
+10-01 21:46:39.923  3747  3853 I StormGLOFT: Optimized shader: 31
+10-01 21:46:39.938  3747  3853 I StormGLOFT: Optimized shader: 32
+10-01 21:46:39.951  3747  3853 I StormGLOFT: Optimized shader: 34
+10-01 21:46:39.966  3747  3853 I StormGLOFT: Optimized shader: 35
+10-01 21:46:39.978  3747  3853 I StormGLOFT: Optimized shader: 37
+10-01 21:46:39.993  3747  3853 I StormGLOFT: Optimized shader: 38
+10-01 21:46:40.005  3747  3853 I StormGLOFT: Optimized shader: 40
+10-01 21:46:40.020  3747  3853 I StormGLOFT: Optimized shader: 41
+10-01 21:46:41.242  3747  3853 I StormGLOFT: Optimized shader: 43
+10-01 21:46:41.274  3747  3853 I StormGLOFT: Optimized shader: 44
+10-01 21:46:41.319  3747  3853 I StormGLOFT: Optimized shader: 46
+10-01 21:46:41.349  3747  3853 I StormGLOFT: Optimized shader: 47
+10-01 21:46:41.475  3747  3853 I StormGLOFT: Optimized shader: 49
+10-01 21:46:41.507  3747  3853 I StormGLOFT: Optimized shader: 50
+10-01 21:46:41.650  3747  3853 I StormGLOFT: Optimized shader: 52
+10-01 21:46:41.681  3747  3853 I StormGLOFT: Optimized shader: 53
+10-01 21:46:41.751  3747  3853 I StormGLOFT: Optimized shader: 55
+10-01 21:46:41.781  3747  3853 I StormGLOFT: Optimized shader: 56
+10-01 21:46:41.871  3747  3853 I StormGLOFT: Optimized shader: 58
+10-01 21:46:41.910  3747  3853 I StormGLOFT: Optimized shader: 59
+10-01 21:46:41.972  3747  3853 I StormGLOFT: Optimized shader: 61
+10-01 21:46:42.003  3747  3853 I StormGLOFT: Optimized shader: 62
+10-01 21:46:42.064  3747  3853 I StormGLOFT: Optimized shader: 64
+10-01 21:46:42.096  3747  3853 I StormGLOFT: Optimized shader: 65
+10-01 21:46:42.187  3747  3853 I StormGLOFT: Optimized shader: 67
+10-01 21:46:42.226  3747  3853 I StormGLOFT: Optimized shader: 68
+10-01 21:46:42.318  3747  3853 I StormGLOFT: Optimized shader: 70
+10-01 21:46:42.357  3747  3853 I StormGLOFT: Optimized shader: 71
+10-01 21:46:42.421  3747  3853 I StormGLOFT: Optimized shader: 73
+10-01 21:46:42.453  3747  3853 I StormGLOFT: Optimized shader: 74
+10-01 21:46:42.547  3747  3853 I StormGLOFT: Optimized shader: 76
+10-01 21:46:42.587  3747  3853 I StormGLOFT: Optimized shader: 77
+10-01 21:46:42.650  3747  3853 I StormGLOFT: Optimized shader: 79
+10-01 21:46:42.682  3747  3853 I StormGLOFT: Optimized shader: 80
+10-01 21:46:42.745  3747  3853 I StormGLOFT: Optimized shader: 82
+10-01 21:46:42.778  3747  3853 I StormGLOFT: Optimized shader: 83
+10-01 21:46:42.874  3747  3853 I StormGLOFT: Optimized shader: 85
+10-01 21:46:42.914  3747  3853 I StormGLOFT: Optimized shader: 86
+10-01 21:46:43.010  3747  3853 I StormGLOFT: Optimized shader: 88
+10-01 21:46:43.051  3747  3853 I StormGLOFT: Optimized shader: 89
+10-01 21:46:43.129  3747  3853 I StormGLOFT: Optimized shader: 91
+10-01 21:46:43.162  3747  3853 I StormGLOFT: Optimized shader: 92
+10-01 21:46:43.273  3747  3853 I StormGLOFT: Optimized shader: 94
+10-01 21:46:43.314  3747  3853 I StormGLOFT: Optimized shader: 95
+10-01 21:46:43.391  3747  3853 I StormGLOFT: Optimized shader: 97
+10-01 21:46:43.425  3747  3853 I StormGLOFT: Optimized shader: 98
+10-01 21:46:43.502  3747  3853 I StormGLOFT: Optimized shader: 100
+10-01 21:46:43.536  3747  3853 I StormGLOFT: Optimized shader: 101
+10-01 21:46:43.651  3747  3853 I StormGLOFT: Optimized shader: 103
+10-01 21:46:43.694  3747  3853 I StormGLOFT: Optimized shader: 104
+10-01 21:46:43.809  3747  3853 I StormGLOFT: Optimized shader: 106
+10-01 21:46:43.853  3747  3853 I StormGLOFT: Optimized shader: 107
+10-01 21:46:43.934  3747  3853 I StormGLOFT: Optimized shader: 109
+10-01 21:46:43.969  3747  3853 I StormGLOFT: Optimized shader: 110
+10-01 21:46:44.086  3747  3853 I StormGLOFT: Optimized shader: 112
+10-01 21:46:44.129  3747  3853 I StormGLOFT: Optimized shader: 113
+10-01 21:46:44.209  3747  3853 I StormGLOFT: Optimized shader: 115
+10-01 21:46:44.244  3747  3853 I StormGLOFT: Optimized shader: 116
+10-01 21:46:44.325  3747  3853 I StormGLOFT: Optimized shader: 118
+10-01 21:46:44.361  3747  3853 I StormGLOFT: Optimized shader: 119
+10-01 21:46:44.477  3747  3853 I StormGLOFT: Optimized shader: 121
+10-01 21:46:44.523  3747  3853 I StormGLOFT: Optimized shader: 122
+10-01 21:46:44.641  3747  3853 I StormGLOFT: Optimized shader: 124
+10-01 21:46:44.688  3747  3853 I StormGLOFT: Optimized shader: 125
+10-01 21:46:44.759  3747  3853 I FILENAMEEEEEEEEEEEEEE : /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/oconf.bar
+10-01 21:46:44.762  3747  3853 I GLXPlayer: [GetWebConfig] before String2Blob -> buffer = f|1|i|22347|v|1.0.0|
+10-01 21:46:44.763  3747  3853 I GLXPlayer: SendByGet b=MXxm8LgFYiZm0CdF2XxmUaJlWWh
+10-01 21:46:44.763  3747  3853 I GLXPlayer: GLXPlayerHttp::sendByGet()
+10-01 21:46:44.788  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:44.788  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:44.788  3747  3853 I _DEBUG_OUT:  Last PushMenu:: menu_splash 
+10-01 21:46:44.788  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:44.814  3747  3853 I _DEBUG_OUT: ----------------ClearLoadingScreen
+10-01 21:46:44.864  3747  3853 I _DEBUG_OUT: IS true
+10-01 21:46:44.884  3747  3853 I _DEBUG_OUT: Idle
+10-01 21:46:44.884  3747  3853 I _DEBUG_OUT: Idle
+10-01 21:46:44.884  3747  3853 I _DEBUG_OUT: IS true
+10-01 21:46:44.917  3747  3853 I _DEBUG_OUT: ControllerGameSWF
+10-01 21:46:44.918  3747  3853 I _DEBUG_OUT: _root.btn_PauseBlocker._visible is: false
+10-01 21:46:44.918  3747  3853 I _DEBUG_OUT: _root.btn_TravelBlocker._visible is: false
+10-01 21:46:44.921  3747  3853 I _DEBUG_OUT: NUMBER IS: 2
+10-01 21:46:46.483  3747  3747 I VRI[Stubs$SingleInstance]@8130585: ViewPostIme pointer 0
+10-01 21:46:46.483  3747  3747 I System.out: ------------------------------------Count = 1
+10-01 21:46:46.483  3747  3817 I _DEBUG_OUT: Toucxhhhhhhhhhhhhhhhh 1530---- 1186
+10-01 21:46:46.485  3747  3747 I VRI[Stubs$SingleInstance]@8130585: call setFrameRateCategory for touch hint category=high hint, reason=touch, vri=VRI[Stubs$SingleInstance]@8130585
+10-01 21:46:46.510  3747  3747 I System.out: ------------------------------------Count = 1
+10-01 21:46:46.510  3747  3817 I _DEBUG_OUT: Toucxhhhhhhhhhhhhhhhh 1530---- 1186
+10-01 21:46:46.527  3747  3747 I System.out: ------------------------------------Count = 1
+10-01 21:46:46.527  3747  3817 I _DEBUG_OUT: Toucxhhhhhhhhhhhhhhhh 1530---- 1186
+10-01 21:46:46.543  3747  3747 I System.out: ------------------------------------Count = 1
+10-01 21:46:46.544  3747  3817 I _DEBUG_OUT: Toucxhhhhhhhhhhhhhhhh 1530---- 1186
+10-01 21:46:46.560  3747  3747 I System.out: ------------------------------------Count = 1
+10-01 21:46:46.560  3747  3817 I _DEBUG_OUT: Toucxhhhhhhhhhhhhhhhh 1530---- 1186
+10-01 21:46:46.576  3747  3747 I System.out: ------------------------------------Count = 1
+10-01 21:46:46.576  3747  3817 I _DEBUG_OUT: Toucxhhhhhhhhhhhhhhhh 1530---- 1186
+10-01 21:46:46.593  3747  3747 I System.out: ------------------------------------Count = 1
+10-01 21:46:46.593  3747  3817 I _DEBUG_OUT: Toucxhhhhhhhhhhhhhhhh 1530---- 1186
+10-01 21:46:46.603  3747  3747 I VRI[Stubs$SingleInstance]@8130585: ViewPostIme pointer 1
+10-01 21:46:46.603  3747  3747 I System.out: ------------------------------------Count = 1
+10-01 21:46:46.603  3747  3817 I _DEBUG_OUT: Toucxhhhhhhhhhhhhhhhh 1530---- 1186
+10-01 21:46:46.616  3747  3853 I _DEBUG_OUT: *************************GoToMainMenu::1111111
+10-01 21:46:46.616  3747  3853 I _DEBUG_OUT: *************************GoToMainMenu::222222
+10-01 21:46:46.616  3747  3853 I _DEBUG_OUT: *************************GoToMainMenu::3333333
+10-01 21:46:46.617  3747  3853 I _DEBUG_OUT: *************************GoToMainMenu::4444444444
+10-01 21:46:46.617  3747  3853 I _DEBUG_OUT: *************************GoToMainMenu::55555555555555
+10-01 21:46:46.625  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:46.625  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:46.625  3747  3853 I _DEBUG_OUT:  Last PushMenu:: menu_MainMenu 
+10-01 21:46:46.625  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:46.625  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:46.625  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:46.625  3747  3853 I _DEBUG_OUT:  ***************************Last menu_MainMenu::  
+10-01 21:46:46.625  3747  3853 I _DEBUG_OUT: 
+10-01 21:46:46.626  3747  3853 I _DEBUG_OUT: IN SHOW
+10-01 21:46:46.626  3747  3853 I _DEBUG_OUT: IN GET SLOT
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: PlayerLastSave = 18.04.     09:05
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: SlotID = 0
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: PlayerLocation = Болота
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: StringClassLVL = Воин Ур.: 1
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: PlayerCurrentAct = 1
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: PlayerClass = Воин
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: DifficultyUnlocked = 0
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: Difficulty = 0
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: PlayerName = wolf
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: InUse = true
+10-01 21:46:46.685  3747  3853 I _DEBUG_OUT: PlayerLVL = 1
+10-01 21:46:46.692  3747  3853 I _DEBUG_OUT: NAME: wolf
+10-01 21:46:46.692  3747  3853 I _DEBUG_OUT: CLASS: Воин Ур.: 1
+10-01 21:46:46.692  3747  3853 I _DEBUG_OUT: LOCATION: Болота
+10-01 21:46:46.692  3747  3853 I _DEBUG_OUT: DIFF: 0
+10-01 21:46:49.592  3747  3853 W DH2FileGuard: DH2FileGuard rejected directory-shaped path: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/
+10-01 21:46:49.595  3747  3853 I _DEBUG_OUT: Could not open file :  /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS//storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/3d/characters/prince/prince_modular.bdae 
+10-01 21:46:49.596  3747  3825 I zbridge : guest SIGSEGV: read of 0x00000000, pc 0x00000000
+10-01 21:46:49.596  3747  3825 I zbridge :   r0  00000000  r1  000aaae8  r2  00000000  r3  fa991520
+10-01 21:46:49.596  3747  3825 I zbridge :   r4  fb0760f4  r5  0000177c  r6  fa991520  r7  f597ce8c
+10-01 21:46:49.596  3747  3825 I zbridge :   r8  fb076148  r9  00000001  r10 fb07619c  r11 f4799b00
+10-01 21:46:49.596  3747  3825 I zbridge :   r12 00000000  r13 fb076080  r14 fce102e4  r15 00000000
+10-01 21:46:49.596  3747  3825 I zbridge :   cpsr a0070010  tls fb07748c  tid 3825  guest tid 3853
+10-01 21:46:49.596  3747  3825 I zbridge :   pc in ?
+10-01 21:46:49.596  3747  3825 I zbridge :   lr in /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x60b2e4
+10-01 21:46:49.676  3612  3612 I VRI[Dh2Activity]@cbdf3bc: handleAppVisibility mAppVisible = false visible = true
+10-01 21:46:49.679  3612  3612 I VRI[Dh2Activity]@cbdf3bc: stopped(false) old = true
+10-01 21:46:49.680  3612  3612 D ViewRootImpl: Skipping stats log for color mode
+10-01 21:46:49.680  3612  3612 D BBA2    : setIsFg isFg = true
+10-01 21:46:49.697  3612  3612 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 1968, 2184), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=false mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=false mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null} }
+10-01 21:46:49.697  3612  3612 I BufferQueueProducer: [](id:e1c00000002,api:0,p:-752708400,c:3612) setDequeueTimeout:2077252342
+10-01 21:46:49.697  3612  3612 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= VRI[Dh2Activity]@cbdf3bc mNativeObject= 0xb40000795320e010 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3603 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 android.view.Choreographer.doCallbacks:1423 android.view.Choreographer.doFrame:1348 android.view.Choreographer$FrameDisplayEventReceiver.run:1930 
+10-01 21:46:49.698  3612  3612 I BLASTBufferQueue_Java: update, w= 1968 h= 2184 mName = VRI[Dh2Activity]@cbdf3bc mNativeObject= 0xb40000795320e010 sc.mNativeObject= 0xb400007a5321fbd0 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3608 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:49.698  3612  3612 I VRI[Dh2Activity]@cbdf3bc: Relayout returned: old=(0,0,1968,2184) new=(0,0,1968,2184) relayoutAsync=false req=(1968,2184)0 dur=5 res=0x200003 s={true 0xb4000078b3238980} ch=true seqId=0
+10-01 21:46:49.699  3612  3612 D VRI[Dh2Activity]@cbdf3bc: applyTransactionOnDraw applyImmediately
+10-01 21:46:49.699  3612  3612 D VRI[Dh2Activity]@cbdf3bc: reportNextDraw android.view.ViewRootImpl.performTraversals:5507 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 
+10-01 21:46:49.699  3612  3612 D VRI[Dh2Activity]@cbdf3bc: applyTransactionOnDraw applyImmediately
+10-01 21:46:49.699  3612  3612 D VRI[Dh2Activity]@cbdf3bc: Setup new sync=wmsSync-VRI[Dh2Activity]@cbdf3bc#4
+10-01 21:46:49.699  3612  3612 I VRI[Dh2Activity]@cbdf3bc: Creating new active sync group VRI[Dh2Activity]@cbdf3bc#5
+10-01 21:46:49.699  3612  3612 D VRI[Dh2Activity]@cbdf3bc: Start draw after previous draw not visible
+10-01 21:46:49.703  3612  3612 I BLASTBufferQueue: [VRI[Dh2Activity]@cbdf3bc#2](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:49.703  3612  3612 I SurfaceComposerClient: apply transaction with the first frame. layerId: 274981, bufferData(ID: 15513421873159, frameNumber: 1)
+10-01 21:46:49.704  3612  3612 D VRI[Dh2Activity]@cbdf3bc: reportDrawFinished seqId=0
+10-01 21:46:49.720  3612  3612 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 1968, 2184), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=false mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=false mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null} }
+10-01 21:46:49.721  3612  3612 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 1968, 2184), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null} }
+10-01 21:46:49.721  3612  3612 I VRI[Dh2Activity]@cbdf3bc: handleResized, frames=ClientWindowFrames{frame=[0,0][1968,2184] display=[0,0][1968,2184] parentFrame=[0,0][0,0]} displayId=0 dragResizing=false compatScale=1.0 frameChanged=false attachedFrameChanged=false configChanged=false displayChanged=false compatScaleChanged=false dragResizingChanged=false
+10-01 21:46:49.738  3612  3612 D InputMethodManagerUtils: startInputInner - Id : 0
+10-01 21:46:49.738  3612  3612 I InputMethodManager: startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+10-01 21:46:49.739  3612  3612 D InsetsController: hide(ime())
+10-01 21:46:49.739  3612  3612 I ImeTracker: local.dh2.fold7:39ef885a: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+10-01 21:46:49.740  3612  3623 D InputTransport: Input channel constructed: 'ClientS', fd=129
+10-01 21:46:50.010  3612  4471 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=local.dh2.fold7
+10-01 21:46:50.307  3612  3612 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(0, 88 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(1450, 18 - 1520, 88), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 1968, 2184), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {3 mType=ime mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:50.308  3612  3612 I VRI[Dh2Activity]@cbdf3bc: handleResized, frames=ClientWindowFrames{frame=[0,0][1968,2184] display=[0,0][1968,2184] parentFrame=[0,0][0,0]} displayId=0 dragResizing=false compatScale=1.0 frameChanged=false attachedFrameChanged=false configChanged=false displayChanged=false compatScaleChanged=false dragResizingChanged=false
+10-01 21:46:50.318  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=statusBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:50.372  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=navigationBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:52.113  3612  3612 I VRI[Dh2Activity]@cbdf3bc: ViewPostIme pointer 0
+10-01 21:46:52.113  3612  3612 I VRI[Dh2Activity]@cbdf3bc: call setFrameRateCategory for touch hint category=high hint, reason=touch, vri=VRI[Dh2Activity]@cbdf3bc
+10-01 21:46:52.268  3612  3612 I VRI[Dh2Activity]@cbdf3bc: ViewPostIme pointer 1
+10-01 21:46:52.270  3612  3612 D ScrollView: initGoToTop
+10-01 21:46:52.271  3612  3612 I Dialog  : mIsDeviceDefault = false, mIsSamsungBasicInteraction = false, isMetaDataInActivity = false
+10-01 21:46:52.274  3612  3612 I DecorView: setWindowBackground: isPopOver=false color=fff1f1f3 d=android.graphics.drawable.InsetDrawable@c94a091
+10-01 21:46:52.275  3612  3612 D ScrollView: initGoToTop
+10-01 21:46:52.276  3612  3612 D ScrollView: initGoToTop
+10-01 21:46:52.276  3612  3612 W Settings: Setting show_button_background has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+10-01 21:46:52.278  3612  3612 I WindowManager: WindowManagerGlobal#addView, ty=2, view=com.android.internal.policy.DecorView{7637f0b V.E...... R.....I. 0,0-0,0}[Dh2Activity], caller=android.view.WindowManagerImpl.addView:167 android.app.Dialog.show:544 android.app.AlertDialog$Builder.show:1195 
+10-01 21:46:52.278  3612  3612 D ViewRootImpl: desktopMode is false
+10-01 21:46:52.278  3612  3612 I ViewRootImpl: dVRR is disabled
+10-01 21:46:52.280  3612  3612 D InputTransport: Input channel constructed: 'fdd1a78', fd=142
+10-01 21:46:52.281  3612  3612 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(0, 88 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(1450, 18 - 1520, 88), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 1968, 2184), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:52.281  3612  3612 I VRI[Dh2Activity]@394a1e8: synced displayState. AttachInfo displayState=2
+10-01 21:46:52.281  3612  3612 I VRI[Dh2Activity]@394a1e8: setView = com.android.internal.policy.DecorView@7637f0b IsHRR=false mFlingFrameRateChange=0 TM=true
+10-01 21:46:52.281  3612  3612 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda16@866b3d
+10-01 21:46:52.309  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=statusBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:52.309  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=navigationBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:52.309  3612  3612 I BufferQueueProducer: [](id:e1c00000003,api:0,p:0,c:3612) setDequeueTimeout:2077252342
+10-01 21:46:52.309  3612  3612 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= VRI[Dh2Activity]@394a1e8 mNativeObject= 0xb400007953213a60 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3603 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 android.view.Choreographer.doCallbacks:1423 android.view.Choreographer.doFrame:1348 android.view.Choreographer$FrameDisplayEventReceiver.run:1930 
+10-01 21:46:52.309  3612  3612 I BLASTBufferQueue_Java: update, w= 1826 h= 2308 mName = VRI[Dh2Activity]@394a1e8 mNativeObject= 0xb400007953213a60 sc.mNativeObject= 0xb400007a532504d0 format= -3 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3608 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:52.309  3612  3612 I VRI[Dh2Activity]@394a1e8: Relayout returned: old=(0,89,1968,2145) new=(197,89,1771,2145) relayoutAsync=false req=(1574,2056)0 dur=2 res=0x200003 s={true 0xb4000078b323b020} ch=true seqId=0
+10-01 21:46:52.310  3612  3612 I VRI[Dh2Activity]@394a1e8: performConfigurationChange setNightDimText nightDimLevel=0
+10-01 21:46:52.310  3612  3612 D ScrollView:  onsize change changed 
+10-01 21:46:52.310  3612  3612 D ScrollView:  onsize change changed 
+10-01 21:46:52.310  3612  3612 D VRI[Dh2Activity]@394a1e8: applyTransactionOnDraw applyImmediately
+10-01 21:46:52.310  3612  3612 D VRI[Dh2Activity]@394a1e8: reportNextDraw android.view.ViewRootImpl.performTraversals:5507 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 
+10-01 21:46:52.310  3612  3612 D VRI[Dh2Activity]@394a1e8: applyTransactionOnDraw applyImmediately
+10-01 21:46:52.310  3612  3612 D VRI[Dh2Activity]@394a1e8: Setup new sync=wmsSync-VRI[Dh2Activity]@394a1e8#6
+10-01 21:46:52.310  3612  3612 I VRI[Dh2Activity]@394a1e8: Creating new active sync group VRI[Dh2Activity]@394a1e8#7
+10-01 21:46:52.315  3612  3612 I BLASTBufferQueue: [VRI[Dh2Activity]@394a1e8#3](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:52.315  3612  3612 I SurfaceComposerClient: apply transaction with the first frame. layerId: 275000, bufferData(ID: 15513421873162, frameNumber: 1)
+10-01 21:46:52.315  3612  3612 D VRI[Dh2Activity]@394a1e8: reportDrawFinished seqId=0
+10-01 21:46:52.362  3612  3612 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:52.362  3612  3612 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:52.369  3612  3612 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=true mHasImeFocus=false
+10-01 21:46:52.369  3612  3612 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=true mHasImeFocus=false
+10-01 21:46:52.986  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 0
+10-01 21:46:52.988  3612  3612 I VRI[Dh2Activity]@394a1e8: call setFrameRateCategory for touch hint category=high hint, reason=touch, vri=VRI[Dh2Activity]@394a1e8
+10-01 21:46:53.067  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 1
+10-01 21:46:53.360  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 0
+10-01 21:46:53.453  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 1
+10-01 21:46:53.703  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 0
+10-01 21:46:53.819  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 1
+10-01 21:46:54.103  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 0
+10-01 21:46:54.201  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 1
+10-01 21:46:54.467  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 0
+10-01 21:46:54.569  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 1
+10-01 21:46:55.269  3612  3612 I VRI[Dh2Activity]@cbdf3bc: call setFrameRateCategory for touch hint category=no preference, reason=boost timeout, vri=VRI[Dh2Activity]@cbdf3bc
+10-01 21:46:55.288  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 0
+10-01 21:46:56.516  3612  3612 I VRI[Dh2Activity]@394a1e8: ViewPostIme pointer 1
+10-01 21:46:56.517  3612  3612 I WindowManager: WindowManagerGlobal#removeView, ty=2, view=com.android.internal.policy.DecorView{7637f0b V.E...... R.....I. 0,0-1574,2056}[Dh2Activity], caller=android.view.WindowManagerGlobal.removeView:654 android.view.WindowManagerImpl.removeViewImmediate:254 android.app.Dialog.dismissDialog:854 
+10-01 21:46:56.517  3612  3612 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+10-01 21:46:56.518  3612  3612 I VRI[Dh2Activity]@394a1e8: dispatchDetachedFromWindow
+10-01 21:46:56.532  3612  3612 D InputTransport: Input channel destroyed: 'fdd1a78', fd=142
+10-01 21:46:56.533  3612  3612 W InputEventReceiver: Attempted to finish an input event but the input event receiver has already been disposed.
+10-01 21:46:56.549  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=statusBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:56.549  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=navigationBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:56.571  3612  3612 D InputMethodManagerUtils: startInputInner - Id : 0
+10-01 21:46:56.571  3612  3612 I InputMethodManager: startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+10-01 21:46:56.576  3612  3623 D InputTransport: Input channel constructed: 'ClientS', fd=146
+10-01 21:46:56.588  3612  3612 D InsetsController: hide(ime())
+10-01 21:46:56.588  3612  3612 I ImeTracker: local.dh2.fold7:3e5083ea: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+10-01 21:46:56.802  3612  3612 I VRI[Dh2Activity]@cbdf3bc: ViewPostIme pointer 0
+10-01 21:46:56.803  3612  3612 I VRI[Dh2Activity]@cbdf3bc: call setFrameRateCategory for touch hint category=high hint, reason=touch, vri=VRI[Dh2Activity]@cbdf3bc
+10-01 21:46:56.858  3612  3612 I VRI[Dh2Activity]@cbdf3bc: ViewPostIme pointer 1
+10-01 21:46:56.904  3612  3612 D ScrollView: initGoToTop
+10-01 21:46:56.905  3612  3612 I Dialog  : mIsDeviceDefault = false, mIsSamsungBasicInteraction = false, isMetaDataInActivity = false
+10-01 21:46:56.906  3612  3612 I DecorView: setWindowBackground: isPopOver=false color=fff1f1f3 d=android.graphics.drawable.InsetDrawable@8d367a9
+10-01 21:46:56.907  3612  3612 D ScrollView: initGoToTop
+10-01 21:46:56.907  3612  3612 D ScrollView: initGoToTop
+10-01 21:46:56.908  3612  3612 W Settings: Setting show_button_background has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+10-01 21:46:56.908  3612  3612 I WindowManager: WindowManagerGlobal#addView, ty=2, view=com.android.internal.policy.DecorView{e673448 V.E...... R.....I. 0,0-0,0}[Dh2Activity], caller=android.view.WindowManagerImpl.addView:167 android.app.Dialog.show:544 android.app.AlertDialog$Builder.show:1195 
+10-01 21:46:56.908  3612  3612 D ViewRootImpl: desktopMode is false
+10-01 21:46:56.908  3612  3612 I ViewRootImpl: dVRR is disabled
+10-01 21:46:56.911  3612  3612 D InputTransport: Input channel constructed: '9431eac', fd=142
+10-01 21:46:56.912  3612  3612 I InsetsController: onStateChanged: host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity, from=android.view.ViewRootImpl.onInsetsStateChanged:3038, state=InsetsState: {mDisplayFrame=Rect(0, 0 - 1968, 2184), mDisplayCutout=DisplayCutout{insets=Rect(0, 88 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(1450, 18 - 1520, 88), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=1968 displayHeight=2184 physicalDisplayWidth=1968 physicalDisplayHeight=2184 density={2.625} cutoutSpec={M 190.8571428571429,0 M 190.8571428571429,6.857142857142857 a 13.33333333333333,13.33333333333333 0 1,0 0,26.66666666666667 a 13.33333333333333,13.33333333333333 0 1,0 0,-26.66666666666667 z @dp} rotation={0} scale={1.0} physicalPixelDisplaySizeRatio={1.0}}} sideOverrides={}}, mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=13, center=Point(13, 13)}, RoundedCorner{position=TopRight, radius=13, center=Point(1955, 13)}, RoundedCorner{position=BottomRight, radius=13, center=Point(1955, 2171)}, RoundedCorner{position=BottomLeft, radius=13, center=Point(13, 2171)}]}  mRoundedCornerFrame=Rect(0, 0 - 1968, 2184), mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(1852, 0 - 1968, 89) rotation=0}, mDisplayShape=DisplayShape{ spec=-311912193 displayWidth=1968 displayHeight=2184 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}, mSources= { InsetsSource: {9a630001 mType=navigationBars mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630004 mType=systemGestures mFrame=[0,0][78,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=LEFT mBoundingRects=null}, InsetsSource: {9a630005 mType=mandatorySystemGestures mFrame=[0,2100][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630006 mType=tappableElement mFrame=[0,2145][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=BOTTOM mBoundingRects=null}, InsetsSource: {9a630024 mType=systemGestures mFrame=[1890,0][1968,2184] mAttachedInsets=null mVisible=true mFlags= mSideHint=RIGHT mBoundingRects=null}, InsetsSource: {ec550000 mType=statusBars mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550005 mType=mandatorySystemGestures mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {ec550006 mType=tappableElement mFrame=[0,0][1968,89] mAttachedInsets=null mVisible=true mFlags= mSideHint=TOP mBoundingRects=null}, InsetsSource: {209a0004 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0005 mType=mandatorySystemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0006 mType=tappableElement mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null}, InsetsSource: {209a0024 mType=systemGestures mFrame=[0,0][0,0] mAttachedInsets=null mVisible=false mFlags=INVALID mSideHint=NONE mBoundingRects=null} }
+10-01 21:46:56.912  3612  3612 I VRI[Dh2Activity]@b8f62e1: synced displayState. AttachInfo displayState=2
+10-01 21:46:56.912  3612  3612 I VRI[Dh2Activity]@b8f62e1: setView = com.android.internal.policy.DecorView@e673448 IsHRR=false mFlingFrameRateChange=0 TM=true
+10-01 21:46:56.912  3612  3612 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ViewRootImpl$$ExternalSyntheticLambda16@c3e4c1d
+10-01 21:46:56.933  3612  3612 I BufferQueueProducer: [](id:e1c00000004,api:0,p:-752567664,c:3612) setDequeueTimeout:2077252342
+10-01 21:46:56.934  3612  3612 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= VRI[Dh2Activity]@b8f62e1 mNativeObject= 0xb400007953213a60 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3603 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 android.view.Choreographer.doCallbacks:1423 android.view.Choreographer.doFrame:1348 android.view.Choreographer$FrameDisplayEventReceiver.run:1930 
+10-01 21:46:56.934  3612  3612 I BLASTBufferQueue_Java: update, w= 1826 h= 2308 mName = VRI[Dh2Activity]@b8f62e1 mNativeObject= 0xb400007953213a60 sc.mNativeObject= 0xb400007a5325bb10 format= -3 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3608 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:56.934  3612  3612 I VRI[Dh2Activity]@b8f62e1: Relayout returned: old=(0,89,1968,2145) new=(197,89,1771,2145) relayoutAsync=false req=(1574,2056)0 dur=2 res=0x200003 s={true 0xb4000078b3260d40} ch=true seqId=0
+10-01 21:46:56.934  3612  3612 I VRI[Dh2Activity]@b8f62e1: performConfigurationChange setNightDimText nightDimLevel=0
+10-01 21:46:56.935  3612  3612 D ScrollView:  onsize change changed 
+10-01 21:46:56.935  3612  3612 D ScrollView:  onsize change changed 
+10-01 21:46:56.935  3612  3612 D VRI[Dh2Activity]@b8f62e1: applyTransactionOnDraw applyImmediately
+10-01 21:46:56.935  3612  3612 D VRI[Dh2Activity]@b8f62e1: reportNextDraw android.view.ViewRootImpl.performTraversals:5507 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 
+10-01 21:46:56.935  3612  3612 D VRI[Dh2Activity]@b8f62e1: applyTransactionOnDraw applyImmediately
+10-01 21:46:56.935  3612  3612 D VRI[Dh2Activity]@b8f62e1: Setup new sync=wmsSync-VRI[Dh2Activity]@b8f62e1#8
+10-01 21:46:56.935  3612  3612 I VRI[Dh2Activity]@b8f62e1: Creating new active sync group VRI[Dh2Activity]@b8f62e1#9
+10-01 21:46:56.942  3612  3612 I BLASTBufferQueue: [VRI[Dh2Activity]@b8f62e1#4](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:56.942  3612  3612 I SurfaceComposerClient: apply transaction with the first frame. layerId: 275011, bufferData(ID: 15513421873167, frameNumber: 1)
+10-01 21:46:56.942  3612  3612 D VRI[Dh2Activity]@b8f62e1: reportDrawFinished seqId=0
+10-01 21:46:56.966  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=statusBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:56.966  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=navigationBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:56.976  3612  3612 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:56.976  3612  3612 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:56.984  3612  3612 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=true mHasImeFocus=false
+10-01 21:46:56.984  3612  3612 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=true mHasImeFocus=false
+10-01 21:46:57.476  3612  3612 I VRI[Dh2Activity]@b8f62e1: ViewPostIme pointer 0
+10-01 21:46:57.483  3612  3612 I VRI[Dh2Activity]@b8f62e1: ViewPostIme pointer 1
+10-01 21:46:57.483  3612  3612 I WindowManager: WindowManagerGlobal#removeView, ty=2, view=com.android.internal.policy.DecorView{e673448 V.E...... R.....I. 0,0-1574,2056}[Dh2Activity], caller=android.view.WindowManagerGlobal.removeView:654 android.view.WindowManagerImpl.removeViewImmediate:254 android.app.Dialog.dismissDialog:854 
+10-01 21:46:57.483  3612  3612 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+10-01 21:46:57.484  3612  3612 I VRI[Dh2Activity]@b8f62e1: dispatchDetachedFromWindow
+10-01 21:46:57.494  3612  3612 D InputTransport: Input channel destroyed: '9431eac', fd=142
+10-01 21:46:57.494  3612  3612 W InputEventReceiver: Attempted to finish an input event but the input event receiver has already been disposed.
+10-01 21:46:57.517  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=statusBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:57.517  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=navigationBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:57.521  3612  3612 D InputMethodManagerUtils: startInputInner - Id : 0
+10-01 21:46:57.521  3612  3612 I InputMethodManager: startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+10-01 21:46:57.525  3612  3623 D InputTransport: Input channel constructed: 'ClientS', fd=147
+10-01 21:46:57.539  3612  3612 D InsetsController: hide(ime())
+10-01 21:46:57.539  3612  3612 I ImeTracker: local.dh2.fold7:82918c86: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+10-01 21:46:57.886  3612  3612 I VRI[Dh2Activity]@cbdf3bc: ViewPostIme pointer 0
+10-01 21:46:58.150  3612  3612 I VRI[Dh2Activity]@cbdf3bc: ViewPostIme pointer 1
+10-01 21:46:58.201  3612  3612 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:58.201  3612  3612 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:46:58.334  3612  3612 D InputTransport: Input channel destroyed: 'ClientS', fd=129
+10-01 21:46:58.771  3612  3612 I VRI[Dh2Activity]@cbdf3bc: handleAppVisibility mAppVisible = true visible = false
+10-01 21:46:58.771  3612  3612 D VRI[Dh2Activity]@cbdf3bc: visibilityChanged oldVisibility=true newVisibility=false
+10-01 21:46:58.779  3612  3612 I VRI[Dh2Activity]@cbdf3bc: Relayout returned: old=(0,0,1968,2184) new=(0,0,1968,2184) relayoutAsync=false req=(1968,2184)8 dur=3 res=0x200002 s={false 0x0} ch=true seqId=0
+10-01 21:46:58.779  3612  3612 D VRI[Dh2Activity]@cbdf3bc: Not drawing due to not visible. Reason=!mAppVisible && !mForceDecorViewVisibility
+10-01 21:46:58.779  3612  3612 I VRI[Dh2Activity]@cbdf3bc: stopped(true) old = false
+10-01 21:46:58.779  3612  3612 D ViewRootImpl: Skipping stats log for color mode
+10-01 21:46:58.790  3612  3612 I VRI[Dh2Activity]@cbdf3bc: Relayout returned: old=(0,0,1968,2184) new=(0,0,1968,2184) relayoutAsync=false req=(1968,2184)8 dur=1 res=0x200002 s={false 0x0} ch=false seqId=0
+10-01 21:46:58.790  3612  3691 D HWUI    : CacheManager::trimMemory(20)
+10-01 21:46:58.793  3612  3612 D BBA2    : setIsFg isFg = false; delayValue 3999ms
+10-01 21:46:59.052  3612  3612 I VRI[Dh2Activity]@cbdf3bc: handleAppVisibility mAppVisible = false visible = true
+10-01 21:46:59.054  3612  3612 I VRI[Dh2Activity]@cbdf3bc: stopped(false) old = true
+10-01 21:46:59.054  3612  3612 D ViewRootImpl: Skipping stats log for color mode
+10-01 21:46:59.059  3612  3612 I BufferQueueProducer: [](id:e1c00000005,api:0,p:-752708400,c:3612) setDequeueTimeout:2077252342
+10-01 21:46:59.059  3612  3612 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= VRI[Dh2Activity]@cbdf3bc mNativeObject= 0xb40000795320e010 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3603 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 android.view.Choreographer.doCallbacks:1423 android.view.Choreographer.doFrame:1348 android.view.Choreographer$FrameDisplayEventReceiver.run:1930 
+10-01 21:46:59.059  3612  3612 I BLASTBufferQueue_Java: update, w= 1968 h= 2184 mName = VRI[Dh2Activity]@cbdf3bc mNativeObject= 0xb40000795320e010 sc.mNativeObject= 0xb400007a5321fbd0 format= -1 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3608 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 
+10-01 21:46:59.060  3612  3612 I VRI[Dh2Activity]@cbdf3bc: Relayout returned: old=(0,0,1968,2184) new=(0,0,1968,2184) relayoutAsync=false req=(1968,2184)0 dur=4 res=0x200003 s={true 0xb4000078b323a340} ch=true seqId=0
+10-01 21:46:59.060  3612  3612 D VRI[Dh2Activity]@cbdf3bc: applyTransactionOnDraw applyImmediately
+10-01 21:46:59.060  3612  3612 D VRI[Dh2Activity]@cbdf3bc: reportNextDraw android.view.ViewRootImpl.performTraversals:5507 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 
+10-01 21:46:59.060  3612  3612 D VRI[Dh2Activity]@cbdf3bc: applyTransactionOnDraw applyImmediately
+10-01 21:46:59.060  3612  3612 D VRI[Dh2Activity]@cbdf3bc: Setup new sync=wmsSync-VRI[Dh2Activity]@cbdf3bc#10
+10-01 21:46:59.060  3612  3612 I VRI[Dh2Activity]@cbdf3bc: Creating new active sync group VRI[Dh2Activity]@cbdf3bc#11
+10-01 21:46:59.060  3612  3612 D VRI[Dh2Activity]@cbdf3bc: Start draw after previous draw not visible
+10-01 21:46:59.067  3612  3612 I BLASTBufferQueue: [VRI[Dh2Activity]@cbdf3bc#5](f:0,a:0,s:0) onFrameAvailable the first frame is available
+10-01 21:46:59.067  3612  3612 I SurfaceComposerClient: apply transaction with the first frame. layerId: 275029, bufferData(ID: 15513421873169, frameNumber: 1)
+10-01 21:46:59.067  3612  3612 D VRI[Dh2Activity]@cbdf3bc: reportDrawFinished seqId=0
+10-01 21:46:59.082  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=statusBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:59.082  3612  3612 I InsetsSourceConsumer: applyRequestedVisibilityToControl: visible=true, type=navigationBars, host=local.dh2.fold7/com.zettabridge.launcher.Dh2Activity
+10-01 21:46:59.083  3612  3612 D InputMethodManagerUtils: startInputInner - Id : 0
+10-01 21:46:59.083  3612  3612 I InputMethodManager: startInputInner - IInputMethodManagerGlobalInvoker.startInputOrWindowGainedFocus
+10-01 21:46:59.084  3612  3612 D InsetsController: hide(ime())
+10-01 21:46:59.084  3612  3612 I ImeTracker: local.dh2.fold7:43ef5d82: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+10-01 21:46:59.085  3612  3623 D InputTransport: Input channel constructed: 'ClientS', fd=124
+10-01 21:47:01.151  3612  3612 I VRI[Dh2Activity]@cbdf3bc: call setFrameRateCategory for touch hint category=no preference, reason=boost timeout, vri=VRI[Dh2Activity]@cbdf3bc
+10-01 21:47:02.505  3612  3612 I VRI[Dh2Activity]@cbdf3bc: ViewPostIme pointer 0
+10-01 21:47:02.505  3612  3612 I VRI[Dh2Activity]@cbdf3bc: call setFrameRateCategory for touch hint category=high hint, reason=touch, vri=VRI[Dh2Activity]@cbdf3bc
+10-01 21:47:02.939  3612  3612 I VRI[Dh2Activity]@cbdf3bc: ViewPostIme pointer 1
+10-01 21:47:02.985  3612  3612 I ImeFocusController: onPreWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:47:02.985  3612  3612 I ImeFocusController: onPostWindowFocus: skipped hasWindowFocus=false mHasImeFocus=true
+10-01 21:47:03.066  3612  3612 D InputTransport: Input channel destroyed: 'ClientS', fd=124
+10-01 21:47:03.500  3612  3612 I VRI[Dh2Activity]@cbdf3bc: handleAppVisibility mAppVisible = true visible = false
+10-01 21:47:03.500  3612  3612 D VRI[Dh2Activity]@cbdf3bc: visibilityChanged oldVisibility=true newVisibility=false
+10-01 21:47:03.508  3612  3612 I VRI[Dh2Activity]@cbdf3bc: Relayout returned: old=(0,0,1968,2184) new=(0,0,1968,2184) relayoutAsync=false req=(1968,2184)8 dur=3 res=0x200002 s={false 0x0} ch=true seqId=0
+10-01 21:47:03.508  3612  3612 D VRI[Dh2Activity]@cbdf3bc: Not drawing due to not visible. Reason=!mAppVisible && !mForceDecorViewVisibility
+10-01 21:47:03.509  3612  3691 D HWUI    : CacheManager::trimMemory(20)
+10-01 21:47:03.509  3612  3612 I VRI[Dh2Activity]@cbdf3bc: stopped(true) old = false
+10-01 21:47:03.509  3612  3612 D ViewRootImpl: Skipping stats log for color mode
+10-01 21:47:03.522  3612  3612 I VRI[Dh2Activity]@cbdf3bc: Relayout returned: old=(0,0,1968,2184) new=(0,0,1968,2184) relayoutAsync=false req=(1968,2184)8 dur=1 res=0x200002 s={false 0x0} ch=false seqId=0
+10-01 21:47:03.526  3612  3612 D BBA2    : setIsFg isFg = false; delayValue 3999ms
+10-01 21:47:07.624  3612  3612 I VRI[Dh2Activity]@cbdf3bc: handleAppVisibility mAppVisible = false visible = true
+10-01 21:47:07.625  3612  3612 I VRI[Dh2Activity]@cbdf3bc: stopped(false) old = true
+10-01 21:47:07.625  3612  3612 D ViewRootImpl: Skipping stats log for color mode
+10-01 21:47:07.625  3612  3612 D BBA2    : setIsFg isFg = true
+10-01 21:47:07.639  3612  3612 I BufferQueueProducer: [](id:e1c00000006,api:0,p:-752708400,c:3612) setDequeueTimeout:2077252342
+10-01 21:47:07.639  3612  3612 I BLASTBufferQueue_Java: new BLASTBufferQueue, mName= VRI[Dh2Activity]@cbdf3bc mNativeObject= 0xb40000795320e010 caller= android.view.ViewRootImpl.updateBlastSurfaceIfNeeded:3603 android.view.ViewRootImpl.relayoutWindow:11813 android.view.ViewRootImpl.performTraversals:4840 android.view.ViewRootImpl.doTraversal:3959 android.view.ViewRootImpl$TraversalRunnable.run:13034 android.view.Choreographer$CallbackRecord.run:1961 android.view.Choreographer$CallbackRecord.run:1970 android.view.Choreographer.doCallbacks:1423 android.view.Choreographer.doFrame:1348 android.view.Choreographer$FrameDisplayEventReceiver.run:1930 
+10-01 21:47:07.639  3612  3612 I BLASTBufferQueue_Java: update, w= 1968 h= 2184 mName = VRI[Dh2Activity]@cbdf3bc mNativeObject= 0xb40000795320e010 

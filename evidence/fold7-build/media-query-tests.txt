@@ -1,0 +1,1 @@
+PASS 7 media-query regression cases: explicit projection, rows, null provider, denied access, invalid schema, database error and cursor cleanup. Host doubles only; Android device retest required.

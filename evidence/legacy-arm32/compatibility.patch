@@ -1,0 +1,298 @@
+--- original/AndroidManifest.xml
++++ patched/AndroidManifest.xml
+@@ -1,44 +1,45 @@
+-<?xml version="1.0" encoding="utf-8"?>
++<?xml version='1.0' encoding='utf-8'?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" android:installLocation="auto" package="com.gameloft.android.GAND.GloftD2SS" platformBuildVersionCode="33" platformBuildVersionName="13">
+-    <uses-feature android:name="android.hardware.touchscreen.multitouch"/>
+-    <uses-feature android:name="android.hardware.telephony" android:required="false"/>
+-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+-    <uses-permission android:name="android.permission.INTERNET"/>
+-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+-    <uses-permission android:name="android.permission.BLUETOOTH"/>
+-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+-    <uses-feature android:name="android.hardware.bluetooth"/>
+-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+-    <application android:debuggable="false" android:icon="@drawable/icon" android:label="@string/icon_label" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+-        <activity android:clearTaskOnLaunch="true" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|fontScale" android:finishOnTaskLaunch="true" android:label="@string/icon_label" android:launchMode="singleInstance" android:multiprocess="false" android:name=".DungeonHunter2" android:screenOrientation="landscape"/>
+-        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|fontScale" android:name=".Zirconia_DRM">
++    <uses-feature android:name="android.hardware.touchscreen.multitouch" />
++    <uses-feature android:name="android.hardware.telephony" android:required="false" />
++    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
++    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
++    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
++    <uses-permission android:name="android.permission.INTERNET" />
++    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
++    <uses-permission android:name="android.permission.BLUETOOTH" />
++    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
++    <uses-feature android:name="android.hardware.bluetooth" />
++    <uses-permission android:name="android.permission.WAKE_LOCK" />
++    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
++    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
++    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
++    <application android:debuggable="false" android:icon="@drawable/icon" android:label="@string/icon_label" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:name="local.dh2.compat.CompatApplication" android:hardwareAccelerated="false" android:extractNativeLibs="true" android:resizeableActivity="false">
++        <activity android:clearTaskOnLaunch="true" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|fontScale" android:finishOnTaskLaunch="true" android:label="@string/icon_label" android:launchMode="singleInstance" android:multiprocess="false" android:name=".DungeonHunter2" android:screenOrientation="landscape" android:exported="false" />
++        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|fontScale" android:name=".Zirconia_DRM" android:exported="true">
+             <intent-filter>
+-                <action android:name="android.intent.action.MAIN"/>
+-                <category android:name="android.intent.category.LAUNCHER"/>
++                <action android:name="android.intent.action.MAIN" />
++                <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
+-        <activity android:clearTaskOnLaunch="true" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|fontScale" android:finishOnTaskLaunch="true" android:multiprocess="false" android:name=".MyVideoView" android:screenOrientation="landscape">
++        <activity android:clearTaskOnLaunch="true" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|fontScale" android:finishOnTaskLaunch="true" android:multiprocess="false" android:name=".MyVideoView" android:screenOrientation="landscape" android:exported="true">
+             <intent-filter>
+-                <action android:name="android.intent.action.MAIN"/>
++                <action android:name="android.intent.action.MAIN" />
+             </intent-filter>
+         </activity>
+-        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|uiMode|fontScale" android:multiprocess="false" android:name=".GLiveMain" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar">
++        <activity android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|uiMode|fontScale" android:multiprocess="false" android:name=".GLiveMain" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar" android:exported="true">
+             <intent-filter>
+-                <action android:name="android.intent.action.MAIN"/>
++                <action android:name="android.intent.action.MAIN" />
+             </intent-filter>
+         </activity>
+-        <activity android:clearTaskOnLaunch="true" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|uiMode|fontScale" android:finishOnTaskLaunch="true" android:multiprocess="false" android:name=".IGPActivity" android:screenOrientation="portrait">
++        <activity android:clearTaskOnLaunch="true" android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|uiMode|fontScale" android:finishOnTaskLaunch="true" android:multiprocess="false" android:name=".IGPActivity" android:screenOrientation="portrait" android:exported="true">
+             <intent-filter>
+-                <action android:name="android.intent.action.MAIN"/>
++                <action android:name="android.intent.action.MAIN" />
+             </intent-filter>
+         </activity>
++        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+     </application>
+-    <uses-feature android:name="android.hardware.touchscreen"/>
+-    <uses-feature android:glEsVersion="0x00020000"/>
+-    <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="false" android:xlargeScreens="true"/>
+-</manifest>
++    <uses-feature android:name="android.hardware.touchscreen" />
++    <uses-feature android:glEsVersion="0x00020000" />
++    <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="false" android:xlargeScreens="true" />
++</manifest>--- original/apktool.yml
++++ patched/apktool.yml
+@@ -4,12 +4,13 @@
+   ids:
+   - 1
+ sdkInfo:
+-  minSdkVersion: 8
++  minSdkVersion: 21
++  targetSdkVersion: 24
+ packageInfo:
+   forcedPackageId: 127
+ versionInfo:
+-  versionCode: 102
+-  versionName: 1.0.2
++  versionCode: 103
++  versionName: 1.0.2-compat1-experimental
+ doNotCompress:
+ - arsc
+ - ogg
+--- original/smali/com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.smali
++++ patched/smali/com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.smali
+@@ -1717,7 +1717,7 @@
+ 
+     check-cast v0, Landroid/telephony/TelephonyManager;
+ 
+-    invoke-virtual {v0}, Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
++    invoke-static {v0}, Llocal/dh2/compat/PhoneCompat;->getDeviceId(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     new-instance v0, Ljava/lang/StringBuilder;
+ 
+--- original/smali/com/gameloft/android/GAND/GloftD2SS/GLUtils/Device.smali
++++ patched/smali/com/gameloft/android/GAND/GloftD2SS/GLUtils/Device.smali
+@@ -474,7 +474,7 @@
+     if-eqz v1, :cond_b
+ 
+     :cond_a
+-    invoke-virtual {v0}, Landroid/telephony/TelephonyManager;->getLine1Number()Ljava/lang/String;
++    invoke-static {v0}, Llocal/dh2/compat/PhoneCompat;->getLine1Number(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     move-result-object v1
+ 
+@@ -899,7 +899,7 @@
+ 
+     check-cast v0, Landroid/telephony/TelephonyManager;
+ 
+-    invoke-virtual {v0}, Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
++    invoke-static {v0}, Llocal/dh2/compat/PhoneCompat;->getDeviceId(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     move-result-object v0
+ 
+--- original/smali/com/gameloft/android/GAND/GloftD2SS/GetNpost.smali
++++ patched/smali/com/gameloft/android/GAND/GloftD2SS/GetNpost.smali
+@@ -302,7 +302,7 @@
+ 
+     check-cast v0, Landroid/telephony/TelephonyManager;
+ 
+-    invoke-virtual {v0}, Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
++    invoke-static {v0}, Llocal/dh2/compat/PhoneCompat;->getDeviceId(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     move-result-object v0
+ 
+--- original/smali/com/gameloft/android/GAND/GloftD2SS/IGPActivity.smali
++++ patched/smali/com/gameloft/android/GAND/GloftD2SS/IGPActivity.smali
+@@ -638,7 +638,7 @@
+ 
+     check-cast v0, Landroid/telephony/TelephonyManager;
+ 
+-    invoke-virtual {v0}, Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
++    invoke-static {v0}, Llocal/dh2/compat/PhoneCompat;->getDeviceId(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     move-result-object v0
+ 
+--- original/smali/com/gameloft/android/GAND/GloftD2SS/installer/utils/Tracking.smali
++++ patched/smali/com/gameloft/android/GAND/GloftD2SS/installer/utils/Tracking.smali
+@@ -275,7 +275,7 @@
+ 
+     sput-object v0, Lcom/gameloft/android/GAND/GloftD2SS/installer/utils/Tracking;->h:Ljava/lang/String;
+ 
+-    invoke-virtual {p0}, Landroid/telephony/TelephonyManager;->getLine1Number()Ljava/lang/String;
++    invoke-static {p0}, Llocal/dh2/compat/PhoneCompat;->getLine1Number(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     move-result-object v0
+ 
+--- original/smali/com/samsung/zirconia/DevInfoRetriever.smali
++++ patched/smali/com/samsung/zirconia/DevInfoRetriever.smali
+@@ -32,7 +32,7 @@
+ 
+     check-cast v0, Landroid/telephony/TelephonyManager;
+ 
+-    invoke-virtual {v0}, Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
++    invoke-static {v0}, Llocal/dh2/compat/PhoneCompat;->getDeviceId(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     move-result-object v2
+ 
+@@ -44,13 +44,13 @@
+ 
+     move-result-object v1
+ 
+-    invoke-virtual {v0}, Landroid/telephony/TelephonyManager;->getSubscriberId()Ljava/lang/String;
++    invoke-static {v0}, Llocal/dh2/compat/PhoneCompat;->getSubscriberId(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     move-result-object v3
+ 
+     iput-object v3, p0, Lcom/samsung/zirconia/DevInfoRetriever;->deviceSubscriberNumber:Ljava/lang/String;
+ 
+-    invoke-virtual {v0}, Landroid/telephony/TelephonyManager;->getLine1Number()Ljava/lang/String;
++    invoke-static {v0}, Llocal/dh2/compat/PhoneCompat;->getLine1Number(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     move-result-object v3
+ 
+--- original/smali/com/samsungapps/plasma/b.smali
++++ patched/smali/com/samsungapps/plasma/b.smali
+@@ -253,7 +253,7 @@
+ 
+     check-cast v0, Landroid/telephony/TelephonyManager;
+ 
+-    invoke-virtual {v0}, Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
++    invoke-static {v0}, Llocal/dh2/compat/PhoneCompat;->getDeviceId(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     move-result-object v1
+ 
+@@ -448,7 +448,7 @@
+     iput-object v1, p0, Lcom/samsungapps/plasma/b;->f:Ljava/lang/String;
+ 
+     :cond_8
+-    invoke-virtual {v0}, Landroid/telephony/TelephonyManager;->getLine1Number()Ljava/lang/String;
++    invoke-static {v0}, Llocal/dh2/compat/PhoneCompat;->getLine1Number(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+ 
+     move-result-object v0
+ 
+--- original/smali/local/dh2/compat/CompatApplication.smali
++++ patched/smali/local/dh2/compat/CompatApplication.smali
+@@ -0,0 +1,32 @@
++.class public Llocal/dh2/compat/CompatApplication;
++.super Landroid/app/Application;
++
++.method public constructor <init>()V
++    .locals 0
++    invoke-direct {p0}, Landroid/app/Application;-><init>()V
++    return-void
++.end method
++
++.method public onCreate()V
++    .locals 2
++    invoke-super {p0}, Landroid/app/Application;->onCreate()V
++    # Ask Android to create the app-specific external directory before legacy I/O.
++    :try_start
++    const/4 v0, 0x0
++    invoke-virtual {p0, v0}, Landroid/content/Context;->getExternalFilesDir(Ljava/lang/String;)Ljava/io/File;
++    move-result-object v0
++    if-eqz v0, :unavailable
++    invoke-virtual {v0}, Ljava/io/File;->isDirectory()Z
++    move-result v1
++    if-eqz v1, :unavailable
++    return-void
++    :try_end
++    .catch Ljava/lang/RuntimeException; {:try_start .. :try_end} :failed
++    :failed
++    move-exception v0
++    :unavailable
++    const-string v0, "DH2Compat"
++    const-string v1, "App-specific external storage is unavailable; game data may not load."
++    invoke-static {v0, v1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
++    return-void
++.end method
+--- original/smali/local/dh2/compat/PhoneCompat.smali
++++ patched/smali/local/dh2/compat/PhoneCompat.smali
+@@ -0,0 +1,53 @@
++.class public final Llocal/dh2/compat/PhoneCompat;
++.super Ljava/lang/Object;
++
++.method public static getDeviceId(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
++    .locals 1
++    if-eqz p0, :unavailable
++    :try_start
++    invoke-virtual {p0}, Landroid/telephony/TelephonyManager;->getDeviceId()Ljava/lang/String;
++    move-result-object v0
++    :try_end
++    .catch Ljava/lang/SecurityException; {:try_start .. :try_end} :denied
++    return-object v0
++    :denied
++    move-exception v0
++    :unavailable
++    # Android may withhold hardware identifiers. Do not fabricate an identifier.
++    const/4 v0, 0x0
++    return-object v0
++.end method
++
++.method public static getSubscriberId(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
++    .locals 1
++    if-eqz p0, :unavailable
++    :try_start
++    invoke-virtual {p0}, Landroid/telephony/TelephonyManager;->getSubscriberId()Ljava/lang/String;
++    move-result-object v0
++    :try_end
++    .catch Ljava/lang/SecurityException; {:try_start .. :try_end} :denied
++    return-object v0
++    :denied
++    move-exception v0
++    :unavailable
++    # Android may withhold hardware identifiers. Do not fabricate an identifier.
++    const/4 v0, 0x0
++    return-object v0
++.end method
++
++.method public static getLine1Number(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
++    .locals 1
++    if-eqz p0, :unavailable
++    :try_start
++    invoke-virtual {p0}, Landroid/telephony/TelephonyManager;->getLine1Number()Ljava/lang/String;
++    move-result-object v0
++    :try_end
++    .catch Ljava/lang/SecurityException; {:try_start .. :try_end} :denied
++    return-object v0
++    :denied
++    move-exception v0
++    :unavailable
++    # Android may withhold hardware identifiers. Do not fabricate an identifier.
++    const/4 v0, 0x0
++    return-object v0
++.end method

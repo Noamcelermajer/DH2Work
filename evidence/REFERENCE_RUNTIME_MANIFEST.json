@@ -1,0 +1,55 @@
+{
+  "note": "Optional QEMU reference-host inputs used here, NOT APK inputs. External AOSP libraries are not in the Git snapshot. New physical-device testing does not require these files.",
+  "files": [
+    {
+      "path": "system/bin/linker64",
+      "bytes": 2645184,
+      "sha256": "e2c1a5de942a3cd8f5bc5d5560865e63b91fe9e5b7f9ef674ffbd2301ba45d0c"
+    },
+    {
+      "path": "system/lib64/ld-android.so",
+      "bytes": 34160,
+      "sha256": "b789ba4a1b05f31a7e1f2ad42acdc6b0cb157bd2c3303f493b4cb2180f50cf4d"
+    },
+    {
+      "path": "system/lib64/libc++.so",
+      "bytes": 1154016,
+      "sha256": "c2b72fa9b5c3dd375e331439ce78276836a758a942632f27d766533365fd6f8f"
+    },
+    {
+      "path": "system/lib64/libc.so",
+      "bytes": 1291480,
+      "sha256": "30e53d0458deaefb5643a9afa6c7c76da3adcf7df49ef5cd139268ec14556d2d"
+    },
+    {
+      "path": "system/lib64/libdl.so",
+      "bytes": 50832,
+      "sha256": "8773fb677411c9203ddbf394883c75b1239207ff594e70a550f262e3c03abe06"
+    },
+    {
+      "path": "system/lib64/libdl_android.so",
+      "bytes": 34744,
+      "sha256": "77d6f3077a612a88f95b2ce0ea8ee7c1bc792f28cefcdcefa3a65e687da990c5"
+    },
+    {
+      "path": "system/lib64/liblog.so",
+      "bytes": 102632,
+      "sha256": "df9879db34f157ce34acad0eb68aefefa37ba1e4edffb4d9bb90a1073ab14767"
+    },
+    {
+      "path": "system/lib64/libm.so",
+      "bytes": 249008,
+      "sha256": "51ff8ab1ef27726f97a9bff297382b8daaff22772aa6632b3ac2490b101e7587"
+    },
+    {
+      "path": "system/lib64/libstdc++.so",
+      "bytes": 51680,
+      "sha256": "dd4a81afcccea1e0a45e6a302b716ffda871e2bb547b94e0c8e3afe13ef12291"
+    },
+    {
+      "path": "system/lib64/libz.so",
+      "bytes": 150928,
+      "sha256": "fd705e874ced27ad9be997e77c9d842bbbfffbbea2045e1e8263fa0df50d89b6"
+    }
+  ]
+}

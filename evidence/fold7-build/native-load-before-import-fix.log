@@ -1,0 +1,30 @@
+linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+[zb] sysroot has no /system/etc/ld.config.arm.txt; using the device file
+[zb] sysroot has no /linkerconfig/ld.config.txt; using the device file
+linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+[zb] sysroot has no /system/etc/ld.config.txt; using the device file
+[zb] sysroot has no /system/etc/ld.config.txt; using the device file
+[zb] sysroot has no /odm/lib; using the device file
+[zb] sysroot has no /vendor/lib; using the device file
+[zb] sysroot has no /odm/lib/libnetd_client.so; using the device file
+[zb] sysroot has no /vendor/lib/libnetd_client.so; using the device file
+Loading DungeonHunter2...
+PASS loaded DungeonHunter2
+Loading StormGLOFT...
+PASS loaded StormGLOFT
+Loading nativeinterface...
+PASS loaded nativeinterface
+PASS original engine log2 and integer encoding: 4096 inputs
+Calling DungeonHunter2 JNI_OnLoad with inert VM...
+PASS DungeonHunter2 JNI_OnLoad: 0x10004
+Calling StormGLOFT JNI_OnLoad with inert VM...
+[zb] guest SIGSEGV: read of 0xb9ad7143, pc 0xfc945f34
+[zb]   r0  0618b4b5  r1  00000000  r2  fc94b1d3  r3  000000f0
+[zb]   r4  00000000  r5  00000000  r6  00000020  r7  fc94b1c4
+[zb]   r8  00000000  r9  00000000  r10 b9ad708f  r11 feffe490
+[zb]   r12 00000000  r13 feffe470  r14 fc94b27c  r15 fc945f34
+[zb]   cpsr 600f0010  tls fdd6d48c  tid 23
+[zb]   pc in /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libStormGLOFT.so offset 0x31f34
+[zb]   lr in /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libStormGLOFT.so offset 0x3727c

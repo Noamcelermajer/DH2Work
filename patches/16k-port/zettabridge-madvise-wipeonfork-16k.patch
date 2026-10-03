@@ -1,0 +1,13 @@
+diff --git a/core/src/syscalls.cpp b/core/src/syscalls.cpp
+--- a/core/src/syscalls.cpp
++++ b/core/src/syscalls.cpp
+@@ -425,4 +425,9 @@ std::int32_t sys_madvise(Ctx& c) {
+     const std::uint64_t size = page_round_up(c.a[1]);
+     if (!c.mem.accessible(addr, size, 0)) return -ENOMEM;
++    if (c.mem.host_page_size() != kPageSize && static_cast<int>(c.a[2]) == MADV_WIPEONFORK) {
++        // Guest fork is unsupported.  Forwarding this 4 KiB range to a 16 KiB
++        // kernel would either fail alignment or mark neighboring guest pages.
++        return 0;
++    }
+     return result_of(::madvise(c.mem.base() + addr, size, static_cast<int>(c.a[2])));
+ }

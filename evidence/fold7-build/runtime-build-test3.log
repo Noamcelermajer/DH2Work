@@ -1,0 +1,109 @@
+-- Target architecture: arm64
+CMake Warning (policy) at third_party/dynarmic/CMakeLists.txt:143 (find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+-- Version: 10.1.0
+-- Build type: Release
+CMake Warning (policy) at third_party/dynarmic/externals/mcl/CMakeLists.txt:29 (set):
+  Policy CMP0218 is not set: The CMAKE_WARN_DEPRECATED and
+  CMAKE_ERROR_DEPRECATED variables are ignored.  Run "cmake --help-policy
+  CMP0218" for policy details.  Use the cmake_policy command to set the
+  policy and suppress this warning.
+This warning is for project developers.  Use -Wno-author or -Wno-policy to
+suppress it.
+
+CMake Warning (deprecated) at third_party/dynarmic/externals/oaknut/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/android-arm64
+[1/35] Building CXX object core/CMakeFiles/zbcore.dir/src/android/host_configuration.cpp.o
+[2/35] Building CXX object core/CMakeFiles/zbcore.dir/src/android/host_native_window.cpp.o
+In file included from /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/core/src/android/host_native_window.cpp:1:
+/workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/core/include/zb/host_native_window.h:43:21: warning: private field 'runtime_' is not used [-Wunused-private-field]
+   43 |     LibraryRuntime& runtime_;
+      |                     ^
+1 warning generated.
+[3/35] Building CXX object core/CMakeFiles/zbcore.dir/src/android/host_input.cpp.o
+[4/35] Building CXX object core/CMakeFiles/zbcore.dir/src/android/host_looper.cpp.o
+[5/35] Building CXX object core/CMakeFiles/zbcore.dir/src/assets/host_assets.cpp.o
+[6/35] Building CXX object core/CMakeFiles/zbcore.dir/src/android/host_sensors.cpp.o
+[7/35] Building CXX object core/CMakeFiles/zbcore.dir/src/android/host_native_activity.cpp.o
+[8/35] Building CXX object core/CMakeFiles/zbcore.dir/src/hang_watchdog.cpp.o
+[9/35] Building CXX object core/CMakeFiles/zbcore.dir/src/gl/egl_manual.cpp.o
+[10/35] Building CXX object core/CMakeFiles/zbcore.dir/src/gl/gl_manual.cpp.o
+[11/35] Building CXX object core/CMakeFiles/zbcore.dir/src/gl/gl_diagnostics.cpp.o
+[12/35] Building CXX object core/CMakeFiles/zbcore.dir/src/gl/host_egl.cpp.o
+In file included from /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/core/src/gl/host_egl.cpp:1:
+/workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/core/include/zb/host_egl.h:170:10: warning: private field 'libegl_tried_' is not used [-Wunused-private-field]
+  170 |     bool libegl_tried_ = false;
+      |          ^
+1 warning generated.
+[13/35] Building CXX object core/CMakeFiles/zbcore.dir/src/gl/host_gl.cpp.o
+[14/35] Building CXX object core/CMakeFiles/zbcore.dir/src/jni/host_jni_natives.cpp.o
+[15/35] Building CXX object core/CMakeFiles/zbcore.dir/src/jni/host_jni_objects.cpp.o
+[16/35] Building CXX object core/CMakeFiles/zbcore.dir/src/jni/host_jni.cpp.o
+[17/35] Building CXX object core/CMakeFiles/zbcore.dir/src/jni/host_jni_data.cpp.o
+[18/35] Building CXX object core/CMakeFiles/zbcore.dir/src/jni/host_jni_vm.cpp.o
+[19/35] Building CXX object core/CMakeFiles/zbcore.dir/src/jni/host_jni_values.cpp.o
+[20/35] Building CXX object core/CMakeFiles/zbcore.dir/src/jni/loader.cpp.o
+[21/35] Building CXX object core/CMakeFiles/zbcore.dir/src/proc_files.cpp.o
+[22/35] Building CXX object core/CMakeFiles/zbcore.dir/src/jni/proxy_runtime.cpp.o
+[23/35] Building CXX object core/CMakeFiles/zbcore.dir/src/signals.cpp.o
+[24/35] Building CXX object core/CMakeFiles/zbcore.dir/src/library_runtime.cpp.o
+[25/35] Building CXX object core/CMakeFiles/zbcore.dir/src/zbridge_c_api.cpp.o
+[26/35] Building CXX object core/CMakeFiles/zbcore.dir/src/process.cpp.o
+[27/35] Building CXX object core/CMakeFiles/zbridge.dir/src/zbridge_c_api.cpp.o
+[28/35] Building CXX object core/CMakeFiles/zbcore.dir/src/syscalls.cpp.o
+[29/35] Linking CXX static library core/libzbcore.a
+[30/35] Building CXX object core/CMakeFiles/zbridge.dir/android/zbridge_jni.cpp.o
+[31/35] Building CXX object core/CMakeFiles/zbridge.dir/android/guest_jni_runtime.cpp.o
+[32/35] Building CXX object core/CMakeFiles/zbridge.dir/android/native_activity_glue.cpp.o
+[33/35] Linking CXX shared library core/libzbridge.so
+[34/35] Building CXX object cli/zbrun/CMakeFiles/zbrun.dir/main.cpp.o
+[35/35] Linking CXX executable cli/zbrun/zbrun
+/workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/guest/tests/cp15_barrier_dynamic.c:7:22: warning: deprecated since v7, use 'dmb' [-Winline-asm]
+    7 |     __asm__ volatile("mcr p15, 0, %0, c7, c10, 5" :: "r"(0) : "memory");  /* DMB */
+      |                      ^
+<inline asm>:1:2: note: instantiated into assembly here
+    1 |         mcr p15, 0, r1, c7, c10, 5
+      |         ^
+/workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/guest/tests/cp15_barrier_dynamic.c:8:22: warning: deprecated since v7, use 'dsb' [-Winline-asm]
+    8 |     __asm__ volatile("mcr p15, 0, %0, c7, c10, 4" :: "r"(0) : "memory");  /* DSB */
+      |                      ^
+<inline asm>:1:2: note: instantiated into assembly here
+    1 |         mcr p15, 0, r1, c7, c10, 4
+      |         ^
+/workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/guest/tests/cp15_barrier_dynamic.c:9:22: warning: deprecated since v7, use 'isb' [-Winline-asm]
+    9 |     __asm__ volatile("mcr p15, 0, %0, c7, c5, 4" :: "r"(0) : "memory");   /* ISB */
+      |                      ^
+<inline asm>:1:2: note: instantiated into assembly here
+    1 |         mcr p15, 0, r1, c7, c5, 4
+      |         ^
+/workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/guest/tests/cp15_barrier_dynamic.c:11:22: warning: deprecated since v7, use 'dmb' [-Winline-asm]
+   11 |     __asm__ volatile("mcr p15, 0, %0, c7, c10, 5" :: "r"(0) : "memory");
+      |                      ^
+<inline asm>:1:2: note: instantiated into assembly here
+    1 |         mcr p15, 0, r1, c7, c10, 5
+      |         ^
+4 warnings generated.
+guest build ok
+launcher bundle file mismatch; missing=[], extra=['assets/.rsync-tmp/zb-files.txt', 'assets/.rsync-tmp/zb-version.txt', 'assets/zb/guest/.rsync-tmp/zbhost', 'assets/zb/guest/lib/.rsync-tmp/libEGL.so', 'assets/zb/guest/lib/.rsync-tmp/libGLESv1_CM.so', 'assets/zb/guest/lib/.rsync-tmp/libGLESv2.so', 'assets/zb/guest/lib/.rsync-tmp/libandroid.so', 'assets/zb/guest/lib/.rsync-tmp/libjnigraphics.so', 'assets/zb/guest/lib/.rsync-tmp/libzbcompat.so', 'assets/zb/guest/lib/.rsync-tmp/libzbjni.so', 'assets/zb/host/.rsync-tmp/libzbproxy.so', 'assets/zb/sysroot/system/lib/.rsync-tmp/libdl.so', 'assets/zb/sysroot/system/lib/.rsync-tmp/liblog.so', 'assets/zb/sysroot/system/lib/.rsync-tmp/libm.so', 'assets/zb/sysroot/system/lib/.rsync-tmp/libstdc++.so', 'assets/zb/sysroot/system/lib/.rsync-tmp/libz.so', 'jniLibs/arm64-v8a/.rsync-tmp/libzbridge.so']
+Traceback (most recent call last):
+  File "/workspace/scratch/283fa0994529/dh2-work/fold7-build/build_runtime.py", line 17, in <module>
+    subprocess.run([str(repo/'tools/make_launcher_bundle.sh')],check=True,env=env)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/tools/make_launcher_bundle.sh']' returned non-zero exit status 1.

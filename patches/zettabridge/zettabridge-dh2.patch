@@ -1,0 +1,321 @@
+diff --git a/android/launcher/app/src/main/java/com/zettabridge/core/ZBridge.java b/android/launcher/app/src/main/java/com/zettabridge/core/ZBridge.java
+index b637f22..5eb0c06 100644
+--- a/android/launcher/app/src/main/java/com/zettabridge/core/ZBridge.java
++++ b/android/launcher/app/src/main/java/com/zettabridge/core/ZBridge.java
+@@ -56,2 +56,4 @@ public final class ZBridge {
+ 
++    public static native void addPathAlias(String guestDirectory, String hostDirectory);
++
+     /**
+diff --git a/android/launcher/app/src/main/java/com/zettabridge/launcher/LoadedPlugin.java b/android/launcher/app/src/main/java/com/zettabridge/launcher/LoadedPlugin.java
+index 015adda..70651e3 100644
+--- a/android/launcher/app/src/main/java/com/zettabridge/launcher/LoadedPlugin.java
++++ b/android/launcher/app/src/main/java/com/zettabridge/launcher/LoadedPlugin.java
+@@ -80,2 +80,3 @@ final class LoadedPlugin {
+         ClassLoader cl = new PluginClassLoader(record, codeCache, RuntimeBundle.proxyLibrary(host),
++                host.getApplicationInfo().nativeLibraryDir,
+                 android.content.Context.class.getClassLoader(), ZBridge.class.getClassLoader());
+@@ -92,2 +93,17 @@ final class LoadedPlugin {
+             ZBridge.activatePlugin(record.dir.getCanonicalPath(), record.targetSdk, cl);
++            if (record.packageName.equals(CacheArchive.GAME)) {
++                String legacy = "/data/data/" + record.packageName;
++                String modern = "/data/user/0/" + record.packageName;
++                String actualLib = record.libDir().getCanonicalPath() + "/";
++                String actualData = record.dataDir().getCanonicalPath() + "/";
++                ZBridge.addPathAlias(legacy + "/lib/", actualLib);
++                ZBridge.addPathAlias(modern + "/lib/", actualLib);
++                ZBridge.addPathAlias(legacy + "/", actualData);
++                ZBridge.addPathAlias(modern + "/", actualData);
++                File external = new File(host.getExternalFilesDir(null), "plugins/" + record.packageName);
++                if (!external.isDirectory() && !external.mkdirs()) throw new java.io.IOException("Cannot create game cache directory");
++                String actualExternal = external.getCanonicalPath() + "/";
++                ZBridge.addPathAlias("/sdcard/Android/data/" + record.packageName + "/files/", actualExternal);
++                ZBridge.addPathAlias("/storage/emulated/0/Android/data/" + record.packageName + "/files/", actualExternal);
++            }
+         }
+diff --git a/android/launcher/app/src/main/java/com/zettabridge/launcher/PluginClassLoader.java b/android/launcher/app/src/main/java/com/zettabridge/launcher/PluginClassLoader.java
+index 0e2988f..b228519 100644
+--- a/android/launcher/app/src/main/java/com/zettabridge/launcher/PluginClassLoader.java
++++ b/android/launcher/app/src/main/java/com/zettabridge/launcher/PluginClassLoader.java
+@@ -16,4 +16,7 @@ final class PluginClassLoader extends DexClassLoader {
+-    PluginClassLoader(PluginRecord record, File codeCache, File proxyTemplate, ClassLoader bootLoader,
++    PluginClassLoader(PluginRecord record, File codeCache, File proxyTemplate, String hostNativeLibraryDir,
++            ClassLoader bootLoader,
+             ClassLoader bridgeLoader) {
+-        super(record.apk().getPath(), codeCache.getPath(), record.isTranslated() ? null : record.libDir().getPath(),
++        super(record.apk().getPath(), codeCache.getPath(), record.isTranslated()
++                ? hostNativeLibraryDir + File.pathSeparator + record.proxyDir().getPath()
++                : record.libDir().getPath(),
+                 bootLoader);
+diff --git a/cli/zbrun/main.cpp b/cli/zbrun/main.cpp
+index 0964edf..44dd839 100644
+--- a/cli/zbrun/main.cpp
++++ b/cli/zbrun/main.cpp
+@@ -7,2 +7,3 @@
+ #include "zb/process.h"
++#include "zb/runtime_report.h"
+ 
+@@ -16,2 +17,3 @@ int usage() {
+                  "  --sysroot DIR     arm32 Android system files (default: $ZB_SYSROOT)\n"
++                 "  --report FILE     persist guest log tail, exits and register diagnostics\n"
+                  "  --env NAME=VALUE  set a variable for the guest only; the host dynamic loader never\n"
+@@ -28,2 +30,3 @@ int main(int argc, char** argv) {
+     bool precise_faults = false;
++    std::string report_file;
+ 
+@@ -38,2 +41,3 @@ int main(int argc, char** argv) {
+ 
++    std::vector<std::pair<std::string, std::string>> aliases;
+     int i = 1;
+@@ -43,2 +47,5 @@ int main(int argc, char** argv) {
+             i += 2;
++        } else if (std::strcmp(argv[i], "--report") == 0 && i + 1 < argc) {
++            report_file = argv[i + 1];
++            i += 2;
+         } else if (std::strcmp(argv[i], "--precise-faults") == 0) {
+@@ -52,2 +59,8 @@ int main(int argc, char** argv) {
+             i += 2;
++        } else if (std::strcmp(argv[i], "--alias") == 0 && i + 2 < argc) {
++            const std::string from = argv[i + 1], to = argv[i + 2];
++            if (from.empty() || to.empty() || from.front() != '/' || to.front() != '/' ||
++                from.back() != '/' || to.back() != '/') return usage();
++            aliases.emplace_back(from, to);
++            i += 3;
+         } else {
+@@ -61,3 +74,5 @@ int main(int argc, char** argv) {
+     zb::Process process;
++    if (!report_file.empty() && !zb::write_runtime_report_to(zb::runtime_report(), report_file)) return 2;
+     process.set_sysroot(sysroot);
++    for (const auto& [from, to] : aliases) process.add_path_alias(from, to);
+     if (precise_faults) process.set_precise_faults(true);
+diff --git a/core/android/guest_jni_runtime.h b/core/android/guest_jni_runtime.h
+index 96592da..3334ce0 100644
+--- a/core/android/guest_jni_runtime.h
++++ b/core/android/guest_jni_runtime.h
+@@ -31,2 +31,3 @@ public:
+     ProxyRuntime& proxies() { return proxies_; }
++    void add_path_alias(const std::string& guest, const std::string& host) { engine_.add_path_alias(guest, host); }
+ 
+diff --git a/core/android/zbridge_jni.cpp b/core/android/zbridge_jni.cpp
+index 68c4cc6..7de5987 100644
+--- a/core/android/zbridge_jni.cpp
++++ b/core/android/zbridge_jni.cpp
+@@ -124,2 +124,20 @@ JNIEXPORT void JNICALL Java_com_zettabridge_core_ZBridge_activatePlugin(JNIEnv*
+ 
++// Configure aliases before guest code starts; both prefixes must be absolute directories.
++JNIEXPORT void JNICALL Java_com_zettabridge_core_ZBridge_addPathAlias(JNIEnv* env, jclass,
++                                                                    jstring guest, jstring host) {
++    const auto g = to_string(env, guest);
++    const auto h = to_string(env, host);
++    if (!g || !h || g->empty() || h->empty() || g->front() != '/' || h->front() != '/' ||
++        g->back() != '/' || h->back() != '/') {
++        throw_new(env, "java/lang/IllegalArgumentException", "Path aliases require absolute directory prefixes");
++        return;
++    }
++    auto* runtime = zb::GuestJniRuntime::peek();
++    if (runtime == nullptr) {
++        throw_new(env, "java/lang/IllegalStateException", "Activate the plugin before adding path aliases");
++        return;
++    }
++    runtime->add_path_alias(*g, *h);
++}
++
+ // static native int onProxyLoaded(String proxyPath), called by libzbproxy.so's JNI_OnLoad.
+diff --git a/core/include/zb/process.h b/core/include/zb/process.h
+index 9bb9ba9..ed4cff0 100644
+--- a/core/include/zb/process.h
++++ b/core/include/zb/process.h
+@@ -208,2 +208,3 @@ private:
+     void crash_report(const Stop& stop, GuestThread& thread) const;
++    void thread_report(GuestThread& thread, std::uint32_t pc) const;
+     std::string build_maps() const;
+@@ -221,3 +222,4 @@ private:
+ 
+-    std::mutex mm_mutex_;
++    mutable std::mutex mm_mutex_;
++    mutable std::atomic<bool> crash_state_reported_{false};
+     std::mutex signal_mutex_;
+diff --git a/core/include/zb/runtime_report.h b/core/include/zb/runtime_report.h
+index d354374..76af26c 100644
+--- a/core/include/zb/runtime_report.h
++++ b/core/include/zb/runtime_report.h
+@@ -61,2 +61,4 @@ public:
+     void note_guest_exit(const std::string& reason);
++    // Bounded tail of guest stderr/stdout and liblog messages, independent of logcat.
++    void note_guest_log(const std::string& message, bool urgent = false);
+ 
+@@ -68,3 +70,3 @@ public:
+     static constexpr std::size_t kMaxOpenedPaths = 16;
+-    static constexpr std::size_t kMaxFailedOpens = 4;
++    static constexpr std::size_t kMaxFailedOpens = 16;
+     void note_guest_open(const std::string& path);
+@@ -170,2 +172,3 @@ private:
+     std::string exit_reason_;
++    std::vector<std::string> guest_logs_;
+ 
+diff --git a/core/src/process.cpp b/core/src/process.cpp
+index 1ee6046..df04a97 100644
+--- a/core/src/process.cpp
++++ b/core/src/process.cpp
+@@ -178,2 +178,5 @@ Process::~Process() = default;
+ void Process::request_exit(int status) {
++    if (status != 0 && !exiting_) {
++        if (auto* thread = current_thread()) thread_report(*thread, thread->regs()[15]);
++    }
+     exit_status_ = status;
+@@ -741,2 +744,9 @@ void Process::crash_report(const Stop& stop, GuestThread& thread) const {
+     runtime_report().note_guest_exit(std::string(summary) + " in " + describe_address(stop.pc));
++    thread_report(thread, stop.pc);
++}
++
++void Process::thread_report(GuestThread& thread, std::uint32_t pc) const {
++    // Called from the stopped JIT's normal dispatcher, never a host signal handler.
++    if (crash_state_reported_.exchange(true)) return;
++    std::lock_guard<std::mutex> memory_lock(mm_mutex_);
+     const auto& r = thread.regs();
+@@ -753,3 +763,3 @@ void Process::crash_report(const Stop& stop, GuestThread& thread) const {
+     runtime_report().note_crash_detail("recent-egl-calls", egl_recent_calls());
+-    log("  pc in %s", describe_address(stop.pc).c_str());
++    log("  pc in %s", describe_address(pc).c_str());
+     log("  lr in %s", describe_address(r[14]).c_str());
+@@ -776,3 +786,3 @@ void Process::crash_report(const Stop& stop, GuestThread& thread) const {
+ 
+-    runtime_report().note_crash_detail("pc", describe_address(stop.pc));
++    runtime_report().note_crash_detail("pc", describe_address(pc));
+     runtime_report().note_crash_detail("lr", describe_address(r[14]));
+@@ -793,2 +803,16 @@ void Process::crash_report(const Stop& stop, GuestThread& thread) const {
+     runtime_report().note_crash_detail("precise", precise_faults_ ? "yes" : "no");
++    // These are candidates found on the stack, NOT an unwound backtrace.
++    unsigned candidates = 0;
++    for (unsigned offset = 0; offset < 1024 && candidates < 16; offset += 4) {
++        const std::uint64_t addr = static_cast<std::uint64_t>(sp) + offset;
++        if (addr > UINT32_MAX || !mem_.accessible(addr, 4, kPageRead)) break;
++        std::uint32_t value;
++        std::memcpy(&value, mem_.host_ptr(addr, 4, kPageRead), 4);
++        if (!mem_.accessible(value & ~1u, 2, kPageExec)) continue;
++        const std::string module = describe_address(value & ~1u);
++        if (module == "?") continue;
++        char slot[64];
++        std::snprintf(slot, sizeof slot, "sp+0x%x=0x%08x ", offset, value);
++        runtime_report().note_crash_detail("stack-candidate-" + std::to_string(++candidates), slot + module);
++    }
+ }
+diff --git a/core/src/runtime_report.cpp b/core/src/runtime_report.cpp
+index a703f39..d849884 100644
+--- a/core/src/runtime_report.cpp
++++ b/core/src/runtime_report.cpp
+@@ -178,6 +178,8 @@ void RuntimeReport::note_guest_open_failed(const std::string& path, int error) {
+         std::lock_guard<std::mutex> lock(mutex_);
+-        if (failed_opens_.size() < kMaxFailedOpens) {
+-            failed_opens_.emplace_back(one_line(path, kMaxDetail), error);
+-            structural = true;
+-        }
++        const auto entry = std::make_pair(one_line(path, kMaxDetail), error);
++        auto old = std::find(failed_opens_.begin(), failed_opens_.end(), entry);
++        structural = old == failed_opens_.end();
++        if (old != failed_opens_.end()) failed_opens_.erase(old);
++        failed_opens_.push_back(entry);
++        if (failed_opens_.size() > kMaxFailedOpens) failed_opens_.erase(failed_opens_.begin());
+         observer = take_observer();
+@@ -199,2 +201,13 @@ void RuntimeReport::note_guest_exit(const std::string& reason) {
+ 
++void RuntimeReport::note_guest_log(const std::string& message, bool urgent) {
++    std::shared_ptr<Observer> observer;
++    {
++        std::lock_guard<std::mutex> lock(mutex_);
++        guest_logs_.push_back(one_line(message, 1024));
++        if (guest_logs_.size() > 64) guest_logs_.erase(guest_logs_.begin());
++        observer = take_observer();
++    }
++    if (observer) (*observer)(urgent);
++}
++
+ void RuntimeReport::note_gl_call(const char* function, std::uint64_t host_tid) {
+@@ -513,2 +526,3 @@ std::string RuntimeReport::text() const {
+     out += '\n';
++    for (const auto& line : guest_logs_) out += "guest-log: " + line + '\n';
+ 
+@@ -573,2 +587,4 @@ std::string RuntimeReport::text() const {
+     append_count(out, "egl-swaps", egl_swap_total_);
++    if (egl_current_tids_.empty() && gl_egl_context_current_)
++        out += "egl-observation: current context created outside guest EGL bridge; Java swaps are not counted\n";
+     // A mismatch is a thread that issued a gl* call having never made an EGL context current on
+@@ -577,2 +593,3 @@ std::string RuntimeReport::text() const {
+     for (const std::uint64_t tid : gl_thread_tids_) {
++        if (egl_current_tids_.empty()) break;
+         if (std::find(egl_current_tids_.begin(), egl_current_tids_.end(), tid) != egl_current_tids_.end()) continue;
+@@ -614,2 +631,3 @@ void RuntimeReport::clear() {
+     exit_reason_.clear();
++    guest_logs_.clear();
+     native_calls_.clear();
+diff --git a/core/src/signals.cpp b/core/src/signals.cpp
+index 53f3735..e7b733d 100644
+--- a/core/src/signals.cpp
++++ b/core/src/signals.cpp
+@@ -14,2 +14,3 @@
+ #include "zb/process.h"
++#include "zb/runtime_report.h"
+ 
+@@ -166,2 +167,3 @@ bool Process::dispatch_pending_signals(GuestThread& thread) {
+             log("guest terminated by signal %d", info.si_signo);
++            runtime_report().note_guest_exit("guest terminated by signal " + std::to_string(info.si_signo));
+             request_exit(128 + info.si_signo);
+diff --git a/core/src/syscalls.cpp b/core/src/syscalls.cpp
+index ef25e20..a50c64a 100644
+--- a/core/src/syscalls.cpp
++++ b/core/src/syscalls.cpp
+@@ -20,2 +20,3 @@
+ #include <sys/socket.h>
++#include <sys/un.h>
+ #include <sys/sysinfo.h>
+@@ -219,2 +220,5 @@ std::int32_t sys_read_write(Ctx& c, bool is_write) {
+     const int fd = static_cast<int>(c.a[0]);
++    if (is_write && len && (fd == 1 || fd == 2))
++        runtime_report().note_guest_log(std::string("stdio: ") +
++            std::string(reinterpret_cast<const char*>(buf), std::min(len, 1024u)), fd == 2);
+     return result_of(is_write ? ::write(fd, buf, len) : ::read(fd, buf, len));
+@@ -243,2 +247,25 @@ std::int32_t sys_readv_writev(Ctx& c, bool is_write) {
+     const int fd = static_cast<int>(c.a[0]);
++    if (is_write) {
++        // liblog sends a packed header, priority, tag and message via writev to
++        // logdw. Check the actual peer, not a cached fd that could be reused.
++        const int saved_errno = errno;
++        sockaddr_un peer{};
++        socklen_t peer_size = sizeof peer;
++        const bool logdw = count >= 4 && ::getpeername(fd, reinterpret_cast<sockaddr*>(&peer), &peer_size) == 0
++            && peer.sun_family == AF_UNIX
++            && std::strncmp(peer.sun_path, "/dev/socket/logdw", sizeof peer.sun_path) == 0;
++        if (fd == 1 || fd == 2 || logdw) {
++            std::string line = logdw ? "liblog: " : "stdio: ";
++            const std::size_t first = logdw ? 2 : 0;
++            for (std::size_t i = first; i < iov.size() && line.size() < 1024; ++i) {
++                const auto n = std::min(iov[i].iov_len, 1024 - line.size());
++                if (n) line.append(static_cast<const char*>(iov[i].iov_base), n);
++                if (line.size() < 1024) line += ' ';
++            }
++            const bool fatal = logdw && iov[1].iov_len == 1
++                && *static_cast<const unsigned char*>(iov[1].iov_base) >= 7;
++            runtime_report().note_guest_log(line, fd == 2 || fatal);
++        }
++        errno = saved_errno;
++    }
+     return result_of(is_write ? ::writev(fd, iov.data(), static_cast<int>(count)) : ::readv(fd, iov.data(), static_cast<int>(count)));
+@@ -1208,4 +1235,4 @@ bool handle_syscall(Process& proc, GuestThread& thread) {
+         if (trace_enabled()) log("exit_group(%d)", static_cast<int>(c.a[0]));
+-        if (proc.thread_count() > 1) std::_Exit(static_cast<int>(c.a[0] & 0xff));
+         proc.request_exit(static_cast<int>(c.a[0] & 0xff));
++        if (proc.thread_count() > 1) std::_Exit(static_cast<int>(c.a[0] & 0xff));
+         return false;
+diff --git a/tools/build_guest.sh b/tools/build_guest.sh
+index 670a00e..3090728 100755
+--- a/tools/build_guest.sh
++++ b/tools/build_guest.sh
+@@ -35,3 +35,7 @@ for src in "$ROOT"/guest/tests/*_dynamic.c; do
+     name=$(basename "$src" .c)
+-    "$CC" -O2 -Wall -o "$OUT/$name" "$src" -llog
++    if [ "$name" = zlib_dynamic ]; then
++        "$CC" -O2 -Wall -o "$OUT/$name" "$src" -llog -lz
++    else
++        "$CC" -O2 -Wall -o "$OUT/$name" "$src" -llog
++    fi
+ done

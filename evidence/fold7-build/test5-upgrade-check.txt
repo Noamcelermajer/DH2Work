@@ -1,0 +1,3 @@
+PASS Same signer as Test 4
+Signer #1 certificate SHA-256 digest: daa24cd98557703003fb4518d1ed8504dee071f9620596592819176677772081
+VersionCode 5 > 4, same package local.dh2.fold7

@@ -1,0 +1,200 @@
+diff --git a/core/include/zb/guest_memory.h b/core/include/zb/guest_memory.h
+index 6724e85..798a081 100644
+--- a/core/include/zb/guest_memory.h
++++ b/core/include/zb/guest_memory.h
+@@ -16,6 +16,13 @@ enum PageFlags : std::uint8_t {
+     kPageMapped = 8,
+ };
+ 
++enum GuestBacking : std::uint8_t {
++    kBackingUnknown = 0,
++    kBackingPrivateAnonymous = 1,
++    kBackingFile = 2,
++    kBackingSharedAnonymous = 3,
++};
++
+ inline std::uint64_t page_round_up(std::uint64_t v) {
+     return (v + kPageMask) & ~static_cast<std::uint64_t>(kPageMask);
+ }
+@@ -58,6 +65,14 @@ public:
+     std::uint8_t* host_ptr(std::uint32_t addr, std::uint64_t len, std::uint8_t need) const;
+     std::uint8_t page_flags(std::uint32_t addr) const { return pages_[addr >> 12]; }
+ 
++    // 16 KiB hosts emulate MADV_DONTNEED only for proven private anonymous
++    // guest pages. The separate origin map survives guest mprotect calls.
++    bool private_anonymous(std::uint32_t addr, std::uint64_t len) const;
++    // Discard guest pages only when every page is proven private anonymous.
++    // On 16 KiB hosts this changes exactly the requested 4 KiB guest range.
++    bool discard_private_anonymous(std::uint32_t addr, std::uint64_t len);
++    void mark_guest_backing(std::uint32_t addr, std::uint64_t len, GuestBacking backing);
++
+ private:
+     void set_flags(std::uint32_t addr, std::uint64_t len, std::uint8_t flags);
+     bool ensure_coarse_backing(std::uint32_t addr, std::uint64_t len);
+@@ -66,6 +81,7 @@ private:
+     std::uint8_t* base_ = nullptr;
+     std::uint32_t host_page_size_ = 0;
+     std::vector<std::uint8_t> pages_;
++    std::vector<std::uint8_t> backing_;
+ };
+ 
+ }  // namespace zb
+diff --git a/core/src/guest_memory.cpp b/core/src/guest_memory.cpp
+index 4687996..497a050 100644
+--- a/core/src/guest_memory.cpp
++++ b/core/src/guest_memory.cpp
+@@ -39,7 +39,8 @@ int host_prot(int guest_prot) {
+     return p;
+ }
+ 
+-GuestMemory::GuestMemory() : pages_(static_cast<std::size_t>(kGuestSpaceSize >> 12), 0) {
++GuestMemory::GuestMemory() : pages_(static_cast<std::size_t>(kGuestSpaceSize >> 12), 0),
++                             backing_(static_cast<std::size_t>(kGuestSpaceSize >> 12), kBackingUnknown) {
+     const long host_page = sysconf(_SC_PAGESIZE);
+     if (host_page != kPageSize && host_page != 16384) {
+         log("unsupported host page size: %ld", host_page);
+@@ -62,6 +63,30 @@ void GuestMemory::set_flags(std::uint32_t addr, std::uint64_t len, std::uint8_t
+     std::memset(pages_.data() + (addr >> 12), flags, static_cast<std::size_t>(page_round_up(len) >> 12));
+ }
+ 
++void GuestMemory::mark_guest_backing(std::uint32_t addr, std::uint64_t len, GuestBacking backing) {
++    const std::uint64_t rounded = page_round_up(len);
++    if (!range_valid(addr, rounded)) return;
++    std::memset(backing_.data() + (addr >> 12), backing, static_cast<std::size_t>(rounded >> 12));
++}
++
++bool GuestMemory::private_anonymous(std::uint32_t addr, std::uint64_t len) const {
++    const std::uint64_t rounded = page_round_up(len);
++    if (!range_valid(addr, rounded)) return false;
++    const std::uint64_t end_page = (static_cast<std::uint64_t>(addr) + rounded) >> 12;
++    for (std::uint64_t page = addr >> 12; page < end_page; ++page) {
++        if (backing_[page] != kBackingPrivateAnonymous) return false;
++    }
++    return true;
++}
++
++bool GuestMemory::discard_private_anonymous(std::uint32_t addr, std::uint64_t len) {
++    const std::uint64_t rounded = page_round_up(len);
++    if (host_page_size_ != 16384 || !accessible(addr, rounded, 0) ||
++        !private_anonymous(addr, rounded)) return false;
++    std::memset(base_ + addr, 0, static_cast<std::size_t>(rounded));
++    return true;
++}
++
+ bool GuestMemory::coarse_chunk_has_guest_pages(std::uint64_t chunk) const {
+     const std::uint64_t first = chunk >> 12;
+     for (std::uint64_t i = first; i < first + (host_page_size_ >> 12); ++i) {
+@@ -101,11 +126,13 @@ bool GuestMemory::map_anon(std::uint32_t addr, std::uint64_t len, int prot) {
+         if (!ensure_coarse_backing(addr, len)) return false;
+         std::memset(base_ + addr, 0, static_cast<std::size_t>(len));
+         set_flags(addr, len, flags_from_prot(prot));
++        mark_guest_backing(addr, len, kBackingPrivateAnonymous);
+         return true;
+     }
+     void* p = mmap(base_ + addr, len, host_prot(prot), MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED, -1, 0);
+     if (p == MAP_FAILED) return false;
+     set_flags(addr, len, flags_from_prot(prot));
++    mark_guest_backing(addr, len, kBackingPrivateAnonymous);
+     return true;
+ }
+ 
+@@ -140,12 +167,14 @@ bool GuestMemory::map_file(std::uint32_t addr, std::uint64_t len, int prot, int
+         if (!ensure_coarse_backing(addr, len)) return false;
+         std::memcpy(base_ + addr, image.get(), static_cast<std::size_t>(len));
+         set_flags(addr, len, flags_from_prot(prot));
++        mark_guest_backing(addr, len, kBackingFile);
+         return true;
+     }
+     int flags = (share_flags & (MAP_SHARED | MAP_PRIVATE)) | MAP_FIXED;
+     void* p = mmap(base_ + addr, len, host_prot(prot), flags, fd, static_cast<off_t>(offset));
+     if (p == MAP_FAILED) return false;
+     set_flags(addr, len, flags_from_prot(prot));
++    mark_guest_backing(addr, len, kBackingFile);
+     return true;
+ }
+ 
+@@ -170,6 +199,7 @@ bool GuestMemory::unmap(std::uint32_t addr, std::uint64_t len) {
+             if (pages_[page >> 12] & kPageMapped) std::memset(base_ + page, 0, kPageSize);
+         }
+         set_flags(addr, len, 0);
++        mark_guest_backing(addr, len, kBackingUnknown);
+         const std::uint64_t mask = host_page_size_ - 1;
+         const std::uint64_t first = static_cast<std::uint64_t>(addr) & ~mask;
+         const std::uint64_t end = (static_cast<std::uint64_t>(addr) + len + mask) & ~mask;
+@@ -183,6 +213,7 @@ bool GuestMemory::unmap(std::uint32_t addr, std::uint64_t len) {
+     void* p = mmap(base_ + addr, len, PROT_NONE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED | MAP_NORESERVE, -1, 0);
+     if (p == MAP_FAILED) return false;
+     set_flags(addr, len, 0);
++    mark_guest_backing(addr, len, kBackingUnknown);
+     return true;
+ }
+ 
+diff --git a/core/src/process.cpp b/core/src/process.cpp
+index 1ee6046..d3f6f19 100644
+--- a/core/src/process.cpp
++++ b/core/src/process.cpp
+@@ -196,6 +196,7 @@ void Process::record_file_mapping(std::uint32_t start, std::uint32_t length, std
+                                   bool offset_is_vaddr) {
+     forget_mappings(start, length);
+     file_mappings_.push_back({start, length, offset, std::move(path), offset_is_vaddr});
++    mem_.mark_guest_backing(start, length, kBackingFile);
+ }
+ 
+ std::vector<std::string> Process::mapped_file_paths() const {
+diff --git a/core/src/syscalls.cpp b/core/src/syscalls.cpp
+index feccef8..8fe1e73 100644
+--- a/core/src/syscalls.cpp
++++ b/core/src/syscalls.cpp
+@@ -301,6 +301,7 @@ std::int32_t sys_mmap2(Ctx& c) {
+     if (!ok) return errno ? -errno : -ENOMEM;
+     if (flags & MAP_ANONYMOUS) {
+         c.proc.forget_mappings(at, size);
++        if (flags & MAP_SHARED) c.mem.mark_guest_backing(at, size, kBackingSharedAnonymous);
+     } else {
+         char link[64];
+         char target[PATH_MAX];
+@@ -341,6 +342,7 @@ std::int32_t sys_mremap(Ctx& c) {
+     // mapping; the guest allocators that use mremap never ask for it.
+     if (old_size == 0) return -EINVAL;
+     if (!c.mem.accessible(old_addr, old_size, kPageMapped)) return -EFAULT;
++    const bool old_private_anonymous = c.mem.private_anonymous(old_addr, old_size);
+     const int prot = prot_of_flags(c.mem.page_flags(old_addr));
+ 
+     const bool fixed = (flags & MREMAP_FIXED) != 0;
+@@ -357,6 +359,9 @@ std::int32_t sys_mremap(Ctx& c) {
+     if (!fixed && old_addr + new_size <= kGuestSpaceSize &&
+         c.mem.range_free(old_addr + static_cast<std::uint32_t>(old_size), new_size - old_size) &&
+         c.mem.map_anon(old_addr + static_cast<std::uint32_t>(old_size), new_size - old_size, prot)) {
++        if (!old_private_anonymous)
++            c.mem.mark_guest_backing(old_addr + static_cast<std::uint32_t>(old_size), new_size - old_size,
++                                     kBackingUnknown);
+         return static_cast<std::int32_t>(old_addr);
+     }
+     if (!(flags & MREMAP_MAYMOVE)) return -ENOMEM;
+@@ -375,6 +380,9 @@ std::int32_t sys_mremap(Ctx& c) {
+     }
+     // Mapped writable for the copy, then given the protection the old range had.
+     if (!c.mem.map_anon(at, new_size, PROT_READ | PROT_WRITE)) return -ENOMEM;
++    // A moved file or shared mapping loses its host backing in this mapper.
++    // Keep its guest origin uncertain so DONTNEED cannot silently zero it.
++    if (!old_private_anonymous) c.mem.mark_guest_backing(at, new_size, kBackingUnknown);
+     const std::uint64_t copied = std::min(old_size, new_size);
+     const std::uint8_t* from = c.mem.host_ptr(old_addr, copied, kPageMapped);
+     std::uint8_t* to = c.mem.host_ptr(at, copied, kPageMapped);
+@@ -429,6 +437,16 @@ std::int32_t sys_madvise(Ctx& c) {
+         // kernel would either fail alignment or mark neighboring guest pages.
+         return 0;
+     }
++    if (c.mem.host_page_size() != kPageSize && static_cast<int>(c.a[2]) == MADV_DONTNEED) {
++        if (!c.mem.discard_private_anonymous(addr, size)) {
++            log("16k MADV_DONTNEED refused non-private-anonymous guest range 0x%08x len 0x%llx",
++                addr, static_cast<unsigned long long>(size));
++            return -ENOTSUP;
++        }
++        // A host madvise needs 16 KiB alignment and would also discard guest
++        // neighbors. The checked helper zeroed only this guest range.
++        return 0;
++    }
+     return result_of(::madvise(c.mem.base() + addr, size, static_cast<int>(c.a[2])));
+ }
+ 

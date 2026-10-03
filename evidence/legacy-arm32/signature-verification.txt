@@ -1,0 +1,18 @@
+source:
+	/workspace/scratch/283fa0994529/dh2-work/signed
+zipalign location: BUILT_IN 
+	/tmp/uapksigner-15808099193418766915/linux-zipalign-33_0_216754856256508617741.tmp
+
+01. Dungeon-Hunter-2-compat-arm32-experimental-aligned-signed.apk
+
+	VERIFY
+	file: /workspace/scratch/283fa0994529/dh2-work/signed/Dungeon-Hunter-2-compat-arm32-experimental-aligned-signed.apk (9.79 MiB)
+	checksum: 924db616e73c1ce9c2c100814b00f8f4f6df5fd6d8efb33154ed7d3e8ccbedf1 (sha256)
+	- zipalign verified
+	- signature verified [v1, v2, v3]
+		Subject: CN=DH2 Local Compatibility Test, OU=Unofficial experimental build
+		SHA256: daa24cd98557703003fb4518d1ed8504dee071f9620596592819176677772081 / SHA256withRSA
+		Expires: Sun Sep 28 02:15:01 TRT 2036
+
+[Thu Oct 01 02:16:05 TRT 2026][v1.3.0]
+Successfully processed 1 APKs and 0 errors in 0.24 seconds.

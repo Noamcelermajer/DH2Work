@@ -1,0 +1,5 @@
+PASS media fix and original native initialization retained
+PASS actual packaged renderer registration wrapped in both paths
+PASS packaged language and view hooks present
+PASS optional fit updates native dimensions before original resize
+PASS compiled guest helper is present

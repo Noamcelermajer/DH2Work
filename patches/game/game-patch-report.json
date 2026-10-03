@@ -1,0 +1,46 @@
+{
+  "path_changes": [
+    {
+      "file": "smali/com/gameloft/glf/config_Android.smali",
+      "path_lookups": 2
+    },
+    {
+      "file": "smali/com/gameloft/android/GAND/GloftD2SS/GLiveMain.smali",
+      "path_lookups": 1
+    },
+    {
+      "file": "smali/com/gameloft/android/GAND/GloftD2SS/GLMediaPlayer.smali",
+      "path_lookups": 1
+    },
+    {
+      "file": "smali/com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.smali",
+      "path_lookups": 1
+    },
+    {
+      "file": "smali/com/gameloft/android/GAND/GloftD2SS/iab/InAppBilling.smali",
+      "path_lookups": 1
+    },
+    {
+      "file": "smali/com/gameloft/android/GAND/GloftD2SS/GLUtils/Device.smali",
+      "path_lookups": 1
+    },
+    {
+      "file": "smali/com/gameloft/android/GAND/GloftD2SS/GLUtils/SUtils.smali",
+      "path_lookups": 2
+    },
+    {
+      "file": "smali/com/gameloft/android/GAND/GloftD2SS/installer/GameInstaller.smali",
+      "path_lookups": 17
+    },
+    {
+      "file": "smali/com/gameloft/android/GAND/GloftD2SS/installer/utils/DownloadComponent.smali",
+      "path_lookups": 5
+    }
+  ],
+  "total": 31,
+  "media_playlist_query_fixed": true,
+  "native_engine_modified": true,
+  "engine_change": "20-byte POSIX absolute path recognition fix",
+  "storm_patch_library_modified": true,
+  "licensing_decisions_modified": false
+}

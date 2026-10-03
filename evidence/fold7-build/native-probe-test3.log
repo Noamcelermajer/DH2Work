@@ -1,0 +1,30 @@
+Patched Storm legacy linker handle dereference: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libStormGLOFT.so
+/workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so: unchanged
+/workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libnativeinterface.so: unchanged
+/workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libStormGLOFT.so: unchanged
+linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+[zb] sysroot has no /system/etc/ld.config.arm.txt; using the device file
+[zb] sysroot has no /linkerconfig/ld.config.txt; using the device file
+linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+[zb] sysroot has no /system/etc/ld.config.txt; using the device file
+[zb] sysroot has no /system/etc/ld.config.txt; using the device file
+[zb] sysroot has no /odm/lib; using the device file
+[zb] sysroot has no /vendor/lib; using the device file
+[zb] sysroot has no /odm/lib/libnetd_client.so; using the device file
+[zb] sysroot has no /vendor/lib/libnetd_client.so; using the device file
+Loading DungeonHunter2...
+PASS loaded DungeonHunter2
+Loading StormGLOFT...
+PASS loaded StormGLOFT
+Loading nativeinterface...
+PASS loaded nativeinterface
+PASS original engine log2 and integer encoding: 4096 inputs
+Calling DungeonHunter2 JNI_OnLoad with inert VM...
+PASS DungeonHunter2 JNI_OnLoad: 0x10004
+Calling StormGLOFT JNI_OnLoad with inert VM...
+PASS StormGLOFT JNI_OnLoad: 0x10006
+PASS shader and GL-string GOT hooks and original inline hook are installed
+PASS native load probe; Android framework and gameplay remain untested
+

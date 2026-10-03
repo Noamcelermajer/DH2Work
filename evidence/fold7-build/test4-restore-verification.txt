@@ -1,0 +1,3 @@
+Verified 2141 files; restored 2141 missing files.
+
+PASS all 2141 restored files and standard ZIP hashes

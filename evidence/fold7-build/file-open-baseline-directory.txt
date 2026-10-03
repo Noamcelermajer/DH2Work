@@ -1,0 +1,73 @@
+zettabridge-runtime-report 1
+plugin: (none)
+proxy-loads: 0
+proxy-failures: 0
+jni-onload-calls: 0
+registered-natives: 0
+unimplemented-host-calls: 0
+unimplemented-distinct: 0
+first-unimplemented: (none)
+guest-exit: guest terminated by signal 6
+guest-log: stdio: linker :  Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+guest-log: stdio: WARNING: linker:
+guest-log: stdio: Warning: failed to find generated linker configuration from "
+guest-log: stdio: /linkerconfig/ld.config.txt
+guest-log: stdio: "
+guest-log: stdio:
+guest-log: stdio: CFileSystem::open input=/workspace/scratch/283fa0994529/dh2-work/fold7-build/file-fixtures/ patched=0
+guest-log: stdio: basic_string
+guest-log: stdio:
+native-calls: (none) total=0
+opened-1: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libdl.so
+opened-2: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so
+opened-3: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libdl_android.so
+opened-4: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libzbcompat.so
+opened-5: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so
+opened-6: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libGLESv2.so
+opened-7: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libstdc++.so
+opened-8: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libm.so
+opened-9: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libGLESv1_CM.so
+opened-10: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/liblog.so
+opened-11: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc++.so
+open-failed-1: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libc.so errno=2
+open-failed-2: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libnetd_client.so errno=2
+open-failed-3: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libnetd_client.so errno=2
+open-failed-4: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libnetd_client.so errno=2
+open-failed-5: /odm/lib/libnetd_client.so errno=2
+open-failed-6: /vendor/lib/libnetd_client.so errno=2
+open-failed-7: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libdl_android.so errno=2
+open-failed-8: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libdl_android.so errno=2
+open-failed-9: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libstdc++.so errno=2
+open-failed-10: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libstdc++.so errno=2
+open-failed-11: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libm.so errno=2
+open-failed-12: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libm.so errno=2
+open-failed-13: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/liblog.so errno=2
+open-failed-14: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/liblog.so errno=2
+open-failed-15: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/build/guest/lib/libc++.so errno=2
+open-failed-16: /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libc++.so errno=2
+gl-calls: 0
+gl-first-call: (none)
+gl-egl-context-current: (unknown)
+gl-first-error: (none)
+egl-swaps: 0
+egl-first-error: (none)
+crash-recent-jni-calls: (none)
+crash-recent-egl-calls: (none)
+crash-registers: r0=00000000 r1=00000017 r2=00000006 r3=feffe280 r4=feffe280 r5=00000017 r6=00000017 r7=0000016b r8=00000000 r9=ffffffff r10=fda40fac r11=00000000 r12=feffe290 r13=feffe278 r14=fdca07eb r15=fdca07fe
+crash-state: cpsr=00070030 tls=fdd6d48c tid=23
+crash-pc: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so offset 0x4b7fe
+crash-lr: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so offset 0x4b7eb
+crash-stack: 00000020 00000000 00000000 00000000 ffffffff 00000017 00000000 00000000
+crash-precise: no
+crash-stack-candidate-1: sp+0x98=0xfd506460 /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so offset 0x8be460
+crash-stack-candidate-2: sp+0xb4=0xfd4ea8eb /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so offset 0x8a28ea
+crash-stack-candidate-3: sp+0xbc=0xfd1b4a64 /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so offset 0x56ca64
+crash-stack-candidate-4: sp+0xd4=0xfd1b5de8 /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so offset 0x56dde8
+crash-stack-candidate-5: sp+0x150=0xfd1b5c40 /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so offset 0x56dc40
+crash-stack-candidate-6: sp+0x16c=0xfd1b5c40 /workspace/scratch/283fa0994529/dh2-work/fold7-build/probe-libs/libDungeonHunter2.so offset 0x56dc40
+crash-stack-candidate-7: sp+0x17c=0x3fffda98 /workspace/scratch/283fa0994529/dh2-work/fold7-build/dh2_file_open_probe vaddr 0xa98
+crash-stack-candidate-8: sp+0x2fc=0xfdfcae3f /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/bin/linker vaddr 0x120e3e
+crash-stack-candidate-9: sp+0x304=0xfdfcb16f /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/bin/linker vaddr 0x12116e
+crash-stack-candidate-10: sp+0x314=0xfdf02541 /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/bin/linker vaddr 0x58540
+crash-stack-candidate-11: sp+0x31c=0x3fffd7cc /workspace/scratch/283fa0994529/dh2-work/fold7-build/dh2_file_open_probe vaddr 0x7cc
+crash-stack-candidate-12: sp+0x32c=0xfdf9a46d /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/bin/linker vaddr 0xf046c

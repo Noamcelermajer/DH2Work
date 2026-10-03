@@ -1,0 +1,13 @@
+Test 3
+Signer #1 certificate DN: CN=DH2 Local Compatibility Test, OU=Unofficial experimental build
+Signer #1 certificate SHA-256 digest: daa24cd98557703003fb4518d1ed8504dee071f9620596592819176677772081
+Signer #1 certificate SHA-1 digest: 45c3642e1839432a8064395c71b735ae69ae242a
+Signer #1 certificate MD5 digest: bc29e2e6ca9549ed88d8f1f63b6a3a1e
+
+Test 4
+Signer #1 certificate DN: CN=DH2 Local Compatibility Test, OU=Unofficial experimental build
+Signer #1 certificate SHA-256 digest: daa24cd98557703003fb4518d1ed8504dee071f9620596592819176677772081
+Signer #1 certificate SHA-1 digest: 45c3642e1839432a8064395c71b735ae69ae242a
+Signer #1 certificate MD5 digest: bc29e2e6ca9549ed88d8f1f63b6a3a1e
+
+PASS same signing certificate

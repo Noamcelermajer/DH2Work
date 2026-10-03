@@ -1,0 +1,15 @@
+{
+  "checks": {
+    "all_guest_native_libraries_unchanged": true,
+    "host_native_library_unchanged": true,
+    "packaged_init_calls_new_query": true,
+    "packaged_init_no_wildcard": true,
+    "packaged_init_no_managed_query": true,
+    "packaged_init_still_calls_native_player": true,
+    "same_signing_certificate": true
+  },
+  "sha256": "37cc8b3f77641df5b71638bee6e36f2a9181ecf2f69d3591d88d147b681d59b2",
+  "bytes": 13757664,
+  "media_host_regression_cases": 7,
+  "test2_device_retest_pending": true
+}

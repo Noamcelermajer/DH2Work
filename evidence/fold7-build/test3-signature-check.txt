@@ -1,0 +1,2 @@
+Same signer as test2; in-place update supported.
+Signer #1 certificate SHA-256 digest: daa24cd98557703003fb4518d1ed8504dee071f9620596592819176677772081

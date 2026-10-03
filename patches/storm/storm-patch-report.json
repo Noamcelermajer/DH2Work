@@ -1,0 +1,28 @@
+{
+  "input_sha256": "be6beaab782944e5ce39cca8e850fd03de654e4236c9329621043adcbee291e1",
+  "output_sha256": "334c23b854327ea0315f5353ec89d16fc518963840bedb3753248952f02c7845",
+  "patched_va": "0x438e4",
+  "old_instruction": "ldr r0, [r0, #0x8c]",
+  "replacement": "branch to symbol-based load-bias resolver",
+  "import_hook_entry_patch": "0x371e4",
+  "import_hook_replacement": "0xd3ef0",
+  "import_hook_algorithm": "Walk PT_DYNAMIC, DT_SYMTAB, DT_STRTAB and DT_JMPREL in the loaded engine ELF; replace matching R_ARM_JUMP_SLOT",
+  "stub_va": "0xd3800",
+  "stub_bytes": 2915,
+  "original_rx_end": "0xd37e2",
+  "extended_rx_end": "0xd4363",
+  "instructions": [
+    "000d3800 push {r1, r2, r3, r4, ip, lr}",
+    "000d3804 ldr r1, [pc, #0x1c]",
+    "000d3808 add r1, pc, r1",
+    "000d380c bl #0x321d4",
+    "000d3810 cmp r0, #0",
+    "000d3814 beq #0xd3820",
+    "000d3818 ldr r1, [pc, #0xc]",
+    "000d381c sub r0, r0, r1",
+    "000d3820 pop {r1, r2, r3, r4, ip, lr}",
+    "000d3824 b #0x438e8"
+  ],
+  "file_guard": "Reject trailing directory separators; retry exact repeated Android cache roots after failed read-only fopen; retry flat qata/3d/textures/*.tga as data/3d/textures/*.tga after failed read-only fopen; log buffered STL puts reasons",
+  "scope": "Exact supplied DH2/Storm pair only; no licensing decisions modified"
+}

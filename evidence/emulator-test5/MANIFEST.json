@@ -1,0 +1,40 @@
+{
+  "note": "Original emulator evidence; workspace prefix normalized. Initial boot logcat is from the earlier attempt; final smoke logcat timed out. No game execution recorded.",
+  "files": [
+    {
+      "path": "initial-boot-logcat.txt",
+      "bytes": 77906,
+      "sha256": "c0aad789fe6b5c585254637593df81ffe3c0002db50d4aff3c75434a73163a10"
+    },
+    {
+      "path": "initial-emulator.log",
+      "bytes": 5117,
+      "sha256": "f836073575bc3933a95cd6be24cf30a9360a9d5b6690ab02c078b66d683e9ebf"
+    },
+    {
+      "path": "smoke-emulator.log",
+      "bytes": 5709,
+      "sha256": "a7d214bac18639c69f861f99fea416e0678b6464e7a4aa2c967ac4bd456c746f"
+    },
+    {
+      "path": "device-properties.txt",
+      "bytes": 16413,
+      "sha256": "0ebf9676e696e396d2a359b231fc1bb0cb949f2e8e5055798dda1488f82c6d73"
+    },
+    {
+      "path": "install.txt",
+      "bytes": 166,
+      "sha256": "83741b05191ca753dda7080ff377312a2c7e9e6168b9340c36f052d5569bcb4d"
+    },
+    {
+      "path": "result.json",
+      "bytes": 487,
+      "sha256": "5b25f3708d2db685f208eea776685b3749cc706af373ef52da1f4a0169e0eaee"
+    },
+    {
+      "path": "command.json",
+      "bytes": 304,
+      "sha256": "9853e7b0557faf1097adda71357da969a037865fba0c7e596f6adc4936d04deb"
+    }
+  ]
+}

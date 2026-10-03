@@ -1,0 +1,26 @@
+Running /workspace/scratch/283fa0994529/dh2-work/toolchains/jdk-17.0.20.1+1/bin/javac
+warning: [options] bootstrap class path not set in conjunction with -source 8
+Note: /workspace/scratch/283fa0994529/dh2-work/fold7-build/guest-java/local/dh2/compat/MediaQueries.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 warning
+Running /workspace/scratch/283fa0994529/dh2-work/android-sdk/build-tools/35.0.0/d8
+Running /workspace/scratch/283fa0994529/dh2-work/toolchains/jdk-17.0.20.1+1/bin/javac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Running /workspace/scratch/283fa0994529/dh2-work/toolchains/jdk-17.0.20.1+1/bin/jar
+Running /workspace/scratch/283fa0994529/dh2-work/android-sdk/build-tools/35.0.0/d8
+Running /workspace/scratch/283fa0994529/dh2-work/android-sdk/build-tools/35.0.0/aapt2
+Running /workspace/scratch/283fa0994529/dh2-work/android-sdk/build-tools/35.0.0/aapt2
+Running /workspace/scratch/283fa0994529/dh2-work/android-sdk/build-tools/35.0.0/zipalign
+Running /workspace/scratch/283fa0994529/dh2-work/android-sdk/build-tools/35.0.0/apksigner
+Running /workspace/scratch/283fa0994529/dh2-work/android-sdk/build-tools/35.0.0/apksigner
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): false
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Running /workspace/scratch/283fa0994529/dh2-work/android-sdk/build-tools/35.0.0/zipalign
+Built signed ARM64 test package: /workspace/scratch/283fa0994529/deliverables/Dungeon-Hunter-2-Fold7-test3.apk

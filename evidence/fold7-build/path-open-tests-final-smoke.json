@@ -1,0 +1,12 @@
+[
+  {
+    "case": "test5-rooted-relative",
+    "expected_open": true,
+    "pass": true
+  },
+  {
+    "case": "test5-phone-absolute",
+    "expected_open": true,
+    "pass": true
+  }
+]

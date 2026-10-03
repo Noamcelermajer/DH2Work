@@ -1,0 +1,12 @@
+{
+  "apk_sha256": "e6b81ec649e25bb32c6ec7f3f477d5ef1c2a79b7af43b7ca7643518c5f5e1b8d",
+  "avd": "DH2_API30",
+  "software_cpu": true,
+  "booted": true,
+  "installed": false,
+  "launcher_ready": false,
+  "gameplay_tested": false,
+  "fold7_tested": false,
+  "boot_seconds": 224.1,
+  "error": "APK installation failed: Performing Streamed Install\nadb: failed to install <WORKSPACE>/deliverables/Dungeon-Hunter-2-Fold7-test5.apk: cmd: Failure calling service package: Broken pipe (32)\n\n"
+}

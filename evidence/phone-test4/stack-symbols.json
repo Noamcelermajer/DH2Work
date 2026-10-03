@@ -1,0 +1,155 @@
+[
+  {
+    "report": "crash-lr: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x60b2e4",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x60b2e4",
+    "elf_vaddr": "0x60b2e4",
+    "function": "_ZN6glitch7collada15COnDemandReader4readEiiPv",
+    "function_offset": "0x2c",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-1: sp+0xc=0xfce4a2b4 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x6452b4",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x6452b4",
+    "elf_vaddr": "0x6452b4",
+    "function": "_ZN6glitch3res8onDemandIcE3getERNS0_14onDemandReaderE",
+    "function_offset": "0x64",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-2: sp+0x10=0xfd199a98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x993a98",
+    "elf_vaddr": "0x994a98",
+    "function": null,
+    "function_offset": null,
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-3: sp+0x1c=0xfce4aaec /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x645aec",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x645aec",
+    "elf_vaddr": "0x645aec",
+    "function": "_ZN6glitch7collada5CMeshC1ERKNS0_16CColladaDatabaseEPNS_5video12IVideoDriverERKNS0_9SGeometryERKNS0_13SBufferConfigESD_b",
+    "function_offset": "0x564",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-4: sp+0x44=0xfcd9d904 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x598904",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x598904",
+    "elf_vaddr": "0x598904",
+    "function": "_ZN6glitch5scene10ISceneNode8addChildEPS1_",
+    "function_offset": "0xa0",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-5: sp+0x74=0xfd17d560 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x977560",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x977560",
+    "elf_vaddr": "0x978560",
+    "function": null,
+    "function_offset": null,
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-6: sp+0x7c=0xfda96071 /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x42070",
+    "module": "libc.so",
+    "reported_offset": "0x42070",
+    "elf_vaddr": "0x43070",
+    "function": "scudo_malloc",
+    "function_offset": "0x14",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-7: sp+0xb4=0xfce369b8 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x6319b8",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x6319b8",
+    "elf_vaddr": "0x6319b8",
+    "function": "_ZN6glitch7collada15CColladaFactory14createGeometryERKNS0_16CColladaDatabaseEPNS_5video12IVideoDriverEPNS0_9SGeometryE",
+    "function_offset": "0x94",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-8: sp+0xc4=0xfd199a98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x993a98",
+    "elf_vaddr": "0x994a98",
+    "function": null,
+    "function_offset": null,
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-9: sp+0xe0=0xfd161c98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x95bc98",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x95bc98",
+    "elf_vaddr": "0x95cc98",
+    "function": null,
+    "function_offset": null,
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-10: sp+0xfc=0xfcb557ac /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x3507ac",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x3507ac",
+    "elf_vaddr": "0x3507ac",
+    "function": "_ZN14ColladaFactory14createGeometryERKN6glitch7collada16CColladaDatabaseEPNS0_5video12IVideoDriverEPNS1_9SGeometryE",
+    "function_offset": "0x18",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-11: sp+0x104=0xfcd9c210 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x597210",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x597210",
+    "elf_vaddr": "0x597210",
+    "function": "_ZN6glitch5scene10ISceneNode9setParentEPS1_",
+    "function_offset": "0x30",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-12: sp+0x10c=0xfce1368c /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x60e68c",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x60e68c",
+    "elf_vaddr": "0x60e68c",
+    "function": "_ZNK6glitch7collada16CColladaDatabase17constructGeometryEPNS_5video12IVideoDriverEPNS0_9SGeometryE",
+    "function_offset": "0x58",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-13: sp+0x12c=0xfce1fad8 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x61aad8",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x61aad8",
+    "elf_vaddr": "0x61aad8",
+    "function": "_ZNK6glitch7collada16CColladaDatabase17constructGeometryEPNS_5video12IVideoDriverEPKc",
+    "function_offset": "0x30",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-14: sp+0x13c=0xfce69b30 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x664b30",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x664b30",
+    "elf_vaddr": "0x664b30",
+    "function": "_ZN6glitch7collada12CSkinnedMesh15instanciateMeshEPNS_5video12IVideoDriverEPNS0_14CRootSceneNodeE",
+    "function_offset": "0x38",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-15: sp+0x154=0xfda95e23 /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x41e22",
+    "module": "libc.so",
+    "reported_offset": "0x41e22",
+    "elf_vaddr": "0x42e22",
+    "function": "_ZN5scudo9AllocatorINS_19AndroidNormalConfigEXadL_Z21scudo_malloc_postinitEEE8allocateEjNS_5Chunk6OriginEjb",
+    "function_offset": "0x132",
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  },
+  {
+    "report": "crash-stack-candidate-16: sp+0x170=0xfd199a98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98",
+    "module": "libDungeonHunter2.so",
+    "reported_offset": "0x993a98",
+    "elf_vaddr": "0x994a98",
+    "function": null,
+    "function_offset": null,
+    "warning": "Stack scan candidates can be stale; this is not an unwound backtrace."
+  }
+]

@@ -1,0 +1,4 @@
+Native source commit: 3094fd150ad7fe5891fd3741fd2f43892424277f
+Native compile: passed. Guest build: passed.
+Launcher bundle: regenerated without temporary-copy artifacts; checker passed.
+Final APK runtime bytes verified by verify_package.py.

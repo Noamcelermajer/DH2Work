@@ -1,0 +1,67 @@
+[
+  {
+    "case": "test4-rooted-absolute",
+    "expected_open": false,
+    "pass": true
+  },
+  {
+    "case": "test5-rooted-absolute",
+    "expected_open": true,
+    "pass": true
+  },
+  {
+    "case": "test5-root-without-slash",
+    "expected_open": true,
+    "pass": true
+  },
+  {
+    "case": "test5-rooted-relative",
+    "expected_open": true,
+    "pass": true
+  },
+  {
+    "case": "test5-relative-root-without-slash",
+    "expected_open": true,
+    "pass": true
+  },
+  {
+    "case": "test5-empty-root-absolute",
+    "expected_open": true,
+    "pass": true
+  },
+  {
+    "case": "test4-phone-absolute",
+    "expected_open": false,
+    "pass": true
+  },
+  {
+    "case": "test5-phone-absolute",
+    "expected_open": true,
+    "pass": true
+  },
+  {
+    "case": "test5-phone-relative",
+    "expected_open": true,
+    "pass": true
+  },
+  {
+    "case": "test5-missing-absolute",
+    "expected_open": false,
+    "pass": true
+  },
+  {
+    "case": "test5-missing-relative",
+    "expected_open": false,
+    "pass": true
+  },
+  {
+    "case": "test5-directory",
+    "expected_open": false,
+    "pass": true
+  },
+  {
+    "case": "test5-colon-path",
+    "expected_open": true,
+    "pass": true
+  }
+]

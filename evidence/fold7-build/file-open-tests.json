@@ -1,0 +1,27 @@
+[
+  {
+    "case": "baseline-file",
+    "status": 0,
+    "pass": true
+  },
+  {
+    "case": "baseline-directory",
+    "status": 134,
+    "pass": true
+  },
+  {
+    "case": "fixed-file",
+    "status": 0,
+    "pass": true
+  },
+  {
+    "case": "fixed-directory",
+    "status": 0,
+    "pass": true
+  },
+  {
+    "case": "fixed-missing",
+    "status": 0,
+    "pass": true
+  }
+]

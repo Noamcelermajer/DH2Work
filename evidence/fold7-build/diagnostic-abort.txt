@@ -1,0 +1,46 @@
+zettabridge-runtime-report 1
+plugin: (none)
+proxy-loads: 0
+proxy-failures: 0
+jni-onload-calls: 0
+registered-natives: 0
+unimplemented-host-calls: 0
+unimplemented-distinct: 0
+first-unimplemented: (none)
+guest-exit: guest terminated by signal 6
+guest-log: stdio: linker :  Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"
+guest-log: stdio: WARNING: linker:
+guest-log: stdio: Warning: failed to find generated linker configuration from "
+guest-log: stdio: /linkerconfig/ld.config.txt
+guest-log: stdio: "
+guest-log: stdio:
+guest-log: stdio: diagnostic  writev marker
+guest-log: stdio: diagnostic write marker
+native-calls: (none) total=0
+opened-1: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libdl.so
+opened-2: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so
+open-failed-1: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libnetd_client.so errno=2
+open-failed-2: /odm/lib/libnetd_client.so errno=2
+open-failed-3: /vendor/lib/libnetd_client.so errno=2
+gl-calls: 0
+gl-first-call: (none)
+gl-egl-context-current: (unknown)
+gl-first-error: (none)
+egl-swaps: 0
+egl-first-error: (none)
+crash-recent-jni-calls: (none)
+crash-recent-egl-calls: (none)
+crash-registers: r0=00000000 r1=0000013e r2=00000006 r3=feffe898 r4=feffe898 r5=0000013e r6=0000013e r7=0000016b r8=00000000 r9=ffffffff r10=00000000 r11=feffe970 r12=feffe8a8 r13=feffe890 r14=fdcb47eb r15=fdcb47fe
+crash-state: cpsr=00070030 tls=fdd6d48c tid=318
+crash-pc: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so offset 0x4b7fe
+crash-lr: /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so offset 0x4b7eb
+crash-stack: 00000020 00000000 00000000 00000000 ffffffff 0000013e 00000000 00000000
+crash-precise: no
+crash-stack-candidate-1: sp+0x9c=0x3fffd614 /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x614
+crash-stack-candidate-2: sp+0xb4=0x3fffd6f4 /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x6f4
+crash-stack-candidate-3: sp+0xc4=0x3fffd4d9 /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x4d8
+crash-stack-candidate-4: sp+0xcc=0x3fffd4c4 /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x4c4
+crash-stack-candidate-5: sp+0xe4=0xfdcb1143 /workspace/scratch/283fa0994529/dh2-work/research/ZettaBridge/sysroot/system/lib/libc.so offset 0x48142
+crash-stack-candidate-6: sp+0xfc=0x3fffd57c /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x57c
+crash-stack-candidate-7: sp+0x2d0=0x3fffd034 /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x34
+crash-stack-candidate-8: sp+0x300=0x3fffd510 /workspace/scratch/283fa0994529/dh2-work/fold7-build/diagnostic_probe vaddr 0x510

@@ -1,0 +1,153 @@
+zettabridge-runtime-report 1
+plugin: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS targetSdk 24
+proxy-loads: 3
+proxy-failures: 0
+proxy-loaded: libnativeinterface.so jni=0x00010006
+proxy-loaded: libDungeonHunter2.so jni=0x00010004
+proxy-loaded: libStormGLOFT.so jni=0x00010006
+jni-onload-calls: 2
+jni-onload: libDungeonHunter2.so ok jni=0x00010004
+jni-onload: libStormGLOFT.so ok jni=0x00010006
+registered-natives: 36
+unimplemented-host-calls: 0
+unimplemented-distinct: 0
+first-unimplemented: (none)
+guest-exit: guest terminated by signal 6
+guest-log: liblog: StormGLOFT  Optimized shader: 352
+guest-log: liblog: StormGLOFT  Optimized shader: 353
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 2126---- 590
+guest-log: liblog: StormGLOFT  Optimized shader: 355
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 2126---- 590
+guest-log: liblog: StormGLOFT  Optimized shader: 356
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 2119---- 594
+guest-log: liblog: StormGLOFT  Optimized shader: 358
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 2085---- 609
+guest-log: liblog: StormGLOFT  Optimized shader: 359
+guest-log: liblog: StormGLOFT  Optimized shader: 361
+guest-log: liblog: StormGLOFT  Optimized shader: 362
+guest-log: liblog: StormGLOFT  Optimized shader: 364
+guest-log: liblog: StormGLOFT  Optimized shader: 365
+guest-log: liblog: StormGLOFT  Optimized shader: 367
+guest-log: liblog: StormGLOFT  Optimized shader: 368
+guest-log: liblog: StormGLOFT  Optimized shader: 370
+guest-log: liblog: StormGLOFT  Optimized shader: 371
+guest-log: liblog: StormGLOFT  Optimized shader: 373
+guest-log: liblog: StormGLOFT  Optimized shader: 374
+guest-log: liblog: StormGLOFT  Optimized shader: 376
+guest-log: liblog: StormGLOFT  Optimized shader: 377
+guest-log: liblog: _DEBUG_OUT  TEXTURE FILE [/storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/textures/splash_final.tga]
+guest-log: liblog: _DEBUG_OUT  **********************lastOpenMenuID 11
+guest-log: liblog: _DEBUG_OUT  **********************keyCode 4
+guest-log: liblog: _DEBUG_OUT      GS_InterruptLoading::Dtor  ----> unloading splash screen.
+guest-log: liblog: _DEBUG_OUT      GS_InterruptLoading::Dtor  ----> unloading splash screen.
+guest-log: liblog: GLXPlayer  GLXPlayerWebComponent::Cancel(): m_enable is changed to false!!
+guest-log: liblog: FILENAMEEEEEEEEEEEEEE   /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/serverConfig.sav
+guest-log: liblog: Returnnnnnnnnnnnnnnnnnnnnnnnnnnnn   /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/serverConfig.sav
+guest-log: liblog: GLXPlayer  [GLXPlayerSereverConfig] loadConfigFromLocal - serverConfig.sav not found
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 1713---- 780
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 1713---- 780
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 1713---- 780
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 1713---- 780
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 1713---- 780
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 1713---- 780
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 1713---- 780
+guest-log: liblog: _DEBUG_OUT  Toucxhhhhhhhhhhhhhhhh 1713---- 780
+guest-log: liblog: _DEBUG_OUT  *************************GoToMainMenu::1111111
+guest-log: liblog: _DEBUG_OUT  *************************GoToMainMenu::222222
+guest-log: liblog: _DEBUG_OUT  *************************GoToMainMenu::3333333
+guest-log: liblog: _DEBUG_OUT  *************************GoToMainMenu::4444444444
+guest-log: liblog: _DEBUG_OUT  *************************GoToMainMenu::55555555555555
+guest-log: liblog: _DEBUG_OUT     Last PushMenu:: menu_MainMenu
+guest-log: stdio: 95---- 757Toucxhhhhhhhhhhhhhhhh 1895---- 757Toucxhhhhhhhhhhhhhhhh 1895---- 757Toucxhhhhhhhhhhhhhhhh 1895---- 757Toucxhhhhhhhhhhhhhhhh 1895---- 757Toucxhhhhhhhhhhhhhhhh 1895---- 757Toucxhhhhhhhhhhhhhhhh 2178---- 553Toucxhhhhhhhhhhhhhhhh 2161---- 564Toucxhhhhhhhhhhhhhhhh 2123---- 595Toucxhhhhhhhhhhhhhhhh 2066---- 628Toucxhhhhhhhhhhhhhhhh 2002---- 662Toucxhhhhhhhhhhhhhhhh 1949---- 688Toucxhhhhhhhhhhhhhhhh 1914---- 702Toucxhhhhhhhhhhhhhhhh 1901---- 707Toucxhhhhhhhhhhhhhhhh 1892---- 711Toucxhhhhhhhhhhhhhhhh 16---- 500Toucxhhhhhhhhhhhhhhhh 16---- 500Toucxhhhhhhhhhhhhhhhh 1886---- 716Toucxhhhhhhhhhhhhhhhh 1881---- 723Toucxhhhhhhhhhhhhhhhh 1871---- 738Toucxhhhhhhhhhhhhhhhh 1871---- 738Toucxhhhhhhhhhhhhhhhh 2126---- 590Toucxhhhhhhhhhhhhhhhh 2126---- 590Toucxhhhhhhhhhhhhhhhh 2119---- 594Toucxhhhhhhhhhhhhhhhh 2085---- 609TEXTURE FILE [/storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/textures/splash_final.tga]  **********************lastOpenMenuID 11*******...
+guest-log: liblog: _DEBUG_OUT     ***************************Last menu_MainMenu::
+guest-log: liblog: _DEBUG_OUT  IN SHOW
+guest-log: liblog: _DEBUG_OUT  IN GET SLOT
+guest-log: liblog: _DEBUG_OUT  PlayerLastSave = 18.04.     09:05
+guest-log: liblog: _DEBUG_OUT  SlotID = 0
+guest-log: liblog: _DEBUG_OUT  PlayerLocation = Болота
+guest-log: liblog: _DEBUG_OUT  StringClassLVL = Воин Ур.: 1
+guest-log: liblog: _DEBUG_OUT  PlayerCurrentAct = 1
+guest-log: liblog: _DEBUG_OUT  PlayerClass = Воин
+guest-log: liblog: _DEBUG_OUT  DifficultyUnlocked = 0
+guest-log: liblog: _DEBUG_OUT  Difficulty = 0
+guest-log: liblog: _DEBUG_OUT  PlayerName = wolf
+guest-log: liblog: _DEBUG_OUT  InUse = true
+guest-log: liblog: _DEBUG_OUT  PlayerLVL = 1
+guest-log: liblog: _DEBUG_OUT  NAME: wolf
+guest-log: liblog: _DEBUG_OUT  CLASS: Воин Ур.: 1
+guest-log: liblog: _DEBUG_OUT  LOCATION: Болота
+guest-log: liblog: _DEBUG_OUT  DIFF: 0
+native-calls: com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativeAccelerometer=2012 com/gameloft/android/GAND/GloftD2SS/GameRenderer.nativeRender=735 com/gameloft/android/GAND/GloftD2SS/GameGLSurfaceView.nativeOnTouch=178 com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativeCanInterrupt=75 com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativeResume=4 com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativeSetPhone=4 com/gameloft/android/GAND/GloftD2SS/GameRenderer.nativeOnSurfaceChanged=3 com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativePause=3 total=3028
+opened-1: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/spawn_groups_pyarraynames.bin
+opened-2: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/trophies_pyarraynames.bin
+opened-3: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/v2conditions_pyarraynames.bin
+opened-4: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/v2eventmanager_pyarraynames.bin
+opened-5: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/v2quests_pyarraynames.bin
+opened-6: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/worldmap_pyarraynames.bin
+opened-7: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/character_models_dictionary_pyarraynames.bin
+opened-8: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/animations_dictionary_pyarraynames.bin
+opened-9: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/effects_dictionary_pyarraynames.bin
+opened-10: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/projectiles_dictionary_pyarraynames.bin
+opened-11: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/game_objects_dictionary_pyarraynames.bin
+opened-12: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/common_text_pyarraynames.bin
+opened-13: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/pydata/sdd_dungeon_hunter_2_iphone_pyarraynames.bin
+opened-14: /storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/fontin smallcaps.ttf
+opened-15: /storage/emulated/0/android/data/local.dh2.fold7/files/plugins/com.gameloft.android.gand.gloftd2ss/data/wqy-zenhei.ttf
+opened-16: /storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/PyData/character_properties_pystructnames.bin
+open-failed-1: pydata/skills_pyarraynames.bin errno=2
+open-failed-2: pydata/sounds_pyarraynames.bin errno=2
+open-failed-3: pydata/spawn_groups_pyarraynames.bin errno=2
+open-failed-4: pydata/trophies_pyarraynames.bin errno=2
+open-failed-5: pydata/v2conditions_pyarraynames.bin errno=2
+open-failed-6: pydata/v2eventmanager_pyarraynames.bin errno=2
+open-failed-7: pydata/v2quests_pyarraynames.bin errno=2
+open-failed-8: pydata/worldmap_pyarraynames.bin errno=2
+open-failed-9: pydata/character_models_dictionary_pyarraynames.bin errno=2
+open-failed-10: pydata/animations_dictionary_pyarraynames.bin errno=2
+open-failed-11: pydata/effects_dictionary_pyarraynames.bin errno=2
+open-failed-12: pydata/projectiles_dictionary_pyarraynames.bin errno=2
+open-failed-13: pydata/game_objects_dictionary_pyarraynames.bin errno=2
+open-failed-14: pydata/common_text_pyarraynames.bin errno=2
+open-failed-15: pydata/sdd_dungeon_hunter_2_iphone_pyarraynames.bin errno=2
+open-failed-16: PyData/character_properties_pystructnames.bin errno=2
+gl-calls: 40389
+gl-first-call: glGetIntegerv tid=20767
+gl-egl-context-current: yes
+gl-first-error: glGetError 0x0500
+egl-swaps: 0
+egl-observation: current context created outside guest EGL bridge; Java swaps are not counted
+egl-first-error: (none)
+jni-runtime-start: ok
+jni-loading: libStormGLOFT.so
+crash-recent-jni-calls: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA
+crash-recent-egl-calls: (none)
+crash-registers: r0=00000000 r1=0000513a r2=00000006 r3=fb0b5d20 r4=fb0b5d20 r5=000050ce r6=0000513a r7=0000016b r8=00000000 r9=ffffffff r10=fd541b5c r11=00000000 r12=fb0b5d30 r13=fb0b5d18 r14=fdaa57eb r15=fdaa57fe
+crash-state: cpsr=000f0030 tls=fb0b748c tid=20767 guest-tid=20794
+crash-pc: /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x4b7fe
+crash-lr: /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x4b7eb
+crash-stack: 00000020 00000000 00000000 00000000 ffffffff 000050ce 00002974 00000000
+crash-precise: no
+crash-stack-candidate-1: sp+0x98=0xfd0c8460 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x8be460
+crash-stack-candidate-2: sp+0xb4=0xfd0ac8eb /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x8a28ea
+crash-stack-candidate-3: sp+0xbc=0xfcd76a64 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x56ca64
+crash-stack-candidate-4: sp+0xc8=0xfd19ea98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98
+crash-stack-candidate-5: sp+0xd4=0xfcd77de8 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x56dde8
+crash-stack-candidate-6: sp+0xdc=0xfda9be23 /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x41e22
+crash-stack-candidate-7: sp+0x114=0xfd19ea98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98
+crash-stack-candidate-8: sp+0x11c=0xfda9c071 /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x42070
+crash-stack-candidate-9: sp+0x12c=0xfda9763f /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x3d63e
+crash-stack-candidate-10: sp+0x13c=0xfcb1a460 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x310460
+crash-stack-candidate-11: sp+0x174=0xfd19ea98 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x993a98
+crash-stack-candidate-12: sp+0x17c=0xfcd7a4f8 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x5704f8
+crash-stack-candidate-13: sp+0x18c=0xfcd7a788 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x570788
+crash-stack-candidate-14: sp+0x1a4=0xfcd7a7d8 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x5707d8
+crash-stack-candidate-15: sp+0x1b4=0xfcd77688 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x56d688
+crash-stack-candidate-16: sp+0x1c8=0xfd0cac60 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x8c0c60
+watch-threads-1: 20686:dh2.fold7:guest S cpu=49 in=do_epoll_wait | 20720:SharedPreferenc S cpu=0 in=futex_wait_queue | 20726:AsyncTask #1 S cpu=0 in=futex_wait_queue | 20728:TracingMuxer S cpu=0 in=do_sys_poll | 20729:pool-5-thread-1 S cpu=0 in=futex_wait_queue | 20732:Thread-2 S cpu=24 in=futex_wait_queue | 20744:InsetsAnimation S cpu=2 in=do_epoll_wait | 20750:Thread-2 R cpu=0 in=0 | 20759:Thread-2 S cpu=0 in=futex_wait_queue | 20760:InteractionJank S cpu=0 in=do_epoll_wait
+watch-threads-2: 20767:GLThread 1228 S cpu=156 in=futex_wait_queue | 20794:Thread-2 S cpu=0 in=futex_wait_queue | 20796:OkHttp Connecti S cpu=0 in=futex_wait_queue | 20804:Thread-5 S cpu=9 in=__arm64_sys_nanosleep | 20805:GLThread 1228 S cpu=4 in=__arm64_sys_nanosleep | 20806:GLThread 1228 S cpu=3 in=__arm64_sys_nanosleep | 20807:AudioTrack S cpu=0 in=futex_wait_queue | 20811:AudioPortEventH S cpu=0 in=do_epoll_wait
+watch-threads-platform: 19 runtime threads hidden
+watch-1: 20732=sys:rt_sigprocmask x606 stuck=6 S cpu=24 in=futex_wait_queue | 20751=sys:exit x115 stuck=6 gone | 20759=sys:writev x1670 stuck=6 S cpu=0 in=futex_wait_queue | 20794=sys:nanosleep x289329 stuck=6 S cpu=0 in=futex_wait_queue | 20802=sys:exit x11 stuck=6 gone | 20808=sys:exit x10 stuck=6 gone | 20810=sys:exit x10 stuck=6 gone | 20813=sys:exit x10 stuck=6 gone | recent-jni: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayEl...
+watch-2: 20732=sys:rt_sigprocmask x606 stuck=9 S cpu=24 in=futex_wait_queue | 20751=sys:exit x115 stuck=9 gone | 20759=sys:writev x1670 stuck=9 S cpu=0 in=futex_wait_queue | 20794=sys:nanosleep x289329 stuck=9 S cpu=0 in=futex_wait_queue | 20802=sys:exit x11 stuck=9 gone | 20808=sys:exit x10 stuck=9 gone | 20810=sys:exit x10 stuck=9 gone | 20813=sys:exit x10 stuck=9 gone | recent-jni: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayEl...
+watch-3: 20732=sys:rt_sigprocmask x606 stuck=12 S cpu=24 in=futex_wait_queue | 20751=sys:exit x115 stuck=12 gone | 20802=sys:exit x11 stuck=12 gone | 20808=sys:exit x10 stuck=12 gone | 20810=sys:exit x10 stuck=12 gone | 20813=sys:exit x10 stuck=12 gone | 20815=sys:exit x10 stuck=12 gone | 20816=sys:exit x10 stuck=12 gone | recent-jni: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion Se...
+watch-4: 20732=sys:rt_sigprocmask x606 stuck=15 S cpu=24 in=futex_wait_queue | 20751=sys:exit x115 stuck=15 gone | 20802=sys:exit x11 stuck=15 gone | 20808=sys:exit x10 stuck=15 gone | 20810=sys:exit x10 stuck=15 gone | 20813=sys:exit x10 stuck=15 gone | 20815=sys:exit x10 stuck=15 gone | 20816=sys:exit x10 stuck=15 gone | recent-jni: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion Se...
+watch-5: 20732=sys:rt_sigprocmask x606 stuck=18 S cpu=24 in=futex_wait_queue | 20751=sys:exit x115 stuck=18 gone | 20759=sys:gettimeofday x1679 stuck=6 S cpu=0 in=futex_wait_queue | 20802=sys:exit x11 stuck=18 gone | 20808=sys:exit x10 stuck=18 gone | 20810=sys:exit x10 stuck=18 gone | 20813=sys:exit x10 stuck=18 gone | 20815=sys:exit x10 stuck=18 gone | recent-jni: GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayLength GetPrimitiveArrayRegion SetPrimitiveArrayRegion CallMethodA GetEnv GetArrayElementType GetArrayL...
