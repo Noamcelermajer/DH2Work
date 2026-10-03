@@ -41,3 +41,14 @@ SIMD high-narrowing add/subtract instructions). Their SHA-256 values do not matc
 the pins quoted in `patches/16k-port/TEST11-STRICT-REBUILD.md`, which refer to
 the copies shipped inside the ZettaBridge checkout — see section 13 of
 [`docs/STATUS.md`](../docs/STATUS.md).
+
+## Irrlicht (engine ancestor)
+
+The engine's glitch::video / glitch::scene / glitch::gui / glitch::io / glitch::core layer
+descends from Irrlicht 1.8 (most likely 1.8.0), which is licensed under the zlib licence.
+See docs/IRRLICHT-MAPPING.md for the evidence and the class-by-class mapping. The full
+licence text is retained at notices/Irrlicht-license.txt. zlib is non-copyleft: it requires
+attribution, retention of the notice, and that altered versions be plainly marked - it does
+not require source disclosure. No Irrlicht source is vendored in this repository; the
+mapping is used as a pinned reference only, because no upstream C++ source is ABI-compatible
+with this fork (see docs/IRRLICHT-MAPPING.md section 5).
