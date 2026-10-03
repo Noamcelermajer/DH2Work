@@ -22,15 +22,17 @@ surface created #1 EGL=… GL=OpenGL ES 3.2 renderer=Adreno (TM) 830
 render returned frames=1    elapsedMs=482
 surface created #2 …           (context recreated after the intro video)
 render returned frames=240  elapsedMs=37145
-render returned frames=1200 elapsedMs=63371
+render returned frames=7200 elapsedMs=256328   ← last sample while still alive
 ```
 
-8,640 frames were not reached here, but the measured window
-(240 → 1200 frames over 37.145 s → 63.371 s) is **960 frames / 26.226 s ≈ 36.6 FPS**.
-The guest process stayed alive at ~517 MB RSS. `DH2FileGuard` recovered repeated cache
-roots 178 times with no open failures, and `prince_modular.bdae` opened correctly
-(3,207,072 bytes, first 8 bytes `42524553 feff0000` = `BRES`), so the Test 5 absolute-path
-fix and the Test 6 duplicated-root collapse both work on device.
+The run passed **7200 frames / 256.3 s ≈ 4.3 minutes** with the guest alive at ~711 MB RSS
+and no crash — i.e. it went past the point where the four earlier launches died, and past
+the interval in which the documented Test 6 fault would be expected if this were that bug.
+Overall average 7200 / 256.3 ≈ **28.1 FPS**; the most recent 240 frames took 9.78 s, i.e.
+**≈ 24.5 FPS**. `DH2FileGuard` recovered repeated cache roots 178 times with no open
+failures, and `prince_modular.bdae` opened correctly (3,207,072 bytes, first 8 bytes
+`42524553 feff0000` = `BRES`), so the Test 5 absolute-path fix and the Test 6
+duplicated-root collapse both work on device.
 
 ## 2. The crash: startup, not the documented 5-minute map-load fault
 
@@ -63,25 +65,58 @@ after roughly five minutes of play while a new map loads. Neither address appear
 and this fault happens within ~2 s of game start. The 5-minute map-load crash remains
 unreproduced and unfixed.
 
-## 3. Leading cause: the display the game starts on
+## 3. Root cause: an unguarded null global in `SetFinalOrientation`
 
-Correlating every `mDisplayFrame=Rect(...)` for `Dh2Activity` in the host capture:
+A first pass suggested the crash was tied to the cover display. **That hypothesis was
+refuted** by the later `activity exit-info` history: there were four crashes, not two, and
+the two at 16:34:06 / 16:34:09 happened on the **inner** display (`2184x1968`), the same
+display the successful run used.
 
-| Time | Activity display frame | Outcome |
-| --- | --- | --- |
-| 16:30:42 – 16:30:48 | `0,0 - 2520,1080` (cover display, landscape) | **both launches SIGSEGV** |
-| 16:32:26 – 16:32:54 | `0,0 - 1080,2520` (cover display, portrait) | launcher only |
-| 16:34 onward | `0,0 - 2184,1968` (inner display) | **runs, ~36 FPS, no crash** |
+| # | Time | Display | Outcome |
+| --- | --- | --- | --- |
+| 1 | 16:30:45.835 | cover `2520x1080` | SIGSEGV |
+| 2 | 16:30:47.502 | cover `2520x1080` | SIGSEGV |
+| 3 | 16:34:06.820 | inner `2184x1968` | SIGSEGV |
+| 4 | 16:34:09.183 | inner `2184x1968` | SIGSEGV |
+| 5 | 16:34:19 → | inner `2184x1968` | **ran, 7200 frames / 256 s, no crash** |
 
-`dumpsys display` at the time of writing confirms the geometry: display 0 (inner) is
-`2184x1968` and ON; the cover panel is `1080x2520` and OFF. The app's own log for the
-working run contains **14 `mDisplayFrame` samples, all `2184x1968`, and zero SIGSEGV**.
+Display is therefore **not** the trigger. The crash is **intermittent**: four consecutive
+failures followed by a success with no configuration change.
 
-So: **folded (cover display) → crash at `nativeSetOrientation`; unfolded (inner display)
-→ runs.** This is the project's open "fold lifecycle" item showing up as a hard crash.
+Disassembling the pristine engine pins the faulting instruction exactly. In
+`SetFinalOrientation` (`0x530a6c`):
 
-This is a single-axis correlation across two crashes and one success on one device. It is
-consistent, not yet proven, and section 5 gives the test that would prove or refute it.
+```text
+0x530a70  ldr  r4, [pc, #0xd0]   ; 0x00464014 -> global base
+0x530a7c  add  r4, pc, r4        ; r4 = 0x996a90
+0x530a80  ldr  r6, [r4, r3]      ; r6 = *(base + 0x46a4)     <- pointer slot, non-null
+0x530a84  ldr  r3, [r6]          ; r3 = *r6                  <- TARGET IS NULL
+0x530a88  ldr  r0, [r3, #0x4c]   ; *** FAULT: read of 0x0000004c ***
+0x530a8c  bl   #0x46d4d8         ; SavegameManager::getAutoReorientation(r0)
+```
+
+`ldr r0, [r3, #0x4c]` with `r3 = 0` produces exactly the reported
+`read of 0x0000004c`. The slot itself (`r6`) is valid; the **object it points to is null**.
+
+The caller `nativeSetOrientation` (`0x533500`) *does* carry a null guard — but on a
+**different** global (`base + 0x4128`):
+
+```text
+0x533514  ldr  r2, [r3, r2]      ; base + 0x4128
+0x533518  ldr  r2, [r2]
+0x53351c  cmp  r2, #0
+0x533520  beq  #0x533544         ; null -> return, no call
+...
+0x53353c  bl   #0x530a6c         ; SetFinalOrientation  <- which needs base + 0x46a4
+```
+
+So `nativeSetOrientation` guards one global and then calls code that dereferences a
+different one. That is a genuine latent null dereference in the original engine, normally
+masked because both globals are populated before any orientation request. Inside the
+wrapper, `nativeSetOrientation` can be driven during early EGL surface setup, when only the
+guarded global is set — which is why the guest dies with `gl-calls: 0` and no
+`surface initialization returned`. The intermittency is consistent with an
+initialisation-order race rather than a deterministic bad input.
 
 ## 4. Honest configuration caveat
 
@@ -101,13 +136,36 @@ The missing Test 10 `initialPhoneWidth/initialPhoneHeight` correction applies ex
 restarted from the surviving Test 5 unsigned guests `6f1c00a2…` / `071f3bd9…`) is the
 cleanest way to separate "my rebuild regressed" from "this is a cover-display bug".
 
-## 5. How to confirm
+## 5. Candidate fixes and how to confirm
 
-1. Launch folded, on the cover display → expect the `read of 0x0000004c` / `0x46d4d8` fault.
-2. Launch unfolded, on the inner display → expect gameplay.
+The fault is a **null read in engine globals**, reached because `nativeSetOrientation` is
+called before the object at `base + 0x46a4` exists. Three fix sites, cheapest first:
 
-If both hold, the fix belongs in the app layer (do not start the guest until the activity
-is on a stable inner display, and re-run the orientation setup on unfold), not in the engine.
+1. **App/guest layer — defer the early call.** `nativeSetOrientation` must not run until the
+   engine has finished initialising. This is the only site DH2Work already owns, needs no
+   engine bytes to change, and does not invalidate the pinned engine hash `45891aad…`.
+   The Test 10 delta (`GameTrace.initialPhoneWidth/Height` before `nativeSetPhone(II)V`)
+   already perturbs exactly this startup ordering, which is why reproducing the pinned
+   Test 10 guest is the cleanest next experiment.
+2. **Engine guard, local.** At `0x530a84`, bail out when `r3 == 0` before the `+0x4c` load.
+   Behaviourally safe — `nativeSetOrientation` still stores the requested orientation
+   afterwards and a later call finalises it — but it changes the engine hash and needs an
+   8-byte redirection, like the existing Test 5 `engine_path_fix.S` did.
+3. **Engine guard, at the caller.** Extend `nativeSetOrientation`'s existing null check to
+   cover `base + 0x46a4` as well as `base + 0x4128`. Conceptually the correct fix (the guard
+   that is there is simply checking the wrong global), but again needs engine bytes.
+
+Confirm the race before fixing: launch the game repeatedly, unchanged, and expect a mix of
+the `0x530a88` fault and successful runs. If every launch fails, this is deterministic and
+the init-order reading is wrong.
+
+## 5b. Threat to validity
+
+Steps 1–4 of the guest chain in DH2Work's `build/` (`package_emulator_guest.py` etc.) pin
+**intermediate** Storm revisions — `Test 7`/`Test 8` expect Storm `334c23b8…`, which the
+current `storm_import_fix.c` no longer produces (it yields `2489c037…`). Reproducing the
+pinned Test 10 guest therefore needs the Test 5-era Storm sources from
+`compatibility-work-test5.zip`, not just the current tree.
 
 ## 6. Artifacts in this directory
 
@@ -118,9 +176,11 @@ is on a stable inner display, and re-run the orientation setup on unfold), not i
 | `diag/dh2-events.txt` | app milestone trace up to the crash |
 | `diag/dh2-logcat.txt` | guest log tail, ending at the SIGSEGV dump |
 | `live-dh2-events.txt` | the successful inner-display run, 1 → 1200 frames |
+| `live4-events.txt` | the same run later, up to 7200 frames / 256 s |
 | `app-live-logcat.txt` | 356 KB of the working run; inner display only, no SIGSEGV |
-| `run-logcat.txt` | host `adb logcat` capture spanning both crashes |
+| `crash-window.txt` | compacted host `adb logcat` window covering both 16:30 crashes |
 | `symbolicate.py` | symbolises a guest PC/LR against the pristine engine |
+| `disas_chain.py` | disassembles `nativeSetOrientation` → `SetFinalOrientation` and resolves PC-relative literals |
 
 ## 7. Still unverified
 
