@@ -115,8 +115,36 @@ different one. That is a genuine latent null dereference in the original engine,
 masked because both globals are populated before any orientation request. Inside the
 wrapper, `nativeSetOrientation` can be driven during early EGL surface setup, when only the
 guarded global is set — which is why the guest dies with `gl-calls: 0` and no
-`surface initialization returned`. The intermittency is consistent with an
-initialisation-order race rather than a deterministic bad input.
+`surface initialization returned`.
+
+### 3b. Why it is intermittent: the accelerometer listener
+
+`nativeSetOrientation` is called from the guest's **sensor listener**, not from an
+orientation-change callback. In `DungeonHunter2.smali`:
+
+```text
+L2108  invoke-static {v0}, L…/DungeonHunter2;->nativeSetOrientation(I)V
+L2135  invoke-static {v0}, L…/DungeonHunter2;->nativeSetOrientation(I)V
+       both inside: .method public onSensorChanged(Landroid/hardware/SensorEvent;)V
+```
+
+That closes the loop on everything observed:
+
+* The trigger is a **hardware sensor callback**, so it races the engine's own
+  initialisation instead of following a fixed UI sequence — hence four failures and then a
+  success with nothing changed.
+* It fires regardless of which panel the activity is on, which is why the display
+  hypothesis in the first draft of this document was wrong.
+* The runtime report already showed `nativeAccelerometer=1`, i.e. the listener was live and
+  had been delivered exactly one event — enough to reach the unguarded path.
+* It is consistent with `gl-calls: 0`: an accelerometer event can arrive before the first
+  frame is drawn.
+
+The natural fix is therefore in the app/guest layer: **gate the sensor-driven
+`nativeSetOrientation` call until the engine is known to be initialised** (for example, a
+`GameTrace`-style readiness flag set once the renderer reports its first frame, checked
+before the `invoke-static` at L2108/L2135). That needs no engine bytes and leaves the
+pinned engine hash `45891aad…` untouched.
 
 ## 4. Honest configuration caveat
 
