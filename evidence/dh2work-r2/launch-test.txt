@@ -1,0 +1,10 @@
+DH2Work r2 startup repeat-launch test  2026-10-03 16:44:38
+run  1: guest_alive=True  sigsegv_count=0  
+run  2: guest_alive=True  sigsegv_count=0  
+run  3: guest_alive=True  sigsegv_count=0  
+run  4: guest_alive=True  sigsegv_count=0  
+run  5: guest_alive=True  sigsegv_count=0  
+run  6: guest_alive=True  sigsegv_count=0  
+run  7: guest_alive=True  sigsegv_count=0  
+run  8: guest_alive=True  sigsegv_count=0  
+SUMMARY runs=8 survived=8 died=0

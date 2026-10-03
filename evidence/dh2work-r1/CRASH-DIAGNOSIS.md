@@ -209,6 +209,9 @@ pinned Test 10 guest therefore needs the Test 5-era Storm sources from
 | `crash-window.txt` | compacted host `adb logcat` window covering both 16:30 crashes |
 | `symbolicate.py` | symbolises a guest PC/LR against the pristine engine |
 | `disas_chain.py` | disassembles `nativeSetOrientation` → `SetFinalOrientation` and resolves PC-relative literals |
+| `symbol_at.py` | symbolises any (library, offset) pair, honouring `$a`/`$t` mapping symbols |
+| `resolve_veneer.py` | resolves an engine PLT veneer to its imported symbol through `.rel.plt` |
+| `longrun/` | runtime report, event and exit traces for the 388 s run and its `memcpy` crash |
 
 ## 7. The second crash: the long run, and it looks like the documented one
 
@@ -229,9 +232,9 @@ Symbolising the two addresses:
 
 * **LR `+0x5a1c6c`** is inside `glitch::video::IBuffer::copy()` (`0x5a1c1c`), on the
   instruction immediately after `bl 0x30e868`.
-* **`0x30e868`** is a **PLT veneer** (`add ip, pc, #…; ldr pc, [ip, #…]`) — a call to an
-  imported libc function, which is why the fault sits in `libc.so` while the return address
-  is in the engine.
+* **`0x30e868`** is a **PLT veneer** (`add ip, pc, #…; ldr pc, [ip, #…]`) that resolves —
+  via the engine's `.rel.plt` — to **`memcpy`**. That is why the fault sits in `libc.so`
+  while the return address is in the engine.
 * The instruction stream is self-consistent with `IBuffer::copy()` doing
   `memcpy(dst, src, size)`: it checks `[this+0xc]` (size), saves `[this+8]` (old data),
   calls `operator new[]` (`0x5341a8`) with that size, stores the new pointer back to
