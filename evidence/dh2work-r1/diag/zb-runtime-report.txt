@@ -1,0 +1,125 @@
+zettabridge-runtime-report 1
+plugin: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS targetSdk 24
+proxy-loads: 3
+proxy-failures: 0
+proxy-loaded: libnativeinterface.so jni=0x00010006
+proxy-loaded: libDungeonHunter2.so jni=0x00010004
+proxy-loaded: libStormGLOFT.so jni=0x00010006
+jni-onload-calls: 2
+jni-onload: libDungeonHunter2.so ok jni=0x00010004
+jni-onload: libStormGLOFT.so ok jni=0x00010006
+registered-natives: 36
+unimplemented-host-calls: 0
+unimplemented-distinct: 0
+first-unimplemented: (none)
+guest-exit: guest SIGSEGV: read of 0x0000004c, pc 0xfcbef4d8 in /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x46d4d8
+guest-log: liblog: StormGLOFT  hook info node: custom_hook_info_nativeSetPhone
+guest-log: liblog: StormGLOFT  hook info node: custom_hook_info_nativeResize
+guest-log: liblog: StormGLOFT  hook info node: custom_hook_info_nativeGetWidth
+guest-log: liblog: StormGLOFT  Try to hook Java_com_gameloft_android_GAND_GloftD2SS_DungeonHunter2_nativeSetPhone in lib libDungeonHunter2
+guest-log: liblog: StormGLOFT  hooking:   Java_com_gameloft_android_GAND_GloftD2SS_DungeonHunter2_nativeSetPhone = 0xfccb4e78
+guest-log: liblog: StormGLOFT  ARM using 0xfc3d15a4
+guest-log: liblog: StormGLOFT  Hooked Java_com_gameloft_android_GAND_GloftD2SS_DungeonHunter2_nativeSetPhone in lib libDungeonHunter2
+guest-log: liblog: StormGLOFT  Try to hook Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeResize in lib libDungeonHunter2
+guest-log: liblog: StormGLOFT  hooking:   Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeResize = 0xfccb317c
+guest-log: liblog: StormGLOFT  ARM using 0xfc3d1690
+guest-log: liblog: StormGLOFT  Hooked Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeResize in lib libDungeonHunter2
+guest-log: liblog: StormGLOFT  Try to hook nativeGetWidth in lib libDungeonHunter2
+guest-log: liblog: StormGLOFT  hooking:   nativeGetWidth = 0xfccb3a1c
+guest-log: liblog: StormGLOFT  ARM using 0xfc3d1754
+guest-log: liblog: StormGLOFT  Hooked nativeGetWidth in lib libDungeonHunter2
+guest-log: liblog: StormGLOFT  Hook is auto loaded!
+guest-log: liblog: StormGLOFT  In hook_inline_function.
+guest-log: liblog: StormGLOFT  uiHookAddr is FCCB2C50 in arm mode
+guest-log: liblog: StormGLOFT  InlineHook
+guest-log: liblog: StormGLOFT  HookArm()
+guest-log: liblog: StormGLOFT  Arm32 Opcode to fix 0 : e8830006
+guest-log: liblog: StormGLOFT  getTypeInArm : e8830006
+guest-log: liblog: StormGLOFT  Fix length : 4
+guest-log: liblog: StormGLOFT  getTypeInArm : e8830006
+guest-log: liblog: StormGLOFT  Arm32 Opcode to fix 1 : e59f1200
+guest-log: liblog: StormGLOFT  getTypeInArm : e59f1200
+guest-log: liblog: StormGLOFT  Fix length : 12
+guest-log: liblog: StormGLOFT  getTypeInArm : e59f1200
+guest-log: liblog: StormGLOFT  Fixing Arm !!!!!!!
+guest-log: liblog: StormGLOFT  sizeof(uint8_t) : 1
+guest-log: liblog: StormGLOFT  -------------START----------------
+guest-log: liblog: StormGLOFT  currentOpcode is e8830006
+guest-log: liblog: StormGLOFT  new_entry_addr : fd482230
+guest-log: liblog: StormGLOFT  THE ARM32 OPCODE IS e8830006
+guest-log: liblog: StormGLOFT  getTypeInArm : e8830006
+guest-log: liblog: StormGLOFT  OTHER_ARM
+guest-log: liblog: StormGLOFT  offset : 4
+guest-log: liblog: StormGLOFT  fixPos : 4
+guest-log: liblog: StormGLOFT  --------------END-----------------
+guest-log: liblog: StormGLOFT  -------------START----------------
+guest-log: liblog: StormGLOFT  currentOpcode is e59f1200
+guest-log: liblog: StormGLOFT  new_entry_addr : fd482230
+guest-log: liblog: StormGLOFT  THE ARM32 OPCODE IS e59f1200
+guest-log: liblog: StormGLOFT  getTypeInArm : e59f1200
+guest-log: liblog: StormGLOFT  ADR1_ARM ADR2_ARM LDR_ARM MOV_ARM
+guest-log: liblog: StormGLOFT  ADR1_ARM ADR2_ARM LDR_ARM
+guest-log: liblog: StormGLOFT  LDR_ARM
+guest-log: liblog: StormGLOFT  offset : 12
+guest-log: liblog: StormGLOFT  fixPos : 16
+guest-log: liblog: StormGLOFT  --------------END-----------------
+guest-log: liblog: StormGLOFT  pstInlineHook->backUpLength : 8
+guest-log: liblog: StormGLOFT  backUpPos : 8
+guest-log: liblog: StormGLOFT  fixPos : 16
+guest-log: liblog: StormGLOFT  Fix finish !
+native-calls: com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativeSetPhone=1 com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativeAccelerometer=1 com/gameloft/android/GAND/GloftD2SS/Musicplayer.nativeInitplayer=1 com/samsung/zirconia/NativeInterface.checkLicenseFile2=1 com/gameloft/android/GAND/GloftD2SS/DungeonHunter2.nativeSetOrientation=1 com/samsung/zirconia/NativeInterface.checkLicenseFile=1 com/gameloft/android/GAND/GloftD2SS/GameRenderer.nativeConfig=1 com/gameloft/android/GAND/GloftD2SS/GameRenderer.nativeGameRenderer=1 total=9
+opened-1: /data/data/local.dh2.fold7/files/zb/guest/lib/libzbcompat.so
+opened-2: /data/data/local.dh2.fold7/files/zb/guest/lib/libzbjni.so
+opened-3: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libnativeinterface.so
+opened-4: /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libstdc++.so
+opened-5: /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libm.so
+opened-6: /data/data/local.dh2.fold7/files/zb/guest/lib/libGLESv2.so
+opened-7: /data/data/local.dh2.fold7/files/zb/guest/lib/libGLESv1_CM.so
+opened-8: /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/liblog.so
+opened-9: /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc++.so
+opened-10: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libStormGLOFT.so
+opened-11: /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libz.so
+opened-12: /data/data/local.dh2.fold7/files/zb/guest/lib/libEGL.so
+opened-13: /data/data/local.dh2.fold7/files/zb/guest/lib/libandroid.so
+opened-14: /data/data/com.gameloft.android.GAND.GloftD2SS/lib/libStormGLOFT.so
+opened-15: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so
+opened-16: /data/data/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so
+open-failed-1: /data/data/local.dh2.fold7/files/zb/guest/lib/libnetd_client.so errno=2
+open-failed-2: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libnetd_client.so errno=2
+open-failed-3: /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libnetd_client.so errno=2
+open-failed-4: /data/data/local.dh2.fold7/files/zb/guest/lib/libdl_android.so errno=2
+open-failed-5: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libdl_android.so errno=2
+open-failed-6: /data/data/local.dh2.fold7/files/zb/guest/lib/libstdc++.so errno=2
+open-failed-7: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libstdc++.so errno=2
+open-failed-8: /data/data/local.dh2.fold7/files/zb/guest/lib/libm.so errno=2
+open-failed-9: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libm.so errno=2
+open-failed-10: /data/user/0/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/app_zirconia/zirconia.dat errno=2
+open-failed-11: /data/data/local.dh2.fold7/files/zb/guest/lib/liblog.so errno=2
+open-failed-12: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/liblog.so errno=2
+open-failed-13: /data/data/local.dh2.fold7/files/zb/guest/lib/libc++.so errno=2
+open-failed-14: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libc++.so errno=2
+open-failed-15: /data/data/local.dh2.fold7/files/zb/guest/lib/libz.so errno=2
+open-failed-16: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libz.so errno=2
+gl-calls: 0
+gl-first-call: (none)
+gl-egl-context-current: (unknown)
+gl-first-error: (none)
+egl-swaps: 0
+egl-first-error: (none)
+jni-runtime-start: ok
+jni-loading: libStormGLOFT.so
+crash-recent-jni-calls: Register GetStringUTFLength GetStringLength GetStringUTFRegion GetStringUTFLength GetStringLength GetStringUTFRegion GetStringUTFLength GetStringLength GetStringUTFRegion NewGlobalRef GetMethodID GetMethodID GetMethodID GetMethodID GetMethodID GetMethodID GetMethodID GetMethodID GetMethodID
+crash-recent-egl-calls: (none)
+crash-registers: r0=00000000 r1=00000015 r2=000032f0 r3=00000000 r4=fd116a98 r5=ffffffff r6=fd1783ec r7=00000000 r8=00000000 r9=00000000 r10=00000000 r11=00000000 r12=00000000 r13=fd760170 r14=fccb2a90 r15=fcbef4d8
+crash-state: cpsr=a0000010 tls=fd76048c tid=28997 guest-tid=29040
+crash-pc: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x46d4d8
+crash-lr: /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x530a90
+crash-stack: ffffffff fd11d11c 00000000 fccb5540 00000000 00000000 00000000 ffff0f00
+crash-precise: no
+crash-stack-candidate-1: sp+0x4=0xfd11d11c /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x99a11c
+crash-stack-candidate-2: sp+0xc=0xfccb5540 /data/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/lib/libDungeonHunter2.so offset 0x533540
+crash-stack-candidate-3: sp+0x24=0xfdb07f93 /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x56f92
+crash-stack-candidate-4: sp+0x28=0xfdb07f69 /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x56f68
+crash-stack-candidate-5: sp+0x2c=0xfdafead5 /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x4dad4
+crash-stack-candidate-6: sp+0x34=0xfdb07f69 /data/data/local.dh2.fold7/files/zb/sysroot/system/lib/libc.so offset 0x56f68
+crash-stack-candidate-7: sp+0x70=0x3fffc8e0 /data/data/local.dh2.fold7/files/zb/guest/zbhost vaddr 0x8e0

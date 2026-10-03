@@ -1,0 +1,16 @@
+1791034246966 tid=28997 start locale=en_GB preferEnglish=false fit16by9=false preserveContext=false
+1791034246966 tid=28997 asset probe=character_properties_pystructnames.bin exists=true bytes=5032
+1791034246966 tid=28997 asset sha256=character_properties_pystructnames.bin 7c955f759840dc7808b17ddb54213ce886abd5cdf6607cacc9048a3626803cc2
+1791034246966 tid=28997 asset probe=character_properties.bin exists=false bytes=0
+1791034246966 tid=28997 asset probe=character_models_dictionary_pyarraynames.bin exists=true bytes=1755
+1791034246966 tid=28997 asset sha256=character_models_dictionary_pyarraynames.bin d731c154e9208b66b84476d97a08366ad1d3e1a074c1fc59889e03b847661fc9
+1791034246967 tid=28997 model probe=/storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae exists=true bytes=3207072
+1791034246967 tid=28997 model first32=42524553feff00003c000000a0ef300017250000000000003c00000098940000
+1791034246979 tid=28997 Zirconia_DRM created
+1791034246982 tid=28997 Zirconia_DRM started
+1791034246982 tid=28997 Zirconia_DRM resumed
+1791034247221 tid=28997 Zirconia_DRM paused
+1791034247450 tid=28997 DungeonHunter2 created
+1791034247474 tid=28997 DungeonHunter2 started
+1791034247474 tid=28997 DungeonHunter2 resumed
+1791034247500 tid=29046 surface created #1 EGL=android.opengl.EGLContext@372b7b38 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830

@@ -1,0 +1,6 @@
+Android process exit history (newest first)
+Sat Oct 03 16:30:45 GMT+03:00 2026 process=local.dh2.fold7:guest pid=28895 reason=1 status=139 pssKiB=0 rssKiB=0 description=
+Sat Oct 03 16:30:40 GMT+03:00 2026 process=local.dh2.fold7 pid=28425 reason=10 status=0 pssKiB=0 rssKiB=0 description=[FORCE STOP] stop local.dh2.fold7 due to from pid 28731
+Sat Oct 03 16:30:40 GMT+03:00 2026 process=local.dh2.fold7:guest pid=28473 reason=10 status=0 pssKiB=0 rssKiB=0 description=[FORCE STOP] stop local.dh2.fold7 due to from pid 28731
+Sat Oct 03 16:30:29 GMT+03:00 2026 process=local.dh2.fold7 pid=27442 reason=16 status=0 pssKiB=0 rssKiB=122832 description=stop local.dh2.fold7 due to installPackageLI
+Sat Oct 03 16:30:29 GMT+03:00 2026 process=local.dh2.fold7:guest pid=27908 reason=16 status=0 pssKiB=0 rssKiB=347944 description=stop local.dh2.fold7 due to installPackageLI

@@ -1,0 +1,49 @@
+1791034460081 tid=1590 start locale=en_GB preferEnglish=false fit16by9=false preserveContext=false
+1791034460081 tid=1590 asset probe=character_properties_pystructnames.bin exists=true bytes=5032
+1791034460082 tid=1590 asset sha256=character_properties_pystructnames.bin 7c955f759840dc7808b17ddb54213ce886abd5cdf6607cacc9048a3626803cc2
+1791034460082 tid=1590 asset probe=character_properties.bin exists=false bytes=0
+1791034460082 tid=1590 asset probe=character_models_dictionary_pyarraynames.bin exists=true bytes=1755
+1791034460082 tid=1590 asset sha256=character_models_dictionary_pyarraynames.bin d731c154e9208b66b84476d97a08366ad1d3e1a074c1fc59889e03b847661fc9
+1791034460082 tid=1590 model probe=/storage/emulated/0/Android/data/local.dh2.fold7/files/plugins/com.gameloft.android.GAND.GloftD2SS/data/3d/characters/prince/prince_modular.bdae exists=true bytes=3207072
+1791034460082 tid=1590 model first32=42524553feff00003c000000a0ef300017250000000000003c00000098940000
+1791034460093 tid=1590 Zirconia_DRM created
+1791034460095 tid=1590 Zirconia_DRM started
+1791034460095 tid=1590 Zirconia_DRM resumed
+1791034460335 tid=1590 Zirconia_DRM paused
+1791034460573 tid=1590 DungeonHunter2 created
+1791034460599 tid=1590 DungeonHunter2 started
+1791034460599 tid=1590 DungeonHunter2 resumed
+1791034460620 tid=1641 surface created #1 EGL=android.opengl.EGLContext@372b74f8 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830
+1791034461042 tid=1590 Zirconia_DRM stopped
+1791034461042 tid=1590 Zirconia_DRM destroyed
+1791034461058 tid=1641 surface initialization returned
+1791034461058 tid=1641 surface size=2184x1968 view=2184x1968
+1791034461058 tid=1641 surface resize returned
+1791034461059 tid=1641 render returned frames=1 elapsedMs=482
+1791034461761 tid=1590 DungeonHunter2 paused
+1791034461805 tid=1590 MyVideoView created
+1791034461811 tid=1590 MyVideoView started
+1791034461811 tid=1590 MyVideoView resumed
+1791034462737 tid=1590 DungeonHunter2 saved state
+1791034462739 tid=1590 DungeonHunter2 stopped
+1791034474685 tid=1590 MyVideoView paused
+1791034474690 tid=1590 DungeonHunter2 started
+1791034474690 tid=1590 DungeonHunter2 resumed
+1791034474710 tid=1641 surface created #2 EGL=android.opengl.EGLContext@37318e08 GL=OpenGL ES 3.2 V@0800.64.7 (GIT@f61dec9117, I68b0a64d7e, 1774510019) (Date:03/26/26) renderer=Adreno (TM) 830
+1791034474715 tid=1641 surface initialization returned
+1791034474715 tid=1641 surface size=2184x1968 view=2184x1968
+1791034474715 tid=1641 surface resize returned
+1791034474724 tid=1641 surface size=2184x1968 view=2184x1968
+1791034474724 tid=1641 surface resize returned
+1791034475472 tid=1590 MyVideoView stopped
+1791034475472 tid=1590 MyVideoView destroyed
+1791034490474 tid=1641 render returned frames=120 elapsedMs=29897
+1791034497721 tid=1641 render returned frames=240 elapsedMs=37145
+1791034501806 tid=1641 render returned frames=360 elapsedMs=41229
+1791034505881 tid=1641 render returned frames=480 elapsedMs=45304
+1791034509923 tid=1641 render returned frames=600 elapsedMs=49347
+1791034512350 tid=1641 render returned frames=720 elapsedMs=51773
+1791034514839 tid=1641 render returned frames=840 elapsedMs=54262
+1791034517216 tid=1641 render returned frames=960 elapsedMs=56639
+1791034519262 tid=1641 render returned frames=1080 elapsedMs=58685
+1791034523948 tid=1641 render returned frames=1200 elapsedMs=63371
