@@ -17,9 +17,21 @@ codes.
 2. **Component unit tests.** Every component built so far carries real ones — `host/mem`
    (ctest 4/4, `memtest` 55/55 at both page sizes, `memtest_real` 28/28), `host/loader` (32
    cases, 102,378 checks), `host/rt` (395 checks, 15 cases).
-3. **`qemu-arm` in WSL** for ARM32 semantics. Use `qemu-user` + `gcc-arm-linux-gnueabihf`.
-   This is the **only** way to execute ARM **VFP** instructions for testing — **Unicorn 2.1.4
-   cannot execute a single ARM VFP instruction** on any of its 33 ARM CPU models.
+3. **The run harness at `DH2Work-toolchain\host\harness\`** — `dh2run` executes guest ARM32
+   under Dynarmic **on the host**, including **VFP**. `dh2selftest` is 44 checks / 0 failures.
+   This is now the preferred way to execute a guest instruction or function off-device.
+   **Correction to what this document previously said:** ARM **VFP** no longer requires
+   `qemu-arm`. Confirmed by execution — `vadd.f32 2.5f + 3.5f` gives `r0 = 0x40c00000 = 6.0`.
+   It also runs real engine functions to a breakpoint.
+
+   `qemu-arm` (with `gcc-arm-linux-gnueabihf`) remains a useful independent second opinion for
+   ARM32 semantics, and still matters because **Unicorn 2.1.4 cannot execute a single ARM VFP
+   instruction** on any of its 33 ARM CPU models — so anything VFP-related must not be built on
+   Unicorn.
+
+   Known limits of `dh2run`: no relocation processing yet (so any function that `bl`s through a
+   PLT diverges — use `host/loader`'s 59,623 relocations and `Dh2UserCallbacks` as the seam),
+   no syscall layer (`SVC` stops), one core and one thread, and no Thumb-32 disassembly trace.
 4. **`dh2_oracle.py`** (Unicorn) for differential testing of ARM32 integer code against the
    pristine engine.
 
