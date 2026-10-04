@@ -81,15 +81,24 @@ int main(int argc, char** argv) {
     }
 
     const dh2::RelocationCensus& census = report.relocations;
+    // "seen" is everything the walkers met, so it has to include the TLS forms too; otherwise the
+    // applied count can exceed it, which reads like a bug in the report rather than a category
+    // that was left out of it.
+    const std::uint64_t seen = census.total() + report.tls_relocations;
     std::printf("  relocations  : %llu applied of %llu seen (RELATIVE %llu, ABS32 %llu, GLOB_DAT %llu, "
-                "JUMP_SLOT %llu, NONE %llu)\n",
-                static_cast<unsigned long long>(report.applied),
-                static_cast<unsigned long long>(census.total()),
+                "JUMP_SLOT %llu, TLS %llu, NONE %llu, other %llu)\n",
+                static_cast<unsigned long long>(report.applied), static_cast<unsigned long long>(seen),
                 static_cast<unsigned long long>(census.relative),
                 static_cast<unsigned long long>(census.abs32),
                 static_cast<unsigned long long>(census.glob_dat),
                 static_cast<unsigned long long>(census.jump_slot),
-                static_cast<unsigned long long>(census.none));
+                static_cast<unsigned long long>(report.tls_relocations),
+                static_cast<unsigned long long>(census.none),
+                static_cast<unsigned long long>(census.other));
+    if (report.packed_relocations != 0) {
+        std::printf("  packed       : %llu relocation(s) from DT_ANDROID_REL / DT_ANDROID_RELR / DT_RELR\n",
+                    static_cast<unsigned long long>(report.packed_relocations));
+    }
     std::printf("  symbols      : %zu distinct names indexed\n", report.indexed_symbols);
     std::printf("  static TLS   : %llu byte(s) laid out below the thread pointer, %llu TLS relocation(s)\n",
                 static_cast<unsigned long long>(report.static_tls_size),

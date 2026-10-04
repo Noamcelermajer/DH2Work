@@ -41,6 +41,7 @@ struct LinkReport {
     std::uint64_t applied = 0;
     std::size_t indexed_symbols = 0;
     std::uint64_t tls_relocations = 0;
+    std::uint64_t packed_relocations = 0;
     std::uint64_t static_tls_size = 0;
     std::uint64_t init_array_entries = 0;
     std::uint32_t init_array = 0;
@@ -80,6 +81,9 @@ private:
     std::uint32_t stub_for(const std::string& name);
     std::uint32_t resolve(std::size_t module, std::uint32_t symbol_index, LinkReport& report);
     bool relocate(LinkReport& report, std::string& error);
+    bool relocate_packed(LinkReport& report, std::string& error);
+    bool apply_relocation(std::size_t module, std::uint32_t type, std::uint32_t symbol_index,
+                          std::uint32_t slot, LinkReport& report, std::string& error);
 
     GuestMemory& mem_;
     std::uint32_t dyn_limit_;

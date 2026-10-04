@@ -162,11 +162,141 @@ bool GuestLinker::relocate(LinkReport& report, std::string& error) {
             for (std::uint32_t off = 0; off + sizeof(Elf32_Rel) <= table.size; off += sizeof(Elf32_Rel)) {
                 Elf32_Rel relocation{};
                 std::memcpy(&relocation, base + off, sizeof relocation);
-                const std::uint32_t type = ELF32_R_TYPE(relocation.r_info);
-                const std::uint32_t symbol_index = ELF32_R_SYM(relocation.r_info);
-                const std::uint32_t slot = relocation.r_offset + image.bias;
+                if (!apply_relocation(m, ELF32_R_TYPE(relocation.r_info), ELF32_R_SYM(relocation.r_info),
+                                      relocation.r_offset + image.bias, report, error)) {
+                    return false;
+                }
+            }
+        }
+    }
+    if (!relocate_packed(report, error)) return false;
+    return true;
+}
 
-                const auto read_slot = [&](std::uint32_t* value) -> bool {
+bool GuestLinker::relocate_packed(LinkReport& report, std::string& error) {
+    // APS2: a 4-byte magic, then groups of SLEB128 deltas. Reader follows bionic's
+    // AndroidPackedRelocationSection.
+    const auto sleb128 = [](const std::uint8_t*& p, const std::uint8_t* end, bool& ok) -> std::int64_t {
+        std::int64_t value = 0;
+        int shift = 0;
+        std::uint8_t byte = 0;
+        do {
+            if (p >= end || shift > 63) {
+                ok = false;
+                return 0;
+            }
+            byte = *p++;
+            value |= static_cast<std::int64_t>(byte & 0x7f) << shift;
+            shift += 7;
+        } while ((byte & 0x80) != 0);
+        if (shift < 64 && (byte & 0x40) != 0) value |= -(static_cast<std::int64_t>(1) << shift);
+        return value;
+    };
+
+    for (std::size_t m = 0; m < modules_.size(); ++m) {
+        const LoadedImage& image = modules_[m];
+
+        if (image.dt_android_rel != 0 && image.dt_android_relsz != 0) {
+            const std::uint8_t* base =
+                mem_.host_ptr(image.dt_android_rel + image.bias, image.dt_android_relsz, kPageRead);
+            if (base == nullptr) {
+                error = image.soname + ": packed relocation section is not readable";
+                return false;
+            }
+            const std::uint8_t* p = base;
+            const std::uint8_t* end = base + image.dt_android_relsz;
+            if (image.dt_android_relsz < 4 || std::memcmp(p, "APS2", 4) != 0) {
+                error = image.soname + ": packed relocation section has no APS2 magic";
+                return false;
+            }
+            p += 4;
+            // Header: a declared relocation count followed by one further header field. We do not
+            // need the second field to decode, but the declared count and exact stream
+            // consumption are both checked below, so a different layout cannot pass silently.
+            bool decoded = true;
+            const std::int64_t declared = sleb128(p, end, decoded);
+            (void)sleb128(p, end, decoded);
+            if (!decoded) {
+                error = image.soname + ": truncated packed relocation header";
+                return false;
+            }
+            std::uint32_t offset = 0;
+            std::uint64_t decoded_count = 0;
+            while (p < end) {
+                const std::int64_t group_size = sleb128(p, end, decoded);
+                if (!decoded) break;
+                if (group_size == 0) break;
+                const std::int64_t group_flags = sleb128(p, end, decoded);
+                if (!decoded) break;
+                std::uint32_t group_r_info = 0;
+                std::uint32_t group_offset_delta = 0;
+                if ((group_flags & 1) != 0) group_r_info = static_cast<std::uint32_t>(sleb128(p, end, decoded));
+                if ((group_flags & 2) != 0) group_offset_delta = static_cast<std::uint32_t>(sleb128(p, end, decoded));
+                if ((group_flags & 4) != 0) (void)sleb128(p, end, decoded);  // grouped addend (RELA only)
+                for (std::int64_t i = 0; i < group_size && decoded; ++i) {
+                    const std::int64_t delta = (group_flags & 2) != 0 ? group_offset_delta : sleb128(p, end, decoded);
+                    offset += static_cast<std::uint32_t>(delta);
+                    const std::uint32_t r_info =
+                        (group_flags & 1) != 0 ? group_r_info : static_cast<std::uint32_t>(sleb128(p, end, decoded));
+                    if ((group_flags & 8) != 0 && (group_flags & 4) == 0) (void)sleb128(p, end, decoded);
+                    if (!apply_relocation(m, ELF32_R_TYPE(r_info), ELF32_R_SYM(r_info), offset + image.bias,
+                                          report, error)) {
+                        return false;
+                    }
+                    ++report.packed_relocations;
+                    ++decoded_count;
+                }
+            }
+            if (!decoded || p != end || decoded_count != static_cast<std::uint64_t>(declared)) {
+                error = image.soname + ": the packed relocation stream did not decode exactly (" +
+                        std::to_string(decoded_count) + " of " + std::to_string(declared) + " declared)";
+                return false;
+            }
+        }
+
+        struct RelrSection {
+            std::uint32_t address;
+            std::uint32_t size;
+        };
+        const RelrSection relr_sections[2] = {{image.dt_android_relr, image.dt_android_relrsz},
+                                              {image.dt_relr, image.dt_relrsz}};
+        for (const RelrSection& section : relr_sections) {
+            if (section.address == 0 || section.size < 4) continue;
+            const std::uint32_t* entries = reinterpret_cast<const std::uint32_t*>(
+                mem_.host_ptr(section.address + image.bias, section.size, kPageRead));
+            if (entries == nullptr) {
+                error = image.soname + ": RELR section is not readable";
+                return false;
+            }
+            const std::uint32_t count = section.size / 4;
+            std::uint32_t where = 0;
+            for (std::uint32_t i = 0; i < count; ++i) {
+                const std::uint32_t entry = entries[i];
+                if ((entry & 1u) == 0) {
+                    where = entry;
+                    if (!apply_relocation(m, R_ARM_RELATIVE, 0, where + image.bias, report, error)) return false;
+                    ++report.packed_relocations;
+                    where += 4;
+                } else {
+                    for (unsigned bit = 1; bit < 32; ++bit) {
+                        if ((entry & (1u << bit)) != 0) {
+                            const std::uint32_t slot = where + (bit - 1) * 4 + image.bias;
+                            if (!apply_relocation(m, R_ARM_RELATIVE, 0, slot, report, error)) return false;
+                            ++report.packed_relocations;
+                        }
+                    }
+                    where += 31 * 4;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+bool GuestLinker::apply_relocation(std::size_t m, std::uint32_t type, std::uint32_t symbol_index,
+                                   std::uint32_t slot, LinkReport& report, std::string& error) {
+    const LoadedImage& image = modules_[m];
+    const auto read_slot = [&](std::uint32_t* value) -> bool {
                     const std::uint8_t* source = mem_.host_ptr(slot, 4, kPageRead);
                     if (source == nullptr) return false;
                     std::memcpy(value, source, 4);
@@ -262,9 +392,6 @@ bool GuestLinker::relocate(LinkReport& report, std::string& error) {
                         break;
                     }
                 }
-            }
-        }
-    }
     return true;
 }
 

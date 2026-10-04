@@ -3,6 +3,25 @@
 #include <elf.h>
 #include <sys/mman.h>
 
+// Android's packed-relocation dynamic tags are not in every system elf.h. The values are fixed
+// by the platform ABI (bionic's own elf.h) and are the same for 32- and 64-bit guests.
+#ifndef DT_ANDROID_REL
+#define DT_ANDROID_REL 0x6000000f
+#define DT_ANDROID_RELSZ 0x60000010
+#define DT_ANDROID_RELA 0x60000011
+#define DT_ANDROID_RELASZ 0x60000012
+#endif
+#ifndef DT_ANDROID_RELR
+#define DT_ANDROID_RELR 0x6fffe000
+#define DT_ANDROID_RELRSZ 0x6fffe001
+#define DT_ANDROID_RELRENT 0x6fffe003
+#endif
+#ifndef DT_RELR
+#define DT_RELR 36
+#define DT_RELRSZ 35
+#define DT_RELRENT 37
+#endif
+
 #include <algorithm>
 #include <cstring>
 #include <fstream>
@@ -197,6 +216,14 @@ bool parse_dynamic(GuestMemory& mem, LoadedImage& out, std::string& error) {
             case DT_HASH: out.dt_hash = e.d_un.d_ptr; break;
             case DT_GNU_HASH: out.dt_gnu_hash = e.d_un.d_ptr; break;
             case DT_REL: out.dt_rel = e.d_un.d_ptr; break;
+            case DT_ANDROID_REL: out.dt_android_rel = e.d_un.d_ptr; break;
+            case DT_ANDROID_RELSZ: out.dt_android_relsz = e.d_un.d_val; break;
+            case DT_ANDROID_RELR: out.dt_android_relr = e.d_un.d_ptr; break;
+            case DT_ANDROID_RELRSZ: out.dt_android_relrsz = e.d_un.d_val; break;
+            case DT_ANDROID_RELRENT: out.dt_android_relrent = e.d_un.d_val; break;
+            case DT_RELR: out.dt_relr = e.d_un.d_ptr; break;
+            case DT_RELRSZ: out.dt_relrsz = e.d_un.d_val; break;
+            case DT_RELRENT: out.dt_relrent = e.d_un.d_val; break;
             case DT_RELSZ: out.dt_relsz = e.d_un.d_val; break;
             case DT_RELENT: out.dt_relent = e.d_un.d_val; break;
             case DT_JMPREL: out.dt_jmprel = e.d_un.d_ptr; break;

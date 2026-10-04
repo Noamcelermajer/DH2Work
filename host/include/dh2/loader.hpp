@@ -33,6 +33,12 @@ struct LoadedImage {
     std::uint32_t dt_hash = 0, dt_gnu_hash = 0;
     std::uint32_t dt_rel = 0, dt_relsz = 0, dt_relent = 8;
     std::uint32_t dt_jmprel = 0, dt_pltrelsz = 0;
+    // Android packs relocations to save space. DT_ANDROID_REL is an APS2-encoded stream of
+    // (offset, r_info) groups; RELR is a word-per-address bitmap of relative relocations. A
+    // library can carry only these and no DT_REL at all.
+    std::uint32_t dt_android_rel = 0, dt_android_relsz = 0;
+    std::uint32_t dt_android_relr = 0, dt_android_relrsz = 0, dt_android_relrent = 4;
+    std::uint32_t dt_relr = 0, dt_relrsz = 0, dt_relrent = 4;
     // PT_TLS: the module's static TLS template. The linker lays these out below the thread
     // pointer, which is what R_ARM_TLS_TPOFF32 is expressed against.
     std::uint32_t tls_vaddr = 0, tls_filesz = 0, tls_memsz = 0, tls_align = 1;
