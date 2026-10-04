@@ -59,7 +59,7 @@ out of the initial stack image, installing the TLS thread pointer through CP15, 
 allocator — before `main` runs at all. It then exercises `printf`, `malloc` (1 MiB, poisoned and
 checked), `mmap`/`munmap`, `clock_gettime` and `getpid`. It passes.
 
-The guest suite as a whole, with a **stock** Dynarmic:
+The guest suite as a whole, against the pinned upstream Dynarmic exactly as it is:
 
 ```
 PASS hello            PASS hello_thumb     PASS args
@@ -68,6 +68,22 @@ PASS bionic
 FAIL armv8_t32 (exit 3, expected 0)
 run-guests: 7 passed, 1 failed, 0 skipped
 ```
+
+and against **our own patched build of the same pin**:
+
+```
+PASS hello            PASS hello_thumb     PASS args
+PASS vfp              PASS exclusive       PASS memory
+PASS armv8_t32        PASS bionic
+run-guests: 8 passed, 0 failed, 0 skipped
+```
+
+`armv8_t32`'s numbers are not self-reported: `crc32b=0x2d02ef8d`, `crc32h=0xbe2612ff`,
+`crc32w=0xdebb20e3` and `crc32cb=0xad7d5351`, `crc32cw=0xb798b438` were computed
+independently in Python from the two reflected polynomials (0xEDB88320 and 0x82F63B78, no final
+inversion) before the guest was ever run. It also asserts both halves of the exclusive contract:
+a `stlex` after `clrex` must fail and must not write, and a `stlex` after `ldaex` must succeed
+and must write.
 
 `vfp` matters for its own reason: `sum=0x40c00000` is 6.0 and `product=0x410c0000` is 8.75, so
 the guest really executed `vadd.f32`/`vmul.f32`/`vcmp.f32` — there is no soft-float shim in this
@@ -84,7 +100,8 @@ exit : stopped (3)
 ```
 
 That is the exact behaviour `docs/DYNARMIC-INDEPENDENCE.md` predicted, reproduced here from our
-own binary, and it is what our own patch (section 4) has to remove.
+own binary — and the 8/8 run above is the same suite on the same machine with nothing changed but
+the Dynarmic build.
 
 ## 4. The custom Dynarmic
 
@@ -100,9 +117,11 @@ analysis found necessary and nothing else:
 The ASIMD narrowing family is deliberately **not** included: no guest binary in this title contains
 an architecturally legal instance.
 
-See `patches/dynarmic/README.md` and `patches/dynarmic/EVIDENCE.md` for the patch itself and its
-evidence. The host is pinned to the patched tree by `DH2_DYNARMIC_DIR`; once that build is in place
-`armv8_t32` is expected to pass, and the suite becomes 8/8.
+`host/scripts/fetch-dynarmic.sh` was run against a **pristine clone** of the pin: it checked out
+`86458a0b`, applied the patch with `git apply`, and the host built and passed 8/8 against it. See
+`patches/dynarmic/README.md` for the change and `patches/dynarmic/tests/` for the standalone
+instruction test, which reports `T32-SUMMARY mode=patched pass=18 fail=0` and, on a pristine tree,
+an 18/18 A/B proving each of those instructions is otherwise an undefined instruction.
 
 ## 5. What is honestly not rebuilt
 
