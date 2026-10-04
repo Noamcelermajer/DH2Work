@@ -88,6 +88,7 @@ enum : std::int32_t {
     kClockGettime = 263,
     kClockGettime64 = 403,
     kOpenat = 322,
+    kLlseek = 140,
     kFstatat64 = 327,
     kReadlinkat = 332,
     kFaccessat = 334,
@@ -190,6 +191,7 @@ const char* syscall_name(std::int32_t number) {
         case kFaccessat: return "faccessat";
         case kSetRobustList: return "set_robust_list";
         case kPrlimit64: return "prlimit64";
+        case kLlseek: return "_llseek";
         case kPread64: return "pread64";
         case kGetrandom: return "getrandom";
         case kGetppid: return "getppid";
@@ -231,6 +233,20 @@ SyscallLayer::SyscallLayer(GuestMemory& memory, Cpu& cpu, const LoadedImage& ima
 }
 
 std::uint32_t& SyscallLayer::reg(std::size_t i) { return cpu_.jit().Regs()[i]; }
+
+std::uint32_t SyscallLayer::syscall_arg(std::size_t i) const {
+    // The ARM syscall ABI passes up to seven arguments in r0-r6, and bionic's syscall() wrapper
+    // loads exactly that many before svc. The fifth argument is r4 -- not the first word of the
+    // stack. Reading the stack there returned a leftover stack pointer as the whence, which made
+    // every seek land at EOF and every read return zero.
+    if (i < 7) return cpu_.jit().Regs()[i];
+    // Beyond seven there is no register left, so the kernel reads the caller's stack.
+    const std::uint32_t sp = cpu_.jit().Regs()[13];
+    const std::uint32_t at = sp + static_cast<std::uint32_t>(i - 7) * 4;
+    std::uint32_t value = 0;
+    if (mem_.accessible(at, 4, kPageRead)) std::memcpy(&value, mem_.base() + at, 4);
+    return value;
+}
 
 SyscallResult SyscallLayer::handle(std::uint32_t svc) {
     const std::int32_t number = svc != 0 ? static_cast<std::int32_t>(svc) : static_cast<std::int32_t>(reg(7));
@@ -313,6 +329,11 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
             const auto it = files_.find(fd);
             if (it != files_.end()) {
                 const ssize_t got = ::pread(it->second.host_fd, host, count, static_cast<off_t>(it->second.offset));
+                if (io_trace_ < 60) {
+                    ++io_trace_;
+                    std::fprintf(stderr, "dh2: read fd=%d off=0x%llx want=%u got=%zd\n", fd,
+                                 static_cast<unsigned long long>(it->second.offset), count, got);
+                }
                 if (got < 0) return -errno;
                 it->second.offset += static_cast<std::uint64_t>(got);
                 return static_cast<std::int32_t>(got);
@@ -370,10 +391,22 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
                 if (!mem_.map_anon(at, length, prot)) return -ENOMEM;
                 return static_cast<std::int32_t>(at);
             }
-            const int fd = static_cast<int>(reg(4));
+            const std::int32_t fd = static_cast<std::int32_t>(reg(4));
             const std::uint32_t at = requested != 0 ? page_round_down(requested) : mem_.find_free(length, kStackTop);
             if (at == 0) return -ENOMEM;
-            if (!mem_.map_file(at, length, prot, host_flags, fd, offset)) return -ENOMEM;
+            // A file the guest opened goes through our read-only view, so the descriptor it holds is
+            // ours, not the host's. Passing it straight to mmap() mapped whatever the host had under
+            // that number -- which is not the guest's file, and is why an asset could parse into
+            // nonsense.
+            int host_fd = fd;
+            const auto opened = files_.find(fd);
+            if (opened != files_.end()) host_fd = opened->second.host_fd;
+            if (!mem_.map_file(at, length, prot, host_flags, host_fd, offset)) return -ENOMEM;
+            if (opened != files_.end()) {
+                ++file_maps_;
+                std::printf("  mmap2        : 0x%08x+0x%x from a guest fd %d (host %d, offset 0x%llx)\n", at,
+                            length, fd, host_fd, static_cast<unsigned long long>(offset));
+            }
             return static_cast<std::int32_t>(at);
         }
 
@@ -662,6 +695,38 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
             if (it == files_.end()) return -EBADF;
             ::close(it->second.host_fd);
             files_.erase(it);
+            return 0;
+        }
+
+        case kLlseek: {
+            // _llseek(fd, offset_high, offset_low, loff_t* result, whence). bionic uses this on
+            // 32-bit ARM for its large-file seek, and the engine's asset streams use it heavily:
+            // it was the single unimplemented syscall standing between the engine and its own
+            // content, and returning an error made a stream report a size of -1.
+            const std::int32_t fd = static_cast<std::int32_t>(reg(0));
+            const std::uint32_t offset_high = reg(1);
+            const std::uint32_t offset_low = reg(2);
+            const std::uint32_t result = reg(3);
+            const std::uint32_t whence = syscall_arg(4);
+            const auto it = files_.find(fd);
+            if (it == files_.end()) return -EBADF;
+            const std::int64_t base = whence == SEEK_SET   ? 0
+                                      : whence == SEEK_CUR ? static_cast<std::int64_t>(it->second.offset)
+                                                           : static_cast<std::int64_t>(it->second.size);
+            const std::int64_t delta =
+                static_cast<std::int64_t>((static_cast<std::uint64_t>(offset_high) << 32) | offset_low);
+            const std::int64_t next = base + delta;
+            if (next < 0) return -EINVAL;
+            it->second.offset = static_cast<std::uint64_t>(next);
+            if (io_trace_ < 60) {
+                ++io_trace_;
+                std::fprintf(stderr, "dh2: _llseek fd=%d whence=%u -> 0x%llx\n", fd, whence,
+                             static_cast<unsigned long long>(next));
+            }
+            if (result != 0 && mem_.accessible(result, 8, kPageWrite)) {
+                const std::uint64_t value = static_cast<std::uint64_t>(next);
+                mem_.copy_in(result, &value, 8);
+            }
             return 0;
         }
 

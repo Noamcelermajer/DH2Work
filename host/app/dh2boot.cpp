@@ -491,6 +491,26 @@ int main(int argc, char** argv) {
                             stop.describe().c_str(),
                             static_cast<unsigned long long>(cpu.instruction_count() - before));
                 std::printf("      at pc 0x%08x lr=0x%08x r0=0x%08x r1=0x%08x\n", rr[15], rr[14], rr[0], rr[1]);
+                std::printf("      registers:");
+                for (int i = 0; i < 16; ++i) {
+                    std::printf(" r%d=0x%08x", i, rr[i]);
+                    if (i % 4 == 3 && i != 15) std::printf("\n                ");
+                }
+                std::printf("\n");
+                // The register names are the engine's own; the words they point at are what the
+                // failed size computation actually used.
+                for (int i = 0; i < 16; i += 4) {
+                    if (rr[i] == 0) continue;
+                    std::printf("      [r%d] =", i);
+                    for (std::uint32_t k = 0; k < 32; k += 4) {
+                        const std::uint32_t at = rr[i] + k;
+                        if (!memory.accessible(at, 4, dh2::kPageRead)) break;
+                        std::uint32_t word = 0;
+                        std::memcpy(&word, memory.base() + at, 4);
+                        std::printf(" %08x", word);
+                    }
+                    std::printf("\n");
+                }
                 cpu.dump_accesses(stdout);
             }
             std::fflush(stdout);

@@ -54,6 +54,7 @@ public:
 private:
     std::uint32_t& reg(std::size_t i);
     std::string guest_string(std::uint32_t address) const;
+    std::uint32_t syscall_arg(std::size_t i) const;
 
     GuestMemory& mem_;
     Cpu& cpu_;
@@ -77,6 +78,8 @@ private:
     };
     std::map<std::int32_t, OpenFile> files_;
     std::int32_t next_fd_ = 3;
+    std::uint64_t file_maps_ = 0;
+    mutable int io_trace_ = 0;
     const Vfs* vfs_ = nullptr;
 
     std::int32_t dispatch(std::int32_t number);
