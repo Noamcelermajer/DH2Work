@@ -44,9 +44,19 @@ if [ ${#patches[@]} -eq 0 ]; then
   echo "fetch-dynarmic: no patches under $PATCH_DIR (fetching pristine upstream)"
 else
   for patch in "${patches[@]}"; do
-    echo "fetch-dynarmic: applying $(basename "$patch")"
-    git -C "$DEST" apply --check "$patch"
-    git -C "$DEST" apply "$patch"
+    name="$(basename "$patch")"
+    if git -C "$DEST" apply --check "$patch" 2>/dev/null; then
+      echo "fetch-dynarmic: applying $name"
+      git -C "$DEST" apply "$patch"
+    elif git -C "$DEST" apply --check --reverse "$patch" 2>/dev/null; then
+      # Already applied. A reproduction script has to survive being run twice, and the previous
+      # own-host tree was lost precisely because reproducibility was assumed rather than tested.
+      echo "fetch-dynarmic: $name is already applied, skipping"
+    else
+      echo "fetch-dynarmic: $name does not apply and is not already applied" >&2
+      echo "fetch-dynarmic: the tree at $DEST is neither pristine nor patched as expected" >&2
+      exit 1
+    fi
   done
 fi
 

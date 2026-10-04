@@ -330,6 +330,42 @@ DH2_NDK=$HOME/android-ndk-r29 host/guests/build.sh
 host/scripts/run-guests.sh <build>/dh2run host/guests/out
 ```
 
+## 10. Reproducing all of it
+
+The previous own-host tree was never committed and was lost, so nothing above may depend on state
+outside the repository. One script rebuilds and re-measures everything:
+
+```
+host/scripts/reproduce.sh [--clean] [--arm64]     # DH2_ENGINE=<path> for the engine steps
+```
+
+Verified from a clean checkout -- Dynarmic fetched at the pin and patched, host built, guests
+built, then:
+
+```
+PASS hello   hello_thumb   args   vfp   exclusive   memory   armv8_t32   bionic
+run-guests: 8 passed, 0 failed, 0 skipped
+
+relocations  : 59623 applied of 59623 seen
+packed       : 2645 relocation(s) from DT_ANDROID_REL / DT_ANDROID_RELR / DT_RELR
+stubs        : 92 symbol(s) satisfied by a generated stub
+init_array   : 539 entry(ies) at 0xeff20130
+unresolved   : 0
+
+initializers : 545 completed
+nativeInit   : returned (r0=0xef3e7600) after 326 instruction(s)
+JNI_OnLoad   : returned 0x00010004
+nativeRender : returned r0=0x00000001 after 3793 instruction(s)
+slingshot    : reached at pc 0xef3e2004 argc=0
+GL           : 60 call(s) into 33 imported entry point(s)
+instructions : 5533823
+```
+
+Writing that script immediately found a real defect: `fetch-dynarmic.sh` was not idempotent, so
+a second run failed with "patch does not apply" instead of recognising an already-patched tree.
+It now checks with `git apply --check --reverse` and skips, and refuses with a clear message if
+the tree is neither pristine nor patched.
+
 **Environment used:** WSL2 Ubuntu 22.04, clang 14.0.0, cmake 3.22.1, ninja 1.10.1, 12 cores;
 Android NDK r29 for the guests; Dynarmic with `DYNARMIC_USE_BUNDLED_EXTERNALS=ON` so the build is
 offline. No phone and no emulator were used.
