@@ -33,6 +33,7 @@ constexpr std::uint32_t kDynLimit = 0xF0000000u;
 constexpr std::uint32_t kStackTop = 0xFF000000u;
 constexpr std::uint32_t kStackSize = 8u << 20;
 constexpr std::uint32_t kReturnSwi = 0x7f;      // reserved: a guest returning to the host
+constexpr std::uint32_t kSlingshotSwi = 0x80;   // reserved: bionic called the application entry
 constexpr std::uint32_t kKuserPage = 0xFFFF0000u;
 
 constexpr std::uint16_t kThumbReturn = 0xDF7Fu;
@@ -239,9 +240,11 @@ int main(int argc, char** argv) {
     static std::uint32_t trace[64];
     static std::size_t trace_at = 0;
 
-    const auto call = [&](std::uint32_t target, std::uint32_t& result, dh2::Stop& stop_out) -> bool {
+    const auto call = [&](std::uint32_t target, const std::uint32_t* args, std::size_t arg_count,
+                          std::uint32_t& result, dh2::Stop& stop_out) -> bool {
         std::uint32_t* regs = cpu.jit().Regs().data();
         for (int i = 0; i < 13; ++i) regs[i] = 0;
+        for (std::size_t i = 0; i < arg_count && i < 4; ++i) regs[i] = args[i];
         regs[13] = kStackTop - 0x1000;
         regs[14] = trampoline | 1u;
         regs[15] = target & ~1u;
@@ -257,6 +260,16 @@ int main(int argc, char** argv) {
                 if (stop.svc == kReturnSwi) {
                     result = regs[0];
                     return true;
+                }
+                if (stop.svc == kSlingshotSwi) {
+                    // The application entry bionic calls. Its three arguments are the whole point
+                    // of this gate: argc, argv and envp as __libc_init computed them.
+                    std::printf("  slingshot    : reached at pc 0x%08x argc=%u argv=0x%08x envp=0x%08x\n",
+                                regs[15], regs[0], regs[1], regs[2]);
+                    std::fflush(stdout);
+                    stop_out = stop;
+                    stop_out.kind = dh2::StopKind::Step;
+                    return false;
                 }
                 if (stop.svc == 0x0f0005) {  // __ARM_NR_set_tls
                     cpu.cp15().set_tpidruro(regs[0]);
@@ -328,7 +341,8 @@ int main(int argc, char** argv) {
             }
             dh2::Stop stop;
             std::uint32_t result = 0;
-            if (!call(initializers[i], result, stop)) {
+            const std::uint32_t no_args[4] = {0, 0, 0, 0};
+            if (!call(initializers[i], no_args, 0, result, stop)) {
                 std::printf("  stop         : %s [%zu] at 0x%08x (link-time 0x%08x) -- %s\n",
                             image.soname.c_str(), i, initializers[i], initializers[i] - image.bias,
                             stop.describe().c_str());
@@ -388,6 +402,41 @@ int main(int argc, char** argv) {
     (void)stop_index;
 
     std::printf("  initializers : %d completed\n", completed);
+
+    // __libc_init: bionic's launch function, called by the executable's crt after the dynamic
+    // linker has finished. Our host is the linker *and* the crt, so it calls it directly with the
+    // argument block it built. The slingshot is a probe stub: reaching it proves bionic parsed
+    // argc/argv/envp out of our stack image.
+    if (!halted) {
+        const std::uint32_t libc_init = linker.find_symbol("__libc_init");
+        if (libc_init == 0) {
+            std::printf("  __libc_init  : not found in the closure\n");
+        } else {
+            const std::uint32_t probe = memory.find_free(dh2::kPageSize, kDynLimit);
+            const std::uint32_t structors = probe == 0 ? 0 : 0;  // zeroed block, allocated below
+            std::uint32_t block = 0;
+            if (probe != 0 && memory.map_anon(probe, dh2::kPageSize, PROT_READ | PROT_WRITE)) {
+                const std::uint32_t body[2] = {0xEF000080u, 0xE12FFF1Eu};  // svc #0x80 ; bx lr
+                memory.copy_in(probe, body, sizeof body);
+                memory.protect(probe, dh2::kPageSize, PROT_READ | PROT_EXEC);
+                block = probe + 0x100;  // a zeroed structors_array_t: the init arrays have run
+            }
+            (void)structors;
+            if (probe == 0 || block == 0) {
+                std::printf("  __libc_init  : cannot build the probe\n");
+            } else {
+                std::printf("  __libc_init  : calling 0x%08x with raw_args=0x%08x slingshot=0x%08x\n",
+                            libc_init, sp, probe);
+                std::fflush(stdout);
+                const std::uint32_t args[4] = {sp, 0, probe, block};
+                dh2::Stop stop;
+                std::uint32_t result = 0;
+                if (!call(libc_init, args, 4, result, stop)) {
+                    std::printf("  __libc_init  : %s\n", stop.describe().c_str());
+                }
+            }
+        }
+    }
     std::printf("  instructions : %llu\n", static_cast<unsigned long long>(cpu.instruction_count()));
     syscalls.print_census(stdout);
     loader_if.print_census(stdout);

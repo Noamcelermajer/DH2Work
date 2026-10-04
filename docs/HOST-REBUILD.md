@@ -138,11 +138,53 @@ testable piece:
 The engine's constructors issue 1,028 syscalls across 13 numbers (`mprotect` alone 988 times),
 five `__loader_shared_globals` calls, and 910,463 guest instructions.
 
-The next stop is honest and is not a wall: **libc.so's own first initializer**
-(`libc.so+0x49035`, a read at `0x8`). The old tree never ran the dependency init arrays at all
--- its successful path was the engine's 539 constructors followed by a direct call to
-`libc.so`'s `__libc_init` -- so this is territory the rebuild has reached and the old record
-does not cover.
+### Every initializer in the closure now completes
+
+```
+libc.so                  5 initializer(s)
+libc++.so                1 initializer(s)
+libDungeonHunter2.so     539 initializer(s)
+initializers : 545 completed
+instructions : 940,913
+syscalls     : 1,072 across 17 numbers        (exit 0, no stop)
+```
+
+and then bionic's launch function runs to the application entry point:
+
+```
+__libc_init : calling 0xef5420fd with raw_args=0xfefffe30 slingshot=0xef3e7000
+slingshot   : reached at pc 0xef3e7004 argc=0 argv=0xfefffe38 envp=0xfefffe3c
+```
+
+That is the state `HOST-OWNHOST-PROGRESS.md` records as its own last stop --
+"reached the application entry point bionic called (slingshot) at pc=0xFDE05002: r0=0x00000000
+r1=0xFEFFFF08 r2=0xFEFFFF0C" -- reproduced here: same zero `argc`, same argv/envp shape, on our
+own host.
+
+Three defects stood between the 539 and the slingshot, and each was measured:
+
+1. **`tls[TLS_SLOT_THREAD_ID]` must point at a separate `pthread_internal_t`.** It pointed at
+   the TLS block, so bionic's main-thread registration wrote the thread-list pointers over
+   `tls[0]` and `tls[1]`; `__get_thread()` then read zero and the next dereference faulted at
+   `0x8`. Found with a 64-bit write watch, after a mapping watch had ruled out a `MAP_FIXED`
+   remap -- which zeroes a page without any write callback firing.
+2. **The documented `libc_shared_globals` offset table does not match this sysroot's `libc.so`.**
+   The host wrote an mmap threshold of `0x20000` at `+0x520`; `getenv` reads the environment
+   pointer from that slot, found `0x20000` and faulted dereferencing it. Offsets are now only
+   written where this binary has been shown to use them, and the rest of the block stays zero.
+   `HOST-LINKER-REFERENCE.md` flagged that layout as UNVERIFIED and was right to.
+3. **`[TP-4]` must hold the thread pointer.** `__libc_preinit_impl` ends with
+   `mrc p15,0,r0,c13,c0,3` / `ldr r0,[r0,#-4]` / `strb r5,[r0,#0xb49]`; with that word left
+   zero the store landed at `0xb49`.
+
+What the closure asks for and does not get is named, not implied:
+
+```
+paths tried : faccessat(/proc/self/exe), fstatat64(/dev/__properties__),
+              openat(/dev/__properties__)    -- all -ENOENT; there is no filesystem yet
+```
+
+The next gate is the JNI surface: what the application entry point actually does.
 
 ## 4. The custom Dynarmic
 
