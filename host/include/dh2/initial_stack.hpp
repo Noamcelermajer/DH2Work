@@ -21,6 +21,7 @@ struct AuxVector {
 std::uint32_t build_initial_stack(GuestMemory& mem, std::uint32_t stack_top,
                                   const std::vector<std::string>& argv,
                                   const std::vector<std::string>& envp, std::vector<AuxVector> auxv,
-                                  const std::string& execfn);
+                                  const std::string& execfn,
+                                  std::uint32_t* auxv_address = nullptr);
 
 }  // namespace dh2

@@ -103,6 +103,47 @@ That is the exact behaviour `docs/DYNARMIC-INDEPENDENCE.md` predicted, reproduce
 own binary — and the 8/8 run above is the same suite on the same machine with nothing changed but
 the Dynarmic build.
 
+## 3b. The engine's own initialization now runs (the number the old tree reported)
+
+`dh2boot` loads the real closure with our own linker and runs each module's `DT_INIT` and
+`DT_INIT_ARRAY` under our own JIT. Against the original engine
+(`36498eb8…`, the documented hash):
+
+```
+dh2boot: libDungeonHunter2.so
+  linked       : 8 module(s), 59623 relocation(s) applied, 0 unresolved
+  loader iface : shared_globals=0xefffc000
+  thread       : static TLS 32 bytes, TP=0xff000020 [TP]=TP [TP+4]=TP errno=0
+  libDungeonHunter2.so     539 initializer(s)
+  ...          : 500 completed, 824314 instruction(s)
+  progress     : 539 initializer(s) completed, 910463 instruction(s)
+  initializers : 539 completed
+```
+
+**539 of 539 engine constructors complete.** The old tree's record is
+`HOST-OWNHOST-PROGRESS.md`: "539 present, 539 entered, 539 completed, 824421 instructions" --
+and 500 of ours complete at 824,314 instructions, which is the same run seen through the same
+counter. Before this work the host could not load a shared object at all.
+
+Reaching it needed four things that were each a wall in turn, and each is now a named,
+testable piece:
+
+| Need | Why the stop happened without it |
+| --- | --- |
+| The guest dynamic linker (`host/linker`) | 354 undefined functions per engine; nothing loaded |
+| `__loader_shared_globals` and the 26-slot interface | libc reads its own globals through it; with the value zeroed the first constructor died reading `0x18` |
+| The initial thread's control block at TP | bionic reads `errno` at `TP+0x29C` and its canary at `[TP-4]`; with TP zero it read `0x410` |
+| `mremap` in the syscall layer | `__cxa_atexit` grows its pool with it, and without it every atexit registration reported a failure |
+
+The engine's constructors issue 1,028 syscalls across 13 numbers (`mprotect` alone 988 times),
+five `__loader_shared_globals` calls, and 910,463 guest instructions.
+
+The next stop is honest and is not a wall: **libc.so's own first initializer**
+(`libc.so+0x49035`, a read at `0x8`). The old tree never ran the dependency init arrays at all
+-- its successful path was the engine's 539 constructors followed by a direct call to
+`libc.so`'s `__libc_init` -- so this is territory the rebuild has reached and the old record
+does not cover.
+
 ## 4. The custom Dynarmic
 
 Our own patch set lives in `patches/dynarmic/`, applied by `host/scripts/fetch-dynarmic.sh` to the

@@ -111,6 +111,9 @@ bool Cpu::check_access(std::uint32_t vaddr, std::uint32_t len, std::uint8_t need
         pending_.kind = StopKind::MemoryFault;
         pending_.fault_addr = vaddr;
         pending_.fault_write = write;
+        // PC is still on the accessing instruction: check_halt_on_memory_access returns before
+        // advancing, so this is the exact instruction to disassemble.
+        pending_.pc = jit_->Regs()[15];
     }
     jit_->HaltExecution(kFaultHalt);
     return false;

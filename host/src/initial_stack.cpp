@@ -14,7 +14,7 @@ constexpr std::uint32_t kMaxStackImage = 256 * 1024;
 std::uint32_t build_initial_stack(GuestMemory& mem, std::uint32_t stack_top,
                                   const std::vector<std::string>& argv,
                                   const std::vector<std::string>& envp, std::vector<AuxVector> auxv,
-                                  const std::string& execfn) {
+                                  const std::string& execfn, std::uint32_t* auxv_address) {
     std::uint32_t cursor = stack_top;
     bool overflow = false;
 
@@ -71,6 +71,10 @@ std::uint32_t build_initial_stack(GuestMemory& mem, std::uint32_t stack_top,
     const std::uint32_t sp = (cursor - table_bytes) & ~static_cast<std::uint32_t>(15);
     if (stack_top - sp > kMaxStackImage || !mem.accessible(sp, table_bytes, kPageWrite)) return 0;
     std::memcpy(mem.base() + sp, table.data(), table_bytes);
+    if (auxv_address != nullptr) {
+        // argc, argv[argc], NULL, envp[envc], NULL, then the auxv pairs.
+        *auxv_address = sp + static_cast<std::uint32_t>(1 + argv.size() + 1 + env_addrs.size() + 1) * 4;
+    }
     return sp;
 }
 

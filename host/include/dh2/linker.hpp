@@ -60,6 +60,15 @@ public:
     // this host does not implement yet, stop being an unresolved-import wall.
     void enable_stubs(bool on) { stubs_enabled_ = on; }
 
+    // Resolve a name to a host-chosen guest address before any module is consulted. The loader
+    // interface uses this to interpose the __loader_* entries that the platform linker would
+    // otherwise define; the linker itself stays unaware of bionic.
+    using Interposer = std::uint32_t (*)(void* context, const std::string& name);
+    void set_interposer(Interposer interpose, void* context) {
+        interposer_ = interpose;
+        interposer_context_ = context;
+    }
+
     // Load root and its dependency closure, then resolve and relocate everything.
     bool load(const std::string& root, LinkReport& report, std::string& error);
 
@@ -67,6 +76,8 @@ public:
     std::uint32_t find_symbol(const std::string& name) const;
     const std::vector<LoadedImage>& modules() const { return modules_; }
     std::uint32_t stub_page() const { return stub_base_; }
+    // Total static TLS, rounded so a thread pointer placed at its end is 16-byte aligned.
+    std::uint32_t static_tls_size() const { return tls_total_; }
 
 private:
     struct Definition {
@@ -96,6 +107,8 @@ private:
     // consecutively and tls_total_ is the distance from the highest block to the thread pointer.
     std::vector<std::uint32_t> tls_offsets_;
     std::uint32_t tls_total_ = 0;
+    Interposer interposer_ = nullptr;
+    void* interposer_context_ = nullptr;
     std::uint32_t stub_base_ = 0;
     std::uint32_t stub_next_ = 0;
     bool stubs_enabled_ = false;

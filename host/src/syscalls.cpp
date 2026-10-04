@@ -58,6 +58,10 @@ enum : std::int32_t {
     kRtSigsuspend = 179,
     kRtTgsigqueueinfo = 363,
     kMunmap = 91,
+    kMsync = 144,
+    kReadv = 145,
+    kMremap = 163,
+    kMadvise = 220,
     kMprotect = 125,
     kUname = 122,
     kWritev = 146,
@@ -128,6 +132,10 @@ const char* syscall_name(std::int32_t number) {
         case kGettimeofday: return "gettimeofday";
         case kReadlink: return "readlink";
         case kMunmap: return "munmap";
+        case kMsync: return "msync";
+        case kReadv: return "readv";
+        case kMremap: return "mremap";
+        case kMadvise: return "madvise";
         case kMprotect: return "mprotect";
         case kUname: return "uname";
         case kWritev: return "writev";
@@ -314,6 +322,61 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
         case kMunmap: {
             if (!mem_.unmap(page_round_down(reg(0)), reg(1))) return -EINVAL;
             return 0;
+        }
+
+        case kMremap: {
+            // bionic's __cxa_atexit pool grows its block with this; without it every atexit
+            // registration prints a failure and the constructor path degrades.
+            const std::uint32_t old_address = page_round_down(reg(0));
+            const std::uint32_t old_size = page_round_up(reg(1));
+            const std::uint32_t new_size = page_round_up(reg(2));
+            const int flags = static_cast<int>(reg(3));
+            const std::uint32_t requested = page_round_down(reg(4));
+            if (new_size == 0) return -EINVAL;
+            if (new_size <= old_size) return static_cast<std::int32_t>(old_address);
+
+            // Grow in place when the pages that follow are free.
+            if (!mem_.accessible(old_address, old_size, kPageRead) ||
+                !mem_.range_free(old_address + old_size, new_size - old_size)) {
+                constexpr int kMremapMayMove = 1;
+                if ((flags & kMremapMayMove) == 0 && requested == 0) return -ENOMEM;
+                const std::uint32_t target =
+                    requested != 0 ? requested : mem_.find_free(new_size, kStackTop);
+                if (target == 0 || !mem_.map_anon(target, new_size, PROT_READ | PROT_WRITE)) return -ENOMEM;
+                const std::uint8_t* source = mem_.host_ptr(old_address, old_size, kPageRead);
+                if (source == nullptr) return -EFAULT;
+                std::memmove(mem_.base() + target, source, old_size);
+                mem_.unmap(old_address, old_size);
+                return static_cast<std::int32_t>(target);
+            }
+            if (!mem_.map_anon(old_address + old_size, new_size - old_size, PROT_READ | PROT_WRITE)) {
+                return -ENOMEM;
+            }
+            return static_cast<std::int32_t>(old_address);
+        }
+
+        case kMadvise:
+        case kMsync:
+            return 0;
+
+        case kReadv: {
+            const int fd = static_cast<int>(reg(0));
+            const std::uint32_t iov = reg(1);
+            const std::uint32_t count = reg(2);
+            if (count > 1024) return -EINVAL;
+            std::vector<iovec> vec(count);
+            for (std::uint32_t i = 0; i < count; ++i) {
+                std::uint32_t base = 0, len = 0;
+                if (!mem_.accessible(iov + i * 8, 8, kPageRead)) return -EFAULT;
+                std::memcpy(&base, mem_.base() + iov + i * 8, 4);
+                std::memcpy(&len, mem_.base() + iov + i * 8 + 4, 4);
+                std::uint8_t* destination = mem_.host_ptr(base, len, kPageWrite);
+                if (destination == nullptr) return -EFAULT;
+                vec[i].iov_base = destination;
+                vec[i].iov_len = len;
+            }
+            const ssize_t got = ::readv(fd, vec.data(), static_cast<int>(count));
+            return got < 0 ? -errno : static_cast<std::int32_t>(got);
         }
 
         case kMprotect: {

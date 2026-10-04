@@ -118,6 +118,11 @@ std::uint32_t GuestLinker::resolve(std::size_t module, std::uint32_t symbol_inde
         if (text != nullptr) name = std::string(reinterpret_cast<const char*>(text));
     }
 
+    if (interposer_ != nullptr) {
+        const std::uint32_t interposed = interposer_(interposer_context_, name);
+        if (interposed != 0) return interposed;
+    }
+
     const auto found = index_.find(name);
     if (found != index_.end() && !found->second.empty()) {
         // A weak definition never overrides a strong one: prefer a GLOBAL definition if present.
@@ -431,6 +436,10 @@ bool GuestLinker::load(const std::string& root, LinkReport& report, std::string&
             tls_offsets_[i] = cursor;
             cursor += image.tls_memsz;
         }
+        // The thread pointer sits at the end of the static block and must be 16-byte aligned,
+        // and libc.so's own 8-byte block has to end exactly there, so the total is rounded to 16
+        // rather than to the largest module alignment.
+        if (alignment < 16) alignment = 16;
         tls_total_ = (cursor + alignment - 1) / alignment * alignment;
         report.static_tls_size = tls_total_;
     }
