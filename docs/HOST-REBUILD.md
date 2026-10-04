@@ -470,6 +470,20 @@ Two obstacles, both recorded because they are toolchain problems rather than hos
    `-DFMT_USE_CONSTEVAL=0`, and this fmt version does not read that macro anyway. The known
    fixes are an older NDK (clang 17) or patching the bunded fmt, and neither belongs in this
    repository's host tree.
+0. **Solved: `host/scripts/build-android.sh --static --run`.** The host builds as an Android
+   arm64 binary with NDK **r26d** and, because recent NDKs ship no `/system/bin/linker64`, is
+   linked statically against bionic so it can actually be executed off-device. Verified:
+
+   ```
+   dh2selftest: 34 checks, 0 failures      (Android arm64, statically linked, under qemu)
+   PASS hello  hello_thumb  args  vfp  exclusive  memory  armv8_t32  bionic
+   run-guests: 8 passed, 0 failed, 0 skipped
+   ```
+
+   Two further fixes were needed beyond the NDK version: Boost 1.74 needs
+   `-DBOOST_NO_CXX98_FUNCTION_BASE` under C++20, and the NDK must not be too new (r29's libc++ is
+   newer than the bundled fmt 10 expects).
+
 1b. **The failure is the Android target, not clang 21.** The natural reading of (1) was that
    NDK r29's clang 21 was too new for fmt 10. It is not: pointing the NDK's own toolchain file at
    the *system clang 14* -- the same compiler that builds this tree for x86_64 and aarch64 Linux
