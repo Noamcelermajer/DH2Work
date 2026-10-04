@@ -23,6 +23,7 @@
 
 #include "dh2/cpu.hpp"
 #include "dh2/initial_stack.hpp"
+#include "dh2/jni.hpp"
 #include "dh2/linker.hpp"
 #include "dh2/loader_if.hpp"
 #include "dh2/syscalls.hpp"
@@ -233,6 +234,12 @@ int main(int argc, char** argv) {
     memory.copy_in(trampoline + 4, &kArmReturn, sizeof kArmReturn);
     memory.protect(trampoline, dh2::kPageSize, PROT_READ | PROT_EXEC);
 
+    dh2::JniBridge jni(memory, cpu, kDynLimit);
+    if (!jni.install(error)) {
+        std::fprintf(stderr, "dh2boot: %s\n", error.c_str());
+        return 2;
+    }
+
     dh2::SyscallLayer syscalls(memory, cpu, linker.modules().front());
 
     // The last executed PCs, so a fault can name the instruction that caused it rather than the
@@ -277,6 +284,7 @@ int main(int argc, char** argv) {
                     continue;
                 }
                 if (loader_if.handle_svc(stop.svc)) continue;
+                if (jni.handle_svc(stop.svc)) continue;
                 const dh2::SyscallResult outcome = syscalls.handle(stop.svc);
                 if (outcome.kind == dh2::SyscallResult::Kind::Exit) {
                     stop_out = stop;
@@ -403,6 +411,32 @@ int main(int argc, char** argv) {
 
     std::printf("  initializers : %d completed\n", completed);
 
+    // JNI_OnLoad is the engine's real entry: it is a Java library's native half, so this is what
+    // ART calls after System.loadLibrary. The host presents the JavaVM and JNIEnv it expects.
+    {
+        const std::uint32_t on_load = linker.find_symbol("JNI_OnLoad");
+        if (on_load == 0) {
+            std::printf("  JNI_OnLoad   : not exported by the closure\n");
+        } else {
+            std::printf("  JNI          : JavaVM=0x%08x JNIEnv=0x%08x\n", jni.java_vm(), jni.env());
+            std::printf("  JNI_OnLoad   : calling 0x%08x(vm=0x%08x, reserved=0)\n", on_load,
+                        jni.java_vm());
+            std::fflush(stdout);
+            const std::uint32_t args[4] = {jni.java_vm(), 0, 0, 0};
+            dh2::Stop stop;
+            std::uint32_t result = 0;
+            if (call(on_load, args, 2, result, stop)) {
+                std::printf("  JNI_OnLoad   : returned 0x%08x%s\n", result,
+                            result == 0x00010006u ? " (JNI_VERSION_1_6)" : "");
+            } else {
+                std::printf("  JNI_OnLoad   : %s\n", stop.describe().c_str());
+                const std::uint32_t* rr = cpu.jit().Regs().data();
+                std::printf("      at pc 0x%08x lr=0x%08x r0=0x%08x r1=0x%08x r2=0x%08x r3=0x%08x\n",
+                            rr[15], rr[14], rr[0], rr[1], rr[2], rr[3]);
+            }
+        }
+    }
+
     // __libc_init: bionic's launch function, called by the executable's crt after the dynamic
     // linker has finished. Our host is the linker *and* the crt, so it calls it directly with the
     // argument block it built. The slingshot is a probe stub: reaching it proves bionic parsed
@@ -440,6 +474,7 @@ int main(int argc, char** argv) {
     std::printf("  instructions : %llu\n", static_cast<unsigned long long>(cpu.instruction_count()));
     syscalls.print_census(stdout);
     loader_if.print_census(stdout);
+    jni.print_census(stdout);
     if (!loader_if.events().empty()) {
         std::printf("  loader iface : %zu event(s)\n", loader_if.events().size());
         for (const std::string& event : loader_if.events()) std::printf("      %s\n", event.c_str());

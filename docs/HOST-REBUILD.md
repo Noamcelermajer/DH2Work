@@ -184,7 +184,30 @@ paths tried : faccessat(/proc/self/exe), fstatat64(/dev/__properties__),
               openat(/dev/__properties__)    -- all -ENOENT; there is no filesystem yet
 ```
 
-The next gate is the JNI surface: what the application entry point actually does.
+### The JNI surface is reachable
+
+The engine is a Java library's native half: it exports no `main`, but it does export
+`JNI_OnLoad` at `0x53224c` (32 bytes) and 28,085 other functions, including 14
+`Java_com_gameloft_android_GAND_GloftD2SS_DungeonHunter2_*` natives. `host/jni` presents the two
+structures JNI is built on -- a `JavaVM` whose first member points at the
+`JNIInvokeInterface` table (8 slots) and a `JNIEnv` whose first member points at the
+`JNINativeInterface` table (233 slots) -- both full of ARM stubs served from the SVC callback,
+exactly like the loader interface.
+
+```
+JNI          : JavaVM=0xef3e7000 JNIEnv=0xef3e7100
+JNI_OnLoad   : calling 0xefaf824c(vm=0xef3e7000, reserved=0)
+JNI_OnLoad   : returned 0x00010004          (JNI_VERSION_1_4)
+JNI          : 0 native-interface call(s), 0 invoke-interface call(s)
+```
+
+It returns `JNI_VERSION_1_4` and touches the table **zero times**, which is itself the finding:
+this engine does not register its natives, so ART was resolving the 14
+`Java_com_gameloft_...` symbols by name. Driving the game therefore means calling those natives
+directly, with real Java-side objects -- the class/method registry that does not exist yet.
+
+The next gate is that: a class and method registry good enough to call an engine native, and the
+Java-side driver the DEX would otherwise provide.
 
 ## 4. The custom Dynarmic
 
