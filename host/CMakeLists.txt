@@ -41,6 +41,7 @@ add_library(dh2core STATIC
   src/loader.cpp
   src/initial_stack.cpp
   src/cpu.cpp
+  src/linker.cpp
   src/syscalls.cpp
 )
 target_include_directories(dh2core PUBLIC include)
@@ -54,6 +55,10 @@ target_compile_options(dh2run PRIVATE -Wall -Wextra)
 add_executable(dh2selftest app/dh2selftest.cpp)
 target_link_libraries(dh2selftest PRIVATE dh2core)
 target_compile_options(dh2selftest PRIVATE -Wall -Wextra)
+
+add_executable(dh2link app/dh2link.cpp)
+target_link_libraries(dh2link PRIVATE dh2core)
+target_compile_options(dh2link PRIVATE -Wall -Wextra)
 
 enable_testing()
 add_test(NAME dh2selftest COMMAND dh2selftest)

@@ -34,8 +34,8 @@ const char* reloc_name(std::uint32_t type) {
 
 }  // namespace
 
-bool load_elf32(GuestMemory& mem, const std::string& path, std::uint32_t dyn_limit, LoadedImage& out,
-                std::string& error) {
+bool map_elf(GuestMemory& mem, const std::string& path, std::uint32_t dyn_limit, LoadedImage& out,
+             std::string& error) {
     std::ifstream file(path, std::ios::binary);
     if (!file) {
         error = "cannot open " + path;
@@ -69,7 +69,9 @@ bool load_elf32(GuestMemory& mem, const std::string& path, std::uint32_t dyn_lim
 
     std::uint64_t lo = std::numeric_limits<std::uint64_t>::max();
     std::uint64_t hi = 0;
+    const Elf32_Phdr* dynamic_segment = nullptr;
     for (const auto& p : phdrs) {
+        if (p.p_type == PT_DYNAMIC) dynamic_segment = &p;
         if (p.p_type != PT_LOAD) continue;
         if (p.p_filesz > p.p_memsz || static_cast<std::uint64_t>(p.p_offset) + p.p_filesz > data.size()) {
             error = "bad PT_LOAD in " + path;
@@ -106,6 +108,14 @@ bool load_elf32(GuestMemory& mem, const std::string& path, std::uint32_t dyn_lim
     }
 
     out = LoadedImage{};
+    for (const auto& p : phdrs) {
+        if (p.p_type == PT_TLS) {
+            out.tls_vaddr = p.p_vaddr + bias;
+            out.tls_filesz = p.p_filesz;
+            out.tls_memsz = p.p_memsz;
+            out.tls_align = p.p_align != 0 ? p.p_align : 1;
+        }
+    }
     for (const auto& p : phdrs) {
         if (p.p_type == PT_LOAD && p.p_filesz != 0) {
             if (!mem.copy_in(static_cast<std::uint32_t>(p.p_vaddr) + bias, data.data() + p.p_offset, p.p_filesz)) {
@@ -146,68 +156,9 @@ bool load_elf32(GuestMemory& mem, const std::string& path, std::uint32_t dyn_lim
         }
     }
 
-    // Relocations. Arm uses REL (no addend field in the entry).
-    const Elf32_Phdr* dynamic = nullptr;
-    for (const auto& p : phdrs) {
-        if (p.p_type == PT_DYNAMIC) dynamic = &p;
-    }
-    if (dynamic != nullptr && dynamic->p_filesz != 0) {
-        const std::size_t count = dynamic->p_filesz / sizeof(Elf32_Dyn);
-        const Elf32_Dyn* dyn = reinterpret_cast<const Elf32_Dyn*>(data.data() + dynamic->p_offset);
-        std::uint32_t rel = 0, relsz = 0, relent = sizeof(Elf32_Rel);
-        std::uint32_t jmprel = 0, pltrelsz = 0;
-        for (std::size_t i = 0; i < count; ++i) {
-            switch (dyn[i].d_tag) {
-                case DT_REL: rel = dyn[i].d_un.d_ptr; break;
-                case DT_RELSZ: relsz = dyn[i].d_un.d_val; break;
-                case DT_RELENT: relent = dyn[i].d_un.d_val; break;
-                case DT_JMPREL: jmprel = dyn[i].d_un.d_ptr; break;
-                case DT_PLTRELSZ: pltrelsz = dyn[i].d_un.d_val; break;
-                default: break;
-            }
-        }
-        const auto apply = [&](std::uint32_t addr, std::uint32_t size) -> bool {
-            if (addr == 0 || size == 0) return true;
-            if (relent != sizeof(Elf32_Rel)) {
-                error = path + ": unsupported DT_RELENT " + std::to_string(relent);
-                return false;
-            }
-            // The table lives in the image we just mapped, so read it through guest memory.
-            std::uint8_t* table = mem.host_ptr(addr + bias, size, kPageRead);
-            if (table == nullptr) {
-                error = path + ": relocation table is not inside the loaded image";
-                return false;
-            }
-            for (std::uint32_t off = 0; off + sizeof(Elf32_Rel) <= size; off += sizeof(Elf32_Rel)) {
-                Elf32_Rel r{};
-                std::memcpy(&r, table + off, sizeof r);
-                const std::uint8_t type = static_cast<std::uint8_t>(ELF32_R_TYPE(r.r_info));
-                std::uint8_t* slot = mem.host_ptr(r.r_offset + bias, 4, kPageWrite);
-                switch (type) {
-                    case R_ARM_NONE:
-                        break;
-                    case R_ARM_RELATIVE: {
-                        if (slot == nullptr) {
-                            error = path + ": R_ARM_RELATIVE targets an unwritable address";
-                            return false;
-                        }
-                        std::uint32_t value = 0;
-                        std::memcpy(&value, slot, 4);
-                        value += bias;
-                        std::memcpy(slot, &value, 4);
-                        break;
-                    }
-                    default:
-                        error = std::string(path) + ": needs " + reloc_name(type) +
-                                " (symbol " + std::to_string(ELF32_R_SYM(r.r_info)) +
-                                "), which this loader does not resolve yet";
-                        return false;
-                }
-            }
-            return true;
-        };
-        if (!apply(rel, relsz)) return false;
-        if (!apply(jmprel, pltrelsz)) return false;
+    if (dynamic_segment != nullptr && dynamic_segment->p_filesz != 0) {
+        out.dynamic_addr = dynamic_segment->p_vaddr + bias;
+        out.dynamic_size = dynamic_segment->p_filesz;
     }
 
     out.bias = bias;
@@ -217,6 +168,149 @@ bool load_elf32(GuestMemory& mem, const std::string& path, std::uint32_t dyn_lim
     out.load_start = start;
     out.load_end = static_cast<std::uint32_t>(hi + bias);
     out.is_dyn = eh.e_type == ET_DYN;
+    return true;
+}
+
+const char* arm_reloc_name(std::uint32_t type) { return reloc_name(type); }
+
+bool parse_dynamic(GuestMemory& mem, LoadedImage& out, std::string& error) {
+    if (out.dynamic_addr == 0 || out.dynamic_size == 0) return true;
+    const Elf32_Dyn* dyn = reinterpret_cast<const Elf32_Dyn*>(
+        mem.host_ptr(out.dynamic_addr, out.dynamic_size, kPageRead));
+    if (dyn == nullptr) {
+        error = "the dynamic table is not readable at runtime";
+        return false;
+    }
+    std::vector<std::uint32_t> needed_offsets;
+    std::uint32_t soname_offset = 0;
+    const std::size_t slots = out.dynamic_size / sizeof(Elf32_Dyn);
+    for (std::size_t i = 0; i < slots; ++i) {
+        const Elf32_Dyn& e = dyn[i];
+        if (e.d_tag == DT_NULL) break;
+        switch (e.d_tag) {
+            case DT_NEEDED: needed_offsets.push_back(e.d_un.d_val); break;
+            case DT_SONAME: soname_offset = e.d_un.d_val; break;
+            case DT_STRTAB: out.dt_strtab = e.d_un.d_ptr; break;
+            case DT_STRSZ: out.dt_strsz = e.d_un.d_val; break;
+            case DT_SYMTAB: out.dt_symtab = e.d_un.d_ptr; break;
+            case DT_SYMENT: out.dt_syment = e.d_un.d_val; break;
+            case DT_HASH: out.dt_hash = e.d_un.d_ptr; break;
+            case DT_GNU_HASH: out.dt_gnu_hash = e.d_un.d_ptr; break;
+            case DT_REL: out.dt_rel = e.d_un.d_ptr; break;
+            case DT_RELSZ: out.dt_relsz = e.d_un.d_val; break;
+            case DT_RELENT: out.dt_relent = e.d_un.d_val; break;
+            case DT_JMPREL: out.dt_jmprel = e.d_un.d_ptr; break;
+            case DT_PLTRELSZ: out.dt_pltrelsz = e.d_un.d_val; break;
+            case DT_INIT: out.dt_init = e.d_un.d_ptr; break;
+            case DT_FINI: out.dt_fini = e.d_un.d_ptr; break;
+            case DT_INIT_ARRAY: out.dt_init_array = e.d_un.d_ptr; break;
+            case DT_INIT_ARRAYSZ: out.dt_init_arraysz = e.d_un.d_val; break;
+            case DT_FINI_ARRAY: out.dt_fini_array = e.d_un.d_ptr; break;
+            case DT_FINI_ARRAYSZ: out.dt_fini_arraysz = e.d_un.d_val; break;
+            case DT_TEXTREL: out.textrel = true; break;
+            case DT_FLAGS: out.textrel = out.textrel || ((e.d_un.d_val & DF_TEXTREL) != 0); break;
+            default: break;
+        }
+    }
+
+    const auto string_at = [&](std::uint32_t offset) -> std::string {
+        if (out.dt_strtab == 0) return {};
+        if (out.dt_strsz != 0 && offset >= out.dt_strsz) return {};
+        const std::uint8_t* p = mem.host_ptr(out.dt_strtab + out.bias + offset, 1, kPageRead);
+        if (p == nullptr) return {};
+        const std::uint32_t limit = out.dt_strsz != 0 ? out.dt_strsz - offset : (1u << 20);
+        std::uint32_t length = 0;
+        while (length < limit && p[length] != 0) ++length;
+        return std::string(reinterpret_cast<const char*>(p), length);
+    };
+    if (soname_offset != 0) out.soname = string_at(soname_offset);
+    for (const std::uint32_t offset : needed_offsets) {
+        std::string name = string_at(offset);
+        if (!name.empty()) out.needed.push_back(name);
+    }
+
+    // The symbol count: SysV hash states it; a GNU-hash-only object needs the bucket/chain walk.
+    if (out.dt_hash != 0) {
+        const std::uint32_t* hash = reinterpret_cast<const std::uint32_t*>(mem.host_ptr(out.dt_hash + out.bias, 8, kPageRead));
+        if (hash != nullptr) out.dt_nsyms = hash[1];
+    } else if (out.dt_gnu_hash != 0) {
+        const std::uint32_t* gnu = reinterpret_cast<const std::uint32_t*>(mem.host_ptr(out.dt_gnu_hash + out.bias, 16, kPageRead));
+        if (gnu != nullptr) {
+            const std::uint32_t buckets = gnu[0];
+            const std::uint32_t symoffset = gnu[1];
+            const std::uint32_t bloom_size = gnu[2];
+            const std::uint32_t bucket_base = out.dt_gnu_hash + out.bias + 16 + bloom_size * 4;
+            const std::uint32_t* bucket_table = reinterpret_cast<const std::uint32_t*>(mem.host_ptr(bucket_base, buckets * 4, kPageRead));
+            if (bucket_table != nullptr) {
+                std::uint32_t highest = symoffset;
+                for (std::uint32_t b = 0; b < buckets; ++b) {
+                    std::uint32_t index = bucket_table[b];
+                    if (index < symoffset) continue;
+                    for (;;) {
+                        const std::uint32_t* chain = reinterpret_cast<const std::uint32_t*>(
+                            mem.host_ptr(bucket_base + buckets * 4 + (index - symoffset) * 4, 4, kPageRead));
+                        if (chain == nullptr) break;
+                        ++index;
+                        if ((*chain & 1u) != 0) break;
+                    }
+                    if (index > highest) highest = index;
+                }
+                out.dt_nsyms = highest;
+            }
+        }
+    }
+    return true;
+}
+
+bool load_elf32(GuestMemory& mem, const std::string& path, std::uint32_t dyn_limit, LoadedImage& out,
+                std::string& error) {
+    if (!map_elf(mem, path, dyn_limit, out, error)) return false;
+    if (!parse_dynamic(mem, out, error)) return false;
+    if (out.dt_relent != 0 && out.dt_relent != sizeof(Elf32_Rel)) {
+        error = path + ": unsupported DT_RELENT " + std::to_string(out.dt_relent);
+        return false;
+    }
+
+    const auto apply = [&](std::uint32_t address, std::uint32_t size) -> bool {
+        if (address == 0 || size == 0) return true;
+        std::uint8_t* table = mem.host_ptr(address + out.bias, size, kPageRead);
+        if (table == nullptr) {
+            error = path + ": relocation table is not inside the loaded image";
+            return false;
+        }
+        for (std::uint32_t off = 0; off + sizeof(Elf32_Rel) <= size; off += sizeof(Elf32_Rel)) {
+            Elf32_Rel r{};
+            std::memcpy(&r, table + off, sizeof r);
+            const std::uint8_t type = static_cast<std::uint8_t>(ELF32_R_TYPE(r.r_info));
+            switch (type) {
+                case R_ARM_NONE:
+                    break;
+                case R_ARM_RELATIVE: {
+                    const std::uint8_t* source = mem.host_ptr(r.r_offset + out.bias, 4, kPageRead);
+                    if (source == nullptr) {
+                        error = path + ": R_ARM_RELATIVE targets an unmapped address";
+                        return false;
+                    }
+                    std::uint32_t value = 0;
+                    std::memcpy(&value, source, 4);
+                    value += out.bias;
+                    if (!mem.store32(r.r_offset + out.bias, value)) {
+                        error = path + ": R_ARM_RELATIVE targets an unwritable address";
+                        return false;
+                    }
+                    break;
+                }
+                default:
+                    error = std::string(path) + ": needs " + reloc_name(type) +
+                            " (symbol " + std::to_string(ELF32_R_SYM(r.r_info)) +
+                            "), which the static loader does not resolve";
+                    return false;
+            }
+        }
+        return true;
+    };
+    if (!apply(out.dt_rel, out.dt_relsz)) return false;
+    if (!apply(out.dt_jmprel, out.dt_pltrelsz)) return false;
     return true;
 }
 

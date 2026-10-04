@@ -66,6 +66,10 @@ public:
     bool copy_in(std::uint32_t addr, const void* src, std::uint64_t len);
     bool protect(std::uint32_t addr, std::uint64_t len, int prot);
     bool unmap(std::uint32_t addr, std::uint64_t len);
+    // Write a 32-bit word for a relocation. A text relocation targets a page that is mapped
+    // readable-but-not-writable; the page is made writable for the store and put back the way it
+    // was, so the guest's own view of its protections is unchanged.
+    bool store32(std::uint32_t addr, std::uint32_t value);
 
     // Every page in [addr, addr+len) carries at least the flags in need (OR kPageMapped).
     bool accessible(std::uint32_t addr, std::uint64_t len, std::uint8_t need) const;

@@ -74,6 +74,18 @@ Named so the next workstream does not have to rediscover them:
 * **No GL/EGL marshalling**, no Android lifecycle, no ART.
 * **No fastmem, no `PreCodeReadHook`.** Both are roadmap items, deliberately not started here.
 
+## One emulation choice worth knowing
+
+`getpid`/`gettid` return a **stable pid clamped to the Android platform's range**, not the host's
+raw pid. bionic's 32-bit `pthread_mutex_t` stores the owner in a 16-bit field and refuses a
+process whose pid exceeds 65535; Android's own `pid_max` is 32768, so on the real target this
+never arises, but an off-device Linux host can easily have a much larger pid counter. The guest
+is therefore given `host_pid` when it already fits and a small derived value otherwise. This was
+found by the `bionic` guest test failing with
+`32-bit pthread_mutex_t only supports pids <= 65535` after the host's pid counter crossed the
+boundary -- a test that passed or failed depending on the host's uptime, which is exactly the
+kind of flake the suite is meant to catch.
+
 ## Licence
 
 Dynarmic is 0BSD. Our patches to it are ours. The guest test programs in `guests/` are ours.

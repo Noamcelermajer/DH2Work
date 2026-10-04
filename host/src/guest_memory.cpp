@@ -100,6 +100,29 @@ bool GuestMemory::unmap(std::uint32_t addr, std::uint64_t len) {
     return true;
 }
 
+namespace {
+int prot_from_flags(std::uint8_t flags) {
+    int p = PROT_NONE;
+    if (flags & (kPageRead | kPageExec)) p |= PROT_READ;
+    if (flags & kPageWrite) p |= PROT_READ | PROT_WRITE;
+    return p;
+}
+}  // namespace
+
+bool GuestMemory::store32(std::uint32_t addr, std::uint32_t value) {
+    if (!accessible(addr, 4, kPageRead)) return false;
+    if (accessible(addr, 4, kPageWrite)) {
+        std::memcpy(base_ + addr, &value, 4);
+        return true;
+    }
+    const std::uint32_t page = page_round_down(addr);
+    const std::uint8_t previous = pages_[page >> kPageShift];
+    if (!protect(page, kPageSize, PROT_READ | PROT_WRITE)) return false;
+    std::memcpy(base_ + addr, &value, 4);
+    protect(page, kPageSize, prot_from_flags(previous));
+    return true;
+}
+
 std::uint32_t GuestMemory::find_free(std::uint64_t len, std::uint32_t limit) const {
     const std::uint64_t pages = page_round_up(len) >> kPageShift;
     const std::uint64_t lowest = kLowestAlloc >> kPageShift;

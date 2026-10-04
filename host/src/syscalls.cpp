@@ -96,6 +96,19 @@ enum : std::int32_t {
 
 constexpr std::uint32_t kStackTop = 0xFF000000u;
 
+// Android's pid_max is 32768, and bionic's 32-bit pthread_mutex_t keeps the owner in a 16-bit
+// field, so a guest must never be told a pid above 65535 or libc refuses to lock a mutex at
+// startup. A Linux host can have a far larger pid counter -- this WSL one has -- so the guest is
+// given a stable small pid derived from the host's. One guest thread means pid and tid are the
+// same value, which is also what bionic's main thread expects.
+std::uint32_t guest_pid() {
+    static const std::uint32_t pid = [] {
+        const std::uint32_t host = static_cast<std::uint32_t>(::getpid());
+        return host <= 65535u ? host : 1000u + (host % 30000u);
+    }();
+    return pid;
+}
+
 }  // namespace
 
 const char* syscall_name(std::int32_t number) {
@@ -308,8 +321,8 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
             return 0;
         }
 
-        case kGetpid: return static_cast<std::int32_t>(::getpid());
-        case kGettid: return static_cast<std::int32_t>(::gettid());
+        case kGetpid: return static_cast<std::int32_t>(guest_pid());
+        case kGettid: return static_cast<std::int32_t>(guest_pid());
         case kGetuid32: return 0;
         case kGetgid32: return 0;
         case kGeteuid32: return 0;
@@ -442,7 +455,7 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
             std::memcpy(host + 4, &value, 4);
             return 0;
         }
-        case kSetTidAddress: tid_address_ = reg(0); return static_cast<std::int32_t>(::gettid());
+        case kSetTidAddress: tid_address_ = reg(0); return static_cast<std::int32_t>(guest_pid());
         case kSetRobustList: return 0;
         case kSchedGetaffinity: {
             const std::uint32_t mask = reg(2);
