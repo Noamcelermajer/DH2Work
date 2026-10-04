@@ -99,7 +99,34 @@ Stop Cpu::run() {
         // continue running.
     }
     Stop stop = pending_;
-    if (stop.pc == 0 && stop.kind != StopKind::MemoryFault) stop.pc = jit_->Regs()[15];
+    // A memory fault is precise: with check_halt_on_memory_access the JIT returns with R15 on the
+    // accessing instruction. The callback itself must not read R15 -- inside a translated block
+    // it can still be the block's entry -- so the PC is taken here, after Run() has returned.
+    if (stop.kind == StopKind::MemoryFault) stop.pc = jit_->Regs()[15];
+    if (stop.pc == 0) stop.pc = jit_->Regs()[15];
+    return stop;
+}
+
+Stop Cpu::step() {
+    pending_ = Stop{};
+    Dynarmic::HaltReason reason{};
+    try {
+        reason = jit_->Step();
+    } catch (const std::exception& failure) {
+        std::fprintf(stderr, "dh2: the translator gave up at pc 0x%08x: %s\n", jit_->Regs()[15],
+                     failure.what());
+        pending_.kind = StopKind::Exception;
+        pending_.exception = Dynarmic::A32::Exception::UndefinedInstruction;
+        pending_.pc = jit_->Regs()[15];
+    } catch (...) {
+        pending_.kind = StopKind::Exception;
+        pending_.pc = jit_->Regs()[15];
+    }
+    jit_->ClearHalt(kStopHalt | kFaultHalt);
+    if (pending_.kind == StopKind::None && Dynarmic::Has(reason, kStopHalt)) pending_.kind = StopKind::Step;
+    Stop stop = pending_;
+    if (stop.kind == StopKind::MemoryFault) stop.pc = jit_->Regs()[15];
+    if (stop.pc == 0) stop.pc = jit_->Regs()[15];
     return stop;
 }
 
@@ -107,13 +134,18 @@ void Cpu::halt(Dynarmic::HaltReason reason) { jit_->HaltExecution(reason); }
 
 bool Cpu::check_access(std::uint32_t vaddr, std::uint32_t len, std::uint8_t need, bool write) {
     if (mem_.accessible(vaddr, len, need)) return true;
+    // The first few refusals are traced verbatim: which access, how wide, which direction, and
+    // the guest PC at the moment of the callback. This is the diagnostic that settles "the fault
+    // address is X" without guessing which instruction caused it.
+    if (fault_trace_ < 8) {
+        ++fault_trace_;
+        std::fprintf(stderr, "dh2: refused %s of %u byte(s) at 0x%08x (need 0x%02x) from pc 0x%08x\n",
+                     write ? "write" : "read", len, vaddr, need, jit_->Regs()[15]);
+    }
     if (pending_.kind == StopKind::None) {
         pending_.kind = StopKind::MemoryFault;
         pending_.fault_addr = vaddr;
         pending_.fault_write = write;
-        // PC is still on the accessing instruction: check_halt_on_memory_access returns before
-        // advancing, so this is the exact instruction to disassemble.
-        pending_.pc = jit_->Regs()[15];
     }
     jit_->HaltExecution(kFaultHalt);
     return false;
@@ -136,18 +168,38 @@ std::uint64_t Cpu::MemoryRead64(std::uint32_t vaddr) {
 }
 
 void Cpu::MemoryWrite8(std::uint32_t vaddr, std::uint8_t value) {
+    if (watch_size_ != 0 && vaddr >= watch_base_ && vaddr < watch_base_ + watch_size_ && watch_trace_ < 24) {
+        ++watch_trace_;
+        std::fprintf(stderr, "dh2: watch write8 [0x%08x]=0x%02x from pc 0x%08x\n", vaddr, value,
+                     jit_->Regs()[15]);
+    }
     if (check_access(vaddr, 1, kPageWrite, true)) mem_.base()[vaddr] = value;
 }
 
 void Cpu::MemoryWrite16(std::uint32_t vaddr, std::uint16_t value) {
+    if (watch_size_ != 0 && vaddr >= watch_base_ && vaddr < watch_base_ + watch_size_ && watch_trace_ < 24) {
+        ++watch_trace_;
+        std::fprintf(stderr, "dh2: watch write16 [0x%08x]=0x%04x from pc 0x%08x\n", vaddr, value,
+                     jit_->Regs()[15]);
+    }
     if (check_access(vaddr, 2, kPageWrite, true)) store_le<std::uint16_t>(mem_.base() + vaddr, value);
 }
 
 void Cpu::MemoryWrite32(std::uint32_t vaddr, std::uint32_t value) {
+    if (watch_size_ != 0 && vaddr >= watch_base_ && vaddr < watch_base_ + watch_size_ && watch_trace_ < 24) {
+        ++watch_trace_;
+        std::fprintf(stderr, "dh2: watch write32 [0x%08x]=0x%08x from pc 0x%08x\n", vaddr, value,
+                     jit_->Regs()[15]);
+    }
     if (check_access(vaddr, 4, kPageWrite, true)) store_le<std::uint32_t>(mem_.base() + vaddr, value);
 }
 
 void Cpu::MemoryWrite64(std::uint32_t vaddr, std::uint64_t value) {
+    if (watch_size_ != 0 && vaddr >= watch_base_ && vaddr < watch_base_ + watch_size_ && watch_trace_ < 24) {
+        ++watch_trace_;
+        std::fprintf(stderr, "dh2: watch write64 [0x%08x]=0x%016llx from pc 0x%08x\n", vaddr,
+                     static_cast<unsigned long long>(value), jit_->Regs()[15]);
+    }
     if (check_access(vaddr, 8, kPageWrite, true)) store_le<std::uint64_t>(mem_.base() + vaddr, value);
 }
 

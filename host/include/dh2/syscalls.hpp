@@ -56,6 +56,9 @@ private:
     std::uint64_t handled_ = 0;
     std::vector<CensusEntry> census_;
     std::vector<std::string> unimplemented_;
+    // Every path the guest tried to open, with the result. A missing filesystem shows up here
+    // as a named path, which is how it should show up.
+    std::vector<std::string> path_attempts_;
 
     std::int32_t dispatch(std::int32_t number);
 };

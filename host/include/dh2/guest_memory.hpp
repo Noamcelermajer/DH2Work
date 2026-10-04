@@ -82,11 +82,22 @@ public:
     // Page flags, one byte per 4 KiB page. Used by the self test and diagnostics.
     const std::vector<std::uint8_t>& page_flags() const { return pages_; }
 
+    // Log any mapping operation that touches [base, base+size). Remapping a page through
+    // MAP_FIXED silently zeroes it, which is invisible to a write watch.
+    void watch(std::uint32_t base, std::uint32_t size) {
+        watch_base_ = base;
+        watch_size_ = size;
+    }
+
 private:
     void set_flags(std::uint32_t addr, std::uint64_t len, std::uint8_t flags);
 
+    void note_overlap(const char* what, std::uint32_t addr, std::uint64_t len) const;
+
     std::uint8_t* base_ = nullptr;
     std::vector<std::uint8_t> pages_;
+    std::uint32_t watch_base_ = 0;
+    std::uint32_t watch_size_ = 0;
 };
 
 }  // namespace dh2

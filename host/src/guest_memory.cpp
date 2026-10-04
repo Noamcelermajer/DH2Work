@@ -56,6 +56,7 @@ void GuestMemory::set_flags(std::uint32_t addr, std::uint64_t len, std::uint8_t 
 
 bool GuestMemory::map_anon(std::uint32_t addr, std::uint64_t len, int prot) {
     len = page_round_up(len);
+    note_overlap("map_anon", addr, len);
     if (!ok() || !range_valid(addr, len)) return false;
     void* p = mmap(base_ + addr, len, host_prot(prot), MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED, -1, 0);
     if (p == MAP_FAILED) return false;
@@ -66,6 +67,7 @@ bool GuestMemory::map_anon(std::uint32_t addr, std::uint64_t len, int prot) {
 bool GuestMemory::map_file(std::uint32_t addr, std::uint64_t len, int prot, int share_flags, int fd,
                            std::uint64_t offset) {
     len = page_round_up(len);
+    note_overlap("map_file", addr, len);
     if (!ok() || !range_valid(addr, len)) return false;
     const int flags = (share_flags & (MAP_SHARED | MAP_PRIVATE)) | MAP_FIXED;
     void* p = mmap(base_ + addr, len, host_prot(prot), flags, fd, static_cast<off_t>(offset));
@@ -92,6 +94,7 @@ bool GuestMemory::protect(std::uint32_t addr, std::uint64_t len, int prot) {
 
 bool GuestMemory::unmap(std::uint32_t addr, std::uint64_t len) {
     len = page_round_up(len);
+    note_overlap("unmap", addr, len);
     if (!ok() || !range_valid(addr, len)) return false;
     void* p = mmap(base_ + addr, len, PROT_NONE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED | MAP_NORESERVE,
                    -1, 0);
@@ -157,6 +160,16 @@ bool GuestMemory::accessible(std::uint32_t addr, std::uint64_t len, std::uint8_t
         if ((pages_[i] & mask) != mask) return false;
     }
     return true;
+}
+
+void GuestMemory::note_overlap(const char* what, std::uint32_t addr, std::uint64_t len) const {
+    if (watch_size_ == 0) return;
+    const std::uint64_t a = addr, b = static_cast<std::uint64_t>(addr) + len;
+    const std::uint64_t w = watch_base_, x = static_cast<std::uint64_t>(watch_base_) + watch_size_;
+    if (a < x && w < b) {
+        std::fprintf(stderr, "dh2: %s 0x%08x+0x%llx overlaps the watched range 0x%08x+0x%x\n", what,
+                     addr, static_cast<unsigned long long>(len), watch_base_, watch_size_);
+    }
 }
 
 std::uint8_t* GuestMemory::host_ptr(std::uint32_t addr, std::uint64_t len, std::uint8_t need) const {

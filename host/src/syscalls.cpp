@@ -565,7 +565,20 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
         case kFaccessat:
         case kStat64:
         case kFstat64:
-        case kFstatat64:
+        case kFstatat64: {
+            // fstat64 takes a descriptor and a stat buffer, not a path: tracing it as one printed
+            // the buffer's contents as a pathname.
+            if (number == kFstat64) return -ENOENT;
+            const std::uint32_t path = (number == kOpen || number == kAccess) ? reg(0) : reg(1);
+            std::string text = "?";
+            if (const std::uint8_t* p = mem_.host_ptr(path, 1, kPageRead)) {
+                std::uint32_t n = 0;
+                while (n < 512 && p[n] != 0) ++n;
+                text.assign(reinterpret_cast<const char*>(p), n);
+            }
+            path_attempts_.push_back(std::string(syscall_name(number)) + "(" + text + ") -> -ENOENT");
+            return -ENOENT;
+        }
         case kClose:
         case kLseek:
         case kIoctl:
@@ -587,6 +600,10 @@ void SyscallLayer::print_census(FILE* out) const {
     for (const auto& e : sorted) {
         std::fprintf(out, "    %-24s #%-6d calls=%llu\n", e.name.c_str(), e.number,
                      static_cast<unsigned long long>(e.calls));
+    }
+    if (!path_attempts_.empty()) {
+        std::fprintf(out, "  paths tried: %zu\n", path_attempts_.size());
+        for (const auto& p : path_attempts_) std::fprintf(out, "    %s\n", p.c_str());
     }
     if (!unimplemented_.empty()) {
         std::fprintf(out, "  not implemented: %zu\n", unimplemented_.size());

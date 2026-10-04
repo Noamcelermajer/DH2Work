@@ -60,7 +60,17 @@ public:
     Cp15& cp15() { return *cp15_; }
 
     Stop run();
+    // Execute exactly one guest instruction. Same stop semantics as run(), so a caller can trace
+    // it without a second code path.
+    Stop step();
     void halt(Dynarmic::HaltReason reason = kStopHalt);
+
+    // Log every guest write into [base, base+size). Used to find who clobbers a structure whose
+    // contents are known to be correct immediately beforehand.
+    void watch(std::uint32_t base, std::uint32_t size) {
+        watch_base_ = base;
+        watch_size_ = size;
+    }
 
     std::uint64_t instruction_count() const { return ticks_; }
     std::uint64_t svc_count() const { return svcs_; }
@@ -99,6 +109,10 @@ private:
     std::uint64_t ticks_ = 0;
     std::uint64_t svcs_ = 0;
     std::uint64_t tick_budget_ = 0;
+    int fault_trace_ = 0;
+    std::uint32_t watch_base_ = 0;
+    std::uint32_t watch_size_ = 0;
+    int watch_trace_ = 0;
 };
 
 }  // namespace dh2

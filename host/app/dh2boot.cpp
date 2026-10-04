@@ -10,6 +10,9 @@
 #include <elf.h>
 #include <sys/mman.h>
 
+#include <sys/random.h>
+
+#include <algorithm>
 #include <cinttypes>
 #include <cstdio>
 #include <cstdlib>
@@ -46,6 +49,8 @@ int main(int argc, char** argv) {
     bool stubs = false;
     bool skip_dependency_init = false;
     bool deps_first = false;
+    bool root_first = false;
+    bool trace_steps = false;
     std::uint64_t max_instructions = 0;
 
     for (int i = 1; i < argc; ++i) {
@@ -58,6 +63,10 @@ int main(int argc, char** argv) {
             skip_dependency_init = true;
         } else if (arg == "--deps-first") {
             deps_first = true;
+        } else if (arg == "--root-first") {
+            root_first = true;
+        } else if (arg == "--trace-steps") {
+            trace_steps = true;
         } else if (arg == "--max-instructions" && i + 1 < argc) {
             max_instructions = std::strtoull(argv[++i], nullptr, 10);
         } else {
@@ -115,8 +124,26 @@ int main(int argc, char** argv) {
     std::printf("  linked       : %zu module(s), %llu relocation(s) applied, %zu unresolved\n",
                 linker.modules().size(), static_cast<unsigned long long>(report.applied),
                 report.unresolved.size());
+    for (std::size_t i = 0; i < linker.modules().size(); ++i) {
+        const dh2::LoadedImage& image = linker.modules()[i];
+        std::printf("      [%zu] %-24s bias=0x%08x [0x%08x, 0x%08x)\n", i, image.soname.c_str(),
+                    image.bias, image.load_start, image.load_end);
+    }
     std::printf("  loader iface : shared_globals=0x%08x, %zu event(s) so far\n", loader_if.globals(),
                 loader_if.events().size());
+
+    // Diagnostics for the preinit path: the GOT slot and the guard it should point at.
+    for (const dh2::LoadedImage& image : linker.modules()) {
+        if (image.soname != "libc.so") continue;
+        const std::uint32_t slot = image.bias + 0xa8c34;
+        const std::uint32_t guard = image.bias + 0xc8cb0;
+        std::uint32_t slot_value = 0, guard_value = 0;
+        if (memory.accessible(slot, 4, dh2::kPageRead)) std::memcpy(&slot_value, memory.base() + slot, 4);
+        if (memory.accessible(guard, 4, dh2::kPageRead)) std::memcpy(&guard_value, memory.base() + guard, 4);
+        std::printf("  debug        : GOT[__stack_chk_guard]@0x%08x=0x%08x  expected=0x%08x  "
+                    "*(guard)=0x%08x\n",
+                    slot, slot_value, guard, guard_value);
+    }
 
     // The initial thread's control block. Bionic reads errno at TP+0x29C and its canary at
     // [TP-4], so the thread pointer must be a real pthread_internal_t positioned at the end of
@@ -133,9 +160,28 @@ int main(int argc, char** argv) {
     memory.copy_in(tp + 4, &self, 4);
     const std::uint32_t zero = 0;
     memory.copy_in(tp + 0x29C, &zero, 4);
+    // bionic's first initializer is __libc_preinit, and its first act is
+    //   __stack_chk_guard = __get_tls()[TLS_SLOT_STACK_GUARD];
+    // with TLS_SLOT_STACK_GUARD == 5, i.e. [TP + 0x14]. The comment on that line says the
+    // *linker* filled the slot in, so the host has to: leaving it zero is what made libc.so's
+    // first initializer read address 0x8 and stop.
+    std::uint32_t canary = 0;
+    if (getrandom(&canary, sizeof canary, 0) != static_cast<ssize_t>(sizeof canary)) {
+        canary = static_cast<std::uint32_t>(tp) ^ 0x5bf03635u;  // never zero
+    }
+    if (canary == 0) canary = 0x5bf03635u;
+    memory.copy_in(tp + 0x14, &canary, 4);
     cpu.cp15().set_tpidruro(tp);
-    std::printf("  thread       : static TLS %u bytes, TP=0x%08x [TP]=TP [TP+4]=TP errno=0\n",
-                tls_total, tp);
+    cpu.watch(tp, 0x20);
+    memory.watch(tp, 0x20);
+    {
+      std::uint32_t check_self = 0, check_id = 0;
+      std::memcpy(&check_self, memory.base() + tp, 4);
+      std::memcpy(&check_id, memory.base() + tp + 4, 4);
+      std::printf("  thread       : static TLS %u bytes, TP=0x%08x readback [TP]=0x%08x [TP+4]=0x%08x "
+                  "stack_guard=0x%08x\n",
+                  tls_total, tp, check_self, check_id, canary);
+  }
 
     // The kuser helper page: legacy bionic paths still call it.
     if (memory.map_anon(kKuserPage, dh2::kPageSize, PROT_READ | PROT_WRITE)) {
@@ -161,6 +207,11 @@ int main(int argc, char** argv) {
 
     dh2::SyscallLayer syscalls(memory, cpu, linker.modules().front());
 
+    // The last executed PCs, so a fault can name the instruction that caused it rather than the
+    // one the JIT happened to leave in R15.
+    static std::uint32_t trace[64];
+    static std::size_t trace_at = 0;
+
     const auto call = [&](std::uint32_t target, std::uint32_t& result, dh2::Stop& stop_out) -> bool {
         std::uint32_t* regs = cpu.jit().Regs().data();
         for (int i = 0; i < 13; ++i) regs[i] = 0;
@@ -171,7 +222,10 @@ int main(int argc, char** argv) {
         if ((target & 1u) != 0) cpsr |= 0x20;
         cpu.jit().SetCpsr(cpsr);
         for (;;) {
-            const dh2::Stop stop = cpu.run();
+            if (trace_steps) {
+                trace[trace_at++ % 64] = regs[15];
+            }
+            const dh2::Stop stop = trace_steps ? cpu.step() : cpu.run();
             if (stop.kind == dh2::StopKind::Svc) {
                 if (stop.svc == kReturnSwi) {
                     result = regs[0];
@@ -201,11 +255,25 @@ int main(int argc, char** argv) {
     std::size_t stop_module = 0;
     std::size_t stop_index = 0;
 
-    // The root's constructors run first by default, which is the order the project's own
-    // measurement of "539 of 539" was taken in; --deps-first reverses it to the dependency-first
-    // order a real linker uses.
-    for (std::size_t step = 0; step < linker.modules().size() && !halted; ++step) {
-        const std::size_t m = deps_first ? linker.modules().size() - 1 - step : step;
+    // Initializer order. bionic's own source is explicit that __libc_preinit (libc.so's
+    // constructor number 1) "is called by the dynamic linker when libc.so is loaded. This happens
+    // before any other initializer", so libc.so goes first; everything else follows in reverse
+    // load order, which is dependencies-before-dependents and the engine last.
+    std::vector<std::size_t> order;
+    for (std::size_t i = 0; i < linker.modules().size(); ++i) order.push_back(i);
+    if (deps_first) {
+        std::reverse(order.begin(), order.end());
+    } else if (!root_first) {
+        std::stable_sort(order.begin(), order.end(), [&](std::size_t a, std::size_t b) {
+            const bool libc_a = linker.modules()[a].soname == "libc.so";
+            const bool libc_b = linker.modules()[b].soname == "libc.so";
+            if (libc_a != libc_b) return libc_a;
+            return a > b;
+        });
+    }
+
+    for (std::size_t step = 0; step < order.size() && !halted; ++step) {
+        const std::size_t m = order[step];
         const dh2::LoadedImage& image = linker.modules()[m];
         if (skip_dependency_init && m != 0) continue;
 
@@ -237,6 +305,38 @@ int main(int argc, char** argv) {
                 std::printf("  stop         : %s [%zu] at 0x%08x (link-time 0x%08x) -- %s\n",
                             image.soname.c_str(), i, initializers[i], initializers[i] - image.bias,
                             stop.describe().c_str());
+                if (trace_steps) {
+                    std::printf("  trace        : last executed PCs (oldest first)\n");
+                    for (std::size_t k = 0; k < 64; ++k) {
+                        const std::uint32_t pc = trace[(trace_at + k) % 64];
+                        if (pc == 0) continue;
+                        std::printf("      0x%08x\n", pc);
+                    }
+                }
+                {
+                    const auto word = [&](std::uint32_t address) -> std::uint32_t {
+                        std::uint32_t v = 0;
+                        if (memory.accessible(address, 4, dh2::kPageRead)) {
+                            std::memcpy(&v, memory.base() + address, 4);
+                        }
+                        return v;
+                    };
+                    const std::uint32_t now = cpu.thread_pointer();
+                    std::printf("  tls block    : TP=0x%08x [TP]=0x%08x [TP+4]=0x%08x [TP+8]=0x%08x "
+                                "[TP+0x14]=0x%08x\n",
+                                now, word(now), word(now + 4), word(now + 8), word(now + 0x14));
+                }
+                {
+                    const std::uint32_t* rr = cpu.jit().Regs().data();
+                    std::printf("  stack        : from sp 0x%08x\n", rr[13]);
+                    for (int i = 0; i < 48; ++i) {
+                        const std::uint32_t a = rr[13] + static_cast<std::uint32_t>(i) * 4;
+                        std::uint32_t w = 0;
+                        if (!memory.accessible(a, 4, dh2::kPageRead)) break;
+                        std::memcpy(&w, memory.base() + a, 4);
+                        std::printf("      [sp+%3d] 0x%08x\n", i * 4, w);
+                    }
+                }
                 const std::uint32_t* r = cpu.jit().Regs().data();
                 std::printf("  registers    :");
                 for (int k = 0; k < 16; ++k) std::printf(" r%d=0x%08x", k, r[k]);
