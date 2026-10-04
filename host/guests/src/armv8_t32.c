@@ -35,6 +35,17 @@ static unsigned store_exclusive(volatile unsigned* p, unsigned value) {
     return status;
 }
 
+// STLEX only succeeds while this processor holds an exclusive reservation for the address. The
+// pair below is the architectural use: fail with no reservation, succeed with one.
+static unsigned load_store_exclusive(volatile unsigned* p, unsigned value) {
+    unsigned observed;
+    unsigned status;
+    __asm__ volatile("ldaex %0, [%1]" : "=r"(observed) : "r"(p) : "memory");
+    (void)observed;
+    __asm__ volatile("stlex %0, %1, [%2]" : "=&r"(status) : "r"(value), "r"(p) : "memory");
+    return status;
+}
+
 static unsigned crc32_byte(unsigned crc, unsigned value) {
     __asm__ volatile("crc32b %0, %0, %1" : "+r"(crc) : "r"(value));
     return crc;
@@ -76,8 +87,13 @@ void dh2_main(const int* stack) {
     store_release(&bytes[2], 0x7f);
     dh2_write(" stlb=");
     dh2_write_hex32(bytes[2]);
-    dh2_write(" stlex=");
+    // CLREX makes the bare STLEX's failure an architectural requirement rather than a property
+    // of one monitor implementation's granule size.
+    __asm__ volatile("clrex" ::: "memory");
+    dh2_write(" stlex_bare=");
     dh2_write_int(store_exclusive(&words[1], 0xdeadbeef));
+    dh2_write(" stlex=");
+    dh2_write_int(load_store_exclusive(&words[1], 0xdeadbeef));
     dh2_write(" value=");
     dh2_write_hex32(words[1]);
 
