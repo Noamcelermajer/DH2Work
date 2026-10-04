@@ -333,3 +333,38 @@ host/scripts/run-guests.sh <build>/dh2run host/guests/out
 **Environment used:** WSL2 Ubuntu 22.04, clang 14.0.0, cmake 3.22.1, ninja 1.10.1, 12 cores;
 Android NDK r29 for the guests; Dynarmic with `DYNARMIC_USE_BUNDLED_EXTERNALS=ON` so the build is
 offline. No phone and no emulator were used.
+
+---
+
+## 7. GL marshalling opens, and a frame completes
+
+The generated GL/EGL stubs used to be `mov r0,#0; bx lr`, and that is what stopped the first
+frame: `glitch::video::CCommonGLDriver<...>::genericDriverInit` calls `glGetString(GL_VERSION)`
+and immediately scans the result.
+
+```
+5b3b18: movw r0, #0x1f02      ; GL_VERSION
+5b3b28: bl   glGetString
+5b3b38: ldrsb r3, [r0]        ; scan the returned string  -> r0 was null
+```
+
+The stubs now carry their symbol name -- each is `svc #(0x400 + index) ; bx lr` -- and
+`host/gl` answers by name, so all **92** imported entry points are addressable. The difference is
+not marginal:
+
+| | before | after |
+| --- | ---: | ---: |
+| `GameRenderer.nativeInit` | 45,388 instructions, then a null dereference | **4,586,736 instructions** |
+| `GameRenderer.nativeRender` | fault after 25 instructions | **returns, 3,793 instructions** |
+
+`glGetString` returns real strings (vendor, renderer, GL version, GLSL version, extension list),
+and the engine is seen doing the ordinary first-frame setup: 46 calls across 27 entry points --
+`glEnable`/`glDisable`, blend state, depth state, culling, `glClear*`, `glViewport`,
+`glScissor`, `glGenBuffers`/`glBindBuffer`, `glGenTextures`, `glPixelStorei`,
+`glGetIntegerv`.
+
+The `CallStatic<Type>Method` slots also dispatch by name now, answering the 25 Java methods the
+engine asks for, so the Java side no longer returns a null id for every lookup.
+
+The next stop is a read at `0x24` inside `GameRenderer.nativeInit` (`engine+0x61b0b8`), which is
+where the engine next needs something the host does not yet provide.
