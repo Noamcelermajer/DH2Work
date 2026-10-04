@@ -111,6 +111,12 @@ bool JniBridge::install(std::string& error) {
     return true;
 }
 
+std::uint32_t JniBridge::env_holder() {
+    const std::uint32_t at = data_ + 0xC00;
+    if (!mem_.copy_in(at, &env_struct_, 4)) return 0;
+    return at;
+}
+
 std::uint32_t JniBridge::class_stub(const std::string& name) {
     // A real class registry needs a DEX, and there is none here. What the engine gets back is a
     // distinct, dereferenceable guest address per requested class, so a jclass it passes back is

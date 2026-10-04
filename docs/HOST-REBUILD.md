@@ -206,8 +206,44 @@ this engine does not register its natives, so ART was resolving the 14
 `Java_com_gameloft_...` symbols by name. Driving the game therefore means calling those natives
 directly, with real Java-side objects -- the class/method registry that does not exist yet.
 
-The next gate is that: a class and method registry good enough to call an engine native, and the
-Java-side driver the DEX would otherwise provide.
+### The engine's drive sequence, and the next wall
+
+The recovered Java (in the project's source-recovery package) gives the order the DEX drives the
+engine, and it is not `JNI_OnLoad`:
+
+```java
+// DungeonHunter2 (the Activity)
+public static native void nativeInit(int i);
+public static native void nativeSetPhone(int w, int h);
+public static native void nativeResume(int i);
+public static native int  nativegetState(int i);
+// GameRenderer (the GLSurfaceView.Renderer)
+public GameRenderer(Context c) { f26a = c; nativeGameRenderer(); nativeConfig(); }
+public static native void nativeInit(int i);
+public static native void nativeResize(int i, int i2);
+public static native void nativeRender();          // once per frame
+```
+
+`nativeInit` is the first call that is static and takes one int, so it needs nothing but a
+`jclass`. Its prologue is ARM code that reaches JNI through an indirection:
+
+```
+5325d4: ldr  r5, [got]        ; r5 = engine+0x99c52c, a slot nativeInit reads
+5325e0: ldr  r3, [r5]         ; r3 = the JNIEnv the engine expects to be cached here
+5325ec: mov  r0, r3
+5325f0: ldr  r3, [r3]         ; r3 = env->functions
+5325f8: ldr  pc, [r3, #0x54]  ; call slot 21
+```
+
+**This is where the rebuild currently stops.** `JNI_OnLoad` runs and returns `JNI_VERSION_1_4`
+after calling `VoxSetJavaVMC(vm)` and `NVThreadInit(vm)`, but neither of those makes a single
+JNI call, so nothing caches an `env` and the slot `nativeInit` reads is not a valid pointer to
+one. Seeding that slot with a host-built holder does not fix it, which means the slot is not the
+cached-env global the disassembly first suggests.
+
+The next step is therefore specific and measurable: find which function writes `engine+0x99c52c`
+(or whatever the real indirection is) and call that before `nativeInit` -- the same way
+`JNI_OnLoad` had to be called before anything else.
 
 ## 4. The custom Dynarmic
 

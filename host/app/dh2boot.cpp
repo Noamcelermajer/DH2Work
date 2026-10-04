@@ -411,6 +411,66 @@ int main(int argc, char** argv) {
 
     std::printf("  initializers : %d completed\n", completed);
 
+    // The engine's own entry, as the game's DEX drives it. The recovered Java says
+    //   DungeonHunter2.nativeInit(int)       -- the Activity's engine start
+    //   GameRenderer.nativeGameRenderer()    -- the GLSurfaceView renderer's constructor
+    //   GameRenderer.nativeConfig()
+    //   GameRenderer.nativeRender()          -- once per frame
+    // and the static block loads the library, which is the JNI_OnLoad above. nativeInit is
+    // static and takes one int, so it is the first call that needs nothing but a jclass.
+    if (!halted) {
+        const std::uint32_t native_init =
+            linker.find_symbol("Java_com_gameloft_android_GAND_GloftD2SS_DungeonHunter2_nativeInit");
+        if (native_init == 0) {
+            std::printf("  nativeInit   : symbol not found\n");
+        } else {
+            // nativeInit's first act is
+            //     ldr r5, [got]        ; r5 = &g_cached_env
+            //     ldr r3, [r5]         ; r3 = the JNIEnv the engine cached
+            //     mov r0, r3
+            //     ldr r3, [r3]         ; r3 = env->functions
+            //     ldr pc, [r3, #0x54]  ; call slot 21
+            // so it uses an env the JNI plumbing is expected to have cached already. Nothing has,
+            // because there is no ART. The host seeds that global with the JNIEnv it built: the
+            // GOT entry at engine+0x99c52c holds the global's address after relocation, so this
+            // reads the slot rather than guessing an offset.
+            if (const dh2::LoadedImage* engine = &linker.modules().front()) {
+                const std::uint32_t got = engine->bias + 0x99c52c;
+                std::uint32_t global = 0;
+                if (memory.accessible(got, 4, dh2::kPageRead)) {
+                    std::memcpy(&global, memory.base() + got, 4);
+                }
+                const std::uint32_t holder = jni.env_holder();
+                std::printf("  nativeInit   : cached-env slot 0x%08x holds 0x%08x; holder=0x%08x\n", got,
+                            global, holder);
+                if (holder != 0 && memory.store32(got, holder)) {
+                    std::uint32_t check = 0;
+                    std::memcpy(&check, memory.base() + got, 4);
+                    std::printf("  nativeInit   : slot now holds 0x%08x (a word holding the env)\n",
+                                check);
+                }
+            }
+            std::printf("  nativeInit   : calling 0x%08x(clazz=0x%08x, 0)\n", native_init,
+                        jni.env());
+            std::fflush(stdout);
+            const std::uint32_t args[4] = {jni.env(), 0, 0, 0};
+            dh2::Stop stop;
+            std::uint32_t result = 0;
+            const std::uint64_t before = cpu.instruction_count();
+            if (call(native_init, args, 2, result, stop)) {
+                std::printf("  nativeInit   : returned (r0=0x%08x) after %llu instruction(s)\n", result,
+                            static_cast<unsigned long long>(cpu.instruction_count() - before));
+            } else {
+                const std::uint32_t* rr = cpu.jit().Regs().data();
+                std::printf("  nativeInit   : %s\n", stop.describe().c_str());
+                std::printf("      at pc 0x%08x lr=0x%08x r0=0x%08x r1=0x%08x r2=0x%08x r3=0x%08x\n",
+                            rr[15], rr[14], rr[0], rr[1], rr[2], rr[3]);
+                std::printf("      after %llu instruction(s)\n",
+                            static_cast<unsigned long long>(cpu.instruction_count() - before));
+            }
+        }
+    }
+
     // JNI_OnLoad is the engine's real entry: it is a Java library's native half, so this is what
     // ART calls after System.loadLibrary. The host presents the JavaVM and JNIEnv it expects.
     {

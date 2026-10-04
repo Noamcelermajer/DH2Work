@@ -37,6 +37,9 @@ public:
 
     std::uint32_t java_vm() const { return vm_; }
     std::uint32_t env() const { return env_struct_; }
+    // A guest word holding the JNIEnv pointer. Engine code that reads its cached env through an
+    // indirection needs *its* slot to point at a word like this one.
+    std::uint32_t env_holder();
 
     bool handle_svc(std::uint32_t swi);
     void print_census(FILE* out) const;
