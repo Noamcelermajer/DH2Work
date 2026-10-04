@@ -77,6 +77,30 @@ std::uint32_t GlBridge::string_for(std::uint32_t name) {
     }
 }
 
+namespace {
+// GL enums this host has to understand to answer a query.
+constexpr std::uint32_t kGlCompileStatus = 0x8B81;
+constexpr std::uint32_t kGlLinkStatus = 0x8B82;
+constexpr std::uint32_t kGlTrue = 1;
+constexpr std::uint32_t kGlFramebufferComplete = 0x8CD5;
+constexpr std::uint32_t kGlMaxTextureSize = 0x0D33;
+constexpr std::uint32_t kGlMaxVertexAttribs = 0x8869;
+constexpr std::uint32_t kGlMaxTextureImageUnits = 0x8872;
+constexpr std::uint32_t kGlMaxVertexTextureImageUnits = 0x8B4C;
+constexpr std::uint32_t kGlMaxCombinedTextureImageUnits = 0x8B4D;
+constexpr std::uint32_t kGlMaxVaryingVectors = 0x8DFC;
+constexpr std::uint32_t kGlMaxVertexUniformVectors = 0x8DFB;
+constexpr std::uint32_t kGlMaxFragmentUniformVectors = 0x8DFD;
+constexpr std::uint32_t kGlViewport = 0x0BA2;
+constexpr std::uint32_t kGlNumCompressedTextureFormats = 0x86A3;
+
+void store(GuestMemory& memory, std::uint32_t address, std::uint32_t value) {
+    if (address != 0 && memory.accessible(address, 4, kPageWrite)) {
+        memory.copy_in(address, &value, 4);
+    }
+}
+}  // namespace
+
 bool GlBridge::handle_svc(std::uint32_t swi, const GuestLinker& linker) {
     if (swi < kStubSvcBase) return false;
     const std::size_t index = swi - kStubSvcBase;
@@ -85,24 +109,77 @@ bool GlBridge::handle_svc(std::uint32_t swi, const GuestLinker& linker) {
     ++calls_[name];
     std::uint32_t* regs = cpu_.jit().Regs().data();
 
-    if (name == "glGetString") {
-        regs[0] = string_for(regs[0]);
-    } else if (name == "glGetError") {
-        regs[0] = 0;  // GL_NO_ERROR
-    } else if (name == "glGetIntegerv") {
-        // Two integers is the common case (a query with a single result). Writing the whole buffer
-        // would need the real count, so exactly what the engine asks for is written and the rest
-        // is left alone.
-        if (regs[1] != 0 && mem_.accessible(regs[1], 8, kPageWrite)) {
-            const std::uint32_t zero = 0;
-            mem_.copy_in(regs[1], &zero, 4);
+    // Object creation. A renderer that gets zero back for glCreateShader or glCreateProgram
+    // treats it as an error and gives up, so these hand out distinct non-zero names.
+    if (name == "glCreateShader" || name == "glCreateProgram" || name == "glCreateShaderProgramv") {
+        regs[0] = ++next_object_;
+        return true;
+    }
+    if (name == "glGenBuffers" || name == "glGenTextures" || name == "glGenFramebuffers" ||
+        name == "glGenRenderbuffers" || name == "glGenVertexArraysOES") {
+        const std::uint32_t count = regs[0];
+        const std::uint32_t array = regs[1];
+        for (std::uint32_t i = 0; i < count && i < 64; ++i) {
+            store(mem_, array + i * 4, ++next_object_);
         }
         regs[0] = 0;
-    } else {
-        // Every other entry point: the value a GL implementation returns for a call that cannot
-        // do anything here. Named and counted, so the next one to matter is visible.
-        regs[0] = 0;
+        return true;
     }
+
+    // Queries whose answers decide whether the renderer continues.
+    if (name == "glGetShaderiv" || name == "glGetProgramiv") {
+        const std::uint32_t pname = regs[1];
+        // A shader or program that reports a failed compile or link is abandoned by the caller,
+        // and this host has no compiler to report honestly about; the compile status is the one
+        // value that has to be true for the engine to keep going.
+        store(mem_, regs[2], pname == kGlCompileStatus || pname == kGlLinkStatus ? kGlTrue : 0);
+        regs[0] = 0;
+        return true;
+    }
+    if (name == "glCheckFramebufferStatus") {
+        regs[0] = kGlFramebufferComplete;
+        return true;
+    }
+    if (name == "glGetString") {
+        regs[0] = string_for(regs[0]);
+        return true;
+    }
+    if (name == "glGetError") {
+        regs[0] = 0;  // GL_NO_ERROR
+        return true;
+    }
+    if (name == "glGetUniformLocation") {
+        // Non-negative means "found"; -1 would make the caller skip the uniform entirely.
+        regs[0] = ++next_object_;
+        return true;
+    }
+    if (name == "glGetAttribLocation") {
+        regs[0] = 0;
+        return true;
+    }
+    if (name == "glGetIntegerv") {
+        const std::uint32_t pname = regs[0];
+        std::uint32_t value = 0;
+        switch (pname) {
+            case kGlMaxTextureSize: value = 4096; break;
+            case kGlMaxVertexAttribs: value = 16; break;
+            case kGlMaxTextureImageUnits: value = 16; break;
+            case kGlMaxVertexTextureImageUnits: value = 8; break;
+            case kGlMaxCombinedTextureImageUnits: value = 32; break;
+            case kGlMaxVaryingVectors: value = 15; break;
+            case kGlMaxVertexUniformVectors: value = 256; break;
+            case kGlMaxFragmentUniformVectors: value = 224; break;
+            case kGlNumCompressedTextureFormats: value = 0; break;
+            default: value = 0; break;
+        }
+        store(mem_, regs[1], value);
+        regs[0] = 0;
+        return true;
+    }
+
+    // Shader plumbing, and the rest: succeed and do nothing. Named and counted, so the next entry
+    // point that turns out to matter is visible in the census.
+    regs[0] = 0;
     return true;
 }
 

@@ -40,6 +40,9 @@ private:
     std::uint32_t used_ = 0;
     std::map<std::string, std::uint64_t> calls_;
     std::uint32_t vendor_ = 0, renderer_ = 0, version_ = 0, extensions_ = 0, glsl_ = 0;
+    // GL object names have to be distinct and non-zero; the engine abandons a shader or program
+    // whose name it reads as zero.
+    std::uint32_t next_object_ = 1;
 
     std::uint32_t place(const std::string& text);
 };
