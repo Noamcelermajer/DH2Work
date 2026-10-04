@@ -20,6 +20,7 @@
 
 #include "dh2/cpu.hpp"
 #include "dh2/loader.hpp"
+#include "dh2/random.hpp"
 #include "dh2/vfs.hpp"
 
 namespace dh2 {
@@ -495,8 +496,9 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
             const std::uint32_t length = reg(1);
             std::uint8_t* host = mem_.host_ptr(buffer, length, kPageWrite);
             if (host == nullptr) return -EFAULT;
-            const ssize_t got = ::getrandom(host, length, static_cast<unsigned>(reg(2)));
-            return got < 0 ? -errno : static_cast<std::int32_t>(got);
+            // The flags are advisory here; what matters is that the guest gets entropy back.
+            random_bytes(host, length);
+            return static_cast<std::int32_t>(length);
         }
 
         case kFutex: {

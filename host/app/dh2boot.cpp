@@ -10,7 +10,6 @@
 #include <elf.h>
 #include <sys/mman.h>
 
-#include <sys/random.h>
 #include <unistd.h>
 
 #include <algorithm>
@@ -26,6 +25,7 @@
 #include "dh2/gl.hpp"
 #include "dh2/jni.hpp"
 #include "dh2/linker.hpp"
+#include "dh2/random.hpp"
 #include "dh2/loader_if.hpp"
 #include "dh2/syscalls.hpp"
 #include "dh2/vfs.hpp"
@@ -206,10 +206,8 @@ int main(int argc, char** argv) {
     memory.copy_in(tp - 4, &thread, 4);
 
     std::uint32_t canary = 0;
-    if (getrandom(&canary, sizeof canary, 0) != static_cast<ssize_t>(sizeof canary)) {
-        canary = static_cast<std::uint32_t>(tp) ^ 0x5bf03635u;
-    }
-    if (canary == 0) canary = 0x5bf03635u;
+    dh2::random_bytes(&canary, sizeof canary);
+    if (canary == 0) canary = static_cast<std::uint32_t>(tp) ^ 0x5bf03635u;
     memory.copy_in(tp + 4 * 5, &canary, 4);
     cpu.cp15().set_tpidruro(tp);
     cpu.watch(tp, 0x20);

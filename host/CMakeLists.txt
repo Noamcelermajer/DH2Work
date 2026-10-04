@@ -44,6 +44,7 @@ add_library(dh2core STATIC
   src/gl.cpp
   src/jni.cpp
   src/loader_if.cpp
+  src/random.cpp
   src/linker.cpp
   src/syscalls.cpp
   src/vfs.cpp

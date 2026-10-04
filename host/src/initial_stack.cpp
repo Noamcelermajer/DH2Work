@@ -1,9 +1,10 @@
 #include "dh2/initial_stack.hpp"
 
 #include <elf.h>
-#include <sys/random.h>
 
 #include <cstring>
+
+#include "dh2/random.hpp"
 
 namespace dh2 {
 
@@ -41,13 +42,9 @@ std::uint32_t build_initial_stack(GuestMemory& mem, std::uint32_t stack_top,
     arg_addrs.reserve(argv.size());
     for (const auto& a : argv) arg_addrs.push_back(push_string(a));
 
-    std::uint8_t random_bytes[16];
-    if (getrandom(random_bytes, sizeof random_bytes, 0) != static_cast<ssize_t>(sizeof random_bytes)) {
-        for (std::size_t i = 0; i < sizeof random_bytes; ++i) {
-            random_bytes[i] = static_cast<std::uint8_t>(i * 37 + 11);
-        }
-    }
-    const std::uint32_t random_addr = push_bytes(random_bytes, sizeof random_bytes);
+    std::uint8_t entropy[16];
+    random_bytes(entropy, sizeof entropy);
+    const std::uint32_t random_addr = push_bytes(entropy, sizeof entropy);
     if (overflow) return 0;
 
     auxv.push_back({AT_RANDOM, random_addr});

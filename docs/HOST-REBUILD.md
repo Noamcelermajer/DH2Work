@@ -422,6 +422,26 @@ armv8_t32    exit=0  ldab=0x00000022 ldah=0x00003344 ldaex=0x55667788 stlb=0x000
 bionic       exit=0  hello arm32
 ```
 
+### The Android build, and where it stops
+
+The same CMakeLists was pointed at the NDK r29 toolchain
+(`-DCMAKE_TOOLCHAIN_FILE=.../android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-24`).
+Two obstacles, both recorded because they are toolchain problems rather than host problems:
+
+1. **Dynarmic's bundled fmt 10 against clang 21.** `fmt/format-inl.h` and `fmt/os.cc` fail with
+   `call to consteval function ... is not a constant expression`. The documented escape hatch is
+   in the flags and does not help -- the failing compile line really does carry
+   `-DFMT_USE_CONSTEVAL=0`, and this fmt version does not read that macro anyway. The known
+   fixes are an older NDK (clang 17) or patching the bunded fmt, and neither belongs in this
+   repository's host tree.
+2. **`getrandom()` is API 28** and the build targets android-24. That one *is* ours: the host now
+   uses `dh2::random_bytes` (`host/random`), which issues `SYS_getrandom` directly with a
+   `/dev/urandom` fallback, so the host no longer depends on a libc entry point the target may
+   not have. x86_64 regression after that change: guest suite 8/8, `dh2selftest` 34/34.
+
+So the arm64 *architecture* is verified (above), and the arm64 *Android packaging* step is
+blocked on a toolchain decision, not on host code.
+
 The `armv8_t32` line matters most. Those T32 ARMv8 instructions are the ones our own Dynarmic
 patch adds, and they were verified on x64. Passing here means the patch is exercised on the
 **arm64 backend** -- the one the product uses -- and the halt-guard hunk, which only compiles on
