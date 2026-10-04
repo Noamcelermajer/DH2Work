@@ -29,8 +29,22 @@ JNI          : 28 native-interface calls, 1 method called back into Java
 GL           : 104 calls into 43 imported entry points
 ```
 
-The engine's own initialization completes, it builds its GL pipeline, and it runs a second frame
-of real game work (20.3M instructions).
+The engine's own initialization completes, it builds its GL pipeline, and it sustains a frame
+loop. `--frames 30` drives 30 frames with no fault:
+
+```
+nativeInit : returned r0=0x00000001 after 13,102,907 instruction(s)
+frames     : 29 frame(s) driven, 222,634,462 instruction(s), slowest 58,540,350
+instructions : 236,683,038
+GL         : 160 calls into 43 imported entry points
+```
+
+Frame cost climbs from 4,310 instructions on the first to 58.5M at its heaviest, which is the
+engine doing real work rather than idling in a stub.
+
+> One correction in the interest of the record: `--frames` was first committed as an option that
+> was parsed and never used, so a run described as 60 frames was in fact two. It is implemented
+> now, and the numbers above come from it.
 
 | Gate | Result |
 | --- | --- |

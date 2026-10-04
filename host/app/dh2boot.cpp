@@ -484,9 +484,6 @@ int main(int argc, char** argv) {
             {"nativeInit", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeInit", 1, 0, 0},
             {"nativeResize", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeResize", 2, 1080, 1920},
             {"nativeRender", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeRender", 0, 0, 0},
-            // nativeRender is called once per frame by onDrawFrame, so the loop is what a running
-            // game does; a single frame would not show a loop that fails on its second pass.
-            {"nativeRender", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeRender", 0, 0, 0},
         };
         // Re-read the ctype pointer at this point: it was correct after linking, and the engine
         // dereferences it inside GameRenderer.nativeInit. When it becomes zero says as much as
@@ -544,6 +541,38 @@ int main(int argc, char** argv) {
                 cpu.dump_accesses(stdout);
             }
             std::fflush(stdout);
+        }
+
+        // nativeRender runs once per frame, as onDrawFrame does. A loop that fails on its second
+        // or hundredth pass is not visible in a single frame, so --frames drives it and reports
+        // the cost, which is what a soak needs to be worth anything.
+        if (frames > 1 && !halted) {
+            const std::uint32_t render = linker.find_symbol(
+                "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeRender");
+            if (render == 0) {
+                std::printf("  frames       : nativeRender not found\n");
+            } else {
+                const std::uint32_t args[4] = {jni.env(), jni.env(), 0, 0};
+                std::uint64_t total = 0;
+                std::uint64_t slowest = 0;
+                int done = 0;
+                for (int frame = 1; frame < frames && !halted; ++frame) {
+                    dh2::Stop stop;
+                    std::uint32_t result = 0;
+                    const std::uint64_t before = cpu.instruction_count();
+                    if (!call(render, args, 2, result, stop)) {
+                        std::printf("  frame %-7d : %s\n", frame, stop.describe().c_str());
+                        break;
+                    }
+                    const std::uint64_t cost = cpu.instruction_count() - before;
+                    total += cost;
+                    ++done;
+                    if (cost > slowest) slowest = cost;
+                }
+                std::printf("  frames       : %d frame(s) driven, %llu instruction(s), slowest %llu\n",
+                            done, static_cast<unsigned long long>(total),
+                            static_cast<unsigned long long>(slowest));
+            }
         }
     }
 
