@@ -28,6 +28,7 @@
 #include "dh2/linker.hpp"
 #include "dh2/loader_if.hpp"
 #include "dh2/syscalls.hpp"
+#include "dh2/vfs.hpp"
 
 namespace {
 
@@ -55,6 +56,7 @@ int main(int argc, char** argv) {
     bool deps_first = false;
     bool root_first = false;
     bool trace_steps = false;
+    std::vector<std::string> search_roots;
     std::uint64_t max_instructions = 0;
 
     for (int i = 1; i < argc; ++i) {
@@ -71,6 +73,8 @@ int main(int argc, char** argv) {
             root_first = true;
         } else if (arg == "--trace-steps") {
             trace_steps = true;
+        } else if (arg == "--root" && i + 1 < argc) {
+            search_roots.push_back(argv[++i]);
         } else if (arg == "--max-instructions" && i + 1 < argc) {
             max_instructions = std::strtoull(argv[++i], nullptr, 10);
         } else {
@@ -261,7 +265,12 @@ int main(int argc, char** argv) {
     std::printf("  GL           : %zu imported entry point(s) are answerable by name\n",
                 linker.stub_count());
 
+    dh2::Vfs vfs;
+    for (const std::string& root : search_roots) vfs.add_root(root);
+
     dh2::SyscallLayer syscalls(memory, cpu, linker.modules().front());
+    syscalls.set_filesystem(&vfs);
+    if (!search_roots.empty()) std::printf("  filesystem   : %zu root(s)\n", search_roots.size());
 
     // The last executed PCs, so a fault can name the instruction that caused it rather than the
     // one the JIT happened to leave in R15.

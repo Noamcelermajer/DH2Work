@@ -46,6 +46,7 @@ add_library(dh2core STATIC
   src/loader_if.cpp
   src/linker.cpp
   src/syscalls.cpp
+  src/vfs.cpp
 )
 target_include_directories(dh2core PUBLIC include)
 target_compile_options(dh2core PRIVATE -Wall -Wextra -Wno-unused-parameter)

@@ -366,5 +366,38 @@ and the engine is seen doing the ordinary first-frame setup: 46 calls across 27 
 The `CallStatic<Type>Method` slots also dispatch by name now, answering the 25 Java methods the
 engine asks for, so the Java side no longer returns a null id for every lookup.
 
-The next stop is a read at `0x24` inside `GameRenderer.nativeInit` (`engine+0x61b0b8`), which is
-where the engine next needs something the host does not yet provide.
+The next stop was a read at `0x24` inside `GameRenderer.nativeInit` (`engine+0x61b0b8`): the
+engine was deep in asset loading and had nowhere to load from.
+
+## 8. A filesystem layer, and the honest blocker
+
+`host/vfs` plus real `openat`/`open`/`read`/`pread64`/`close`/`lseek`/`fstat64`/`stat64`/
+`fstatat64`/`faccessat` in the syscall layer give the engine a read-only view of a directory
+(`--root`). Verified by letting the engine itself drive it:
+
+```
+filesystem   : 1 root(s)
+open(/data/tweaker/player_light.tweaker_xml) -> fd 3 (31 bytes)
+open(DebugSwitches.savegame)                 -> fd 8 (8 bytes)
+open(shaders.pak)                            -> fd 14 (4096 bytes)
+open(#/system/fonts/droidsans.ttf)           -> fd 15 (757076 bytes)
+open(#/system/fonts/._droidsans.ttf)         -> -ENOENT
+open(#/system/fonts/.AppleDouble/droidsans.ttf) -> -ENOENT
+open(#/system/fonts/droidsans.ttf/..namedfork/rsrc) -> -ENOENT
+```
+
+Those last three are the engine's own font loader probing macOS resource-fork paths, which is a
+useful sign that it is running real code rather than a stub. `GameRenderer.nativeInit` now runs
+**5,065,945 instructions** (up from 4,586,736) and `nativeRender` still completes a frame.
+
+**The blocker is an input this machine does not have.** The files it asks for by name are the
+game's own content -- `shaders.pak`, `gameswf_effects.bdae`, and the rest of the cache. The
+project's roadmap already calls the cache an owner-supplied private input, and it is not present
+here (the one downloads directory that might have held it is empty). With placeholder bytes in
+those names the engine reads them happily and then faults on a bogus pointer, because placeholder
+bytes are not a shader package.
+
+So the honest position: the host now has everything it needs *structurally* to let the engine load
+its content -- loader, linker, TLS, loader interface, JNI, GL, filesystem -- and stops where the
+content itself would have to be real. Booting to gameplay off-device needs the cache supplied;
+everything up to that line is measured and committed.

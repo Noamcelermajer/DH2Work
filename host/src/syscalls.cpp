@@ -20,6 +20,7 @@
 
 #include "dh2/cpu.hpp"
 #include "dh2/loader.hpp"
+#include "dh2/vfs.hpp"
 
 namespace dh2 {
 
@@ -91,6 +92,7 @@ enum : std::int32_t {
     kFaccessat = 334,
     kSetRobustList = 338,
     kPrlimit64 = 369,
+    kPread64 = 180,
     kGetrandom = 384,
 
     // ARM private range: the number lives in the SVC immediate, not in r7.
@@ -99,6 +101,28 @@ enum : std::int32_t {
 };
 
 constexpr std::uint32_t kStackTop = 0xFF000000u;
+
+// ARM's struct stat64 is 96 bytes and the fields sit at these offsets. Only the ones a guest
+// reads in practice are filled; the rest stays zero rather than guessed.
+constexpr std::uint32_t kStat64Size = 96;
+
+void store_u32(std::uint8_t* out, std::size_t offset, std::uint32_t value) {
+    std::memcpy(out + offset, &value, 4);
+}
+
+void store_u64(std::uint8_t* out, std::size_t offset, std::uint64_t value) {
+    std::memcpy(out + offset, &value, 8);
+}
+
+void fill_stat64(std::uint8_t* out, std::uint32_t mode, std::uint64_t size) {
+    std::memset(out, 0, kStat64Size);
+    store_u32(out, 16, mode);                                    // st_mode
+    store_u32(out, 20, 1);                                       // st_nlink
+    store_u64(out, 44, size);                                    // st_size
+    store_u32(out, 52, 4096);                                    // st_blksize
+    store_u64(out, 56, (size + 511) / 512);                      // st_blocks
+    store_u64(out, 88, 1);                                       // st_ino
+}
 
 // Android's pid_max is 32768, and bionic's 32-bit pthread_mutex_t keeps the owner in a 16-bit
 // field, so a guest must never be told a pid above 65535 or libc refuses to lock a mutex at
@@ -165,6 +189,7 @@ const char* syscall_name(std::int32_t number) {
         case kFaccessat: return "faccessat";
         case kSetRobustList: return "set_robust_list";
         case kPrlimit64: return "prlimit64";
+        case kPread64: return "pread64";
         case kGetrandom: return "getrandom";
         case kGetppid: return "getppid";
         case kUgetrlimit: return "ugetrlimit";
@@ -186,6 +211,15 @@ const char* syscall_name(std::int32_t number) {
         case kArmNrSetTls: return "__ARM_NR_set_tls";
         default: return "unimplemented";
     }
+}
+
+std::string SyscallLayer::guest_string(std::uint32_t address) const {
+    if (address == 0) return {};
+    const std::uint8_t* p = mem_.host_ptr(address, 1, kPageRead);
+    if (p == nullptr) return {};
+    std::uint32_t length = 0;
+    while (length < 512 && p[length] != 0) ++length;
+    return std::string(reinterpret_cast<const char*>(p), length);
 }
 
 SyscallLayer::SyscallLayer(GuestMemory& memory, Cpu& cpu, const LoadedImage& image)
@@ -270,12 +304,35 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
         }
 
         case kRead: {
-            const int fd = static_cast<int>(reg(0));
+            const std::int32_t fd = static_cast<std::int32_t>(reg(0));
             const std::uint32_t buffer = reg(1);
             const std::uint32_t count = reg(2);
             std::uint8_t* host = mem_.host_ptr(buffer, count, kPageWrite);
             if (host == nullptr) return -EFAULT;
+            const auto it = files_.find(fd);
+            if (it != files_.end()) {
+                const ssize_t got = ::pread(it->second.host_fd, host, count, static_cast<off_t>(it->second.offset));
+                if (got < 0) return -errno;
+                it->second.offset += static_cast<std::uint64_t>(got);
+                return static_cast<std::int32_t>(got);
+            }
             const ssize_t got = ::read(fd, host, count);
+            return got < 0 ? -errno : static_cast<std::int32_t>(got);
+        }
+
+        case kPread64: {
+            const std::int32_t fd = static_cast<std::int32_t>(reg(0));
+            const std::uint32_t buffer = reg(1);
+            const std::uint32_t count = reg(2);
+            const std::uint32_t offset_low = reg(3);
+            const std::uint32_t offset_high = reg(4);
+            std::uint8_t* host = mem_.host_ptr(buffer, count, kPageWrite);
+            if (host == nullptr) return -EFAULT;
+            const auto it = files_.find(fd);
+            if (it == files_.end()) return -EBADF;
+            const std::uint64_t offset =
+                static_cast<std::uint64_t>(offset_low) | (static_cast<std::uint64_t>(offset_high) << 32);
+            const ssize_t got = ::pread(it->second.host_fd, host, count, static_cast<off_t>(offset));
             return got < 0 ? -errno : static_cast<std::int32_t>(got);
         }
 
@@ -561,28 +618,94 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
         }
 
         case kGetcwd: return -ENOENT;
-        case kOpen:
-        case kOpenat:
         case kAccess:
-        case kFaccessat:
-        case kStat64:
-        case kFstat64:
-        case kFstatat64: {
-            // fstat64 takes a descriptor and a stat buffer, not a path: tracing it as one printed
-            // the buffer's contents as a pathname.
-            if (number == kFstat64) return -ENOENT;
-            const std::uint32_t path = (number == kOpen || number == kAccess) ? reg(0) : reg(1);
-            std::string text = "?";
-            if (const std::uint8_t* p = mem_.host_ptr(path, 1, kPageRead)) {
-                std::uint32_t n = 0;
-                while (n < 512 && p[n] != 0) ++n;
-                text.assign(reinterpret_cast<const char*>(p), n);
-            }
+        case kFaccessat: {
+            const std::uint32_t path = number == kAccess ? reg(0) : reg(1);
+            const std::string text = guest_string(path);
+            if (vfs_ != nullptr && !vfs_->resolve(text).empty()) return 0;
             path_attempts_.push_back(std::string(syscall_name(number)) + "(" + text + ") -> -ENOENT");
             return -ENOENT;
         }
-        case kClose:
-        case kLseek:
+
+        case kOpen:
+        case kOpenat: {
+            const std::uint32_t path = number == kOpen ? reg(0) : reg(1);
+            const std::string text = guest_string(path);
+            if (vfs_ != nullptr) {
+                const std::string host_path = vfs_->resolve(text);
+                if (!host_path.empty()) {
+                    const int fd = ::open(host_path.c_str(), O_RDONLY | O_CLOEXEC);
+                    if (fd >= 0) {
+                        struct stat info {};
+                        ::fstat(fd, &info);
+                        OpenFile file;
+                        file.host_fd = fd;
+                        file.size = static_cast<std::uint64_t>(info.st_size);
+                        file.mode = 0100644;
+                        const std::int32_t guest_fd = next_fd_++;
+                        files_[guest_fd] = file;
+                        path_attempts_.push_back("open(" + text + ") -> fd " + std::to_string(guest_fd) +
+                                                 " (" + std::to_string(file.size) + " bytes)");
+                        return guest_fd;
+                    }
+                }
+            }
+            path_attempts_.push_back("open(" + text + ") -> -ENOENT");
+            return -ENOENT;
+        }
+
+        case kClose: {
+            const std::int32_t fd = static_cast<std::int32_t>(reg(0));
+            const auto it = files_.find(fd);
+            if (it == files_.end()) return -EBADF;
+            ::close(it->second.host_fd);
+            files_.erase(it);
+            return 0;
+        }
+
+        case kLseek: {
+            const std::int32_t fd = static_cast<std::int32_t>(reg(0));
+            const auto it = files_.find(fd);
+            if (it == files_.end()) return -EBADF;
+            const std::int32_t offset = static_cast<std::int32_t>(reg(1));
+            const int whence = static_cast<int>(reg(2));
+            const std::int64_t base = whence == SEEK_SET   ? 0
+                                      : whence == SEEK_CUR ? static_cast<std::int64_t>(it->second.offset)
+                                                           : static_cast<std::int64_t>(it->second.size);
+            const std::int64_t next = base + offset;
+            if (next < 0) return -EINVAL;
+            it->second.offset = static_cast<std::uint64_t>(next);
+            return static_cast<std::int32_t>(next);
+        }
+
+        case kFstat64: {
+            const std::int32_t fd = static_cast<std::int32_t>(reg(0));
+            const auto it = files_.find(fd);
+            if (it == files_.end()) return -EBADF;
+            std::uint8_t* out = mem_.host_ptr(reg(1), kStat64Size, kPageWrite);
+            if (out == nullptr) return -EFAULT;
+            fill_stat64(out, it->second.mode, it->second.size);
+            return 0;
+        }
+
+        case kStat64:
+        case kFstatat64: {
+            const std::uint32_t path = number == kStat64 ? reg(0) : reg(1);
+            const std::uint32_t out_address = number == kStat64 ? reg(1) : reg(2);
+            const std::string text = guest_string(path);
+            const std::string host_path = vfs_ != nullptr ? vfs_->resolve(text) : std::string();
+            if (host_path.empty()) {
+                path_attempts_.push_back("stat(" + text + ") -> -ENOENT");
+                return -ENOENT;
+            }
+            std::uint8_t* out = mem_.host_ptr(out_address, kStat64Size, kPageWrite);
+            if (out == nullptr) return -EFAULT;
+            struct stat info {};
+            ::stat(host_path.c_str(), &info);
+            fill_stat64(out, 0100644, static_cast<std::uint64_t>(info.st_size));
+            return 0;
+        }
+
         case kIoctl:
         case kDup:
         case kPoll:

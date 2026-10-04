@@ -10,9 +10,13 @@
 #include <string>
 #include <vector>
 
+#include <map>
+
 #include "dh2/guest_memory.hpp"
 
 namespace dh2 {
+
+class Vfs;
 
 class Cpu;
 struct LoadedImage;
@@ -43,8 +47,13 @@ public:
 
     void print_census(FILE* out) const;
 
+    // A read-only filesystem view. Without one every open is -ENOENT, which is what the engine
+    // ran into while loading its own content.
+    void set_filesystem(const Vfs* vfs) { vfs_ = vfs; }
+
 private:
     std::uint32_t& reg(std::size_t i);
+    std::string guest_string(std::uint32_t address) const;
 
     GuestMemory& mem_;
     Cpu& cpu_;
@@ -59,6 +68,16 @@ private:
     // Every path the guest tried to open, with the result. A missing filesystem shows up here
     // as a named path, which is how it should show up.
     std::vector<std::string> path_attempts_;
+
+    struct OpenFile {
+        int host_fd = -1;
+        std::uint64_t offset = 0;
+        std::uint64_t size = 0;
+        std::uint32_t mode = 0;
+    };
+    std::map<std::int32_t, OpenFile> files_;
+    std::int32_t next_fd_ = 3;
+    const Vfs* vfs_ = nullptr;
 
     std::int32_t dispatch(std::int32_t number);
 };
