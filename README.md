@@ -19,6 +19,41 @@ dumps, no `.pseudo.c` pseudocode, no from-scratch C++ engine sources).
 
 ---
 
+## The own host (`host/`) — no ZettaBridge at all
+
+Separately from the bridge above, [`host/`](host/) is a **from-scratch compatibility host** that
+runs the same original engine with **no ZettaBridge code and no `libzbridge.so`**
+(`git grep -il zettabridge -- host` is empty). Its only third-party component is Dynarmic, pinned
+and patched, where the T32 ARMv8 and arm64 halt-guard patch is ours.
+
+It loads and runs the shipping engine — SHA-256
+`36498eb8180ffb74759e6305e9596db999f18583d460f3b8534abcb6022f5e80`, from the released APK — with
+the game's own cache:
+
+```
+initializers : 545 completed
+nativeInit   : returned r0=0x00000001 after 13,103,112 instruction(s)
+nativeRender : returned r0=0x00000001 after 20,297,122 instruction(s)   (2nd frame)
+GL           : 104 calls into 43 imported entry points
+instructions : 34,345,838
+```
+
+It builds and passes its tests on three targets — x86_64 Linux, aarch64 Linux, and **Android
+arm64** (NDK r26d, static bionic, run under qemu) — the last two of which exercise Dynarmic's
+arm64 backend, the one the product actually uses.
+
+**All of this is off-device.** No phone was used, nothing is rendered (GL is answered, not
+implemented), and there is no audio, networking, second thread or timing model. Read
+[OWN-HOST-FINDINGS.md](docs/OWN-HOST-FINDINGS.md) for every measured number, the wall-by-wall
+debugging record, and an explicit list of what is *not* established.
+
+```
+host/scripts/reproduce.sh --arm64            # rebuild and re-measure everything
+host/scripts/build-android.sh --static --run # Android arm64, and run it under qemu
+```
+
+---
+
 ## Read this first: honest status
 
 **Playable gameplay is now demonstrated on the physical phone.** The DH2Work build
