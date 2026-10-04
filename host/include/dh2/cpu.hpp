@@ -72,6 +72,11 @@ public:
         watch_size_ = size;
     }
 
+    // Record the last 32 guest data accesses with the PC that made them. A stop then names the
+    // access that caused it even when the JIT's R15 writeback is a few instructions ahead.
+    void trace_accesses(bool on) { trace_accesses_ = on; }
+    void dump_accesses(FILE* out) const;
+
     std::uint64_t instruction_count() const { return ticks_; }
     std::uint64_t svc_count() const { return svcs_; }
     std::uint32_t thread_pointer() const { return cp15_->tpidruro(); }
@@ -113,6 +118,14 @@ private:
     std::uint32_t watch_base_ = 0;
     std::uint32_t watch_size_ = 0;
     int watch_trace_ = 0;
+    static constexpr std::size_t kAccessTrace = 32;
+    bool trace_accesses_ = false;
+    std::uint32_t access_pc_[kAccessTrace] = {};
+    std::uint32_t access_addr_[kAccessTrace] = {};
+    std::uint32_t access_size_[kAccessTrace] = {};
+    bool access_write_[kAccessTrace] = {};
+    bool access_ok_[kAccessTrace] = {};
+    std::size_t access_at_ = 0;
 };
 
 }  // namespace dh2

@@ -241,9 +241,42 @@ JNI call, so nothing caches an `env` and the slot `nativeInit` reads is not a va
 one. Seeding that slot with a host-built holder does not fix it, which means the slot is not the
 cached-env global the disassembly first suggests.
 
-The next step is therefore specific and measurable: find which function writes `engine+0x99c52c`
-(or whatever the real indirection is) and call that before `nativeInit` -- the same way
-`JNI_OnLoad` had to be called before anything else.
+### nativeInit runs, and the JNI surface it needs is now enumerated
+
+The indirection is a global reached through a GOT slot, and the access trace named the exact
+chain rather than the disassembly guess:
+
+```
+read 4 at 0xeff5f52c  ok        ; GOT slot engine+0x99952c
+read 4 at 0xeffbc518  ok        ; the cached JNIEnv global -- zero
+read 4 at 0x00000000  REFUSED
+```
+
+An earlier attempt seeded `engine+0x99c52c` and did nothing, because that word is initialised
+`.data` (it holds the constant `0x22422224`) and no relocation targets it. With the global the
+trace actually names seeded, `nativeInit` **runs to completion**:
+
+```
+nativeInit : returned (r0=0x00000000) after 326 instruction(s)
+JNI        : 26 native-interface call(s)
+     [ 21] NewGlobalRef      calls=1
+     [113] GetStaticMethodID calls=25
+```
+
+Those 25 lookups are the JNI surface, in call order, and `host/jni` records the names and
+signatures:
+
+| | |
+| --- | --- |
+| platform | `sendAppToBackground ()V`, `Exit ()V`, `openBrowser (Ljava/lang/String;)V`, `Get_PhoneLanguage ()I`, `Get_PhoneManufacturer ()I`, `Get_PhoneModel ()I`, `isWifiAlive ()I`, `isSupportMM ()I` |
+| rendering | `OpenGLive (I)V`, `OpenIGP (I)V` |
+| store/DRM | `unlockDemo ()I`, `lockDemo ()V`, `DisableLaunchGame ()I`, `IncreaseLaunchTimes ()V`, `NotifyTrophy (I)V` |
+| Gameloft Live | `VZIsInProgress ()I`, `VZIsErrorOcurred ()I`, `VZRequestLogin ()V`, `VZRequestPurchaseGame ()V`, `VZGetGamePrice ()[B`, `VZGetGameName ()[B`, `VZGetLastServerMsg ()[B`, `VZInitMobileNetwork ()V`, `VZIsMobileNetworkReady ()I`, `VZRestoreNetworkState ()V` |
+
+That is the whole Java side the engine needs, and most of it is answerable without a network or a
+store: "not in progress", "no error", "wifi is up", "manufacturer: Google", and so on. The next
+gate is to make those IDs real and implement the `CallStatic<Type>Method` slots so the engine can
+call them.
 
 ## 4. The custom Dynarmic
 

@@ -53,8 +53,12 @@ const char* JniBridge::slot_name(std::uint32_t index) const {
 }
 
 std::uint32_t JniBridge::write_table(std::uint32_t at, std::uint32_t svc_base, std::uint32_t slots) {
+    // The native table indexes the first kNativeSlots stubs, the invoke table the next
+    // kInvokeSlots. Deriving the offset by subtracting the SVC bases put every invoke entry 256
+    // stubs past the end of the block, i.e. into memory that was never written.
+    const std::uint32_t first = svc_base == kNativeSvcBase ? 0 : kNativeSlots;
     for (std::uint32_t i = 0; i < slots; ++i) {
-        const std::uint32_t address = stubs_ + (svc_base - kNativeSvcBase + i) * 8;
+        const std::uint32_t address = stubs_ + (first + i) * 8;
         if (!mem_.copy_in(at + i * 4, &address, 4)) return 0;
     }
     return at;
@@ -78,14 +82,20 @@ bool JniBridge::install(std::string& error) {
     std::memset(mem_.base() + data_, 0, kPageSize);
 
     // Every stub: ARM "svc #imm" then "bx lr", so a JNI call lands in guest code the host answers.
-    const std::uint32_t total = kNativeSlots + kInvokeSlots;
-    for (std::uint32_t i = 0; i < total; ++i) {
-        const std::uint32_t svc = 0xEF000000u | (kNativeSvcBase + i);
-        const std::uint32_t bx = 0xE12FFF1Eu;
-        const std::uint32_t body[2] = {svc, bx};
-        if (!mem_.copy_in(stubs_ + i * 8, body, sizeof body)) {
-            error = "cannot write a JNI stub";
-            return false;
+    // The native stubs occupy the first kNativeSlots slots and the invoke stubs the next
+    // kInvokeSlots, which is also how write_table() indexes them.
+    const std::uint32_t svc_bases[2] = {kNativeSvcBase, kInvokeSvcBase};
+    const std::uint32_t svc_counts[2] = {kNativeSlots, kInvokeSlots};
+    std::uint32_t stub_index = 0;
+    for (int table = 0; table < 2; ++table) {
+        for (std::uint32_t i = 0; i < svc_counts[table]; ++i, ++stub_index) {
+            const std::uint32_t svc = 0xEF000000u | (svc_bases[table] + i);
+            const std::uint32_t bx = 0xE12FFF1Eu;
+            const std::uint32_t body[2] = {svc, bx};
+            if (!mem_.copy_in(stubs_ + stub_index * 8, body, sizeof body)) {
+                error = "cannot write a JNI stub";
+                return false;
+            }
         }
     }
     if (!mem_.protect(stubs_, kPageSize, PROT_READ | PROT_EXEC)) {
@@ -109,6 +119,22 @@ bool JniBridge::install(std::string& error) {
         return false;
     }
     return true;
+}
+
+namespace {
+// A NUL-terminated guest string, bounded so a bad pointer cannot walk forever.
+std::string guest_string(GuestMemory& memory, std::uint32_t address) {
+    if (address == 0) return "(null)";
+    const std::uint8_t* p = memory.host_ptr(address, 1, kPageRead);
+    if (p == nullptr) return "(unreadable)";
+    std::uint32_t length = 0;
+    while (length < 256 && p[length] != 0) ++length;
+    return std::string(reinterpret_cast<const char*>(p), length);
+}
+}  // namespace
+
+void JniBridge::note(const std::string& text) {
+    if (requests_.size() < 128) requests_.push_back(text);
 }
 
 std::uint32_t JniBridge::env_holder() {
@@ -137,10 +163,23 @@ bool JniBridge::handle_svc(std::uint32_t swi) {
             case 4:  // GetVersion
                 regs[0] = 0x00010006u;  // JNI_VERSION_1_6
                 break;
-            case 6:  // FindClass: a real class registry does not exist yet, so a distinct,
-                   // non-null token is handed back and the call is recorded by name.
-                regs[0] = class_stub("(class)");
+            case 6: {  // FindClass(name)
+                const std::string name = guest_string(mem_, regs[1]);
+                note("FindClass(" + name + ")");
+                regs[0] = class_stub(name);
                 break;
+            }
+            case 33: {  // GetMethodID(clazz, name, sig)
+                note("GetMethodID(" + guest_string(mem_, regs[2]) + ", " + guest_string(mem_, regs[3]) + ")");
+                regs[0] = 0;
+                break;
+            }
+            case 113: {  // GetStaticMethodID(clazz, name, sig)
+                note("GetStaticMethodID(" + guest_string(mem_, regs[2]) + ", " +
+                     guest_string(mem_, regs[3]) + ")");
+                regs[0] = 0;
+                break;
+            }
             case 15:  // ExceptionOccurred
                 regs[0] = 0;
                 break;
@@ -202,6 +241,12 @@ void JniBridge::print_census(FILE* out) const {
         const char* name = slot_name(i);
         std::fprintf(out, "      [%3u] %-24s calls=%llu\n", i, name != nullptr ? name : "(unnamed)",
                      static_cast<unsigned long long>(native_calls_[i]));
+    }
+    if (!requests_.empty()) {
+        std::fprintf(out, "  JNI requests : %zu, in call order\n", requests_.size());
+        for (const std::string& request : requests_) {
+            std::fprintf(out, "      %s\n", request.c_str());
+        }
     }
     for (std::uint32_t i = 0; i < kInvokeSlots; ++i) {
         if (invoke_calls_[i] == 0) continue;

@@ -17,6 +17,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <string>
+#include <vector>
 
 #include "dh2/guest_memory.hpp"
 
@@ -44,6 +45,7 @@ public:
     bool handle_svc(std::uint32_t swi);
     void print_census(FILE* out) const;
     const char* slot_name(std::uint32_t index) const;
+    const std::vector<std::string>& requests() const { return requests_; }
 
 private:
     std::uint32_t write_table(std::uint32_t at, std::uint32_t svc_base, std::uint32_t slots);
@@ -62,6 +64,10 @@ private:
     std::uint64_t native_calls_[kNativeSlots] = {};
     std::uint64_t invoke_calls_[kInvokeSlots] = {};
     int class_counter_ = 0;
+    // Every class and method the engine asked for, in order. This is the JNI surface as the
+    // engine actually uses it, recorded rather than assumed.
+    std::vector<std::string> requests_;
+    void note(const std::string& text);
 };
 
 }  // namespace dh2

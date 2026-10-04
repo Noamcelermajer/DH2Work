@@ -434,20 +434,26 @@ int main(int argc, char** argv) {
             // because there is no ART. The host seeds that global with the JNIEnv it built: the
             // GOT entry at engine+0x99c52c holds the global's address after relocation, so this
             // reads the slot rather than guessing an offset.
+            // nativeInit reads its JNIEnv through a global, and the access trace names the exact
+            // chain: GOT slot engine+0x99952c -> 0xeffbc518 -> the env (zero). The GOT entry is
+            // relocated by our linker, so this reads the address of the global rather than
+            // guessing an offset. In the real process the engine's own JNI plumbing fills it;
+            // there is no ART here, so the host does, and says so.
             if (const dh2::LoadedImage* engine = &linker.modules().front()) {
-                const std::uint32_t got = engine->bias + 0x99c52c;
+                const std::uint32_t got = engine->bias + 0x99952c;
                 std::uint32_t global = 0;
                 if (memory.accessible(got, 4, dh2::kPageRead)) {
                     std::memcpy(&global, memory.base() + got, 4);
                 }
-                const std::uint32_t holder = jni.env_holder();
-                std::printf("  nativeInit   : cached-env slot 0x%08x holds 0x%08x; holder=0x%08x\n", got,
-                            global, holder);
-                if (holder != 0 && memory.store32(got, holder)) {
-                    std::uint32_t check = 0;
-                    std::memcpy(&check, memory.base() + got, 4);
-                    std::printf("  nativeInit   : slot now holds 0x%08x (a word holding the env)\n",
-                                check);
+                const std::uint32_t env_value = jni.env();
+                std::printf("  nativeInit   : cached-env chain GOT[0x%08x]=0x%08x -> global\n", got,
+                            global);
+                if (global != 0 && memory.accessible(global, 4, dh2::kPageWrite) &&
+                    memory.copy_in(global, &env_value, 4)) {
+                    std::printf("  nativeInit   : seeded the cached JNIEnv at 0x%08x = 0x%08x\n", global,
+                                env_value);
+                } else {
+                    std::printf("  nativeInit   : cannot seed the cached JNIEnv at 0x%08x\n", global);
                 }
             }
             std::printf("  nativeInit   : calling 0x%08x(clazz=0x%08x, 0)\n", native_init,
@@ -456,6 +462,7 @@ int main(int argc, char** argv) {
             const std::uint32_t args[4] = {jni.env(), 0, 0, 0};
             dh2::Stop stop;
             std::uint32_t result = 0;
+            cpu.trace_accesses(true);
             const std::uint64_t before = cpu.instruction_count();
             if (call(native_init, args, 2, result, stop)) {
                 std::printf("  nativeInit   : returned (r0=0x%08x) after %llu instruction(s)\n", result,
@@ -467,6 +474,7 @@ int main(int argc, char** argv) {
                             rr[15], rr[14], rr[0], rr[1], rr[2], rr[3]);
                 std::printf("      after %llu instruction(s)\n",
                             static_cast<unsigned long long>(cpu.instruction_count() - before));
+                cpu.dump_accesses(stdout);
             }
         }
     }

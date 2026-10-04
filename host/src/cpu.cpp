@@ -132,7 +132,26 @@ Stop Cpu::step() {
 
 void Cpu::halt(Dynarmic::HaltReason reason) { jit_->HaltExecution(reason); }
 
+void Cpu::dump_accesses(FILE* out) const {
+    std::fprintf(out, "  last %zu guest data access(es), oldest first:\n", kAccessTrace);
+    for (std::size_t k = 0; k < kAccessTrace; ++k) {
+        const std::size_t i = (access_at_ + k) % kAccessTrace;
+        if (access_size_[i] == 0) continue;
+        std::fprintf(out, "      pc=0x%08x %s %u byte(s) at 0x%08x %s\n", access_pc_[i],
+                     access_write_[i] ? "write" : "read ", access_size_[i], access_addr_[i],
+                     access_ok_[i] ? "ok" : "REFUSED");
+    }
+}
+
 bool Cpu::check_access(std::uint32_t vaddr, std::uint32_t len, std::uint8_t need, bool write) {
+    if (trace_accesses_) {
+        const std::size_t i = access_at_++ % kAccessTrace;
+        access_pc_[i] = jit_->Regs()[15];
+        access_addr_[i] = vaddr;
+        access_size_[i] = len;
+        access_write_[i] = write;
+        access_ok_[i] = mem_.accessible(vaddr, len, need);
+    }
     if (mem_.accessible(vaddr, len, need)) return true;
     // The first few refusals are traced verbatim: which access, how wide, which direction, and
     // the guest PC at the moment of the callback. This is the diagnostic that settles "the fault
