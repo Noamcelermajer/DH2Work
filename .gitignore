@@ -30,6 +30,9 @@ toolchains/
 # Downstream upstream checkout (ZettaBridge), restored locally per the build docs
 research/ZettaBridge/
 
+# Downstream upstream checkout (Dynarmic), fetched by host/scripts/fetch-dynarmic.sh
+third_party/dynarmic/
+
 # Python bytecode caches
 __pycache__/
 *.pyc

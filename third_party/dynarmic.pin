@@ -1,0 +1,7 @@
+# DH2Work's Dynarmic pin.
+#
+# Upstream at this commit is Vita3K/dynarmic's master tip, and it is the revision the project's
+# own analysis (docs/DYNARMIC-INDEPENDENCE.md) measured. DH2Work's own patches under
+# patches/dynarmic/ are applied on top by scripts/fetch-dynarmic.sh.
+repository=https://github.com/Vita3K/dynarmic
+commit=86458a0bd369d63ba4c2ef812cacbb6c9080c065
