@@ -401,3 +401,28 @@ So the honest position: the host now has everything it needs *structurally* to l
 its content -- loader, linker, TLS, loader interface, JNI, GL, filesystem -- and stops where the
 content itself would have to be real. Booting to gameplay off-device needs the cache supplied;
 everything up to that line is measured and committed.
+
+## 9. The arm64 product target
+
+Everything above was measured on x86_64, which is Dynarmic's *x64* backend. The product is arm64
+Android, so the host was cross-built for aarch64 (`aarch64-linux-gnu-g++`; the NDK's clang 21
+still rejects the tree's bundled fmt 10) and run under `qemu-aarch64-static`:
+
+```
+dh2selftest: 34 checks, 0 failures        (Dynarmic arm64 backend)
+
+hello        exit=0  hello arm32
+hello_thumb  exit=0  hello arm32
+args         exit=0  argc=3 argv1=alpha argv2=beta
+vfp          exit=0  sum=0x40c00000 product=0x410c0000 less=1 equal=0
+exclusive    exit=0  swapped=1 value=2 refused=1
+memory       exit=0  mapped=1 first=0x0000005a last=0x000000a5 munmap=0 brk=1
+armv8_t32    exit=0  ldab=0x00000022 ldah=0x00003344 ldaex=0x55667788 stlb=0x0000007f
+                     stlex_bare=1 stlex=0 value=0xdeadbeef
+bionic       exit=0  hello arm32
+```
+
+The `armv8_t32` line matters most. Those T32 ARMv8 instructions are the ones our own Dynarmic
+patch adds, and they were verified on x64. Passing here means the patch is exercised on the
+**arm64 backend** -- the one the product uses -- and the halt-guard hunk, which only compiles on
+arm64, is now part of a binary that runs and passes its tests.
