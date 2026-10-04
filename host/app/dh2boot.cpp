@@ -11,6 +11,7 @@
 #include <sys/mman.h>
 
 #include <sys/random.h>
+#include <unistd.h>
 
 #include <algorithm>
 #include <cinttypes>
@@ -149,39 +150,65 @@ int main(int argc, char** argv) {
     // [TP-4], so the thread pointer must be a real pthread_internal_t positioned at the end of
     // the static TLS block, and it has to exist before the first guest instruction.
     const std::uint32_t tls_total = linker.static_tls_size();
-    const std::uint32_t control_size = dh2::page_round_up(tls_total + 0x2A0);
-    if (!memory.map_anon(kStackTop, control_size, PROT_READ | PROT_WRITE)) {
+    // Two pages: the TLS block itself, and immediately above it the reserved flag word bionic's
+    // interface uses to tell libc that the linker has set the process up.
+    if (!memory.map_anon(kStackTop, 2 * dh2::kPageSize, PROT_READ | PROT_WRITE)) {
         std::fprintf(stderr, "dh2boot: cannot map the TLS control block\n");
         return 2;
     }
     const std::uint32_t tp = kStackTop + tls_total;
+
+    // bionic's slot numbering on ARM32 is slot N at [TP + 4N]:
+    //   slot 0 TLS_SLOT_SELF          -> &tls[0], i.e. TP itself
+    //   slot 1 TLS_SLOT_THREAD_ID     -> the pthread_internal_t
+    //   slot 2 TLS_SLOT_ERRNO         -> errno lives *in* the slot, so it stays zero
+    //   slot 5 TLS_SLOT_STACK_GUARD   -> the canary the linker is expected to have written
+    //                                  ("The linker ... filled in the main thread's TLS slot
+    //                                   with that value", libc_init_dynamic.cpp)
+    //
+    // Slot 1 is the one that matters here. It must point at a *separate* pthread_internal_t,
+    // not at the TLS block: bionic's main-thread registration writes the thread-list pointers
+    // into that structure, and while slot 1 pointed at TP those two words landed on tls[0] and
+    // tls[1] and wiped them -- after which __get_thread() read zero and the next dereference
+    // faulted at 0x8.
+    const std::uint32_t thread = kStackTop + dh2::kPageSize;
     const std::uint32_t self = tp;
-    memory.copy_in(tp, &self, 4);
-    memory.copy_in(tp + 4, &self, 4);
     const std::uint32_t zero = 0;
+    memory.copy_in(tp + 4 * 0, &self, 4);
+    memory.copy_in(tp + 4 * 1, &thread, 4);
+    memory.copy_in(tp + 4 * 2, &zero, 4);
     memory.copy_in(tp + 0x29C, &zero, 4);
-    // bionic's first initializer is __libc_preinit, and its first act is
-    //   __stack_chk_guard = __get_tls()[TLS_SLOT_STACK_GUARD];
-    // with TLS_SLOT_STACK_GUARD == 5, i.e. [TP + 0x14]. The comment on that line says the
-    // *linker* filled the slot in, so the host has to: leaving it zero is what made libc.so's
-    // first initializer read address 0x8 and stop.
+    // [TP-4] is a second, independent path to the same thread structure. libc.so's
+    // __libc_preinit_impl ends with
+    //     mrc  p15,0,r0,c13,c0,3     ; r0 = TP
+    //     ldr  r0,[r0,#-4]           ; r0 = *(TP-4)
+    //     strb r5,[r0,#0xb49]        ; ((char*)r0)[0xb49] = 1
+    // so leaving the word below the thread pointer zero makes that store land at 0xb49.
+    memory.copy_in(tp - 4, &thread, 4);
+
     std::uint32_t canary = 0;
     if (getrandom(&canary, sizeof canary, 0) != static_cast<ssize_t>(sizeof canary)) {
-        canary = static_cast<std::uint32_t>(tp) ^ 0x5bf03635u;  // never zero
+        canary = static_cast<std::uint32_t>(tp) ^ 0x5bf03635u;
     }
     if (canary == 0) canary = 0x5bf03635u;
-    memory.copy_in(tp + 0x14, &canary, 4);
+    memory.copy_in(tp + 4 * 5, &canary, 4);
     cpu.cp15().set_tpidruro(tp);
     cpu.watch(tp, 0x20);
     memory.watch(tp, 0x20);
+
+    // The pthread_internal_t itself: thread list pointers clear, a tid, main-thread flag.
+    const std::uint32_t main_pid = 1 + (static_cast<std::uint32_t>(::getpid()) % 30000u);
+    memory.copy_in(thread + 0x00, &zero, 4);
+    memory.copy_in(thread + 0x04, &zero, 4);
+    memory.copy_in(thread + 0x08, &main_pid, 4);
     {
-      std::uint32_t check_self = 0, check_id = 0;
-      std::memcpy(&check_self, memory.base() + tp, 4);
-      std::memcpy(&check_id, memory.base() + tp + 4, 4);
-      std::printf("  thread       : static TLS %u bytes, TP=0x%08x readback [TP]=0x%08x [TP+4]=0x%08x "
-                  "stack_guard=0x%08x\n",
-                  tls_total, tp, check_self, check_id, canary);
-  }
+        const std::uint32_t one = 1;
+        memory.copy_in(thread + 0x0C, &one, 4);
+    }
+
+    std::printf("  thread       : static TLS %u bytes, TP=0x%08x [TP]=0x%08x [TP+4]=0x%08x "
+                "(pthread_internal_t @0x%08x, tid=%u) stack_guard=0x%08x\n",
+                tls_total, tp, self, thread, thread, main_pid, canary);
 
     // The kuser helper page: legacy bionic paths still call it.
     if (memory.map_anon(kKuserPage, dh2::kPageSize, PROT_READ | PROT_WRITE)) {

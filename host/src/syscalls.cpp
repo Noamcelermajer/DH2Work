@@ -461,6 +461,8 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
             return -ENOSYS;
         }
 
+        case kRtSigprocmask: return 0;
+        case kRtSigaction: return 0;
         case kGetppid: return 1;
         case kPersonality:
             // bionic reads the personality (clearing ADDR_NO_RANDOMIZE for a child thread) and

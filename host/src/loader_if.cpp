@@ -120,11 +120,15 @@ bool LoaderInterface::install(std::uint32_t argc, const std::vector<std::string>
 
     // libc_shared_globals: only the fields a reached path reads are filled, and the rest stays
     // zero. Offsets are the ones measured by scanning libc.so's own call sites.
+    // The block is allocated and left zero apart from the two fields whose meaning is verified
+    // against this host's own libc.so below. The earlier attempt also wrote +0x51C (profile flag)
+    // and +0x520 (mmap threshold) from a documented offset table, and that table does not match
+    // this sysroot's libc.so: getenv read the environment pointer from +0x520, found the
+    // threshold 0x20000 we had written there, and faulted dereferencing it. Offsets are only
+    // written here once this binary has been shown to use them.
     std::memset(mem_.base() + globals_, 0, kGlobalsSize);
     write32(globals_ + 0x410, argc);
     write32(globals_ + 0x414, auxv_);
-    write32(globals_ + 0x51C, 0);
-    write32(globals_ + 0x520, 0x20000);  // bionic's mmap threshold for a 4 KiB page
     if (!argv.empty()) {
         const std::uint32_t name = place_string(argv.front());
         write32(globals_ + 0x554, name);
