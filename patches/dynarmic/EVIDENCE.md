@@ -185,12 +185,41 @@ Thumb state and asserts `ExceptionRaised(pc, Exception::UndefinedInstruction)`, 
 other exception, no interpreter fallback and no SVC. Every added encoding therefore takes
 the `thumb32_UDF()` path on the pinned revision.
 
-## 7. The arm64 halt-guard hunk was not independently compiled here
+## 7. The arm64 halt-guard hunk: compiled, in the arm64 backend
 
 The guard change is in the **arm64** backend
-(`src/dynarmic/backend/arm64/a32_address_space.cpp`), which the required x86_64 build
-does not compile. Two attempts to compile that backend on this machine failed for reasons
-unrelated to the patch:
+(`src/dynarmic/backend/arm64/a32_address_space.cpp`), which the required x86_64 build does
+not compile. It has since been compiled for aarch64 through the project's documented
+cross route (Linux aarch64, not the NDK -- see the note on the NDK below). Boost is
+header-only for Dynarmic's use (`boost/icl/interval_map.hpp`), and the host Boost headers
+have to be staged outside `/usr/include` because CMake drops an implicit `/usr/include`
+from a cross build's include path and the NDK sysroot carries no Boost:
+
+```
+$ mkdir -p /tmp/dh2boost && cp -r /usr/include/boost /tmp/dh2boost/
+$ cmake -S ~/dh2/dynarmic-patched -B ~/dh2/build-arm64c -G Ninja \
+    -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=aarch64 \
+    -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DDYNARMIC_USE_BUNDLED_EXTERNALS=ON -DDYNARMIC_TESTS=OFF \
+    -DDYNARMIC_WARNINGS_AS_ERRORS=OFF -DDYNARMIC_USE_PRECOMPILED_HEADERS=OFF \
+    -DBoost_NO_SYSTEM_PATHS=ON -DBoost_INCLUDE_DIR=/tmp/dh2boost -DBoost_NO_BOOST_CMAKE=ON
+  -- Target architecture: arm64
+  -- Found Boost: /tmp/dh2boost (found suitable version "1.74.0", minimum required is "1.57")
+$ cmake --build ~/dh2/build-arm64c -j 12
+  [192/192] Linking CXX static library src/dynarmic/libdynarmic.a
+  ARM64_EXIT=0
+  -rw-r--r-- 412789690 build-arm64c/src/dynarmic/libdynarmic.a
+  -rw-r--r--  3042608 build-arm64c/.../backend/arm64/a32_address_space.cpp.o
+```
+
+The translation unit that carries the guard compiled, and the whole arm64 backend links
+into `libdynarmic.a`. What remains unverified is the guard's *behaviour*: proving it needs
+a guest that takes a memory abort in the middle of a block with a translated guest
+register write still pending, which is a host test rather than a test of this patch.
+
+Two earlier attempts failed for reasons unrelated to the patch, and they are recorded
+because they are what the next person will hit:
 
 * `-DARCHITECTURE=arm64` with the host x86_64 compiler configures
   (`-- Target architecture: arm64`) but cannot compile oaknut's inline aarch64 assembly
@@ -203,11 +232,11 @@ unrelated to the patch:
   `boost/container_hash/hash.hpp` because the host Boost uses `std::unary_function`,
   which the NDK libc++ removes at C++20.
 
-The hunk itself only extends an `if` condition with `&& !conf.check_halt_on_memory_access`;
-the identical condition is compiled by the x86_64 build in
-`backend/x64/a32_interface.cpp`, and the A64 arm64 backend
-(`backend/arm64/a64_address_space.cpp`) carries it verbatim. It could not be verified
-beyond that on this machine.
+The NDK r29 toolchain also rejects the tree's **bundled fmt 10** at C++20
+(`call to consteval function ... is not a constant expression` in `fmt/format-inl.h`),
+which is why the cross build above uses GCC 11 instead of the NDK's clang 21. That is a
+toolchain-version problem, not a property of this patch; it is worth knowing before anyone
+tries to build the arm64 product target with an NDK this new.
 
 ## 8. Also not verified
 

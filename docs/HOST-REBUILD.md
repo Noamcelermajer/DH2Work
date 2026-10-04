@@ -135,8 +135,10 @@ Nothing below is claimed to work, and each is a named next step rather than a su
   case rather than blocking; a queued signal is acknowledged, not delivered.
 * **The filesystem.** `open`/`stat`/`readlink` return `-ENOENT`.
 * **JNI, GL/EGL marshalling, the Android lifecycle, ART.** Not started.
-* **The arm64 product target.** Everything here was built and run on x86_64 Linux (Dynarmic's x64
-  backend) off-device. The arm64 backend builds but has not been exercised by this tree yet.
+* **The arm64 product target.** The host in this tree was built and run on x86_64 Linux
+  (Dynarmic's x64 backend) off-device. The *patched Dynarmic*'s arm64 backend has since been
+  cross-compiled for aarch64 successfully, including the translation unit that carries the
+  halt guard; the host itself has not been cross-built, and no arm64 result has been executed.
 * **fastmem and `PreCodeReadHook`.** Deliberately not started; the roadmap says measure the first
   before building it.
 * **The two documented debts the old tree still carried** — `region_containing`'s unexplained
