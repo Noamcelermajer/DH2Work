@@ -10,6 +10,7 @@
 #include <elf.h>
 #include <sys/mman.h>
 
+#include <csignal>
 #include <unistd.h>
 
 #include <algorithm>
@@ -49,6 +50,10 @@ std::uint32_t interpose(void* context, const std::string& name) {
 }  // namespace
 
 int main(int argc, char** argv) {
+    // A guest that writes to a socket whose connection failed must get an error code, not a
+    // signal: without this, one failed connect (the engine tries Gameloft Live) killed the whole
+    // host with SIGPIPE the moment it next wrote.
+    std::signal(SIGPIPE, SIG_IGN);
     std::vector<std::string> search_paths;
     std::vector<std::string> roots;
     bool stubs = false;
@@ -57,6 +62,7 @@ int main(int argc, char** argv) {
     bool root_first = false;
     bool trace_steps = false;
     int frames = 1;
+    int io_trace_limit = 60;
     std::vector<std::string> search_roots;
     std::uint64_t max_instructions = 0;
 
@@ -76,6 +82,8 @@ int main(int argc, char** argv) {
             trace_steps = true;
         } else if (arg == "--frames" && i + 1 < argc) {
             frames = std::atoi(argv[++i]);
+        } else if (arg == "--io-trace" && i + 1 < argc) {
+            io_trace_limit = std::atoi(argv[++i]);
         } else if (arg == "--root" && i + 1 < argc) {
             search_roots.push_back(argv[++i]);
         } else if (arg == "--max-instructions" && i + 1 < argc) {
@@ -295,6 +303,7 @@ int main(int argc, char** argv) {
 
     dh2::SyscallLayer syscalls(memory, cpu, linker.modules().front());
     syscalls.set_filesystem(&vfs);
+    syscalls.set_io_trace_limit(io_trace_limit);
     if (!search_roots.empty()) std::printf("  filesystem   : %zu root(s)\n", search_roots.size());
 
     // The last executed PCs, so a fault can name the instruction that caused it rather than the

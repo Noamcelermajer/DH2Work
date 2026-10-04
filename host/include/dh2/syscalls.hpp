@@ -80,6 +80,10 @@ private:
     std::int32_t next_fd_ = 3;
     std::uint64_t file_maps_ = 0;
     mutable int io_trace_ = 0;
+    int io_trace_limit_ = 60;
+public:
+    // How many file reads and seeks to log before going quiet. 0 logs none.
+    void set_io_trace_limit(int limit) { io_trace_limit_ = limit; }
     const Vfs* vfs_ = nullptr;
 
     std::int32_t dispatch(std::int32_t number);

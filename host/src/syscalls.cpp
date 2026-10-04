@@ -88,6 +88,7 @@ enum : std::int32_t {
     kClockGettime = 263,
     kClockGettime64 = 403,
     kOpenat = 322,
+    kConnect = 283,
     kLlseek = 140,
     kFstatat64 = 327,
     kReadlinkat = 332,
@@ -191,6 +192,7 @@ const char* syscall_name(std::int32_t number) {
         case kFaccessat: return "faccessat";
         case kSetRobustList: return "set_robust_list";
         case kPrlimit64: return "prlimit64";
+        case kConnect: return "connect";
         case kLlseek: return "_llseek";
         case kPread64: return "pread64";
         case kGetrandom: return "getrandom";
@@ -329,7 +331,7 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
             const auto it = files_.find(fd);
             if (it != files_.end()) {
                 const ssize_t got = ::pread(it->second.host_fd, host, count, static_cast<off_t>(it->second.offset));
-                if (io_trace_ < 60) {
+                if (io_trace_ < io_trace_limit_) {
                     ++io_trace_;
                     std::fprintf(stderr, "dh2: read fd=%d off=0x%llx want=%u got=%zd\n", fd,
                                  static_cast<unsigned long long>(it->second.offset), count, got);
@@ -718,7 +720,7 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
             const std::int64_t next = base + delta;
             if (next < 0) return -EINVAL;
             it->second.offset = static_cast<std::uint64_t>(next);
-            if (io_trace_ < 60) {
+            if (io_trace_ < io_trace_limit_) {
                 ++io_trace_;
                 std::fprintf(stderr, "dh2: _llseek fd=%d whence=%u -> 0x%llx\n", fd, whence,
                              static_cast<unsigned long long>(next));
@@ -772,6 +774,12 @@ std::int32_t SyscallLayer::dispatch(std::int32_t number) {
             fill_stat64(out, 0100644, static_cast<std::uint64_t>(info.st_size));
             return 0;
         }
+
+        case kConnect:
+            // Gameloft Live. There is no server and no route; a device would report the
+            // connection refused, and the engine's network state machine handles that. ENOSYS
+            // was worse: it left the socket open and the next write raised SIGPIPE.
+            return -ECONNREFUSED;
 
         case kIoctl:
         case kDup:
