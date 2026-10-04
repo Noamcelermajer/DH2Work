@@ -56,6 +56,7 @@ int main(int argc, char** argv) {
     bool deps_first = false;
     bool root_first = false;
     bool trace_steps = false;
+    int frames = 1;
     std::vector<std::string> search_roots;
     std::uint64_t max_instructions = 0;
 
@@ -73,6 +74,8 @@ int main(int argc, char** argv) {
             root_first = true;
         } else if (arg == "--trace-steps") {
             trace_steps = true;
+        } else if (arg == "--frames" && i + 1 < argc) {
+            frames = std::atoi(argv[++i]);
         } else if (arg == "--root" && i + 1 < argc) {
             search_roots.push_back(argv[++i]);
         } else if (arg == "--max-instructions" && i + 1 < argc) {
@@ -253,6 +256,30 @@ int main(int argc, char** argv) {
     if (!jni.install(error)) {
         std::fprintf(stderr, "dh2boot: %s\n", error.c_str());
         return 2;
+    }
+
+    // Every one of the engine's JNI natives reads its JNIEnv from a global that the engine's own
+    // JNI plumbing would have cached. There is no ART here, so the host seeds it -- and it has to
+    // happen before *any* engine code runs. Seeding it only before the Activity's nativeInit left
+    // the renderer's natives (nativeGet_PhoneManufacturer and friends) reading a null env.
+    //
+    // The access trace named the chain rather than a guess: GOT slot engine+0x99952c -> the global
+    // -> the env. The GOT entry is relocated by our linker, so this reads the address of the
+    // global instead of hard-coding an offset into .bss.
+    if (const dh2::LoadedImage* engine_image = &linker.modules().front()) {
+        const std::uint32_t got = engine_image->bias + 0x99952c;
+        std::uint32_t global = 0;
+        if (memory.accessible(got, 4, dh2::kPageRead)) {
+            std::memcpy(&global, memory.base() + got, 4);
+        }
+        const std::uint32_t env_value = jni.env();
+        if (global != 0 && memory.accessible(global, 4, dh2::kPageWrite) &&
+            memory.copy_in(global, &env_value, 4)) {
+            std::printf("  JNI          : cached JNIEnv seeded at 0x%08x = 0x%08x\n", global, env_value);
+        } else {
+            std::printf("  JNI          : cannot seed the cached JNIEnv (GOT[0x%08x]=0x%08x)\n", got,
+                        global);
+        }
     }
 
     dh2::GlBridge gl(memory, cpu);
@@ -457,6 +484,9 @@ int main(int argc, char** argv) {
             {"nativeInit", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeInit", 1, 0, 0},
             {"nativeResize", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeResize", 2, 1080, 1920},
             {"nativeRender", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeRender", 0, 0, 0},
+            // nativeRender is called once per frame by onDrawFrame, so the loop is what a running
+            // game does; a single frame would not show a loop that fails on its second pass.
+            {"nativeRender", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeRender", 0, 0, 0},
         };
         // Re-read the ctype pointer at this point: it was correct after linking, and the engine
         // dereferences it inside GameRenderer.nativeInit. When it becomes zero says as much as
@@ -537,31 +567,7 @@ int main(int argc, char** argv) {
             //     ldr r3, [r3]         ; r3 = env->functions
             //     ldr pc, [r3, #0x54]  ; call slot 21
             // so it uses an env the JNI plumbing is expected to have cached already. Nothing has,
-            // because there is no ART. The host seeds that global with the JNIEnv it built: the
-            // GOT entry at engine+0x99c52c holds the global's address after relocation, so this
-            // reads the slot rather than guessing an offset.
-            // nativeInit reads its JNIEnv through a global, and the access trace names the exact
-            // chain: GOT slot engine+0x99952c -> 0xeffbc518 -> the env (zero). The GOT entry is
-            // relocated by our linker, so this reads the address of the global rather than
-            // guessing an offset. In the real process the engine's own JNI plumbing fills it;
-            // there is no ART here, so the host does, and says so.
-            if (const dh2::LoadedImage* engine = &linker.modules().front()) {
-                const std::uint32_t got = engine->bias + 0x99952c;
-                std::uint32_t global = 0;
-                if (memory.accessible(got, 4, dh2::kPageRead)) {
-                    std::memcpy(&global, memory.base() + got, 4);
-                }
-                const std::uint32_t env_value = jni.env();
-                std::printf("  nativeInit   : cached-env chain GOT[0x%08x]=0x%08x -> global\n", got,
-                            global);
-                if (global != 0 && memory.accessible(global, 4, dh2::kPageWrite) &&
-                    memory.copy_in(global, &env_value, 4)) {
-                    std::printf("  nativeInit   : seeded the cached JNIEnv at 0x%08x = 0x%08x\n", global,
-                                env_value);
-                } else {
-                    std::printf("  nativeInit   : cannot seed the cached JNIEnv at 0x%08x\n", global);
-                }
-            }
+            // The cached JNIEnv this reads was seeded before any engine code ran.
             std::printf("  nativeInit   : calling 0x%08x(clazz=0x%08x, 0)\n", native_init,
                         jni.env());
             std::fflush(stdout);
