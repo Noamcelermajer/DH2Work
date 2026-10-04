@@ -187,7 +187,7 @@ std::uint64_t Cpu::MemoryRead64(std::uint32_t vaddr) {
 }
 
 void Cpu::MemoryWrite8(std::uint32_t vaddr, std::uint8_t value) {
-    if (watch_size_ != 0 && vaddr >= watch_base_ && vaddr < watch_base_ + watch_size_ && watch_trace_ < 24) {
+    if (watch_trace_ < 24 && watched(vaddr)) {
         ++watch_trace_;
         std::fprintf(stderr, "dh2: watch write8 [0x%08x]=0x%02x from pc 0x%08x\n", vaddr, value,
                      jit_->Regs()[15]);
@@ -196,7 +196,7 @@ void Cpu::MemoryWrite8(std::uint32_t vaddr, std::uint8_t value) {
 }
 
 void Cpu::MemoryWrite16(std::uint32_t vaddr, std::uint16_t value) {
-    if (watch_size_ != 0 && vaddr >= watch_base_ && vaddr < watch_base_ + watch_size_ && watch_trace_ < 24) {
+    if (watch_trace_ < 24 && watched(vaddr)) {
         ++watch_trace_;
         std::fprintf(stderr, "dh2: watch write16 [0x%08x]=0x%04x from pc 0x%08x\n", vaddr, value,
                      jit_->Regs()[15]);
@@ -205,7 +205,7 @@ void Cpu::MemoryWrite16(std::uint32_t vaddr, std::uint16_t value) {
 }
 
 void Cpu::MemoryWrite32(std::uint32_t vaddr, std::uint32_t value) {
-    if (watch_size_ != 0 && vaddr >= watch_base_ && vaddr < watch_base_ + watch_size_ && watch_trace_ < 24) {
+    if (watch_trace_ < 24 && watched(vaddr)) {
         ++watch_trace_;
         std::fprintf(stderr, "dh2: watch write32 [0x%08x]=0x%08x from pc 0x%08x\n", vaddr, value,
                      jit_->Regs()[15]);
@@ -214,7 +214,7 @@ void Cpu::MemoryWrite32(std::uint32_t vaddr, std::uint32_t value) {
 }
 
 void Cpu::MemoryWrite64(std::uint32_t vaddr, std::uint64_t value) {
-    if (watch_size_ != 0 && vaddr >= watch_base_ && vaddr < watch_base_ + watch_size_ && watch_trace_ < 24) {
+    if (watch_trace_ < 24 && watched(vaddr)) {
         ++watch_trace_;
         std::fprintf(stderr, "dh2: watch write64 [0x%08x]=0x%016llx from pc 0x%08x\n", vaddr,
                      static_cast<unsigned long long>(value), jit_->Regs()[15]);
@@ -223,6 +223,11 @@ void Cpu::MemoryWrite64(std::uint32_t vaddr, std::uint64_t value) {
 }
 
 bool Cpu::MemoryWriteExclusive8(std::uint32_t vaddr, std::uint8_t value, std::uint8_t expected) {
+    if (watch_trace_ < 24 && watched(vaddr)) {
+        ++watch_trace_;
+        std::fprintf(stderr, "dh2: watch writeexcl8 [0x%08x]=0x%02x from pc 0x%08x\n", vaddr, value,
+                     jit_->Regs()[15]);
+    }
     if (!check_access(vaddr, 1, static_cast<std::uint8_t>(kPageRead | kPageWrite), true)) return false;
     if (mem_.base()[vaddr] != expected) return false;
     mem_.base()[vaddr] = value;
@@ -230,6 +235,11 @@ bool Cpu::MemoryWriteExclusive8(std::uint32_t vaddr, std::uint8_t value, std::ui
 }
 
 bool Cpu::MemoryWriteExclusive16(std::uint32_t vaddr, std::uint16_t value, std::uint16_t expected) {
+    if (watch_trace_ < 24 && watched(vaddr)) {
+        ++watch_trace_;
+        std::fprintf(stderr, "dh2: watch writeexcl16 [0x%08x]=0x%04x from pc 0x%08x\n", vaddr, value,
+                     jit_->Regs()[15]);
+    }
     if (!check_access(vaddr, 2, static_cast<std::uint8_t>(kPageRead | kPageWrite), true)) return false;
     if (load_le<std::uint16_t>(mem_.base() + vaddr) != expected) return false;
     store_le<std::uint16_t>(mem_.base() + vaddr, value);
@@ -237,6 +247,11 @@ bool Cpu::MemoryWriteExclusive16(std::uint32_t vaddr, std::uint16_t value, std::
 }
 
 bool Cpu::MemoryWriteExclusive32(std::uint32_t vaddr, std::uint32_t value, std::uint32_t expected) {
+    if (watch_trace_ < 24 && watched(vaddr)) {
+        ++watch_trace_;
+        std::fprintf(stderr, "dh2: watch writeexcl32 [0x%08x]=0x%08x from pc 0x%08x\n", vaddr, value,
+                     jit_->Regs()[15]);
+    }
     if (!check_access(vaddr, 4, static_cast<std::uint8_t>(kPageRead | kPageWrite), true)) return false;
     if (load_le<std::uint32_t>(mem_.base() + vaddr) != expected) return false;
     store_le<std::uint32_t>(mem_.base() + vaddr, value);
@@ -244,6 +259,11 @@ bool Cpu::MemoryWriteExclusive32(std::uint32_t vaddr, std::uint32_t value, std::
 }
 
 bool Cpu::MemoryWriteExclusive64(std::uint32_t vaddr, std::uint64_t value, std::uint64_t expected) {
+    if (watch_trace_ < 24 && watched(vaddr)) {
+        ++watch_trace_;
+        std::fprintf(stderr, "dh2: watch writeexcl64 [0x%08x]=0x%016llx from pc 0x%08x\n", vaddr,
+                     static_cast<unsigned long long>(value), jit_->Regs()[15]);
+    }
     if (!check_access(vaddr, 8, static_cast<std::uint8_t>(kPageRead | kPageWrite), true)) return false;
     if (load_le<std::uint64_t>(mem_.base() + vaddr) != expected) return false;
     store_le<std::uint64_t>(mem_.base() + vaddr, value);

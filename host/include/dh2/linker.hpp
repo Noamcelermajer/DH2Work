@@ -18,6 +18,10 @@
 
 namespace dh2 {
 
+// The SVC immediate range the generated GL/EGL stubs use, disjoint from the loader interface
+// (0x100+) and the JNI tables (0x200+, 0x300+).
+inline constexpr std::uint32_t kStubSvcBase = 0x400;
+
 struct RelocationCensus {
     std::uint64_t relative = 0;
     std::uint64_t abs32 = 0;
@@ -76,6 +80,8 @@ public:
     std::uint32_t find_symbol(const std::string& name) const;
     const std::vector<LoadedImage>& modules() const { return modules_; }
     std::uint32_t stub_page() const { return stub_base_; }
+    std::size_t stub_count() const { return stub_names_.size(); }
+    const std::string& stub_name(std::size_t index) const { return stub_names_[index]; }
     // Total static TLS, rounded so a thread pointer placed at its end is 16-byte aligned.
     std::uint32_t static_tls_size() const { return tls_total_; }
 
@@ -103,6 +109,7 @@ private:
     std::map<std::string, std::size_t> loaded_by_name_;
     std::map<std::string, std::vector<Definition>> index_;
     std::map<std::string, std::uint32_t> stubs_;
+    std::vector<std::string> stub_names_;
     // Static TLS is laid out once, below the thread pointer: module blocks are placed
     // consecutively and tls_total_ is the distance from the highest block to the thread pointer.
     std::vector<std::uint32_t> tls_offsets_;

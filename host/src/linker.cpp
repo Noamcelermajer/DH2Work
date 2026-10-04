@@ -89,8 +89,13 @@ std::uint32_t GuestLinker::stub_for(const std::string& name) {
     }
     if (stub_next_ + 8 > kPageSize) return 0;
     const std::uint32_t address = stub_base_ + stub_next_;
-    const std::uint32_t body[2] = {0xE3A00000u, 0xE12FFF1Eu};  // mov r0, #0 ; bx lr
+    // "svc #(0x400 + index) ; bx lr". The host answers by name, which is what turns 92 blind
+    // imports into a marshalling table: every GL and EGL entry point the engine imports lands
+    // here, and the SVC immediate says which one it is.
+    const std::uint32_t svc = 0xEF000000u | (kStubSvcBase + static_cast<std::uint32_t>(stub_names_.size()));
+    const std::uint32_t body[2] = {svc, 0xE12FFF1Eu};
     if (!mem_.copy_in(address, body, sizeof body)) return 0;
+    stub_names_.push_back(name);
     stub_next_ += 8;
     stubs_[name] = address;
     return address;

@@ -86,6 +86,7 @@ bool GuestMemory::copy_in(std::uint32_t addr, const void* src, std::uint64_t len
 
 bool GuestMemory::protect(std::uint32_t addr, std::uint64_t len, int prot) {
     len = page_round_up(len);
+    note_overlap("protect", addr, len);
     if (!ok() || !range_valid(addr, len) || !accessible(addr, len, 0)) return false;
     if (mprotect(base_ + addr, len, host_prot(prot)) != 0) return false;
     set_flags(addr, len, flags_from_prot(prot));
@@ -163,12 +164,14 @@ bool GuestMemory::accessible(std::uint32_t addr, std::uint64_t len, std::uint8_t
 }
 
 void GuestMemory::note_overlap(const char* what, std::uint32_t addr, std::uint64_t len) const {
-    if (watch_size_ == 0) return;
     const std::uint64_t a = addr, b = static_cast<std::uint64_t>(addr) + len;
-    const std::uint64_t w = watch_base_, x = static_cast<std::uint64_t>(watch_base_) + watch_size_;
-    if (a < x && w < b) {
-        std::fprintf(stderr, "dh2: %s 0x%08x+0x%llx overlaps the watched range 0x%08x+0x%x\n", what,
-                     addr, static_cast<unsigned long long>(len), watch_base_, watch_size_);
+    for (std::size_t i = 0; i < watch_count_; ++i) {
+        const std::uint64_t w = watch_base_[i];
+        const std::uint64_t x = w + watch_size_[i];
+        if (a < x && w < b) {
+            std::fprintf(stderr, "dh2: %s 0x%08x+0x%llx covers watched 0x%08x+0x%x\n", what, addr,
+                         static_cast<unsigned long long>(len), watch_base_[i], watch_size_[i]);
+        }
     }
 }
 

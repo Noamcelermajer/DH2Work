@@ -85,8 +85,11 @@ public:
     // Log any mapping operation that touches [base, base+size). Remapping a page through
     // MAP_FIXED silently zeroes it, which is invisible to a write watch.
     void watch(std::uint32_t base, std::uint32_t size) {
-        watch_base_ = base;
-        watch_size_ = size;
+        if (watch_count_ < kWatchRanges) {
+            watch_base_[watch_count_] = base;
+            watch_size_[watch_count_] = size;
+            ++watch_count_;
+        }
     }
 
 private:
@@ -96,8 +99,10 @@ private:
 
     std::uint8_t* base_ = nullptr;
     std::vector<std::uint8_t> pages_;
-    std::uint32_t watch_base_ = 0;
-    std::uint32_t watch_size_ = 0;
+    static constexpr std::size_t kWatchRanges = 4;
+    std::uint32_t watch_base_[kWatchRanges] = {};
+    std::uint32_t watch_size_[kWatchRanges] = {};
+    std::size_t watch_count_ = 0;
 };
 
 }  // namespace dh2

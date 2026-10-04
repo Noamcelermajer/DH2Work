@@ -16,6 +16,7 @@
 
 #include <cstdint>
 #include <cstdio>
+#include <map>
 #include <string>
 #include <vector>
 
@@ -46,6 +47,7 @@ public:
     void print_census(FILE* out) const;
     const char* slot_name(std::uint32_t index) const;
     const std::vector<std::string>& requests() const { return requests_; }
+    const std::map<std::string, std::uint64_t>& method_calls() const { return method_calls_; }
 
 private:
     std::uint32_t write_table(std::uint32_t at, std::uint32_t svc_base, std::uint32_t slots);
@@ -68,6 +70,14 @@ private:
     // engine actually uses it, recorded rather than assumed.
     std::vector<std::string> requests_;
     void note(const std::string& text);
+
+    // A jmethodID is an address of a 64-byte record in guest memory holding the method's name and
+    // signature, so a call back from the engine can be answered by name instead of by guess.
+    std::uint32_t method_id(const std::string& name, const std::string& signature);
+    std::string method_name_at(std::uint32_t id) const;
+    std::uint32_t answer_for(const std::string& name) const;
+    std::uint32_t methods_used_ = 0;
+    std::map<std::string, std::uint64_t> method_calls_;
 };
 
 }  // namespace dh2

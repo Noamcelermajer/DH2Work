@@ -41,6 +41,7 @@ add_library(dh2core STATIC
   src/loader.cpp
   src/initial_stack.cpp
   src/cpu.cpp
+  src/gl.cpp
   src/jni.cpp
   src/loader_if.cpp
   src/linker.cpp

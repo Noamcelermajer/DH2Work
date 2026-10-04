@@ -68,8 +68,17 @@ public:
     // Log every guest write into [base, base+size). Used to find who clobbers a structure whose
     // contents are known to be correct immediately beforehand.
     void watch(std::uint32_t base, std::uint32_t size) {
-        watch_base_ = base;
-        watch_size_ = size;
+        if (watch_count_ < kWatchRanges) {
+            watch_base_[watch_count_] = base;
+            watch_size_[watch_count_] = size;
+            ++watch_count_;
+        }
+    }
+    bool watched(std::uint32_t vaddr) const {
+        for (std::size_t i = 0; i < watch_count_; ++i) {
+            if (vaddr >= watch_base_[i] && vaddr < watch_base_[i] + watch_size_[i]) return true;
+        }
+        return false;
     }
 
     // Record the last 32 guest data accesses with the PC that made them. A stop then names the
@@ -115,8 +124,10 @@ private:
     std::uint64_t svcs_ = 0;
     std::uint64_t tick_budget_ = 0;
     int fault_trace_ = 0;
-    std::uint32_t watch_base_ = 0;
-    std::uint32_t watch_size_ = 0;
+    static constexpr std::size_t kWatchRanges = 4;
+    std::uint32_t watch_base_[kWatchRanges] = {};
+    std::uint32_t watch_size_[kWatchRanges] = {};
+    std::size_t watch_count_ = 0;
     int watch_trace_ = 0;
     static constexpr std::size_t kAccessTrace = 32;
     bool trace_accesses_ = false;

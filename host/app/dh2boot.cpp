@@ -23,6 +23,7 @@
 
 #include "dh2/cpu.hpp"
 #include "dh2/initial_stack.hpp"
+#include "dh2/gl.hpp"
 #include "dh2/jni.hpp"
 #include "dh2/linker.hpp"
 #include "dh2/loader_if.hpp"
@@ -146,6 +147,18 @@ int main(int argc, char** argv) {
         std::printf("  debug        : GOT[__stack_chk_guard]@0x%08x=0x%08x  expected=0x%08x  "
                     "*(guard)=0x%08x\n",
                     slot, slot_value, guard, guard_value);
+        // _ctype_ is an R_ARM_RELATIVE slot whose file value is 0x27f0e, so if the linker applied
+        // it the runtime word must be bias+0x27f0e. Anything else is our bug, not libc's.
+        const std::uint32_t ctype = image.bias + 0xaab50;
+        std::uint32_t ctype_value = 0;
+        if (memory.accessible(ctype, 4, dh2::kPageRead)) {
+            std::memcpy(&ctype_value, memory.base() + ctype, 4);
+        }
+        std::printf("  debug        : _ctype_@0x%08x=0x%08x  expected=0x%08x\n", ctype, ctype_value,
+                    image.bias + 0x27f0e);
+        // The engine imports _ctype_ (R_ARM_GLOB_DAT at engine+0x996874) and indexes it, so it
+        // must be valid on device. Watch the word to see what clears it here.
+        cpu.watch(ctype, 4);
     }
 
     // The initial thread's control block. Bionic reads errno at TP+0x29C and its canary at
@@ -240,6 +253,14 @@ int main(int argc, char** argv) {
         return 2;
     }
 
+    dh2::GlBridge gl(memory, cpu);
+    if (!gl.install(error)) {
+        std::fprintf(stderr, "dh2boot: %s\n", error.c_str());
+        return 2;
+    }
+    std::printf("  GL           : %zu imported entry point(s) are answerable by name\n",
+                linker.stub_count());
+
     dh2::SyscallLayer syscalls(memory, cpu, linker.modules().front());
 
     // The last executed PCs, so a fault can name the instruction that caused it rather than the
@@ -285,6 +306,7 @@ int main(int argc, char** argv) {
                 }
                 if (loader_if.handle_svc(stop.svc)) continue;
                 if (jni.handle_svc(stop.svc)) continue;
+                if (gl.handle_svc(stop.svc, linker)) continue;
                 const dh2::SyscallResult outcome = syscalls.handle(stop.svc);
                 if (outcome.kind == dh2::SyscallResult::Kind::Exit) {
                     stop_out = stop;
@@ -410,6 +432,63 @@ int main(int argc, char** argv) {
     (void)stop_index;
 
     std::printf("  initializers : %d completed\n", completed);
+
+    // The renderer's natives, in the order GameRenderer and the Activity call them. Each is run
+    // with the host's JNIEnv and an opaque token standing in for the Java object, which is all a
+    // native can do with a jobject it has not been given a class for.
+    if (!halted) {
+        struct RendererCall {
+            const char* label;
+            const char* symbol;
+            int arguments;
+            std::uint32_t a0;
+            std::uint32_t a1;
+        };
+        const RendererCall calls[] = {
+            {"nativeGameRenderer", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeGameRenderer", 0, 0, 0},
+            {"nativeConfig", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeConfig", 0, 0, 0},
+            {"nativeInit", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeInit", 1, 0, 0},
+            {"nativeResize", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeResize", 2, 1080, 1920},
+            {"nativeRender", "Java_com_gameloft_android_GAND_GloftD2SS_GameRenderer_nativeRender", 0, 0, 0},
+        };
+        // Re-read the ctype pointer at this point: it was correct after linking, and the engine
+        // dereferences it inside GameRenderer.nativeInit. When it becomes zero says as much as
+        // who did it.
+        {
+            const dh2::LoadedImage& libc = linker.modules()[1];
+            const std::uint32_t at = libc.bias + 0xaab50;
+            std::uint32_t now = 0;
+            if (memory.accessible(at, 4, dh2::kPageRead)) std::memcpy(&now, memory.base() + at, 4);
+            std::printf("  check        : _ctype_ before the renderer natives = 0x%08x\n", now);
+        }
+        cpu.trace_accesses(true);
+        for (const RendererCall& entry : calls) {
+            if (halted) break;
+            const std::uint32_t function = linker.find_symbol(entry.symbol);
+            if (function == 0) {
+                std::printf("  %-16s : symbol not found\n", entry.label);
+                continue;
+            }
+            const std::uint32_t args[4] = {jni.env(), jni.env(), entry.a0, entry.a1};
+            const std::uint64_t before = cpu.instruction_count();
+            dh2::Stop stop;
+            std::uint32_t result = 0;
+            std::printf("  %-16s : calling 0x%08x\n", entry.label, function);
+            std::fflush(stdout);
+            if (call(function, args, 2 + static_cast<std::size_t>(entry.arguments), result, stop)) {
+                std::printf("  %-16s : returned r0=0x%08x after %llu instruction(s)\n", entry.label, result,
+                            static_cast<unsigned long long>(cpu.instruction_count() - before));
+            } else {
+                const std::uint32_t* rr = cpu.jit().Regs().data();
+                std::printf("  %-16s : %s after %llu instruction(s)\n", entry.label,
+                            stop.describe().c_str(),
+                            static_cast<unsigned long long>(cpu.instruction_count() - before));
+                std::printf("      at pc 0x%08x lr=0x%08x r0=0x%08x r1=0x%08x\n", rr[15], rr[14], rr[0], rr[1]);
+                cpu.dump_accesses(stdout);
+            }
+            std::fflush(stdout);
+        }
+    }
 
     // The engine's own entry, as the game's DEX drives it. The recovered Java says
     //   DungeonHunter2.nativeInit(int)       -- the Activity's engine start
@@ -543,6 +622,7 @@ int main(int argc, char** argv) {
     syscalls.print_census(stdout);
     loader_if.print_census(stdout);
     jni.print_census(stdout);
+    gl.print_census(stdout);
     if (!loader_if.events().empty()) {
         std::printf("  loader iface : %zu event(s)\n", loader_if.events().size());
         for (const std::string& event : loader_if.events()) std::printf("      %s\n", event.c_str());

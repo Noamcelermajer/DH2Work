@@ -65,21 +65,24 @@ std::uint32_t JniBridge::write_table(std::uint32_t at, std::uint32_t svc_base, s
 }
 
 bool JniBridge::install(std::string& error) {
-    vm_ = mem_.find_free(kPageSize, dyn_limit_);
-    stubs_ = vm_ != 0 ? mem_.find_free(kPageSize, vm_) : 0;
-    data_ = stubs_ != 0 ? mem_.find_free(kPageSize, stubs_) : 0;
-    if (vm_ == 0 || stubs_ == 0 || data_ == 0) {
+    // One contiguous reservation, laid out explicitly. Mapping each piece with its own
+    // find_free() only reserves one page, so growing one of them with MAP_FIXED silently
+    // replaced its neighbours: the three-page data region wiped the JavaVM and stub pages and
+    // the process died inside nativeInit.
+    const std::uint32_t span = 4 * kPageSize;
+    const std::uint32_t base = mem_.find_free(span, dyn_limit_);
+    if (base == 0) {
         error = "no guest address space for the JNI bridge";
         return false;
     }
-    if (!mem_.map_anon(vm_, kPageSize, PROT_READ | PROT_WRITE) ||
-        !mem_.map_anon(stubs_, kPageSize, PROT_READ | PROT_WRITE) ||
-        !mem_.map_anon(data_, kPageSize, PROT_READ | PROT_WRITE)) {
+    if (!mem_.map_anon(base, span, PROT_READ | PROT_WRITE)) {
         error = "cannot map the JNI bridge";
         return false;
     }
-    std::memset(mem_.base() + vm_, 0, kPageSize);
-    std::memset(mem_.base() + data_, 0, kPageSize);
+    vm_ = base;                    // page 0: JavaVM, JNIEnv, function tables, class tokens
+    stubs_ = base + kPageSize;     // page 1: the stubs the tables point at
+    data_ = base + 2 * kPageSize;  // pages 2-3: jmethodID records
+    std::memset(mem_.base() + base, 0, span);
 
     // Every stub: ARM "svc #imm" then "bx lr", so a JNI call lands in guest code the host answers.
     // The native stubs occupy the first kNativeSlots slots and the invoke stubs the next
@@ -137,6 +140,38 @@ void JniBridge::note(const std::string& text) {
     if (requests_.size() < 128) requests_.push_back(text);
 }
 
+std::uint32_t JniBridge::method_id(const std::string& name, const std::string& signature) {
+    if (methods_used_ >= 64) return 0;
+    const std::uint32_t at = data_ + 0x1000 + methods_used_ * 64;
+    std::memset(mem_.base() + at, 0, 64);
+    std::memcpy(mem_.base() + at, name.c_str(), name.size() < 31 ? name.size() : 31);
+    std::memcpy(mem_.base() + at + 32, signature.c_str(), signature.size() < 31 ? signature.size() : 31);
+    ++methods_used_;
+    return at;
+}
+
+std::string JniBridge::method_name_at(std::uint32_t id) const {
+    const std::uint32_t first = data_ + 0x1000;
+    if (id < first || id >= first + 64 * 64) return {};
+    return std::string(reinterpret_cast<const char*>(mem_.base() + id));
+}
+
+std::uint32_t JniBridge::answer_for(const std::string& name) const {
+    // The Java side the engine asks for, answered without a network or a store. Every value here
+    // is a deliberate choice, and each one is named so the choice is reviewable.
+    if (name == "unlockDemo") return 1;            // the full game, not the demo
+    if (name == "isWifiAlive") return 1;
+    if (name == "isSupportMM") return 1;           // multimedia support
+    if (name == "Get_PhoneLanguage") return 1;     // English
+    if (name == "Get_PhoneManufacturer") return 0;
+    if (name == "Get_PhoneModel") return 0;
+    // Everything else is a no-op or a "not happening": sendAppToBackground, OpenGLive, OpenIGP,
+    // NotifyTrophy, Exit, openBrowser, lockDemo, DisableLaunchGame, IncreaseLaunchTimes, and all
+    // ten Gameloft Live calls (no login, no purchase, no server message, no error, network not
+    // ready).
+    return 0;
+}
+
 std::uint32_t JniBridge::env_holder() {
     const std::uint32_t at = data_ + 0xC00;
     if (!mem_.copy_in(at, &env_struct_, 4)) return 0;
@@ -175,11 +210,22 @@ bool JniBridge::handle_svc(std::uint32_t swi) {
                 break;
             }
             case 113: {  // GetStaticMethodID(clazz, name, sig)
-                note("GetStaticMethodID(" + guest_string(mem_, regs[2]) + ", " +
-                     guest_string(mem_, regs[3]) + ")");
-                regs[0] = 0;
+                const std::string name = guest_string(mem_, regs[2]);
+                const std::string sig = guest_string(mem_, regs[3]);
+                note("GetStaticMethodID(" + name + ", " + sig + ")");
+                regs[0] = method_id(name, sig);
                 break;
             }
+            default:
+                if (index >= 114 && index <= 143) {  // CallStatic<Type>Method{,V,A}
+                    const std::string name = method_name_at(regs[2]);
+                    ++method_calls_[name.empty() ? "(unknown method id)" : name];
+                    // Object-returning slots get null; everything else gets the answered value.
+                    regs[0] = (index <= 116) ? 0u : answer_for(name);
+                    break;
+                }
+                regs[0] = 0;
+                break;
             case 15:  // ExceptionOccurred
                 regs[0] = 0;
                 break;
@@ -204,9 +250,6 @@ bool JniBridge::handle_svc(std::uint32_t swi) {
                 regs[0] = 0;
                 break;
             }
-            default:
-                regs[0] = 0;  // null / JNI_ERR: named in the census, not silently wrong
-                break;
         }
         return true;
     }
@@ -246,6 +289,13 @@ void JniBridge::print_census(FILE* out) const {
         std::fprintf(out, "  JNI requests : %zu, in call order\n", requests_.size());
         for (const std::string& request : requests_) {
             std::fprintf(out, "      %s\n", request.c_str());
+        }
+    }
+    if (!method_calls_.empty()) {
+        std::fprintf(out, "  JNI callbacks: %zu method(s) called back into Java\n", method_calls_.size());
+        for (const auto& entry : method_calls_) {
+            std::fprintf(out, "      %-28s calls=%llu\n", entry.first.c_str(),
+                         static_cast<unsigned long long>(entry.second));
         }
     }
     for (std::uint32_t i = 0; i < kInvokeSlots; ++i) {
