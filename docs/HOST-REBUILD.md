@@ -470,6 +470,12 @@ Two obstacles, both recorded because they are toolchain problems rather than hos
    `-DFMT_USE_CONSTEVAL=0`, and this fmt version does not read that macro anyway. The known
    fixes are an older NDK (clang 17) or patching the bunded fmt, and neither belongs in this
    repository's host tree.
+1b. **The failure is the Android target, not clang 21.** The natural reading of (1) was that
+   NDK r29's clang 21 was too new for fmt 10. It is not: pointing the NDK's own toolchain file at
+   the *system clang 14* -- the same compiler that builds this tree for x86_64 and aarch64 Linux
+   -- fails on exactly the same consteval errors. clang 14 + Linux succeeds, clang 14 + Android
+   fails, so the differentiator is the target platform's C++ runtime, not the compiler version.
+   That is what makes an older NDK the right fix rather than a newer compiler.
 2. **`getrandom()` is API 28** and the build targets android-24. That one *is* ours: the host now
    uses `dh2::random_bytes` (`host/random`), which issues `SYS_getrandom` directly with a
    `/dev/urandom` fallback, so the host no longer depends on a libc entry point the target may
