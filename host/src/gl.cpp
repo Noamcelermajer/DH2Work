@@ -3,7 +3,9 @@
 #include <dlfcn.h>
 #include <sys/mman.h>
 
+#include <algorithm>
 #include <cstring>
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -228,7 +230,7 @@ const char* signature_of(const std::string& name) {
         {"glActiveTexture", "e"}, {"glAttachShader", "ee"}, {"glBindBuffer", "ee"},
         {"glBindFramebuffer", "ee"}, {"glBindRenderbuffer", "ee"}, {"glBindTexture", "ee"},
         {"glBlendEquation", "e"}, {"glBlendFunc", "ee"}, {"glBlendFuncSeparate", "eeee"},
-        {"glBufferData", "epi"}, {"glCheckFramebufferStatus", "e"}, {"glClear", "e"},
+        {"glBufferData", "eipi"}, {"glCheckFramebufferStatus", "e"}, {"glClear", "e"},
         {"glClearColor", "ffff"}, {"glClearDepthf", "f"}, {"glClearStencil", "e"},
         {"glColorMask", "eeee"}, {"glCompileShader", "e"}, {"glCreateProgram", ""},
         {"glCreateShader", "e"}, {"glCullFace", "e"}, {"glDeleteBuffers", "ep"},
@@ -246,11 +248,11 @@ const char* signature_of(const std::string& name) {
         {"glGetString", "e"}, {"glGetUniformLocation", "ep"}, {"glHint", "ee"},
         {"glLineWidth", "f"}, {"glLinkProgram", "e"}, {"glPixelStorei", "ee"},
         {"glPolygonOffset", "ff"}, {"glReadPixels", "eeeeep"}, {"glRenderbufferStorage", "eeee"},
-        {"glSampleCoverage", "fe"}, {"glScissor", "eeee"}, {"glShaderSource", "eppp"},
+        {"glSampleCoverage", "fe"}, {"glScissor", "eeee"}, {"glShaderSource", "eepp"},
         {"glTexImage2D", "eeeeeeeep"}, {"glTexParameterf", "eef"}, {"glTexParameteri", "eee"},
         {"glUniform1f", "ef"}, {"glUniform1i", "ee"}, {"glUniform2f", "eff"},
         {"glUniform3f", "efff"}, {"glUniform4f", "effff"}, {"glUniformMatrix4fv", "eeep"},
-        {"glUseProgram", "e"}, {"glVertexAttribPointer", "eeeeeep"}, {"glViewport", "eeee"},
+        {"glUseProgram", "e"}, {"glVertexAttribPointer", "eeeeep"}, {"glViewport", "eeee"},
         {"glEGLImageTargetTexture2DOES", "ep"},
     };
     for (const Entry& entry : table) {
@@ -366,7 +368,7 @@ bool GlBridge::invoke_real(std::size_t index, const std::string& name, std::uint
             reinterpret_cast<void*>(args[2]), reinterpret_cast<void*>(args[3]));
         return true;
     }
-    if (sig == "epi") {
+    if (sig == "eipi") {
         reinterpret_cast<void (*)(std::uint32_t, std::uint32_t, void*, std::uint32_t)>(fn)(
             static_cast<std::uint32_t>(args[0]), static_cast<std::uint32_t>(args[1]),
             reinterpret_cast<void*>(args[2]), static_cast<std::uint32_t>(args[3]));
@@ -471,6 +473,7 @@ bool GlBridge::handle_svc(std::uint32_t swi, const GuestLinker& linker) {
     // platform instead of being satisfied by this host's table.
     if (index < real_.size() && real_[index] != nullptr && invoke_real(index, name, regs)) {
         ++real_calls_;
+        ++real_by_name_[name];
         return true;
     }
 
@@ -557,7 +560,14 @@ void GlBridge::print_census(FILE* out) const {
                       "the platform GLES\n",
                  static_cast<unsigned long long>(total), static_cast<unsigned long long>(real_calls_));
     if (real_calls_ != 0) {
-        std::fprintf(out, "  GL (real)    : %zu entry point(s) resolved\n", real_.size());
+        std::fprintf(out, "  GL (real)    : %zu entry point(s), top by call count\n", real_.size());
+        std::vector<std::pair<std::uint64_t, std::string>> ordered;
+        for (const auto& entry : real_by_name_) ordered.emplace_back(entry.second, entry.first);
+        std::sort(ordered.begin(), ordered.end(), std::greater<>());
+        for (std::size_t i = 0; i < ordered.size() && i < 18; ++i) {
+            std::fprintf(out, "      %-44s calls=%llu\n", ordered[i].second.c_str(),
+                         static_cast<unsigned long long>(ordered[i].first));
+        }
     }
     for (const auto& entry : calls_) {
         std::fprintf(out, "      %-44s calls=%llu\n", entry.first.c_str(),

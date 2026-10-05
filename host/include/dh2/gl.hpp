@@ -69,6 +69,7 @@ private:
     int capture_width_ = 0;
     int capture_height_ = 0;
     std::uint64_t real_calls_ = 0;
+    std::map<std::string, std::uint64_t> real_by_name_;
     std::uint32_t scratch_ = 0;
     std::uint32_t scratch_used_ = 0;
 };
