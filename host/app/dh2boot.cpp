@@ -61,7 +61,11 @@ int main(int argc, char** argv) {
     bool deps_first = false;
     bool root_first = false;
     bool trace_steps = false;
+    bool no_real_gl = false;
     int frames = 1;
+    std::string capture_path;
+    int capture_width = 1080;
+    int capture_height = 1920;
     int io_trace_limit = 60;
     std::vector<std::string> search_roots;
     std::uint64_t max_instructions = 0;
@@ -80,6 +84,13 @@ int main(int argc, char** argv) {
             root_first = true;
         } else if (arg == "--trace-steps") {
             trace_steps = true;
+        } else if (arg == "--no-real-gl") {
+            no_real_gl = true;
+        } else if (arg == "--capture" && i + 1 < argc) {
+            capture_path = argv[++i];
+        } else if (arg == "--capture-size" && i + 2 < argc) {
+            capture_width = std::atoi(argv[++i]);
+            capture_height = std::atoi(argv[++i]);
         } else if (arg == "--frames" && i + 1 < argc) {
             frames = std::atoi(argv[++i]);
         } else if (arg == "--io-trace" && i + 1 < argc) {
@@ -294,6 +305,14 @@ int main(int argc, char** argv) {
     if (!gl.install(error)) {
         std::fprintf(stderr, "dh2boot: %s\n", error.c_str());
         return 2;
+    }
+    // Prefer the platform's GLES when there is one -- inside an Android emulator or on a device
+    // that is a real implementation, and the engine's calls should reach it.
+    if (!no_real_gl && !gl.attach_real_gl(linker)) {
+        std::printf("  GL           : no platform GLES; the host's own table answers every call\n");
+    }
+    if (!capture_path.empty() && !gl.create_context(capture_width, capture_height)) {
+        std::printf("  EGL          : no context; the frame cannot be captured\n");
     }
     std::printf("  GL           : %zu imported entry point(s) are answerable by name\n",
                 linker.stub_count());
@@ -581,6 +600,14 @@ int main(int argc, char** argv) {
                 std::printf("  frames       : %d frame(s) driven, %llu instruction(s), slowest %llu\n",
                             done, static_cast<unsigned long long>(total),
                             static_cast<unsigned long long>(slowest));
+            }
+        }
+
+        // The colour buffer, as a file, so "the engine rendered" can be looked at rather than
+        // inferred from a call count.
+        if (!capture_path.empty() && !halted) {
+            if (!gl.capture_frame(capture_path)) {
+                std::printf("  capture      : failed\n");
             }
         }
     }
